@@ -12,176 +12,155 @@
 <meta property="og:url" content="https://iltuomark.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="attico-telefono.jpg" as="image" media="(max-width:899px)">
-<link rel="preload" href="attico-largo.jpg" as="image" media="(min-width:900px)">
 <!--
-  MARK · IL FUNNEL v3 — 23 ott 2026 pomeriggio, online su iltuomark.com. Dennis: «è Mark I, Mark II non esiste»; «troppo acciaio, mi gasa la grande città, l'attico tutto vetri».
-  v3: eroe nell'attico sulla città (foto Higgsfield), acciaio solo come accento della forgia, demo interattiva al posto della VSL (che mostrava Jarvis), Mark I ovunque, telefono rifinito.
-  v2:
-  Dalla v1 (anteprima del 22 ott) restano testo, scene e filtro a 5 domande. Cambia il gesto: LA FORGIA.
-  I titoli escono dalla fessura incandescenti e si raffreddano in avorio, la M dell'eroe si accende tra le scintille,
-  la chiusura è un punzone battuto sul metallo. Nuove scene: Turno di notte e il contatore dei rilasci.
-  Le lead vanno alla stessa RACCOLTA di iltuojarvis.com (CRM Lead Jarvis → GHL «Jarvis»), con pagina = iltuomark.com.
+  MARK · IL FUNNEL v4 — 23 ott 2026 sera. Dennis: «la chat è uguale a Claude e GPT», «troppe scritte, mi piaceva più quello di Jarvis, minimal», «il lusso col mood, non con lo sfondo».
+  v4: lo schema di iltuojarvis.com (nero neutro, una cosa per schermata, titoli piccoli, un solo accento oro). Via foto, grana, braci, scintille, forgia, notte, rilascio.
+  La prova non è più una chat: è il computer che lavora da solo (memoria, programmi, squadra, conferma sul telefono, clic tuoi 0). Filtro e invio delle lead identici alla v3.
+  v3 salvata in git (0b26f8b).
 -->
 <style>
-/* L'attico sulla città di notte: vetro, skyline, un solo accento ambra. La forgia resta come gesto: le cose si arroventano e si raffreddano. */
+/* MARK I · v4. Come iltuojarvis.com: nero neutro, una cosa per schermata, un solo accento. Il lusso sta nel silenzio, non nelle foto. */
 @font-face{font-family:Archivo;src:url(archivo-700.woff2) format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:Unbounded;src:url(unbounded-800.woff2) format('woff2');font-weight:800;font-display:swap}
 @font-face{font-family:Switzer;src:url(switzer-500.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:Switzer;src:url(switzer-600.woff2) format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:'Geist Mono';src:url(geist-mono-500.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Instrument Serif';src:url(instrument-serif-400-corsivo.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
 :root{
-  --ossidiana:#0B0B0C;--grafite:#161618;--grafite-2:#1C1C1F;--linea:#2A2A2D;--avorio:#EDE9E1;--titanio:#9A9DA1;--ambra:#E39B3A;--ambra-forte:#F2B25E;--brace:#7A3210;--bianco-caldo:#FFE2B0;
-  --marchio:Unbounded,Archivo,sans-serif;--titoli:Archivo,'Arial Narrow',sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--corsivo:'Instrument Serif',Georgia,serif;
+  --ossidiana:#0A0A0A;--grafite:#121212;--grafite-2:#1A1A1A;--linea:#232323;--avorio:#F2F0EB;--titanio:#8C8C8C;--ambra:#E39B3A;--ambra-forte:#F2B25E;
+  --marchio:Unbounded,Archivo,sans-serif;--titoli:Archivo,'Arial Narrow',sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;
   --curva:cubic-bezier(.32,.72,0,1);color-scheme:dark
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--ossidiana);color:var(--avorio);font:500 18px/1.5 var(--testo);overflow-x:hidden}
+body{margin:0;background:var(--ossidiana);color:var(--avorio);font:500 17px/1.5 var(--testo);overflow-x:hidden}
 body.chiuso{overflow:hidden}
 a{color:inherit}
-h1,h2{font-family:var(--titoli);font-weight:700;margin:0;letter-spacing:.03em;text-transform:uppercase;text-wrap:balance}
+h1,h2{font-family:var(--titoli);font-weight:700;margin:0;letter-spacing:.05em;text-transform:uppercase;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
 :focus-visible{outline:2px solid var(--ambra);outline-offset:4px}
 .ambra{color:var(--ambra)}
-.corsivo{font-family:var(--corsivo);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ambra)}
+.punto{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ambra);box-shadow:0 0 8px var(--ambra);margin-right:8px;vertical-align:1px;animation:respira 2.4s ease-in-out infinite}
+@keyframes respira{50%{opacity:.3}}
 
-/* materia: grana sopra tutto, e il filo della forgia che avanza con lo scroll */
-.grana{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
-.filo-scroll{position:fixed;left:0;top:0;height:2px;width:100%;z-index:80;background:var(--ambra);box-shadow:0 0 12px rgba(227,155,58,.7);transform-origin:left;transform:scaleX(0)}
-
-/* ── SCENE ── */
-.scena{position:relative;min-height:88svh;padding-block:104px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+/* ── SCENE: una cosa per schermata ── */
+.scena{position:relative;min-height:100svh;padding:96px max(24px,env(safe-area-inset-right,0px)) 96px max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .scena + .scena{border-top:1px solid var(--linea)}
-.titolo{font-size:38px;line-height:1;max-width:820px}
-.riga{margin-top:20px;font-size:19px;line-height:29px;color:var(--titanio);max-width:460px}
+.titolo{font-size:26px;line-height:32px;max-width:680px}
+.riga{margin-top:16px;font-size:18px;line-height:28px;color:var(--titanio);max-width:420px}
 .angoli{position:absolute;inset:24px;pointer-events:none}
-.angoli i{position:absolute;width:20px;height:20px;border-color:var(--ambra);border-style:solid;opacity:.3;transition:inset .9s var(--curva),opacity .9s var(--curva)}
-.angoli i:nth-child(1){left:12px;top:12px;border-width:1px 0 0 1px}
-.angoli i:nth-child(2){right:12px;top:12px;border-width:1px 1px 0 0}
-.angoli i:nth-child(3){left:12px;bottom:12px;border-width:0 0 1px 1px}
-.angoli i:nth-child(4){right:12px;bottom:12px;border-width:0 1px 1px 0}
-.scena.attiva .angoli i{opacity:.55}
-.scena.attiva .angoli i:nth-child(1){left:0;top:0}.scena.attiva .angoli i:nth-child(2){right:0;top:0}
-.scena.attiva .angoli i:nth-child(3){left:0;bottom:0}.scena.attiva .angoli i:nth-child(4){right:0;bottom:0}
-.compare{transition:opacity 1s var(--curva),transform 1s var(--curva)}
-.js-anima .scena:not(.attiva) .compare{opacity:0;transform:translateY(24px) scale(.98)}
-.scena.attiva .compare.d1{transition-delay:.25s}.scena.attiva .compare.d2{transition-delay:.45s}.scena.attiva .compare.d3{transition-delay:.65s}
+.angoli i{position:absolute;width:20px;height:20px;border-color:var(--ambra);border-style:solid;opacity:0;transition:opacity .9s var(--curva),transform .9s var(--curva)}
+.angoli i:nth-child(1){left:0;top:0;border-width:1px 0 0 1px;transform:translate(-10px,-10px)}
+.angoli i:nth-child(2){right:0;top:0;border-width:1px 1px 0 0;transform:translate(10px,-10px)}
+.angoli i:nth-child(3){left:0;bottom:0;border-width:0 0 1px 1px;transform:translate(-10px,10px)}
+.angoli i:nth-child(4){right:0;bottom:0;border-width:0 1px 1px 0;transform:translate(10px,10px)}
+.scena.attiva .angoli i{opacity:.28;transform:none}
+.js-anima .compare{opacity:0;transform:translateY(20px);transition:opacity 1.1s var(--curva),transform 1.1s var(--curva)}
+.js-anima .scena.attiva .compare{opacity:1;transform:none}
+.scena.attiva .compare.d1{transition-delay:.15s}.scena.attiva .compare.d2{transition-delay:.3s}.scena.attiva .compare.d3{transition-delay:.45s}
 
-/* ⭐ IL GESTO: la forgia. Ogni parola sale dalla fessura incandescente e si raffredda in avorio */
-.forgia .p{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
-.forgia .p > span{display:inline-block}
-.js-anima .scena:not(.attiva) .forgia .p > span{transform:translateY(105%)}
-.scena.attiva .forgia .p > span{animation:esce 1.1s var(--curva) both,raffredda 1.9s ease-out both;animation-delay:calc(var(--i) * 70ms),calc(var(--i) * 70ms)}
-@keyframes esce{from{transform:translateY(105%)}to{transform:none}}
-@keyframes raffredda{0%{color:var(--bianco-caldo);text-shadow:0 0 18px #FF9B3A,0 0 46px rgba(255,120,30,.55)}100%{text-shadow:0 0 0 transparent}}
-.forgia .ambra .p > span,.forgia .p.ambra > span{color:var(--ambra)}
-
-/* pulsante: ambra pieno, un lampo di metallo che ci passa sopra */
-.pulsante{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:36px;background:var(--ambra);color:var(--ossidiana);text-decoration:none;font:600 18px/24px var(--testo);padding:19px 34px;border-radius:2px;min-width:272px;border:0;cursor:pointer;animation:chiama 2.8s var(--curva) infinite;transition:transform .5s var(--curva),background .5s var(--curva)}
-.pulsante::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(100deg,transparent,rgba(255,244,224,.65),transparent);transform:skewX(-18deg);animation:lampo 4.2s var(--curva) infinite 1.6s}
+/* pulsante */
+.pulsante{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:32px;background:var(--ambra);color:var(--ossidiana);text-decoration:none;font:600 17px/24px var(--testo);padding:17px 32px;border-radius:2px;min-width:260px;border:0;cursor:pointer;animation:chiama 3s var(--curva) infinite;transition:transform .5s var(--curva),background .5s var(--curva)}
 .pulsante:hover{background:var(--ambra-forte);transform:translateY(-2px)}
 .pulsante:active{transform:translateY(1px)}
-.pulsante svg{width:20px;height:20px;position:relative;z-index:1}
-@keyframes chiama{0%{box-shadow:0 0 0 0 rgba(227,155,58,.45)}70%{box-shadow:0 0 0 18px rgba(227,155,58,0)}100%{box-shadow:0 0 0 0 rgba(227,155,58,0)}}
-@keyframes lampo{0%{left:-40%}35%,100%{left:130%}}
-.rassicura{margin-top:14px;font:500 15px/20px var(--testo);color:var(--titanio)}
+.pulsante svg{width:20px;height:20px}
+@keyframes chiama{0%{box-shadow:0 0 0 0 rgba(227,155,58,.4)}70%{box-shadow:0 0 0 16px rgba(227,155,58,0)}100%{box-shadow:0 0 0 0 rgba(227,155,58,0)}}
 
-/* ── EROE: il metallo, le braci, la M che si accende ── */
-.eroe{min-height:100svh;padding:0;align-items:stretch;text-align:left;justify-content:flex-end;overflow:hidden}
-.eroe picture{position:absolute;inset:0}
-.eroe .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.08);transition:transform 3.2s var(--curva)}
-.eroe.acceso .foto{transform:scale(1)}
-.eroe::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--ossidiana) 4%,rgba(11,11,12,.55) 42%,rgba(11,11,12,0) 75%);pointer-events:none}
-.eroe .luce{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px circle at var(--x,30%) var(--y,40%),rgba(227,155,58,.16),transparent 60%);mix-blend-mode:screen}
-#braci,#scintille{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.eroe .dentro{position:relative;z-index:3;padding-block:0 56px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));max-width:1180px}
-.avvio{position:absolute;z-index:3;left:max(24px,env(safe-area-inset-left,0px));right:24px;top:calc(24px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;gap:16px;font:500 12px/20px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--titanio)}
+/* eroe: solo il marchio */
+.avvio{position:absolute;left:max(24px,env(safe-area-inset-left,0px));top:calc(28px + env(safe-area-inset-top,0px));font:500 12px/20px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--titanio)}
 .avvio b{color:var(--ambra);font-weight:500}
-.punto{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ambra);box-shadow:0 0 10px var(--ambra);margin-right:8px;vertical-align:1px;animation:respira 2s ease-in-out infinite}
-@keyframes respira{50%{opacity:.35}}
-.marchio{font:800 clamp(64px,19.5vw,260px)/.8 var(--marchio);letter-spacing:-.02em;margin:0;display:flex}
-.marchio .l{display:inline-block;opacity:0;transform:translateY(60%)}
-.eroe.acceso .marchio .l{animation:sale 1s cubic-bezier(.2,.8,.2,1) both,arroventa 2.4s ease-out both;animation-delay:calc(.2s + var(--i) * 90ms),calc(.2s + var(--i) * 90ms)}
-@keyframes sale{from{opacity:0;transform:translateY(60%)}to{opacity:1;transform:none}}
-@keyframes arroventa{0%{color:#2A2420}30%{color:var(--bianco-caldo);text-shadow:0 0 40px #FF9B3A,0 0 100px rgba(255,120,30,.55)}100%{color:var(--avorio);text-shadow:0 0 0 transparent}}
+.marchio{font:800 clamp(64px,17vw,148px)/.9 var(--marchio);letter-spacing:-.01em;text-transform:none;display:flex}
 .marchio .m{position:relative}
-.marchio .m::after{content:"";position:absolute;left:5%;right:5%;bottom:-.1em;height:.075em;background:var(--ambra);box-shadow:0 0 22px rgba(227,155,58,.45);transform:scaleX(0);transform-origin:left}
-.eroe.acceso .marchio .m::after{animation:barra 1.6s .9s cubic-bezier(.3,.7,.2,1) both}
-@keyframes barra{0%{transform:scaleX(0);background:var(--brace);box-shadow:none}55%{transform:scaleX(1);background:var(--bianco-caldo);box-shadow:0 0 60px #FFB65C}100%{transform:scaleX(1);background:var(--ambra);box-shadow:0 0 22px rgba(227,155,58,.45)}}
-.saluto{margin-top:clamp(36px,4vw,56px);font:500 clamp(14px,1.6vw,17px)/1.5 var(--mono);color:var(--avorio);min-height:1.5em}
-.cursore{display:inline-block;width:.6em;height:1.1em;background:var(--ambra);vertical-align:-.18em;margin-left:4px;animation:batte 1s steps(1) infinite}
-@keyframes batte{50%{opacity:0}}
-.eroe .sotto{margin-top:14px;font:700 clamp(30px,5vw,52px)/1 var(--titoli);letter-spacing:.03em;text-transform:uppercase;color:var(--ambra)}
-.eroe .riga{color:var(--avorio);max-width:460px;margin-top:16px}
-.eroe .seq{opacity:0;transform:translateY(16px);transition:opacity .9s var(--curva),transform .9s var(--curva)}
-.eroe.acceso .seq{opacity:1;transform:none}
-.eroe.acceso .seq.s1{transition-delay:2.2s}.eroe.acceso .seq.s2{transition-delay:2.4s}.eroe.acceso .seq.s3{transition-delay:2.6s}
-.giu{position:absolute;z-index:3;right:max(24px,env(safe-area-inset-right,0px));bottom:56px;width:1px;height:64px;background:var(--linea);overflow:hidden}
-.giu::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ambra);animation:scende 2.2s var(--curva) infinite}
-@keyframes scende{to{top:100%}}
+.marchio .m::after{content:"";position:absolute;left:6%;right:6%;bottom:-.12em;height:.06em;background:var(--ambra);box-shadow:0 0 18px rgba(227,155,58,.45);transform-origin:left;transform:scaleX(0);transition:transform 1.2s var(--curva) .5s}
+.acceso .marchio .m::after{transform:none}
+.eroe .sotto{margin-top:36px;font:700 22px/28px var(--titoli);letter-spacing:.08em;text-transform:uppercase;color:var(--ambra)}
+.js-anima .eroe .seq{opacity:0;transform:translateY(12px);transition:opacity 1s var(--curva),transform 1s var(--curva)}
+.acceso .seq{opacity:1!important;transform:none!important}
+.acceso .s1{transition-delay:.9s!important}.acceso .s2{transition-delay:1.1s!important}.acceso .s3{transition-delay:1.3s!important}
 
-/* LA DEMO: Mark al lavoro, si tocca un comando e si guarda */
-.demo{width:min(100%,640px);margin-top:40px;text-align:left;background:rgba(22,22,24,.92);border:1px solid var(--linea);border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(227,155,58,.06),0 40px 100px -40px rgba(227,155,58,.45)}
-.demo .barra-f{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--linea);font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--titanio)}
-.demo .barra-f b{color:var(--ambra);font-weight:500}
-.demo .schermo{padding:20px 16px;min-height:300px;display:flex;flex-direction:column;gap:12px}
-.demo .ordine{align-self:flex-end;max-width:88%;background:#3A2A16;border-radius:12px;border-bottom-right-radius:3px;padding:10px 14px;font-size:16px;line-height:22px}
-.demo .ordine:empty{display:none}
-.demo .passi-m{display:grid;gap:6px;font:500 13px/20px var(--mono);color:var(--titanio)}
-.demo .passi-m div{display:grid;grid-template-columns:18px 1fr;gap:8px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--curva),transform .4s var(--curva)}
-.demo .passi-m div.su{opacity:1;transform:none}
-.demo .passi-m i{font-style:normal;color:var(--ambra)}
-.demo .passi-m div.lavora i{animation:respira .8s ease-in-out infinite}
-.demo .passi-m b{font-weight:500;color:var(--avorio)}
-.demo .risposta{border:1px solid var(--linea);border-radius:12px;border-bottom-left-radius:3px;padding:12px 14px;font-size:16px;line-height:23px;max-width:94%;opacity:0;transform:translateY(8px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
-.demo .risposta.su{opacity:1;transform:none}
-.demo .risposta:empty{display:none}
-.demo .file{display:flex;align-items:center;gap:12px;margin-top:10px;padding:10px 12px;border:1px solid var(--ambra);border-radius:2px;background:#22190F;font:500 14px/20px var(--testo)}
-.demo .file i{width:28px;height:34px;flex:none;border:1.5px solid var(--ambra);border-radius:2px;position:relative}
-.demo .file i::after{content:"";position:absolute;left:5px;right:5px;top:9px;height:2px;background:var(--ambra);box-shadow:0 6px 0 var(--ambra),0 12px 0 var(--ambra)}
-.demo .file span{color:var(--titanio);display:block;font-size:13px}
+/* ── LA PROVA: il computer che lavora da solo ── */
+.demo{width:min(100%,760px);margin-top:40px;text-align:left;border:1px solid var(--linea);border-radius:3px;overflow:hidden;background:var(--grafite)}
+.demo .voce{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--linea);min-height:60px}
+.demo .mic{width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--linea);display:grid;place-items:center;color:var(--titanio);transition:border-color .3s,color .3s}
+.demo .mic svg{width:14px;height:14px}
+.demo .voce.parla .mic{border-color:var(--ambra);color:var(--ambra)}
+.demo .detto{font-size:16px;line-height:22px;color:var(--titanio)}
+.demo .voce.parla .detto,.demo .voce.detta .detto{color:var(--avorio)}
+.demo .pc{position:relative;height:420px;overflow:hidden;background:var(--ossidiana)}
+.pc .menu{position:absolute;inset:0 0 auto;height:30px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--titanio);border-bottom:1px solid var(--linea);z-index:5;background:var(--ossidiana)}
+.pc .menu b{color:var(--ambra);font-weight:500}
+.fin{position:absolute;background:var(--grafite-2);border:1px solid #2E2E2E;border-radius:5px;box-shadow:0 24px 60px -24px #000;overflow:hidden;font-size:13px;line-height:18px;opacity:0;transform:translateY(10px) scale(.98);transition:opacity .5s var(--curva),transform .5s var(--curva),filter .5s}
+.fin.su{opacity:1;transform:none}
+.fin.dietro{filter:brightness(.5)}
+.fin .tit{display:flex;align-items:center;gap:5px;padding:7px 10px;border-bottom:1px solid var(--linea);font:500 11px/14px var(--mono);color:var(--titanio)}
+.fin .tit i{width:7px;height:7px;border-radius:50%;background:#333}
+.fin .tit span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fin .corpo{padding:8px;display:grid;gap:2px}
+.fin .r{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 8px;border-radius:2px;transition:opacity .4s var(--curva),transform .4s var(--curva),background .3s}
+.js-anima .fin .r:not(.su){opacity:0;transform:translateY(4px)}
+.fin .r.luce{background:#241A0E;box-shadow:inset 0 0 0 1px rgba(227,155,58,.6)}
+.fin .r em{font:500 12px/18px var(--mono);font-style:normal;color:var(--titanio);white-space:nowrap}
+.fin .r.tot{border-top:1px solid var(--linea);border-radius:0;margin-top:4px;font-weight:600}
+.fin .r.tot em{color:var(--ambra)}
+.fin .r.no em{color:#D9826B}
+.fin .r .v{color:var(--ambra);margin-left:6px}
+.fin .corpo{transition:padding .3s var(--curva)}
+.fin.timbrata .corpo{padding-bottom:36px}
+.timbro{position:absolute;right:10px;bottom:10px;font:500 10px/14px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ambra);border:1px solid var(--ambra);padding:4px 7px;border-radius:2px;transform:rotate(-4deg) scale(1.6);opacity:0;transition:opacity .3s,transform .4s cubic-bezier(.5,1.8,.5,1)}
+.timbro.su{opacity:1;transform:rotate(-4deg)}
+.memo{position:absolute;left:12px;top:42px;width:min(260px,calc(100% - 24px));border:1px solid rgba(227,155,58,.55);background:#16120C;border-radius:4px;padding:10px 12px;z-index:4;opacity:0;transform:translateY(-6px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.memo.su{opacity:1;transform:none}
+.memo .t{font:500 10px/14px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ambra);margin-bottom:6px}
+.memo p{font-size:13px;line-height:18px;padding:3px 0}
+.notifica{position:absolute;right:12px;top:42px;width:min(290px,calc(100% - 24px));background:#1C1C1C;border:1px solid #333;border-radius:12px;padding:12px;z-index:6;opacity:0;transform:translateY(-16px);transition:opacity .5s var(--curva),transform .6s var(--curva);box-shadow:0 20px 50px -20px #000}
+.notifica.su{opacity:1;transform:none}
+.notifica .t{display:flex;align-items:center;gap:8px;font:500 11px/14px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--titanio)}
+.notifica .t i{width:20px;height:20px;border-radius:4px;background:var(--ossidiana);display:grid;place-items:center;font:800 10px/1 var(--marchio);font-style:normal;color:var(--avorio);border-bottom:2px solid var(--ambra)}
+.notifica p{margin-top:8px;font-size:14px;line-height:20px}
+.notifica .bt{display:flex;gap:6px;margin-top:10px}
+.notifica .bt span{flex:1;text-align:center;font-size:13px;line-height:18px;padding:7px 8px;border-radius:6px;background:#2A2A2A}
+.notifica .bt span:first-child{background:var(--ambra);color:var(--ossidiana);font-weight:600}
+.cursore-m{position:absolute;left:0;top:0;width:16px;height:20px;z-index:7;pointer-events:none;transition:transform .85s var(--curva);opacity:0}
+.cursore-m.su{opacity:1}
+.cursore-m::after{content:"";position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--ambra);opacity:0}
+.cursore-m.clic::after{animation:clic .5s var(--curva)}
+@keyframes clic{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.dock{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:5px;padding:5px;background:#141414;border:1px solid #2A2A2A;border-radius:10px;z-index:5}
+.dock span{position:relative;width:32px;height:32px;border-radius:7px;background:#1F1F1F;display:grid;place-items:center;color:#5E5E5E;transition:color .3s,background .3s}
+.dock svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dock span.uso{color:var(--ambra);background:#241A0E}
+.dock span.uso::after{content:"";position:absolute;bottom:-4px;left:50%;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:var(--ambra)}
+.squadra{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:12px 16px;border-top:1px solid var(--linea);font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.squadra .et{color:var(--titanio);margin-right:4px}
+.squadra span:not(.et){padding:6px 8px;border:1px solid var(--linea);border-radius:2px;color:#555;transition:all .35s var(--curva)}
+.squadra span.lavora{color:var(--ossidiana);background:var(--ambra);border-color:var(--ambra)}
+.squadra span.fatto{color:var(--ambra);border-color:rgba(227,155,58,.5)}
 .comandi{display:grid;gap:8px;padding:16px;border-top:1px solid var(--linea)}
-.comandi p{font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--titanio);margin-bottom:4px}
-.comandi button{display:flex;align-items:center;gap:12px;min-height:56px;width:100%;text-align:left;background:var(--ossidiana);border:1px solid var(--linea);border-radius:3px;color:var(--avorio);font:500 17px/22px var(--testo);padding:12px 16px;cursor:pointer;transition:border-color .3s var(--curva),background .3s var(--curva)}
+.comandi p{font:500 11px/16px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--titanio);margin-bottom:4px}
+.comandi button{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;text-align:left;background:var(--ossidiana);border:1px solid var(--linea);border-radius:2px;color:var(--avorio);font:500 16px/22px var(--testo);padding:12px 16px;cursor:pointer;transition:border-color .3s var(--curva),background .3s var(--curva)}
 .comandi button::before{content:"›";color:var(--ambra);font:500 20px/1 var(--mono)}
-.comandi button:hover,.comandi button.attivo{border-color:var(--ambra);background:#22190F}
-.comandi button[disabled]{opacity:.45;cursor:default}
-.simula{margin-top:14px;font-size:15px;color:#6C6F74;max-width:440px}
+.comandi button:hover,.comandi button.attivo{border-color:var(--ambra);background:#17120B}
+.comandi button[disabled]{opacity:.4;cursor:default}
+.simula{margin-top:14px;font-size:14px;line-height:20px;color:#5E5E5E;max-width:440px}
 
 /* poteri */
 .potere-visivo{width:min(100%,360px);height:200px;margin-bottom:40px;position:relative}
 .onda{display:flex;align-items:center;justify-content:center;gap:5px;height:100%}
-.onda span{width:5px;border-radius:1px;background:var(--ambra);height:8px;box-shadow:0 0 10px rgba(227,155,58,.35)}
+.onda span{width:4px;border-radius:1px;background:var(--ambra);height:8px;box-shadow:0 0 10px rgba(227,155,58,.3)}
 .rete svg,.memoria svg{width:100%;height:100%;overflow:visible}
-.nomi{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:28px;max-width:460px}
-.nomi span{font:500 15px/20px var(--testo);padding:6px 12px;border:1px solid var(--linea);border-radius:2px;color:var(--titanio);background:rgba(11,11,12,.6)}
+.nomi{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px;max-width:440px}
+.nomi span{font-size:14px;line-height:20px;padding:4px 12px;border:1px solid var(--linea);border-radius:2px;color:var(--titanio)}
 .nomi span.tuo{border-color:var(--ambra);color:var(--ambra)}
-.scena.con-foto{overflow:hidden}
-.scena.con-foto img.sfondo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3}
-.scena.con-foto > *:not(.sfondo){position:relative}
-
-/* turno di notte */
-.notte{width:min(100%,460px);display:grid;gap:8px;margin-top:40px;text-align:left}
-.ev{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:baseline;background:var(--grafite);border:1px solid var(--linea);border-radius:2px;padding:12px 14px;font-size:16px;line-height:22px}
-.ev .t{font:500 13px/22px var(--mono);color:var(--ambra);font-variant-numeric:tabular-nums}
-.js-anima .ev{opacity:0;transform:translateY(10px) scale(.98);transition:opacity .6s var(--curva),transform .6s var(--curva)}
-.js-anima .ev.su{opacity:1;transform:none}
-.ev.ultimo{border-color:var(--ambra);background:#22190F}
-.esempio{margin-top:14px;font-size:15px;color:#6C6F74}
 
 /* telefono */
-.telefono{width:min(100%,300px);border:1px solid var(--linea);border-radius:28px;padding:16px 12px 24px;background:var(--grafite);margin-bottom:40px;text-align:left;box-shadow:0 30px 80px -40px rgba(227,155,58,.4)}
+.telefono{width:min(100%,300px);border:1px solid var(--linea);border-radius:28px;padding:16px 12px 24px;background:var(--grafite);margin-bottom:40px;text-align:left}
 .telefono .testa{display:flex;align-items:center;gap:12px;padding:4px 8px 16px;border-bottom:1px solid var(--linea)}
-.telefono .testa i{width:32px;height:32px;border-radius:4px;background:var(--ossidiana);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:800 15px/.8 var(--marchio);font-style:normal}
-.telefono .testa i::after{content:"";width:10px;height:2px;background:var(--ambra)}
-.telefono .testa b{display:block;font-weight:600;font-size:15px;line-height:20px}
-.telefono .testa span{font-size:13px;line-height:16px;color:var(--ambra)}
+.telefono .testa i{width:32px;height:32px;border-radius:6px;background:var(--ossidiana);display:grid;place-items:center;font:800 14px/1 var(--marchio);font-style:normal;border-bottom:2px solid var(--ambra)}
+.telefono .testa b{display:block;font-weight:600;font-size:14px;line-height:20px}
+.telefono .testa span{font-size:12px;line-height:16px;color:var(--ambra)}
 .messaggi{display:flex;flex-direction:column;gap:8px;padding-top:16px;min-height:220px}
-.msg{max-width:86%;padding:8px 12px;border-radius:12px;font-size:15px;line-height:21px;transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.msg{max-width:86%;padding:8px 12px;border-radius:12px;font-size:14px;line-height:20px;transition:opacity .5s var(--curva),transform .5s var(--curva)}
 .js-anima .msg:not(.su){opacity:0;transform:translateY(8px) scale(.96)}
-.msg.io{align-self:flex-end;background:#3A2A16;border-bottom-right-radius:3px}
+.msg.io{align-self:flex-end;background:#2B2117;border-bottom-right-radius:3px}
 .msg.lui{align-self:flex-start;border:1px solid var(--linea);border-bottom-left-radius:3px}
 .msg.vocale{display:flex;align-items:center;gap:8px}
 .msg.vocale .mini{display:flex;gap:2px;align-items:center}
@@ -195,71 +174,45 @@ p{margin:0;text-wrap:pretty}
 /* da solo / con me */
 .bivio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;width:min(100%,560px);margin-top:40px;text-align:left}
 .bivio > div{border:1px solid var(--linea);border-radius:3px;padding:20px 16px}
-.bivio > div.si{border-color:var(--ambra);background:var(--grafite);box-shadow:0 20px 60px -30px rgba(227,155,58,.5)}
-.bivio h3{font:700 16px/20px var(--titoli);text-transform:uppercase;margin:0 0 12px;letter-spacing:.06em}
+.bivio > div.si{border-color:var(--ambra);background:var(--grafite)}
+.bivio h3{font:700 14px/20px var(--titoli);text-transform:uppercase;margin:0 0 12px;letter-spacing:.08em}
 .bivio .no h3{color:var(--titanio)}
 .bivio .si h3{color:var(--ambra)}
-.bivio p{font-size:16px;line-height:22px;padding:9px 0;border-top:1px solid var(--linea)}
-.bivio .no p{color:var(--titanio);text-decoration:line-through;text-decoration-color:rgba(154,157,161,.6)}
-
-/* il rilascio: il contatore scatta e si aggiunge una piastra */
-.rilascio{position:relative;width:min(100%,520px);margin-top:44px;padding:48px 16px 40px;background:var(--grafite);border:1px solid var(--linea);border-radius:3px}
-.rilascio .tag{position:absolute;top:14px;left:16px;font:500 12px/16px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--titanio)}
-.rilascio .tag.dx{left:auto;right:16px;color:var(--ambra)}
-.contatore{display:flex;align-items:center;justify-content:center;gap:14px;font:800 clamp(40px,10vw,72px)/1 var(--marchio);letter-spacing:-.01em}
-.rullo{height:1.1em;overflow:hidden;color:var(--ambra);font:500 .82em/1.1em var(--mono)}
-.rullo div{display:grid;transition:transform .9s cubic-bezier(.7,0,.2,1)}
-.piastre{display:flex;justify-content:center;gap:6px;margin-top:28px}
-.piastre i{width:clamp(36px,9vw,56px);height:10px;background:var(--grafite-2);border:1px solid var(--linea);transition:background .4s,border-color .4s,transform .4s var(--curva),box-shadow .4s}
-.piastre i.su{background:var(--ambra);border-color:var(--ambra);transform:translateY(-4px);box-shadow:0 0 16px rgba(227,155,58,.5)}
-.versioni{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:28px;font:500 14px/20px var(--testo);color:var(--titanio)}
-.versioni b{display:block;font:500 15px/22px var(--mono);letter-spacing:.08em;color:#6C6F74}
-.versioni .ora b{color:var(--avorio)}.versioni .ora span{color:var(--ambra)}
-.versioni .prossima b{color:var(--ambra)}
+.bivio p{font-size:14px;line-height:20px;padding:8px 0;border-top:1px solid var(--linea)}
+.bivio .no p{color:var(--titanio);text-decoration:line-through;text-decoration-color:rgba(140,140,140,.6)}
 
 /* passi */
-.passi{position:relative;width:min(100%,460px);margin-top:44px;text-align:left;padding-left:48px}
-.passi .filo{position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:var(--linea)}
-.passi .filo i{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--ambra);box-shadow:0 0 12px rgba(227,155,58,.6);transform-origin:top;transition:transform 1.6s var(--curva) .3s}
+.passi{position:relative;width:min(100%,420px);margin-top:40px;text-align:left;padding-left:48px}
+.passi .filo{position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:var(--linea)}
+.passi .filo i{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--ambra);transform-origin:top;transition:transform 1.6s var(--curva) .3s}
 .js-anima .scena:not(.attiva) .passi .filo i{transform:scaleY(0)}
 .passo{position:relative;padding-bottom:40px}
 .passo:last-child{padding-bottom:0}
-.passo::before{content:"";position:absolute;left:-41px;top:4px;width:16px;height:16px;border-radius:2px;border:2px solid var(--ambra);background:var(--ossidiana)}
-.passo b{display:block;font:700 20px/26px var(--titoli);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.passo::before{content:"";position:absolute;left:-40px;top:5px;width:14px;height:14px;border-radius:2px;border:1px solid var(--ambra);background:var(--ossidiana)}
+.passo b{display:block;font:700 16px/24px var(--titoli);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
 .passo span{color:var(--titanio)}
 
 /* posti */
-.posti{display:grid;grid-template-columns:repeat(5,40px);gap:16px;margin:40px 0 8px}
-.posti i{width:40px;height:40px;border-radius:2px;border:1px solid var(--linea);position:relative;transition:border-color .4s var(--curva)}
-.posti i::after{content:"";position:absolute;inset:13px;border-radius:1px;background:var(--ambra);opacity:0;transition:opacity .4s var(--curva),box-shadow .4s;box-shadow:0 0 0 rgba(227,155,58,0)}
+.posti{display:grid;grid-template-columns:repeat(5,36px);gap:16px;margin:40px 0 8px}
+.posti i{width:36px;height:36px;border-radius:2px;border:1px solid var(--linea);position:relative;transition:border-color .4s var(--curva)}
+.posti i::after{content:"";position:absolute;inset:12px;border-radius:1px;background:var(--ambra);opacity:0;transition:opacity .4s var(--curva)}
 .posti i.su{border-color:var(--ambra)}
-.posti i.su::after{opacity:1;box-shadow:0 0 14px rgba(227,155,58,.7)}
+.posti i.su::after{opacity:1}
 
 /* domande */
-.domande{width:min(100%,600px);margin-top:36px;text-align:left}
+.domande{width:min(100%,560px);margin-top:32px;text-align:left}
 details{border-top:1px solid var(--linea)}
 details:last-child{border-bottom:1px solid var(--linea)}
 summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:600;position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"";position:absolute;right:8px;top:26px;width:10px;height:10px;border-right:1.5px solid var(--ambra);border-bottom:1.5px solid var(--ambra);transform:rotate(45deg);transition:transform .5s var(--curva)}
+summary::after{content:"";position:absolute;right:8px;top:26px;width:9px;height:9px;border-right:1.5px solid var(--ambra);border-bottom:1.5px solid var(--ambra);transform:rotate(45deg);transition:transform .5s var(--curva)}
 details[open] summary::after{transform:rotate(225deg);top:30px}
 details p{padding:0 0 20px;color:var(--titanio)}
 
-/* il punzone in chiusura */
-.lastra{width:min(64vw,260px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3A3A3F,#17171A 70%);display:grid;place-items:center;position:relative;perspective:600px}
-.anello{width:80%;aspect-ratio:1;border-radius:50%;border:2px solid var(--ambra);display:grid;place-items:center;position:relative}
-.anello svg{position:absolute;inset:-7%;width:114%;height:114%;animation:gira 40s linear infinite}
-@keyframes gira{to{transform:rotate(360deg)}}
-.anello b{font:800 clamp(52px,12vw,84px)/1 var(--marchio);position:relative}
-.anello b::after{content:"";position:absolute;left:6%;right:6%;bottom:-.1em;height:.08em;background:var(--ambra)}
-.js-anima .js-punzone-scena:not(.attiva) .anello{opacity:0}
-.js-punzone-scena.attiva .anello{animation:batti .9s cubic-bezier(.6,0,.4,1) both}
-.js-punzone-scena.attiva .lastra{animation:trema .35s .55s both}
-@keyframes batti{0%{transform:scale(2.4) translateZ(80px);opacity:0;filter:blur(6px)}60%{transform:scale(1);opacity:1;filter:none}68%{transform:scale(.96)}100%{transform:scale(1)}}
-@keyframes trema{0%,100%{transform:none}25%{transform:translate(2px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,1px)}}
-#scintille-fine{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.firma{font:800 40px/1 var(--marchio);position:relative;display:inline-block}
+.firma::after{content:"";position:absolute;left:6%;right:6%;bottom:-.14em;height:.07em;background:var(--ambra)}
 
-footer{padding-block:32px 112px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));border-top:1px solid var(--linea);text-align:center;font-size:14px;line-height:20px;color:var(--titanio)}
+footer{padding:32px max(24px,env(safe-area-inset-right,0px)) 112px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--linea);text-align:center;font-size:13px;line-height:18px;color:var(--titanio)}
 footer a{color:var(--titanio)}
 
 /* barra fissa su telefono */
@@ -307,105 +260,80 @@ footer a{color:var(--titanio)}
 .campo.sbagliato input{border-color:#E5674F}
 
 @media (min-width:900px){
-  .titolo{font-size:64px}
-  .eroe .dentro{padding-bottom:80px;padding-left:72px}
-  .avvio{left:72px;right:72px;top:40px}
-  .giu{right:72px;bottom:80px}
-  .potere-visivo{height:260px;width:480px}
-  .domanda h2{font-size:40px}
+  .titolo{font-size:34px;line-height:42px}
+  .eroe .sotto{font-size:26px;line-height:32px}
+  .domanda h2{font-size:36px}
+  .demo .pc{height:440px}
   .barra{display:none}
 }
-@media (max-width:899px){
-  .scena{min-height:0;padding-block:96px}
-  .eroe{min-height:100svh}
-  .eroe .dentro{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
-  .eroe .pulsante,.scena > .pulsante{width:100%;min-width:0}
-  .giu{display:none}
-  .angoli{inset:16px}
-  .potere-visivo{height:180px;margin-bottom:28px}
-  .telefono{margin-bottom:32px}
-}
-@media (max-width:380px){.bivio{grid-template-columns:1fr}.titolo{font-size:34px}}
-@media (max-width:520px){.avvio .dx{display:none}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.marchio .l,.eroe .seq{opacity:1;transform:none}.marchio .m::after{transform:none}.cursore{display:none}}
+@media (max-width:899px){.eroe .pulsante,.scena > .pulsante{width:100%;min-width:0}}
+@media (max-width:380px){.bivio{grid-template-columns:1fr}.dock span{width:28px;height:28px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="grana" aria-hidden="true"></div>
-<div class="filo-scroll js-filo" aria-hidden="true"></div>
 
 <main>
   <section class="scena eroe js-eroe">
-    <picture><source media="(min-width:900px)" srcset="attico-largo.jpg"><img class="foto" src="attico-telefono.jpg" alt="Un attico tutto vetri sulla città di notte, con un portatile acceso sulla scrivania"></picture>
-    <div class="luce js-luce" aria-hidden="true"></div>
-    <canvas id="braci" aria-hidden="true"></canvas>
-    <canvas id="scintille" aria-hidden="true"></canvas>
-    <div class="avvio" aria-hidden="true"><div><span class="punto"></span>Sistema <b>[ MARK I ]</b> online</div><div class="dx">Memoria · agenti · voce</div></div>
-    <div class="dentro">
-      <h1 class="marchio" aria-label="Mark"><span class="l m" style="--i:0">M</span><span class="l" style="--i:1">A</span><span class="l" style="--i:2">R</span><span class="l" style="--i:3">K</span></h1>
-      <p class="saluto" aria-hidden="true"><span class="js-saluto"></span><span class="cursore"></span></p>
-      <div class="sotto seq s1">Sul tuo computer.</div>
-      <p class="riga seq s2">Lo stesso dei miei video.<br>Lo accendiamo insieme, in videochiamata.</p>
-      <div class="seq s3"><a class="pulsante js-wa" href="#">Voglio il mio Mark</a></div>
-    </div>
-    <div class="giu" aria-hidden="true"></div>
+    <div class="avvio"><span class="punto"></span><b>[ MARK I ]</b> online</div>
+    <h1 class="marchio" aria-label="Mark"><span class="m">M</span>ARK</h1>
+    <div class="sotto seq s1">Sul tuo computer.</div>
+    <p class="riga seq s2">Lo stesso dei miei video.<br>Lo accendiamo insieme, in videochiamata.</p>
+    <div class="seq s3"><a class="pulsante js-wa" href="#">Voglio il mio Mark</a></div>
   </section>
 
   <section class="scena js-demo-scena" id="prova">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">PROVALO<br><span class="ambra">ADESSO.</span></h2>
-    <p class="riga compare d1">Tocca un comando e guarda Mark al lavoro.</p>
+    <h2 class="titolo compare">PROVALO <span class="ambra">ADESSO.</span></h2>
+    <p class="riga compare d1">Non ti risponde. Lo fa.<br>Dagli un ordine e guarda il computer lavorare da solo.</p>
     <div class="demo compare d2">
-      <div class="barra-f"><span><span class="punto"></span><b>Mark I</b> · sul tuo computer</span><span class="js-stato">pronto</span></div>
-      <div class="schermo" aria-live="polite">
-        <div class="ordine js-ordine"></div>
-        <div class="passi-m js-passi-m"></div>
-        <div class="risposta js-risposta"></div>
+      <div class="voce js-voce"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="detto js-detto">Scegli un ordine qui sotto</span></div>
+      <div class="pc js-pc" aria-live="polite">
+        <div class="menu"><span><span class="punto"></span><b>Mark I</b> · <span class="js-stato">pronto</span></span><span>Clic tuoi <b>0</b></span></div>
+        <div class="memo js-memo"><div class="t js-memo-t"></div><div class="js-memo-r"></div></div>
+        <div class="notifica js-notifica"><div class="t"><i>M</i>Mark · adesso</div><p class="js-notifica-p"></p><div class="bt js-notifica-bt"></div></div>
+        <div class="js-finestre"></div>
+        <svg class="cursore-m js-cursore" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 2.5-1-3-7h6z" fill="#F2F0EB" stroke="#0A0A0A" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <div class="dock js-dock" aria-hidden="true">
+          <span data-app="cartelle"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg></span>
+          <span data-app="documenti"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span>
+          <span data-app="posta"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg></span>
+          <span data-app="banca"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18"/></svg></span>
+          <span data-app="fatture"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>
+          <span data-app="browser"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>
+          <span data-app="crm"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 10h16M9 10v9"/></svg></span>
+        </div>
       </div>
+      <div class="squadra js-squadra"><span class="et">La squadra</span></div>
       <div class="comandi js-comandi">
-        <p>Scegli cosa chiedergli</p>
-        <button type="button" data-c="0">Cosa ho domani?</button>
-        <button type="button" data-c="1">Prepara il preventivo per Rossi</button>
-        <button type="button" data-c="2">Riassumi le mail di oggi</button>
+        <p>Di' a Mark</p>
+        <button type="button" data-c="0">Prepara il preventivo per Rossi</button>
+        <button type="button" data-c="1">Fai le fatture di ottobre</button>
+        <button type="button" data-c="2">Trovami clienti nuovi a Milano</button>
       </div>
     </div>
-    <p class="simula compare d3">È una simulazione con dati di esempio. Sul tuo computer Mark lavora sui tuoi file, sulla tua posta e sui tuoi programmi.</p>
+    <p class="simula compare d3">Simulazione con dati di esempio. Sul tuo computer Mark lavora sui tuoi file, sulla tua posta e sui tuoi programmi, e non manda niente senza il tuo sì.</p>
   </section>
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <div class="potere-visivo compare"><div class="onda js-onda"></div></div>
-    <h2 class="titolo forgia">GLI PARLI.<br><span class="ambra">TI RISPONDE.</span></h2>
+    <h2 class="titolo compare d1">GLI PARLI.<br><span class="ambra">TI RISPONDE.</span></h2>
     <p class="riga compare d2">A voce, quando vuoi. Ti chiama «signore», se vuoi anche quello.</p>
   </section>
 
-  <section class="scena con-foto">
-    <img class="sfondo" src="torre.jpg" alt="">
+  <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <div class="potere-visivo rete compare"><svg class="js-rete" viewBox="0 0 360 200" aria-hidden="true"></svg></div>
-    <h2 class="titolo forgia">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
-    <p class="riga compare d2">Agenti che si parlano tra loro e si passano il lavoro.</p>
-    <div class="nomi compare d3"><span>Analista</span><span>Copywriter</span><span>Cacciatore di clienti</span><span>Costruttore di siti</span><span>Contabile</span><span>Contraddittorio</span><span class="tuo">+ il tuo</span></div>
-  </section>
-
-  <section class="scena con-foto js-notte-scena">
-    <img class="sfondo" src="citta-notte.jpg" alt="">
-    <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">ANCHE<br><span class="ambra">MENTRE DORMI.</span></h2>
-    <div class="notte">
-      <div class="ev"><span class="t">23:04</span><span>Mail della giornata in ordine, bozze pronte</span></div>
-      <div class="ev"><span class="t">01:30</span><span>Preventivo impaginato per la call di domani</span></div>
-      <div class="ev"><span class="t">03:12</span><span>Fatture del mese controllate con la banca</span></div>
-      <div class="ev"><span class="t">05:45</span><span>Il montaggio del video è pronto</span></div>
-      <div class="ev ultimo"><span class="t">07:00</span><span>Buongiorno, signore. È tutto pronto.</span></div>
-    </div>
-    <p class="esempio compare d3">Un esempio di notte di Mark.</p>
+    <h2 class="titolo compare d1">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
+    <p class="riga compare d2">Agenti che si parlano tra loro e si passano il lavoro. Anche mentre dormi.</p>
+    <div class="nomi compare d3"><span>Analista</span><span>Copywriter</span><span>Contabile</span><span>Cacciatore di clienti</span><span class="tuo">+ il tuo</span></div>
   </section>
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <div class="potere-visivo memoria compare"><svg class="js-memoria" viewBox="0 0 360 200" aria-hidden="true"></svg></div>
-    <h2 class="titolo forgia">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
+    <h2 class="titolo compare d1">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
     <p class="riga compare d2">Clienti, progetti, decisioni. Ogni giorno sa qualcosa in più del tuo lavoro.</p>
   </section>
 
@@ -421,35 +349,22 @@ footer a{color:var(--titanio)}
         <div class="scrive js-scrive"><span></span><span></span><span></span></div>
       </div>
     </div>
-    <h2 class="titolo forgia">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
+    <h2 class="titolo compare d1">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
     <p class="riga compare d2">Gli scrivi o gli mandi un vocale su Telegram. Ti risponde a voce.</p>
   </section>
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">NON TI SERVE<br><span class="ambra">UN TUTORIAL.</span></h2>
+    <h2 class="titolo compare">NON TI SERVE<br><span class="ambra">UN TUTORIAL.</span></h2>
     <div class="bivio compare d1">
       <div class="no"><h3>Da solo</h3><p>Mesi di prove</p><p>Voce lenta</p><p>Memoria che si azzera</p></div>
       <div class="si"><h3>Con me</h3><p>Un'ora di call</p><p>Già collaudato</p><p>Acceso quando chiudi</p></div>
     </div>
   </section>
 
-  <section class="scena con-foto js-rilascio-scena">
-    <img class="sfondo" src="eroe.jpg" alt="">
-    <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">OGNI VERSIONE<br><span class="ambra">È PIÙ FORTE.</span></h2>
-    <p class="riga compare d1">Mark cresce a giorni di rilascio. Gli aggiornamenti arrivano anche a te.</p>
-    <div class="rilascio compare d2">
-      <span class="tag">Giorno di rilascio</span><span class="tag dx"><span class="punto"></span>Online</span>
-      <div class="contatore" aria-label="Mark I"><span>MARK</span><span class="rullo"><div class="js-rullo"><span>&nbsp;</span><span>I</span></div></span></div>
-      <div class="piastre js-piastre"><i></i><i></i></div>
-      <div class="versioni"><div class="ora"><b>MARK I</b><span>online</span></div><div class="prossima"><b>MARK II</b>in forgia</div></div>
-    </div>
-  </section>
-
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">TRE PASSI</h2>
+    <h2 class="titolo compare">TRE PASSI</h2>
     <div class="passi compare d1">
       <div class="filo"><i></i></div>
       <div class="passo"><b>Mi scrivi</b><span>Cinque domande. Ti rispondiamo noi.</span></div>
@@ -460,7 +375,7 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-posti-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">10 POSTI<br><span class="ambra">A OTTOBRE.</span></h2>
+    <h2 class="titolo compare">10 POSTI<br><span class="ambra">A OTTOBRE.</span></h2>
     <p class="riga compare d1">Ogni Mark lo accendo io, con te.</p>
     <div class="posti js-posti" aria-label="10 posti a ottobre"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <a class="pulsante compare d2 js-wa" href="#">Voglio il mio Mark</a>
@@ -468,7 +383,7 @@ footer a{color:var(--titanio)}
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">DOMANDE</h2>
+    <h2 class="titolo compare">DOMANDE</h2>
     <div class="domande compare d1">
       <details><summary>Devo saper programmare?</summary><p>No. Si installa da solo, passo per passo, e in call ci sono io.</p></details>
       <details><summary>Funziona su Windows?</summary><p>Sì, su Mac e su Windows. Va bene il computer che usi già.</p></details>
@@ -478,11 +393,10 @@ footer a{color:var(--titanio)}
     </div>
   </section>
 
-  <section class="scena con-foto js-punzone-scena">
-    <img class="sfondo" src="attico.jpg" alt="">
-    <canvas id="scintille-fine" aria-hidden="true"></canvas>
-    <div class="lastra" aria-hidden="true"><div class="anello"><svg viewBox="0 0 200 200"><defs><path id="cerchio" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><text font-family="Geist Mono, monospace" font-size="11" letter-spacing="4" fill="#9A9DA1"><textPath href="#cerchio">FORGIATO · PRECISO · TUO · MARK I · 2026 ·</textPath></text></svg><b>M</b></div></div>
-    <h2 class="titolo forgia" style="margin-top:40px">PRONTO QUANDO VUOI.</h2>
+  <section class="scena js-fine-scena">
+    <div class="angoli"><i></i><i></i><i></i><i></i></div>
+    <div class="firma compare" aria-hidden="true">M</div>
+    <h2 class="titolo compare d1" style="margin-top:40px">PRONTO QUANDO VUOI.</h2>
     <a class="pulsante compare d2 js-wa" href="#">Scrivimi</a>
   </section>
 </main>
@@ -672,83 +586,17 @@ invia.addEventListener('click', e => {
   vai('grazie');
 });
 
-/* ── LA FORGIA: ogni parola dei titoli in una fessura, che poi si accende e si raffredda ── */
-document.querySelectorAll('.forgia').forEach(h => {
-  let i = 0;
-  (function spezza(n){
-    [...n.childNodes].forEach(x => {
-      if (x.nodeType === 3) {
-        const pezzi = x.textContent.split(/(\s+)/), f = document.createDocumentFragment();
-        pezzi.forEach(p => { if (!p) return; if (/^\s+$/.test(p)) return f.append(p); const o = document.createElement('span'); o.className = 'p'; const s = document.createElement('span'); s.textContent = p; s.style.setProperty('--i', i++); o.append(s); f.append(o); });
-        x.replaceWith(f);
-      } else if (x.nodeType === 1 && x.tagName !== 'BR') spezza(x);
-    });
-  })(h);
-});
-
+/* ── LE SCENE: una alla volta, come su iltuojarvis.com ── */
 const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const s = e.target; if (s.classList.contains('attiva')) return;
   s.classList.add('attiva');
   if (s.classList.contains('js-chat-scena')) chat();
   if (s.classList.contains('js-posti-scena')) posti();
-  if (s.classList.contains('js-notte-scena')) notte();
-  if (s.classList.contains('js-rilascio-scena')) rilascio();
-  if (s.classList.contains('js-demo-scena')) setTimeout(() => giro || demo(0), lento ? 0 : 1200);
-  if (s.classList.contains('js-punzone-scena')) setTimeout(() => scintille(document.getElementById('scintille-fine'), .5, .5, 120), 520);
+  if (s.classList.contains('js-demo-scena')) setTimeout(() => giro || demo(0), lento ? 0 : 1000);
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
 
-/* ── EROE: accensione ── */
 const eroe = document.querySelector('.js-eroe');
-function tela(c){ const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); c.width = r.width*d; c.height = r.height*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); return {x, w: r.width, h: r.height}; }
-
-/* le braci che salgono dal metallo */
-(function(){
-  if (lento) return;
-  const c = document.getElementById('braci'); let t = tela(c); addEventListener('resize', () => { t = tela(c); });
-  const p = Array.from({length: 54}, () => ({x: Math.random()*t.w, y: Math.random()*t.h, v: .2 + Math.random()*.6, r: .6 + Math.random()*1.7, a: Math.random()*6}));
-  (function brucia(){
-    t.x.clearRect(0,0,t.w,t.h);
-    p.forEach(b => { b.y -= b.v; b.x += Math.sin((b.y + b.a*100)/40)*.3; b.a += .005;
-      if (b.y < -10){ b.y = t.h + 10; b.x = Math.random()*t.w; }
-      t.x.fillStyle = 'rgba(227,155,58,' + (.2 + .4*Math.abs(Math.sin(b.a*3))) + ')'; t.x.beginPath(); t.x.arc(b.x, b.y, b.r, 0, 6.283); t.x.fill(); });
-    requestAnimationFrame(brucia);
-  })();
-})();
-
-/* la pioggia di scintille: parte dalla barra della M quando diventa incandescente */
-function scintille(c, fx, fy, n){
-  if (lento || !c) return;
-  const t = tela(c); let sc = [];
-  const ox = t.w*fx, oy = t.h*fy;
-  for (let i = 0; i < n; i++){ const a = Math.PI + Math.random()*Math.PI, v = 1.5 + Math.random()*6; sc.push({x: ox + (Math.random()-.5)*t.w*.18, y: oy, vx: Math.cos(a)*v, vy: Math.sin(a)*v*1.3, l: 40 + Math.random()*60}); }
-  (function vola(){
-    t.x.clearRect(0,0,t.w,t.h);
-    sc.forEach(s => { s.x += s.vx; s.y += s.vy; s.vy += .14; s.vx *= .99; s.l--;
-      if (s.l > 0){ t.x.strokeStyle = 'rgba(255,' + (150 + Math.round(s.l)) + ',80,' + Math.min(1, s.l/40) + ')'; t.x.lineWidth = 1.4; t.x.beginPath(); t.x.moveTo(s.x, s.y); t.x.lineTo(s.x - s.vx*2, s.y - s.vy*2); t.x.stroke(); } });
-    sc = sc.filter(s => s.l > 0);
-    if (sc.length) requestAnimationFrame(vola); else t.x.clearRect(0,0,t.w,t.h);
-  })();
-}
-
-/* il saluto che si scrive da solo */
-const saluto = document.querySelector('.js-saluto'), FRASE = 'Buongiorno, signore. Mark è online.';
-function scrivi(){ if (lento){ saluto.textContent = FRASE; return; } let i = 0; (function passo(){ saluto.textContent = FRASE.slice(0, ++i); if (i < FRASE.length) setTimeout(passo, 42); })(); }
-
-function accendi(){
-  eroe.classList.add('acceso');
-  setTimeout(() => { const m = document.querySelector('.marchio .m').getBoundingClientRect(), r = eroe.getBoundingClientRect();
-    scintille(document.getElementById('scintille'), (m.left + m.width/2 - r.left)/r.width, (m.bottom - r.top)/r.height, 160); }, 1500);
-  setTimeout(scrivi, lento ? 0 : 1300);
-}
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(accendi)); else accendi();
-
-/* la luce della forgia segue il dito o il mouse sul metallo */
-const luce = document.querySelector('.js-luce');
-eroe.addEventListener('pointermove', e => { const r = eroe.getBoundingClientRect(); luce.style.setProperty('--x', (e.clientX - r.left) + 'px'); luce.style.setProperty('--y', (e.clientY - r.top) + 'px'); });
-
-/* il filo della forgia avanza con lo scroll */
-const filo = document.querySelector('.js-filo');
-addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; filo.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')'; }, {passive: true});
+requestAnimationFrame(() => requestAnimationFrame(() => eroe.classList.add('acceso')));
 
 /* ── POTERI ── */
 const onda = document.querySelector('.js-onda'); const barre = Array.from({length: 32}, () => onda.appendChild(document.createElement('span')));
@@ -756,71 +604,134 @@ const onda = document.querySelector('.js-onda'); const barre = Array.from({lengt
 
 (function(){ const svg = document.querySelector('.js-rete'), NS = 'http://www.w3.org/2000/svg';
   const nodi = Array.from({length: 7}, (_, i) => ({a: i/6*Math.PI*2})), centro = {x:180, y:100}, linee = [], punti = [], pos = [];
-  for (let i = 0; i < 7; i++) for (let j = i+1; j < 7; j++){ const l = document.createElementNS(NS,'line'); l.setAttribute('stroke','rgba(227,155,58,.16)'); svg.appendChild(l); linee.push([l,i,j]); }
-  const impulsi = Array.from({length: 6}, () => { const c = document.createElementNS(NS,'circle'); c.setAttribute('r', 3); c.setAttribute('fill','#F2B25E'); svg.appendChild(c); return {c, da: 0, a: 1, t: Math.random()}; });
-  nodi.forEach((n,i) => { const c = document.createElementNS(NS,'rect'); const s = i === 6 ? 26 : 14; c.setAttribute('width', s); c.setAttribute('height', s); c.setAttribute('rx', 2); c.setAttribute('fill', i === 6 ? '#E39B3A' : '#0B0B0C'); c.setAttribute('stroke','#E39B3A'); c.setAttribute('stroke-width', 1.5); c.dataset.s = s; svg.appendChild(c); punti.push(c); });
-  (function gira(t){ nodi.forEach((n,i) => { const a = n.a + t/6000; pos[i] = i === 6 ? centro : {x: centro.x + Math.cos(a)*150, y: centro.y + Math.sin(a)*72}; const s = +punti[i].dataset.s; punti[i].setAttribute('x', pos[i].x - s/2); punti[i].setAttribute('y', pos[i].y - s/2); });
+  for (let i = 0; i < 7; i++) for (let j = i+1; j < 7; j++){ const l = document.createElementNS(NS,'line'); l.setAttribute('stroke','rgba(227,155,58,.14)'); svg.appendChild(l); linee.push([l,i,j]); }
+  const impulsi = Array.from({length: 6}, () => { const c = document.createElementNS(NS,'circle'); c.setAttribute('r', 2.5); c.setAttribute('fill','#F2B25E'); svg.appendChild(c); return {c, da: 0, a: 1, t: Math.random()}; });
+  nodi.forEach((n,i) => { const c = document.createElementNS(NS,'rect'); const s = i === 6 ? 22 : 12; c.setAttribute('width', s); c.setAttribute('height', s); c.setAttribute('rx', 2); c.setAttribute('fill', i === 6 ? '#E39B3A' : '#0A0A0A'); c.setAttribute('stroke','#E39B3A'); c.setAttribute('stroke-width', 1.2); c.dataset.s = s; svg.appendChild(c); punti.push(c); });
+  (function gira(t){ nodi.forEach((n,i) => { const a = n.a + t/7000; pos[i] = i === 6 ? centro : {x: centro.x + Math.cos(a)*150, y: centro.y + Math.sin(a)*72}; const s = +punti[i].dataset.s; punti[i].setAttribute('x', pos[i].x - s/2); punti[i].setAttribute('y', pos[i].y - s/2); });
     linee.forEach(([l,i,j]) => { l.setAttribute('x1',pos[i].x); l.setAttribute('y1',pos[i].y); l.setAttribute('x2',pos[j].x); l.setAttribute('y2',pos[j].y); });
-    impulsi.forEach(p => { p.t += .012; if (p.t >= 1){ p.t = 0; p.da = Math.random()*7|0; p.a = (p.da + 1 + (Math.random()*6|0)) % 7; }
+    impulsi.forEach(p => { p.t += .01; if (p.t >= 1){ p.t = 0; p.da = Math.random()*7|0; p.a = (p.da + 1 + (Math.random()*6|0)) % 7; }
       const A = pos[p.da], B = pos[p.a]; p.c.setAttribute('cx', A.x + (B.x-A.x)*p.t); p.c.setAttribute('cy', A.y + (B.y-A.y)*p.t); p.c.setAttribute('opacity', Math.sin(Math.PI*p.t)); });
     if (!lento) requestAnimationFrame(gira); })(0);
 })();
 
 (function(){ const svg = document.querySelector('.js-memoria'), NS = 'http://www.w3.org/2000/svg';
   const n = Array.from({length: 46}, () => ({x: 20 + Math.random()*320, y: 12 + Math.random()*176, l: 0}));
-  const archi = []; n.forEach((a,i) => n.forEach((b,j) => { if (j > i && Math.hypot(a.x-b.x, a.y-b.y) < 62){ const l = document.createElementNS(NS,'line'); l.setAttribute('x1',a.x); l.setAttribute('y1',a.y); l.setAttribute('x2',b.x); l.setAttribute('y2',b.y); l.setAttribute('stroke','#E39B3A'); l.setAttribute('stroke-opacity', .08); svg.appendChild(l); archi.push([l,i,j]); } }));
-  const pt = n.map(a => { const c = document.createElementNS(NS,'circle'); c.setAttribute('cx',a.x); c.setAttribute('cy',a.y); c.setAttribute('r',2.4); c.setAttribute('fill','#E39B3A'); svg.appendChild(c); return c; });
+  const archi = []; n.forEach((a,i) => n.forEach((b,j) => { if (j > i && Math.hypot(a.x-b.x, a.y-b.y) < 62){ const l = document.createElementNS(NS,'line'); l.setAttribute('x1',a.x); l.setAttribute('y1',a.y); l.setAttribute('x2',b.x); l.setAttribute('y2',b.y); l.setAttribute('stroke','#E39B3A'); l.setAttribute('stroke-opacity', .07); svg.appendChild(l); archi.push([l,i,j]); } }));
+  const pt = n.map(a => { const c = document.createElementNS(NS,'circle'); c.setAttribute('cx',a.x); c.setAttribute('cy',a.y); c.setAttribute('r',2.2); c.setAttribute('fill','#E39B3A'); svg.appendChild(c); return c; });
   if (lento) return;
-  setInterval(() => { n[Math.random()*n.length|0].l = 1; }, 140);
-  (function vive(){ n.forEach((a,i) => { a.l *= .965; pt[i].setAttribute('opacity', .25 + a.l*.75); pt[i].setAttribute('r', 2.4 + a.l*2.6); });
-    archi.forEach(([l,i,j]) => l.setAttribute('stroke-opacity', .06 + Math.max(n[i].l, n[j].l)*.5)); requestAnimationFrame(vive); })();
+  setInterval(() => { n[Math.random()*n.length|0].l = 1; }, 160);
+  (function vive(){ n.forEach((a,i) => { a.l *= .965; pt[i].setAttribute('opacity', .22 + a.l*.78); pt[i].setAttribute('r', 2.2 + a.l*2.4); });
+    archi.forEach(([l,i,j]) => l.setAttribute('stroke-opacity', .05 + Math.max(n[i].l, n[j].l)*.45)); requestAnimationFrame(vive); })();
 })();
-
-function notte(){ document.querySelectorAll('.notte .ev').forEach((e,i) => setTimeout(() => e.classList.add('su'), 500 + i*(i === 4 ? 650 : 520))); }
 
 function chat(){ const m = [...document.querySelectorAll('.js-messaggi .msg')], s = document.querySelector('.js-scrive'); let i = 0;
   (function prossimo(){ if (i >= m.length){ s.classList.remove('su'); return; } const lui = m[i].classList.contains('lui');
     if (lui){ s.classList.add('su'); m[i].parentNode.insertBefore(s, m[i]); }
     setTimeout(() => { s.classList.remove('su'); m[i].classList.add('su'); i++; setTimeout(prossimo, 500); }, lui ? 1100 : 300); })(); }
 
-/* Mark I è online, Mark II è in forgia: il contatore scatta su I e si accende la prima piastra */
-function rilascio(){ const r = document.querySelector('.js-rullo'), p = document.querySelectorAll('.js-piastre i');
-  setTimeout(() => { r.style.transform = 'translateY(-1.1em)'; p[0].classList.add('su'); }, lento ? 0 : 900);
-}
-
 function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setTimeout(() => p.classList.add('su'), 400 + i*160)); }
 
-/* ── LA DEMO: un comando, gli agenti che si passano il lavoro, il risultato. Dati di esempio, dichiarati sotto la finestra ── */
+/* ── LA PROVA: un ordine a voce e il computer lavora da solo. Memoria, programmi veri, la squadra, la conferma sul telefono.
+   Un chatbot risponde in una bolla: qui non c'è nessuna bolla, si vede il lavoro fatto. Dati di esempio, dichiarati sotto. ──
+   Passi: [attesa ms, azione, ...]. Finestre: [sinistra %, alto px, larghezza %, alto px sul telefono] */
 const DEMO = [
-  {ordine: 'Cosa ho domani?',
-   passi: [['Calendario', 'tre appuntamenti trovati'], ['Posta', 'un cambio d\'orario da Rossi']],
-   risposta: 'Domani alle 10 call con Rossi Immobiliare, alle 12:30 pranzo con Marco, alle 16 il dentista. Rossi ha spostato la call di mezz\'ora: l\'ho già aggiornata in agenda, signore. Le note per la call sono pronte.'},
-  {ordine: 'Prepara il preventivo per Rossi',
-   passi: [['Analista', 'rilegge la call di martedì'], ['Copywriter', 'scrive l\'offerta'], ['Contabile', 'calcola prezzi e IVA'], ['Contraddittorio', 'ricontrolla i numeri']],
-   risposta: 'Pronto, signore. Non lo mando finché non mi dà l\'ok.',
-   file: ['Preventivo Rossi Immobiliare.pdf', '3 pagine · pronto da inviare']},
-  {ordine: 'Riassumi le mail di oggi',
-   passi: [['Posta', '38 mail lette da stamattina'], ['Filtro', '35 tra newsletter e notifiche, messe da parte']],
-   risposta: 'Ne contano 3, signore: un cliente chiede di anticipare la consegna, il commercialista vuole le fatture di settembre, un fornitore ha mandato il listino nuovo. Le bozze di risposta sono pronte.'}
+  {ordine: 'Prepara il preventivo per Rossi', squadra: ['Analista', 'Copywriter', 'Contabile', 'Contraddittorio'], passi: [
+    [0, 'agente', 0],
+    [200, 'memo', 'Dalla memoria · Rossi Immobiliare', ['Call di martedì: tre agenzie, vuole partire a novembre', 'L\'anno scorso ha chiesto di pagare in due rate', 'Preferisce i preventivi di una pagina']],
+    [2400, 'app', 'cartelle'],
+    [100, 'apri', 'a', 'Clienti › Rossi Immobiliare', [54, 42, 42, 48], [['Note call 21 ott.txt', 'ieri'], ['Listino 2026.xlsx', 'sett.'], ['Preventivo 2025.pdf', '2025']]],
+    [400, 'righe', 'a'],
+    [900, 'punta', 'a', 0], [1100, 'punta', 'a', 1],
+    [1100, 'agente', 1], [0, 'app', 'documenti'],
+    [100, 'apri', 'b', 'Preventivo Rossi.pdf', [4, 160, 50, 100], [['Gestione annunci, 3 agenzie', '2.400 €'], ['Sito e schede immobili', '1.800 €'], ['Totale IVA inclusa', '5.124 €', 'tot'], ['In due rate', 'nov · dic']]],
+    [400, 'righe', 'b', 0, 2],
+    [900, 'agente', 2], [200, 'righe', 'b', 2, 4],
+    [1100, 'agente', 3], [600, 'timbro', 'b', 'Numeri ricontrollati'],
+    [1100, 'app', 'posta'],
+    [100, 'apri', 'c', 'Posta · bozza', [42, 226, 54, 156], [['A', 'm.rossi@rossiimmobiliare.it'], ['Oggetto', 'Il preventivo di martedì'], ['Allegato', 'Preventivo Rossi.pdf']]],
+    [400, 'righe', 'c'], [900, 'punta', 'c', 2],
+    [1300, 'fine', 'Il preventivo per Rossi è pronto e la mail è in bozza. La mando, signore?', ['Mandala', 'Fammela vedere']]
+  ]},
+  {ordine: 'Fai le fatture di ottobre', squadra: ['Contabile', 'Copywriter'], passi: [
+    [0, 'agente', 0],
+    [200, 'memo', 'Dalla memoria · la sua contabilità', ['Fatture elettroniche dal suo gestionale', 'Clienti a 30 giorni', 'Bianchi paga quasi sempre in ritardo']],
+    [2400, 'app', 'banca'],
+    [100, 'apri', 'a', 'Conto aziendale · ottobre', [54, 42, 42, 48], [['Rossi Immobiliare', '+ 2.400 €'], ['Studio Verdi', '+ 1.200 €'], ['Neri Srl', '+ 900 €'], ['Bianchi & Figli', 'manca 1.500 €', 'no']]],
+    [400, 'righe', 'a'],
+    [900, 'punta', 'a', 0, '✓'], [1000, 'punta', 'a', 1, '✓'], [1000, 'punta', 'a', 2, '✓'], [1000, 'punta', 'a', 3],
+    [1100, 'app', 'fatture'],
+    [100, 'apri', 'b', 'Fatture · ottobre', [4, 160, 50, 100], [['N. 41 · Rossi Immobiliare', '2.400 €'], ['N. 42 · Studio Verdi', '1.200 €'], ['N. 43 · Neri Srl', '900 €'], ['Pronte da emettere', '3', 'tot']]],
+    [400, 'righe', 'b'],
+    [1500, 'agente', 1], [0, 'app', 'posta'],
+    [100, 'apri', 'c', 'Posta · bozza', [42, 226, 54, 156], [['A', 'amministrazione@bianchiefigli.it'], ['Oggetto', 'Fattura 38, un promemoria'], ['Scaduta da', '12 giorni', 'no']]],
+    [400, 'righe', 'c'],
+    [1400, 'fine', 'Tre fatture pronte e il promemoria a Bianchi è in bozza. Le emetto, signore?', ['Emetti', 'Prima le guardo']]
+  ]},
+  {ordine: 'Trovami clienti nuovi a Milano', squadra: ['Cacciatore di clienti', 'Copywriter', 'Contraddittorio'], passi: [
+    [0, 'agente', 0],
+    [200, 'memo', 'Dalla memoria · il suo cliente ideale', ['Agenzie immobiliari da 5 a 20 persone', 'Milano e provincia', 'Rossi, Verdi e Neri sono già clienti']],
+    [2400, 'app', 'browser'],
+    [100, 'apri', 'a', 'Browser · agenzie immobiliari Milano', [54, 42, 42, 48], [['Navigli Case', '4,8 ★'], ['Immobiliare Sempione', '4,6 ★'], ['Rossi Immobiliare', 'già cliente', 'no'], ['Brera Casa', '4,7 ★']]],
+    [400, 'righe', 'a'],
+    [900, 'punta', 'a', 0, '✓'], [1000, 'punta', 'a', 1, '✓'], [1000, 'punta', 'a', 3, '✓'],
+    [1100, 'app', 'crm'],
+    [100, 'apri', 'b', 'CRM · lead nuove', [4, 160, 50, 100], [['Navigli Case', 'titolare trovato'], ['Immobiliare Sempione', 'titolare trovato'], ['Brera Casa', 'titolare trovato'], ['Lead nuove oggi', '12', 'tot']]],
+    [400, 'righe', 'b'],
+    [1400, 'agente', 1], [0, 'app', 'posta'],
+    [100, 'apri', 'c', 'Posta · 12 bozze', [42, 226, 54, 156], [['A', 'titolare · Navigli Case'], ['Oggetto', 'Una domanda sui vostri annunci'], ['Scritte', 'una per una']]],
+    [400, 'righe', 'c'],
+    [1100, 'agente', 2], [600, 'timbro', 'c', 'Già clienti saltati'],
+    [1300, 'fine', '12 agenzie nuove nel CRM e 12 mail in bozza, scritte una per una. Le mando, signore?', ['Mandale', 'Fammele vedere']]
+  ]}
 ];
-const dOrdine = document.querySelector('.js-ordine'), dPassi = document.querySelector('.js-passi-m'), dRisposta = document.querySelector('.js-risposta'), dStato = document.querySelector('.js-stato'), dBottoni = [...document.querySelectorAll('.js-comandi button')];
+const pc = document.querySelector('.js-pc'), dFin = pc.querySelector('.js-finestre'), dCur = pc.querySelector('.js-cursore'), dMemo = pc.querySelector('.js-memo'), dNot = pc.querySelector('.js-notifica'), dStato = pc.querySelector('.js-stato');
+const dVoce = document.querySelector('.js-voce'), dDetto = document.querySelector('.js-detto'), dSquadra = document.querySelector('.js-squadra'), dBottoni = [...document.querySelectorAll('.js-comandi button')];
 let giro = 0;
 function demo(n){
-  const mio = ++giro, c = DEMO[n], t = lento ? 0 : 1;
+  const mio = ++giro, c = DEMO[n], t = lento ? 0 : 1, stretto = () => pc.clientWidth < 560, fin = {};
   const dopo = (ms, f) => setTimeout(() => { if (mio === giro) f(); }, ms * t);
   dBottoni.forEach((b, i) => { b.classList.toggle('attivo', i === n); b.disabled = true; });
-  dOrdine.textContent = ''; dPassi.textContent = ''; dRisposta.textContent = ''; dRisposta.classList.remove('su'); dStato.textContent = 'ascolta';
-  let i = 0; (function batte(){ if (mio !== giro) return; dOrdine.textContent = c.ordine.slice(0, ++i); if (i < c.ordine.length) setTimeout(batte, lento ? 0 : 34); else avvia(); })();
+  dFin.textContent = ''; dMemo.classList.remove('su'); dNot.classList.remove('su'); dCur.classList.remove('su');
+  pc.querySelectorAll('.js-dock span').forEach(s => s.classList.remove('uso'));
+  dSquadra.querySelectorAll('span:not(.et)').forEach(s => s.remove());
+  const chip = c.squadra.map(x => { const s = document.createElement('span'); s.textContent = x; dSquadra.append(s); return s; });
+  dStato.textContent = 'ascolta'; dVoce.classList.remove('detta'); dVoce.classList.add('parla');
+  const frase = '«' + c.ordine + '»'; let i = 0;
+  (function batte(){ if (mio !== giro) return; dDetto.textContent = frase.slice(0, ++i); if (i < frase.length) setTimeout(batte, lento ? 0 : 38); else { dVoce.classList.replace('parla', 'detta'); dopo(300, avvia); } })();
+  function cursore(el){ const r = el.getBoundingClientRect(), p = pc.getBoundingClientRect(); dCur.classList.add('su'); dCur.style.transform = 'translate(' + (r.left - p.left + Math.min(r.width * .55, 140)) + 'px,' + (r.top - p.top + r.height * .55) + 'px)'; }
+  const AZIONI = {
+    agente(k){ chip.forEach((s, j) => { if (j < k) { s.classList.remove('lavora'); s.classList.add('fatto'); } }); chip[k].classList.add('lavora'); },
+    memo(tit, righe){ pc.querySelector('.js-memo-t').textContent = tit; const box = pc.querySelector('.js-memo-r'); box.textContent = ''; righe.forEach(x => { const p = document.createElement('p'); p.textContent = x; box.append(p); }); dMemo.classList.add('su'); },
+    app(k){ const s = pc.querySelector('.js-dock [data-app="' + k + '"]'); s.classList.add('uso'); cursore(s); },
+    apri(id, tit, [l, a, w, an], righe){
+      Object.values(fin).forEach(f => f.el.classList.add('dietro'));
+      if (stretto() || Object.keys(fin).length) dMemo.classList.remove('su');
+      const el = document.createElement('div'), testa = document.createElement('div'), nome = document.createElement('span'), corpo = document.createElement('div');
+      el.className = 'fin'; testa.className = 'tit'; corpo.className = 'corpo';
+      testa.append(document.createElement('i'), document.createElement('i'), document.createElement('i'), nome); nome.textContent = tit;
+      const rr = righe.map(([sx, dx, cl]) => { const r = document.createElement('div'), b = document.createElement('span'), e = document.createElement('em'); r.className = 'r' + (cl ? ' ' + cl : ''); b.textContent = sx; e.textContent = dx; r.append(b, e); corpo.append(r); return r; });
+      el.append(testa, corpo);
+      if (stretto()) { el.style.left = '4%'; el.style.width = '92%'; el.style.top = an + 'px'; } else { el.style.left = l + '%'; el.style.width = w + '%'; el.style.top = a + 'px'; }
+      dFin.append(el); fin[id] = {el, rr};
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('su')));
+    },
+    righe(id, da = 0, a){ const rr = fin[id].rr; rr.slice(da, a ?? rr.length).forEach((r, k) => dopo(k * 260, () => r.classList.add('su'))); },
+    punta(id, k, segno){ const f = fin[id], r = f.rr[k]; f.el.classList.remove('dietro'); cursore(r);
+      dopo(850, () => { dCur.classList.remove('clic'); void dCur.offsetWidth; dCur.classList.add('clic'); f.rr.forEach(x => x.classList.toggle('luce', x === r));
+        if (segno && !r.querySelector('.v')) { const v = document.createElement('span'); v.className = 'v'; v.textContent = segno; r.querySelector('em').append(v); } }); },
+    timbro(id, testo){ const s = document.createElement('div'); s.className = 'timbro'; s.textContent = testo; fin[id].el.append(s); fin[id].el.classList.add('timbrata'); requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add('su'))); },
+    fine(testo, bottoni){
+      chip.forEach(s => { s.classList.remove('lavora'); s.classList.add('fatto'); });
+      dCur.classList.remove('su'); dStato.textContent = 'fatto';
+      dNot.querySelector('.js-notifica-p').textContent = testo;
+      const bt = dNot.querySelector('.js-notifica-bt'); bt.textContent = ''; bottoni.forEach(x => { const s = document.createElement('span'); s.textContent = x; bt.append(s); });
+      dNot.classList.add('su');
+      dBottoni.forEach(b => b.disabled = false);
+    }
+  };
   function avvia(){
     dStato.textContent = 'al lavoro';
-    const righe = c.passi.map(([chi, cosa]) => { const r = document.createElement('div'), ic = document.createElement('i'), tx = document.createElement('span'), b = document.createElement('b'); ic.textContent = '●'; b.textContent = chi; tx.append(b, ' ' + cosa); r.append(ic, tx); r.className = 'lavora'; dPassi.append(r); return [r, ic]; });
-    righe.forEach(([r, ic], k) => { dopo(300 + k * 750, () => r.classList.add('su')); dopo(900 + k * 750, () => { r.classList.remove('lavora'); ic.textContent = '✓'; }); });
-    dopo(1200 + righe.length * 750, () => {
-      dRisposta.textContent = c.risposta;
-      if (c.file){ const f = document.createElement('div'), ic = document.createElement('i'), tx = document.createElement('div'), sp = document.createElement('span'); f.className = 'file'; tx.textContent = c.file[0]; sp.textContent = c.file[1]; tx.append(sp); f.append(ic, tx); dRisposta.append(f); }
-      dRisposta.classList.add('su'); dStato.textContent = 'fatto';
-      dBottoni.forEach(b => b.disabled = false);
-    });
+    let quando = 0; c.passi.forEach(([attesa, azione, ...arg]) => { quando += attesa; dopo(quando, () => AZIONI[azione](...arg)); });
   }
 }
 dBottoni.forEach(b => b.addEventListener('click', () => demo(+b.dataset.c)));
@@ -829,7 +740,7 @@ const barra = document.querySelector('.js-barra');
 /* la barra sparisce quando a schermo c'è già un pulsante grande: l'eroe e la chiusura */
 const visti = new Set();
 const vedi = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? visti.add(e.target) : visti.delete(e.target)); barra.classList.toggle('su', !visti.size); });
-[eroe, document.querySelector('.js-punzone-scena')].forEach(x => vedi.observe(x));
+[eroe, document.querySelector('.js-fine-scena')].forEach(x => vedi.observe(x));
 </script>
 </body>
 </html>
