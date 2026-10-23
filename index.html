@@ -704,13 +704,13 @@ footer a{color:var(--titanio)}
       <label class="consenso"><input id="consenso" type="checkbox" class="js-consenso"><span>Voglio ricevere da Dennis contenuti e novità su Mark via email e WhatsApp. Mi cancello quando voglio. <a href="privacy.html" target="_blank" rel="noopener">Privacy</a></span></label>
       <div class="riepilogo js-riepilogo"></div>
       <a class="pulsante js-invia" href="#" aria-disabled="true">Invia la richiesta</a>
-      <p class="nota" style="font-size:15px;line-height:20px">Ti scriviamo noi su WhatsApp al numero che hai lasciato.</p>
+      <p class="nota" style="font-size:15px;line-height:20px">Si apre WhatsApp con le tue risposte già scritte: premi invia e ti rispondiamo lì.</p>
     </div>
 
     <div class="domanda" data-passo="grazie">
       <div class="num">Richiesta ricevuta</div>
       <h2>Grazie, ci siamo.</h2>
-      <p class="nota">Abbiamo le tue risposte. Ti scriviamo su WhatsApp al numero che hai lasciato, nelle prossime ore, con la proposta per il tuo Mark.</p>
+      <p class="nota">Abbiamo le tue risposte. Premi invia su WhatsApp e ti rispondiamo lì. Se WhatsApp non si è aperto, tranquillo: ti scriviamo noi al numero che hai lasciato.</p>
       <a class="pulsante" href="https://www.instagram.com/dennisavarello.bsn/" target="_blank" rel="noopener">Seguimi su Instagram</a>
     </div>
 
@@ -733,6 +733,12 @@ const lento = matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* ── IL FILTRO ── */
 /* Il target si capisce dalle risposte, come su iltuojarvis.com: da solo = freelance, team = azienda, progetti personali = privato */
 const NUMERO_DAVIDE = '393520936895';
+/* 23 ott sera (Davide): dopo il modulo si riapre WhatsApp come su iltuojarvis.com, così il lead ci scrive per primo
+   (la risposta rientra nei messaggi di servizio, il modello a pagamento resta solo per chi non scrive).
+   Freelance e privati → Jarvis Setter 352 097 5156; aziende e microimprese → Jarvis Aziende 351 373 5369. */
+const NUMERO_SETTER = '393520975156', NUMERO_AZIENDE = '393513735369';
+const numero = r => ['freelance', 'privato'].includes(target(r)) ? NUMERO_SETTER : NUMERO_AZIENDE;
+const IN_APP = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|BytedanceWebview|Threads/i.test(navigator.userAgent);
 function target(r){
   if (r.uso === 'Per i miei progetti personali') return 'privato';
   if (r.uso === 'Per la mia azienda e il mio team') return 'azienda';
@@ -811,12 +817,21 @@ invia.addEventListener('click', e => {
   if (!inviata) {
     inviata = true;
     const r = risposte, nome = [r.nome, r.cognome].filter(Boolean).join(' ');
-    const corpo = JSON.stringify({nome, cognome: r.cognome, email: r.email, telefono: r.telefono, consenso: filtro.querySelector('.js-consenso').checked, uso: r.uso, attivita: r.attivita, settore: r.settore, persone: 'target ' + target(r), primo: r.primo, processi: r.processi, investimento: r.investimento, numero: NUMERO_DAVIDE, pagina: location.origin + location.pathname + UTM});
+    const corpo = JSON.stringify({nome, cognome: r.cognome, email: r.email, telefono: r.telefono, consenso: filtro.querySelector('.js-consenso').checked, uso: r.uso, attivita: r.attivita, settore: r.settore, persone: 'target ' + target(r), primo: r.primo, processi: r.processi, investimento: r.investimento, numero: numero(r), pagina: location.origin + location.pathname + UTM});
     let ok = false;
     try { ok = navigator.sendBeacon && navigator.sendBeacon(RACCOLTA, new Blob([corpo], {type: 'text/plain'})); } catch (x) {}
     if (!ok) try { fetch(RACCOLTA, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain'}, body: corpo}); } catch (x) {}
   }
   vai('grazie');
+  /* il riepilogo diventa il primo messaggio su WhatsApp (come su iltuojarvis.com) */
+  const r = risposte, nome = [r.nome, r.cognome].filter(Boolean).join(' ');
+  const personale = r.uso === 'Per i miei progetti personali';
+  const righe = [['Uso', r.uso], ...(personale ? [] : [['Attività', [r.attivita, r.settore].filter(Boolean).join(' · ')]]), ['Per prima cosa', r.primo], ['Da automatizzare', r.processi], ['Investimento', r.investimento]];
+  const testo = `Ciao, sono ${nome}. Ho visto la pagina di Mark e lo voglio sul mio computer.\n\n` + righe.map(([k, v]) => `• ${k}: ${v || ''}`).join('\n');
+  const link = `https://wa.me/${numero(r)}?text=${encodeURIComponent(testo)}`;
+  if (IN_APP) { setTimeout(() => { location.href = link; }, 150); return; }
+  const w = window.open(link, '_blank');
+  if (!w) setTimeout(() => { location.href = link; }, 150);
 });
 
 /* ── REGIA ── */
