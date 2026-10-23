@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mark</title>
+<!--
+  LA PLANCIA DI JARVIS — il corpo che si vende (10 ott 2026)
+  Sopra: l'entità. Uno sciame di nanoparticelle che cambia forma, fluttua e
+  quando Jarvis parla vibra con la sua voce. Un clic e la ascolta.
+  Sotto: l'ecosistema. Ogni agente è una figura olografica al lavoro alla sua
+  console, raggruppati per azienda, con i dati che corrono fra loro.
+  ⭐ Prodotto: gli agenti arrivano da /api/hq (Quartier Generale) oppure, sul
+  computer di un cliente, da /plancia/agenti.json. Nessun nome scritto a mano qui.
+-->
+<style>
+/* ⭐ 22 ott: STILE MARK — ossidiana, titanio, avorio e una sola luce: l'Ambra Forgia */
+@font-face{font-family:Archivo;src:url(font/archivo-700.woff2) format('woff2');font-weight:700}
+@font-face{font-family:'Geist Mono';src:url(font/geist-mono-500.woff2) format('woff2');font-weight:500}
+@font-face{font-family:Switzer;src:url(font/switzer-500.woff2) format('woff2');font-weight:500}
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+.solo #ecosistema,.solo #segno{display:none}.solo #entita{flex:1 1 100%}
+body{display:flex;flex-direction:column}
+#entita{position:relative;flex:1 1 58%;min-height:0;pointer-events:none}
+#ecosistema{position:relative;flex:1 1 42%;min-height:0;overflow:hidden}
+.nome{position:absolute;left:0;top:0;font:500 10px/1 Switzer,-apple-system,sans-serif;letter-spacing:.06em;color:#EDE9E1;white-space:nowrap;padding:3px 6px;border:1px solid rgba(138,141,145,.3);background:rgba(11,11,12,.6);pointer-events:none;will-change:transform;transition:opacity .3s}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#segno{position:fixed;left:12px;top:12px;z-index:6;display:flex;align-items:center;gap:9px;pointer-events:none}
+#segno .m{display:flex;flex-direction:column;align-items:center;gap:3px}
+#segno b{font:700 17px/.8 Archivo,'Helvetica Neue',Arial,sans-serif;color:#EDE9E1;letter-spacing:-.01em}
+#segno i{width:11px;height:2px;background:#E39B3A}
+#segno span{font:500 9px/1 'Geist Mono',ui-monospace,Menlo,monospace;letter-spacing:.24em;color:#8A8D91;white-space:nowrap}
+@media (max-width:380px){#segno span{display:none}}
+</style>
+</head>
+<body>
+<div id="segno" aria-hidden="true"><div class="m"><b>M</b><i></i></div><span>[ MARK I ]</span></div>
+<script>if(/solo/.test(location.search))document.documentElement.classList.add('solo')</script>
+<div id="entita" aria-label="Mark: tocchi per parlare"></div>
+<div id="ecosistema" aria-label="La squadra al lavoro"></div>
+<script src="lib/three.min.js"></script>
+<script src="lib/CopyShader.js"></script><script src="lib/LuminosityHighPassShader.js"></script><script src="lib/EffectComposer.js"></script>
+<script src="lib/RenderPass.js"></script><script src="lib/ShaderPass.js"></script><script src="lib/UnrealBloomPass.js"></script>
+<script>
+const V = (x,y,z) => new THREE.Vector3(x,y,z);
+function palco(box, fov, bloomForza){
+  const r = new THREE.WebGLRenderer({antialias:true}); r.setPixelRatio(Math.min(devicePixelRatio,2)); r.setClearColor(0x0B0B0C);
+  box.appendChild(r.domElement);
+  const scena = new THREE.Scene(), cam = new THREE.PerspectiveCamera(fov,1,.1,3000);
+  const comp = new THREE.EffectComposer(r); comp.addPass(new THREE.RenderPass(scena, cam));
+  const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(256,256), bloomForza, .6, .12); comp.addPass(bloom);
+  const misura = () => { const w = box.clientWidth, h = Math.max(1, box.clientHeight); r.setSize(w,h,false); comp.setSize(w,h); cam.aspect = w/h; cam.updateProjectionMatrix(); };
+  new ResizeObserver(misura).observe(box); misura();
+  return {r, scena, cam, comp, bloom};
+}
+
+// ════════════════════════════════════════════════════════════════════════
+//  L'ENTITÀ — nanotecnologia: lo sciame cambia forma da solo e vibra con la voce
+// ════════════════════════════════════════════════════════════════════════
+const E = palco(document.getElementById('entita'), 40, 1.15);
+const NP = 16000;
+const gP = new THREE.BufferGeometry(), dir = new Float32Array(NP*3), rnd = new Float32Array(NP*4);
+for (let i=0;i<NP;i++){
+  const y = 1 - (i+.5)/NP*2, rr = Math.sqrt(1-y*y), t = i*2.399963;        // spirale di Fibonacci: punti uniformi sulla sfera
+  dir.set([Math.cos(t)*rr, y, Math.sin(t)*rr], i*3);
+  rnd.set([Math.random(), Math.random(), Math.random(), Math.random()], i*4);
+}
+gP.setAttribute('position', new THREE.BufferAttribute(dir,3));
+gP.setAttribute('rnd', new THREE.BufferAttribute(rnd,4));
+const NOISE = `
+vec3 m289(vec3 x){return x-floor(x*(1./289.))*289.;} vec4 m289(vec4 x){return x-floor(x*(1./289.))*289.;}
+vec4 perm(vec4 x){return m289(((x*34.)+1.)*x);} vec4 tis(vec4 r){return 1.79284291400159-.85373472095314*r;}
+float snoise(vec3 v){ const vec2 C=vec2(1./6.,1./3.); const vec4 D=vec4(0.,.5,1.,2.);
+  vec3 i=floor(v+dot(v,C.yyy)); vec3 x0=v-i+dot(i,C.xxx); vec3 g=step(x0.yzx,x0.xyz); vec3 l=1.-g;
+  vec3 i1=min(g.xyz,l.zxy); vec3 i2=max(g.xyz,l.zxy); vec3 x1=x0-i1+C.xxx; vec3 x2=x0-i2+C.yyy; vec3 x3=x0-D.yyy;
+  i=m289(i); vec4 p=perm(perm(perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+  float n_=.142857142857; vec3 ns=n_*D.wyz-D.xzx; vec4 j=p-49.*floor(p*ns.z*ns.z); vec4 x_=floor(j*ns.z); vec4 y_=floor(j-7.*x_);
+  vec4 x=x_*ns.x+ns.yyyy; vec4 y=y_*ns.x+ns.yyyy; vec4 h=1.-abs(x)-abs(y); vec4 b0=vec4(x.xy,y.xy); vec4 b1=vec4(x.zw,y.zw);
+  vec4 s0=floor(b0)*2.+1.; vec4 s1=floor(b1)*2.+1.; vec4 sh=-step(h,vec4(0.)); vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy; vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+  vec3 p0=vec3(a0.xy,h.x); vec3 p1=vec3(a0.zw,h.y); vec3 p2=vec3(a1.xy,h.z); vec3 p3=vec3(a1.zw,h.w);
+  vec4 nr=tis(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3))); p0*=nr.x; p1*=nr.y; p2*=nr.z; p3*=nr.w;
+  vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.); m=m*m;
+  return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3))); }
+mat3 rotY(float a){ float c=cos(a),s=sin(a); return mat3(c,0.,-s, 0.,1.,0., s,0.,c); }
+mat3 rotX(float a){ float c=cos(a),s=sin(a); return mat3(1.,0.,0., 0.,c,s, 0.,-s,c); }`;
+const mP = new THREE.ShaderMaterial({
+  uniforms:{ t:{value:0}, voce:{value:0}, ascolta:{value:0}, pensa:{value:0}, forma:{value:0}, px:{value:E.r.getPixelRatio()} },
+  vertexShader: NOISE + `
+    attribute vec4 rnd; uniform float t, voce, ascolta, pensa, forma, px; varying float vLuce; varying float vOro;
+    // tre corpi in cui lo sciame si ricompone: una sfera, un nucleo a petali, un anello che si avvolge
+    vec3 corpo(vec3 d, float k){
+      float petali = 1. + .28*sin(5.*atan(d.z,d.x))*sin(3.*acos(d.y));
+      float th = atan(d.z,d.x), ph = acos(d.y)*2.;
+      vec3 toro = vec3((1.+.42*cos(ph))*cos(th), .42*sin(ph), (1.+.42*cos(ph))*sin(th))*.82;
+      vec3 a = d, b = d*petali, c = toro;
+      float f = fract(k)*3.; float s = smoothstep(.0,1.,fract(f));
+      return f<1. ? mix(a,b,s) : f<2. ? mix(b,c,s) : mix(c,a,s);
+    }
+    void main(){
+      vec3 d = position;
+      float corsa = t*(.06 + rnd.x*.05) * (1. + pensa*4.);              // le particelle scorrono sulla pelle, a bande
+      d = rotY(corsa + d.y*.6) * d;
+      vec3 p = corpo(d, forma);
+      float n1 = snoise(p*1.4 + vec3(0., t*.18, 0.));
+      float n2 = snoise(p*4.2 + vec3(t*1.6));
+      float r = 1. + .16*n1 + voce*(.42*n2 + .12) + ascolta*.05*sin(t*6. + p.y*8.);
+      vec3 q = p * r * 60.;
+      // il pulviscolo: alcune particelle si staccano e orbitano attorno al corpo
+      float libera = step(.9, rnd.y);
+      vec3 orbita = rotX(rnd.z*6.28) * rotY(t*(.2+rnd.w*.4) + rnd.x*6.28) * vec3(78. + rnd.w*36. + voce*30., 0., 0.);
+      q = mix(q, orbita, libera);
+      q += vec3(snoise(vec3(rnd.xy*40., t*.3)), snoise(vec3(rnd.yz*40., t*.3)), snoise(vec3(rnd.zw*40., t*.3))) * (1.2 + voce*5.);
+      vec4 mv = modelViewMatrix * vec4(q,1.);
+      gl_Position = projectionMatrix * mv;
+      gl_PointSize = px * (1.1 + rnd.w*1.6 + voce*2.2) * (300./-mv.z);
+      vLuce = .45 + .55*smoothstep(-.4,.8,n1) + voce*.9 + ascolta*.3 - libera*.25;
+      vOro = step(.965, rnd.z);
+    }`,
+  fragmentShader: `varying float vLuce; varying float vOro;
+    void main(){ float d = length(gl_PointCoord-.5); if (d>.5) discard; float a = smoothstep(.5,.0,d);
+      vec3 holo = mix(vec3(.89,.55,.18), vec3(1.,.90,.74), clamp(vLuce-.6,0.,1.));   // Ambra Forgia → avorio
+      vec3 c = mix(holo, vec3(.80,.82,.85), vOro);                                   // scintille di titanio
+      gl_FragColor = vec4(c*vLuce*a, a); }`,
+  transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+});
+const sciame = new THREE.Points(gP, mP); E.scena.add(sciame);
+// due anelli sottili che girano attorno: il "campo" dell'entità
+const anelli = [0,1].map(k=>{ const g = new THREE.BufferGeometry().setFromPoints(Array.from({length:241},(_,i)=>{ const a=i/240*Math.PI*2; return V(Math.cos(a)*(96+k*14),0,Math.sin(a)*(96+k*14)); }));
+  const l = new THREE.Line(g, new THREE.LineDashedMaterial({color:0xE39B3A, dashSize:2+k*3, gapSize:5+k*4, transparent:true, opacity:.28-k*.1, blending:THREE.AdditiveBlending, depthWrite:false}));
+  l.computeLineDistances(); l.rotation.x = .35 + k*.5; l.rotation.z = k*.8; E.scena.add(l); return l; });
+
+// ── la voce: un clic, parla, Jarvis risponde e lo sciame vibra con lui
+const DIALOGO = '';
+let stato = 'riposo', ac = null, anaVoce = null, anaMic = null; const buf = new Uint8Array(1024);
+const leggi = a => { if (!a) return 0; a.getByteTimeDomainData(buf); let s=0; for (let i=0;i<buf.length;i++){ const v=(buf[i]-128)/128; s+=v*v; } return Math.sqrt(s/buf.length); };
+const contesto = () => ac || (ac = new (window.AudioContext||window.webkitAudioContext)());
+async function ascolta(){ if (!GEMINI && stato==='riposo') return ascoltaChrome();
+  if (stato==='parla'){ zitto(); return; } if (stato!=='riposo') return;
+  let flusso; try { flusso = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:true}}); } catch(e){ console.warn('microfono negato', e); return; }
+  stato = 'ascolta'; const ctx = contesto(); anaMic = ctx.createAnalyser(); anaMic.fftSize = 1024; ctx.createMediaStreamSource(flusso).connect(anaMic);
+  const pezzi = [], reg = new MediaRecorder(flusso); reg.ondataavailable = e => e.data.size && pezzi.push(e.data);
+  let parlato = false, ultimo = Date.now(); const t0 = Date.now();
+  const guarda = setInterval(()=>{ if (leggi(anaMic) > .035){ parlato = true; ultimo = Date.now(); }
+    if ((parlato && Date.now()-ultimo > 1300) || Date.now()-t0 > 15000 || (!parlato && Date.now()-t0 > 6000)){ clearInterval(guarda); reg.stop(); } }, 80);
+  reg.onstop = async () => { flusso.getTracks().forEach(t=>t.stop()); anaMic = null;
+    if (!parlato){ stato = 'riposo'; return; }
+    stato = 'pensa';
+    try {
+      const fd = new Blob(pezzi,{type:'audio/webm'});
+      const detto = ((await (await fetch(DIALOGO+'/ascolta',{method:'POST', body:fd})).json()).testo||'').trim();
+      if (!detto){ stato = 'riposo'; return; }
+      const d = await (await fetch(DIALOGO+'/parla',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({testo:detto})})).json();
+      if (d.audio) suona(d.audio); else if (d.testo){ stato = 'riposo'; diChrome(d.testo); } else stato = 'riposo';
+    } catch(e){ stato = 'riposo'; }
+  };
+  reg.start(200);
+}
+let voce = null;
+function suona(url){ const ctx = contesto(); voce = new Audio(url); voce.crossOrigin = 'anonymous';
+  const src = ctx.createMediaElementSource(voce); anaVoce = ctx.createAnalyser(); anaVoce.fftSize = 1024; src.connect(anaVoce); anaVoce.connect(ctx.destination);
+  stato = 'parla'; const fine = () => { stato = 'riposo'; anaVoce = null; voce = null; }; voce.onended = fine; voce.onerror = fine; voce.play().catch(fine); }
+function zitto(){ if (voce){ voce.pause(); voce.onended && voce.onended(); } }
+// ⭐ il microfono è dell'app di Jarvis: il clic le dà il nome, come dire «Jarvis». Senza app, ascolta la pagina
+let app = false;
+document.getElementById('entita').addEventListener('click', async () => {
+  if (stato==='parla' && voce){ zitto(); return; }
+  try { const r = await fetch('/sveglia', {method:'POST'}); if (r.ok){ app = true; appStato = 'ascolta'; appDa = Date.now(); return; } } catch(e){}
+  ascolta();
+});
+// lo stato della voce dell'app, ogni quarto di secondo
+let appStato = 'riposo', appPicco = 0, appDa = 0;
+if (false) setInterval(async () => { try { const d = await (await fetch('/stato-voce', {cache:'no-store'})).json();
+  app = d.app; appPicco = d.picco || 0;
+  const nuovo = d.parla ? 'parla' : d.pensa ? 'pensa' : d.ascolta ? 'ascolta' : 'riposo';
+  if (nuovo !== 'riposo' || Date.now() - appDa > 2500) appStato = nuovo;
+} catch(e){} }, 250);
+window.jarvisParla = url => suona(url);
+// ── senza chiave Gemini: orecchio e voce di Chrome, gratis (kit cliente)
+let GEMINI = false; Promise.reject().then(r=>r.json()).then(c=>{ GEMINI = !!c.gemini; }).catch(()=>{});
+function ascoltaChrome(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR){ console.warn('serve Chrome'); return; }
+  const r = new SR(); r.lang = 'it-IT'; r.interimResults = false; r.maxAlternatives = 1;
+  appStato = 'ascolta'; appDa = Date.now(); let detto = '';
+  r.onresult = e => { detto = e.results[0][0].transcript; };
+  r.onerror = () => { appStato = 'riposo'; };
+  r.onend = async () => { if (!detto.trim()){ appStato = 'riposo'; return; }
+    appStato = 'pensa'; appDa = Date.now();
+    try { const d = await (await fetch('/parla',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({testo:detto})})).json();
+      if (d.testo) diChrome(d.testo); else appStato = 'riposo'; } catch(e){ appStato = 'riposo'; } };
+  r.start();
+}
+function diChrome(t){
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'it-IT';
+  const v = speechSynthesis.getVoices().filter(x=>/^it/i.test(x.lang)); const m = v.find(x=>/luca|diego|cosimo|male|uomo/i.test(x.name)) || v[0]; if (m) u.voice = m;
+  appStato = 'parla'; appDa = Date.now(); u.onend = u.onerror = () => { appStato = 'riposo'; };
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}      // chi ospita la pagina può farla parlare
+
+let vLiscia = 0, aLiscia = 0, pLiscia = 0;
+function vivaEntita(now){
+  const t = now/1000;
+  // la pagina parla da sé (senza app) oppure segue l'app di Jarvis
+  const s0 = stato !== 'riposo' ? stato : appStato;
+  const sillabe = .45 + .55*Math.abs(Math.sin(t*7.3) * Math.sin(t*3.1 + 1.3));       // la voce dell'app non la sento: la mimo a sillabe
+  const v = stato==='parla' ? Math.min(1, leggi(anaVoce)*3.4) : stato==='ascolta' ? Math.min(1, leggi(anaMic)*2) * .5
+          : appStato==='parla' ? .75*sillabe : appStato==='ascolta' ? Math.min(.5, appPicco*5) : 0;
+  vLiscia += (v - vLiscia) * .22; aLiscia += ((s0==='ascolta'?1:0) - aLiscia) * .06; pLiscia += ((s0==='pensa'?1:0) - pLiscia) * .06;
+  const u = mP.uniforms; u.t.value = t; u.voce.value = vLiscia; u.ascolta.value = aLiscia; u.pensa.value = pLiscia;
+  u.forma.value = t/26;                                   // ogni ~9 secondi si ricompone in un altro corpo
+  sciame.rotation.y = t*.07; sciame.rotation.x = Math.sin(t*.13)*.25; sciame.position.y = Math.sin(t*.6)*3;
+  anelli.forEach((l,k)=>{ l.rotation.y = t*(k? -.05 : .08); l.material.opacity = (.22 - k*.08) + vLiscia*.4; });
+  E.bloom.strength = 1.05 + vLiscia*1.1 + aLiscia*.25;
+  const D = E.cam.aspect < 1 ? 330 : 250;
+  E.cam.position.set(0, 18, D); E.cam.lookAt(0, 0, 0);
+  E.comp.render();
+}
+
+// ════════════════════════════════════════════════════════════════════════
+//  L'ECOSISTEMA — gli agenti al lavoro, raggruppati per azienda
+// ════════════════════════════════════════════════════════════════════════
+const Q = palco(document.getElementById('ecosistema'), 34, .85);
+Q.scena.fog = new THREE.FogExp2(0x0B0B0C, .006);
+const lm = (c, o=1) => new THREE.LineBasicMaterial({color:c, transparent:true, opacity:o, blending:THREE.AdditiveBlending, depthWrite:false});
+const cerchio = (rr, c, o, n=96) => new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(Array.from({length:n},(_,i)=>{ const a=i/n*Math.PI*2; return V(Math.cos(a)*rr, 0, Math.sin(a)*rr); })), lm(c, o));
+const COLORE = {vendite:'#E39B3A', marketing:'#D9825B', operations:'#B9BCC1', finanza:'#D8C69E', ponte:'#EDE9E1'};   // ⭐ 22 ott: ambra, rame, titanio, champagne, avorio
+const COMPITO = {};   // i compiti veri arrivano dal server (/api/hq), dalla Sala
+// la goccia di luce che corre fra un agente e l'altro: i dati che si passano
+const goccia = (()=>{ const c = document.createElement('canvas'); c.width = c.height = 32; const g = c.getContext('2d'), gr = g.createRadialGradient(16,16,0,16,16,16);
+  gr.addColorStop(0,'#fff'); gr.addColorStop(.4,'rgba(255,255,255,.5)'); gr.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0,0,32,32); return new THREE.CanvasTexture(c); })();
+const eco = new THREE.Group(); Q.scena.add(eco);
+const vivi = [];
+function agente3D(u, colStr){
+  const col = new THREE.Color(u.salute==='errore' ? '#D8614A' : u.salute==='fermo' ? '#5E6166' : colStr).getHex();
+  const g = new THREE.Group();
+  const vetro = (geo, op=.22) => { const gr = new THREE.Group();
+    gr.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:col, transparent:true, opacity:op, depthWrite:false, blending:THREE.AdditiveBlending})));
+    gr.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 25), lm(col, .9))); return gr; };
+  g.add(cerchio(4.2, col, .5, 64));
+  const tav = vetro(new THREE.BoxGeometry(5.4,.18,2.2), .12); tav.position.set(0,2.2,1.5); g.add(tav);
+  const pc = vetro(new THREE.BoxGeometry(1.8,.08,1.2), .3); pc.position.set(0,2.35,1.4); g.add(pc);
+  const pcs = vetro(new THREE.BoxGeometry(1.8,1.1,.06), .35); pcs.position.set(0,2.9,2.05); pcs.rotation.x = .25; g.add(pcs);
+  const sed = vetro(new THREE.BoxGeometry(1.8,.2,1.8), .1); sed.position.set(0,1.35,-.9); g.add(sed);
+  const sch2 = vetro(new THREE.BoxGeometry(1.8,1.9,.2), .08); sch2.position.set(0,2.3,-1.75); g.add(sch2);
+  const busto = vetro(new THREE.CylinderGeometry(.85,1.05,2.4,10), .55); busto.position.set(0,2.65,-.75); busto.rotation.x = .15; g.add(busto);
+  const testa = vetro(new THREE.IcosahedronGeometry(.72,1), .6); testa.position.set(0,4.25,-.5); g.add(testa);
+  const braccia = [-1,1].map(sx=>{ const p = new THREE.Group(); p.position.set(.9*sx,3.4,-.55); const b = vetro(new THREE.CylinderGeometry(.24,.2,1.8,6), .5); b.position.y = -.8; p.add(b); p.rotation.x = -1.25; g.add(p); return p; });
+  const luce = new THREE.Sprite(new THREE.SpriteMaterial({map:goccia, color:col, transparent:true, opacity:.55, blending:THREE.AdditiveBlending, depthWrite:false}));
+  luce.scale.setScalar(4.2); luce.position.set(0,3.6,-.6); g.add(luce);
+  const cv = document.createElement('canvas'); cv.width = 320; cv.height = 200; const cx = cv.getContext('2d'), tx = new THREE.CanvasTexture(cv);
+  const sch = new THREE.Mesh(new THREE.PlaneGeometry(5.2,3.25), new THREE.MeshBasicMaterial({map:tx, transparent:true, depthWrite:false, side:THREE.DoubleSide}));
+  sch.position.set(0,6.4,-2.4); sch.scale.setScalar(.72); sch.rotation.x = -.08; g.add(sch);
+  const testo = u.compito || COMPITO[u.icona] || ['AL LAVORO','in corso','fatto'], hex = '#' + new THREE.Color(col).getHexString();
+  let righe = Array.from({length:6}, ()=>Math.random());
+  const disegna = t => { cx.clearRect(0,0,320,200); cx.fillStyle = 'rgba(3,14,18,.75)'; cx.fillRect(0,0,320,200); cx.strokeStyle = hex; cx.lineWidth = 2; cx.strokeRect(2,2,316,196);
+    cx.fillStyle = hex; cx.font = '600 22px Switzer, sans-serif'; cx.fillText(testo[0], 16, 36);
+    if (u.salute!=='ok'){ cx.font = '500 18px Switzer, sans-serif'; cx.fillText(u.salute==='errore' ? 'in errore' : 'in pausa', 16, 80); tx.needsUpdate = true; return; }
+    righe = righe.slice(1).concat([Math.random()]);
+    righe.forEach((w,k)=>{ cx.globalAlpha = .35 + k*.11; cx.fillRect(16, 60 + k*20, 50 + w*220, 6); });
+    cx.globalAlpha = 1; cx.font = '500 15px Switzer, sans-serif'; cx.fillText('› ' + testo[1 + (Math.floor(t*.5)%2)], 16, 188); tx.needsUpdate = true; };
+  disegna(0);
+  const A = {g, sch, disegna, braccia, testa, fase:Math.random()*6, lavora:u.salute==='ok', col, nome:(u.jarvis||u.nome||'').replace(/^Jarvis\s+/,'')};
+  g.scale.setScalar(1.25);
+  vivi.push(A); return A;
+}
+
+const flussi = [];
+function flusso(a, b, col){
+  const m = a.clone().lerp(b, .5); m.y += 6 + a.distanceTo(b)*.18;
+  const curva = new THREE.QuadraticBezierCurve3(a, m, b);
+  const linea = new THREE.Line(new THREE.BufferGeometry().setFromPoints(curva.getPoints(40)), lm(col, .12)); eco.add(linea);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:goccia, color:col, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false})); sp.scale.setScalar(1.6); eco.add(sp);
+  flussi.push({curva, sp, t:Math.random(), v:.12 + Math.random()*.18});
+}
+
+function agentiDa(d){
+  // ⭐ un formato solo: [{azienda, agenti:[{nome, reparto, icona, salute}]}]
+  if (Array.isArray(d)) return d;
+  const ordine = ['vendite','marketing','operations','finanza'], gruppi = [];
+  const ponte = (d.ponte?.uffici||[]).filter(u=>u.tipo==='agente').map(u=>({...u, reparto:'ponte'}));
+  if (ponte.length) gruppi.push({azienda:'Ponte', agenti:ponte});
+  for (const az of d.aziende||[]){
+    const lista = x => Array.isArray(x) ? x : (x?.uffici || []);
+    const ag = ordine.flatMap(r=>lista(az.reparti?.[r]).filter(u=>u.tipo==='agente').map(u=>({...u, reparto:r})));
+    if (ag.length) gruppi.push({azienda:az.nome, agenti:ag});
+  }
+  return gruppi;
+}
+async function carica(){
+  for (const u of ['agenti.json']){ try { const r = await fetch(u, {cache:'no-store'}); if (r.ok) return agentiDa(await r.json()); } catch(e){} }
+  return [];
+}
+let larghezza = 0, profondita = 0, gruppi = [], colonna = null;
+async function costruisci(){
+  if (!gruppi.length) gruppi = await carica(); if (!gruppi.length) return;
+  vivi.forEach(A=>A.tag && A.tag.remove()); vivi.length = 0; flussi.length = 0; eco.clear(); larghezza = 0;
+  // ⭐ largo: le aziende una accanto all'altra. Stretto (barra laterale): una sotto l'altra
+  colonna = Q.cam.aspect < 1.3;
+  const passo = 13, spazio = 9, fila = 22; let x = 0; const posti = [];
+  gruppi.forEach((gr,gi)=>{
+    const n = gr.agenti.length, w = (n-1)*passo;
+    const x0 = colonna ? -w/2 : x, z0 = colonna ? gi*fila : 0, cx = x0 + w/2;
+    const isola = cerchio(w/2 + 9, 0x2E6C80, .45, 160); isola.position.set(cx, -.05, z0); isola.scale.z = .55; eco.add(isola);
+    const isola2 = cerchio(w/2 + 11, 0x2E6C80, .18, 160); isola2.position.set(cx, -.05, z0); isola2.scale.z = .6; eco.add(isola2);
+    gr.agenti.forEach((u,k)=>{ const A = agente3D(u, COLORE[u.reparto] || '#E39B3A'); const px = x0 + k*passo, pz = z0 + (colonna ? 0 : (k%2 ? 2.5 : -2.5));
+      A.tag = document.createElement('div'); A.tag.className = 'nome'; A.tag.textContent = A.nome; A.tag.style.borderColor = '#' + new THREE.Color(A.col).getHexString() + '66'; document.getElementById('ecosistema').appendChild(A.tag);
+      A.g.position.set(px, 0, pz); A.g.rotation.y = Math.PI + (Math.random()-.5)*.25; eco.add(A.g); posti.push({p:V(px, 4.4, pz), col:A.col, gi}); });
+    larghezza = colonna ? Math.max(larghezza, w) : x + w;
+    x += w + passo + spazio;
+  });
+  profondita = colonna ? (gruppi.length-1)*fila : 0;
+  eco.position.set(colonna ? 0 : -larghezza/2, 0, -profondita/2);
+  // i dati corrono dentro ogni azienda e fra un'azienda e l'altra
+  posti.forEach((a,i)=>{ const b = posti[(i+1)%posti.length]; if (posti.length>1) flusso(a.p, b.p, a.col); });
+  posti.forEach((a,i)=>{ if (i%2===0 && posti.length>2){ const b = posti[(i+3)%posti.length]; flusso(a.p, b.p, 0xE39B3A); } });
+  // pavimento: una griglia fine che sparisce nel buio
+  const grid = new THREE.GridHelper(Math.max(200, larghezza*2), 60, 0x16404C, 0x0C2630); grid.position.set(colonna ? 0 : larghezza/2, -.1, profondita/2); grid.material.transparent = true; grid.material.opacity = .35; eco.add(grid);
+}
+costruisci();
+new ResizeObserver(()=>{ if (colonna!==null && (Q.cam.aspect < 1.3) !== colonna) costruisci(); }).observe(document.getElementById('ecosistema'));
+
+let fot = 0;
+function vivaEcosistema(now){
+  const t = now/1000; fot++;
+  vivi.forEach(A=>{
+    if (A.lavora){ A.braccia[0].rotation.x = -1.25 + Math.sin(t*11 + A.fase)*.14; A.braccia[1].rotation.x = -1.25 + Math.sin(t*11 + A.fase + 1.7)*.14; A.testa.rotation.y = Math.sin(t*.7 + A.fase)*.35; }
+    A.sch.position.y = 6.4 + Math.sin(t*1.5 + A.fase)*.1;
+    if (fot % 24 === Math.floor(A.fase*3)) A.disegna(t);
+  });
+  flussi.forEach(f=>{ f.t = (f.t + f.v*.016) % 1; f.sp.position.copy(f.curva.getPoint(f.t)); f.sp.material.opacity = Math.sin(f.t*Math.PI); });
+  // la camera guarda l'ecosistema dall'alto, si allarga fino a farci stare tutti, e ondeggia piano
+  const asp = Q.cam.aspect, tg = Math.tan(THREE.MathUtils.degToRad(Q.cam.fov/2));
+  const serve = Math.max((larghezza + 26) / 2 / tg / asp, (profondita + 22) / 2 / tg * .78);
+  const D = Math.max(46, serve*1.02), a = Math.sin(t*.08)*.18;
+  Q.cam.position.set(Math.sin(a)*D*.4, D*.62, D*.95); Q.cam.lookAt(0, 3, 0);
+  Q.comp.render();
+  // le etichette: proiettate sopra la testa, e se due si toccano quella dietro sale di una riga
+  const box = document.getElementById('ecosistema'), W = box.clientWidth, H = box.clientHeight, v3 = new THREE.Vector3(), messi = [];
+  vivi.map(A=>{ A.g.updateMatrixWorld(); v3.set(0, 5.6, -.5).applyMatrix4(A.g.matrixWorld).project(Q.cam);
+      return {A, x:(v3.x*.5+.5)*W, y:(-v3.y*.5+.5)*H, w:A.tag.offsetWidth, h:A.tag.offsetHeight}; })
+    .sort((a,b)=>b.y-a.y)
+    .forEach(e=>{ let y = e.y; for (let k=0;k<4;k++){ const urto = messi.find(m=>Math.abs(m.x-e.x) < (m.w+e.w)/2+4 && Math.abs(m.y-y) < e.h+3); if (!urto) break; y = urto.y - e.h - 4; }
+      messi.push({x:e.x, y, w:e.w}); e.A.tag.style.transform = `translate(${Math.round(e.x - e.w/2)}px, ${Math.round(y - e.h)}px)`; });
+}
+
+function frame(now){ requestAnimationFrame(frame); vivaEntita(now); vivaEcosistema(now); }
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

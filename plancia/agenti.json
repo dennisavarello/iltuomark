@@ -1,0 +1,8 @@
+[{"azienda":"Le aziende di Dennis","agenti":[
+{"nome":"capo-squadra","reparto":"operations","salute":"ok","compito":["CAPO SQUADRA","punto del mattino","chi fa cosa"]},
+{"nome":"outreach","reparto":"vendite","salute":"ok","compito":["OUTREACH","24 strutture trovate","prima email partita"]},
+{"nome":"deckmaker","reparto":"vendite","salute":"ok","compito":["DECKMAKER","presentazione su misura","pronta per la call"]},
+{"nome":"media-buyer","reparto":"marketing","salute":"ok","compito":["MEDIA BUYER","campagne attive","tiene solo chi porta clienti"]},
+{"nome":"contabile","reparto":"finanza","salute":"ok","compito":["CONTABILE","fatture e scadenze","tutto in ordine"]},
+{"nome":"sponsor-manager","reparto":"marketing","salute":"ok","compito":["SPONSOR MANAGER","brand trovati","proposta pronta"]}
+]}]

@@ -11,23 +11,23 @@
 <meta property="og:image" content="https://iltuomark.com/attico-largo.jpg">
 <meta property="og:url" content="https://iltuomark.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
-<link rel="preload" href="unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
-  MARK · IL FUNNEL v4 — 23 ott 2026 sera. Dennis: «la chat è uguale a Claude e GPT», «troppe scritte, mi piaceva più quello di Jarvis, minimal», «il lusso col mood, non con lo sfondo».
-  v4: lo schema di iltuojarvis.com (nero neutro, una cosa per schermata, titoli piccoli, un solo accento oro). Via foto, grana, braci, scintille, forgia, notte, rilascio.
-  La prova non è più una chat: è il computer che lavora da solo (memoria, programmi, squadra, conferma sul telefono, clic tuoi 0). Filtro e invio delle lead identici alla v3.
-  v3 salvata in git (0b26f8b).
+  MARK · IL FUNNEL v5 — 23 ott 2026 sera. Dennis: «la prova fa cagare, toglila»; «la palla di neuroni è una figata, la teniamo»; «Mark sul tuo computer lo terrei, col font high tech»;
+  «un po di foto ci stanno se si resta minimal»; «molte più animazioni cinematic: deve fare scintille, deve sembrare una serie TV».
+  v5: eroe come Jarvis (sfera della plancia in ambra), titoli Michroma che si decifrano e si arroventano, accensione a sipario, scintille, braci, foto della vision board in cornice con HUD da telecamera.
+  Ordine: eroe · azienda agentica · telefono · squadra · voce · memoria · tutorial · passi · posti · domande · chiusura. Filtro e lead identici. v4 = 1b682d3, v3 = 0b26f8b.
 -->
 <style>
-/* MARK I · v4. Come iltuojarvis.com: nero neutro, una cosa per schermata, un solo accento. Il lusso sta nel silenzio, non nelle foto. */
-@font-face{font-family:Archivo;src:url(archivo-700.woff2) format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:Unbounded;src:url(unbounded-800.woff2) format('woff2');font-weight:800;font-display:swap}
+/* MARK I · v5. Lo schema minimal di Jarvis (nero, una cosa per schermata) con la regia di una serie: accensione, scintille, titoli che si decifrano e si arroventano, foto della vision board in cornice, mai come sfondo. */
+@font-face{font-family:Stark;src:url(michroma-400.woff2) format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Switzer;src:url(switzer-500.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:Switzer;src:url(switzer-600.woff2) format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:'Geist Mono';src:url(geist-mono-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(instrument-serif-400-corsivo.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
 :root{
-  --ossidiana:#0A0A0A;--grafite:#121212;--grafite-2:#1A1A1A;--linea:#232323;--avorio:#F2F0EB;--titanio:#8C8C8C;--ambra:#E39B3A;--ambra-forte:#F2B25E;
-  --marchio:Unbounded,Archivo,sans-serif;--titoli:Archivo,'Arial Narrow',sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;
+  --ossidiana:#050505;--grafite:#0F0F10;--grafite-2:#161617;--linea:#1F1F21;--avorio:#F2F0EB;--titanio:#8C8C8C;--ambra:#E39B3A;--ambra-forte:#F2B25E;--bianco-caldo:#FFE2B0;
+  --stark:Stark,Switzer,sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--corsivo:'Instrument Serif',Georgia,serif;
   --curva:cubic-bezier(.32,.72,0,1);color-scheme:dark
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -35,147 +35,177 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--ossidiana);color:var(--avorio);font:500 17px/1.5 var(--testo);overflow-x:hidden}
 body.chiuso{overflow:hidden}
 a{color:inherit}
-h1,h2{font-family:var(--titoli);font-weight:700;margin:0;letter-spacing:.05em;text-transform:uppercase;text-wrap:balance}
+h1,h2{font-family:var(--stark);font-weight:400;margin:0;letter-spacing:.04em;text-transform:uppercase;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
 :focus-visible{outline:2px solid var(--ambra);outline-offset:4px}
 .ambra{color:var(--ambra)}
-.punto{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ambra);box-shadow:0 0 8px var(--ambra);margin-right:8px;vertical-align:1px;animation:respira 2.4s ease-in-out infinite}
+.corsivo{font-family:var(--corsivo);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.3em;line-height:.8}
+.punto{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ambra);box-shadow:0 0 8px var(--ambra);margin-right:8px;vertical-align:1px;animation:respira 2.2s ease-in-out infinite}
 @keyframes respira{50%{opacity:.3}}
 
+/* ── REGIA: accensione, scintille, braci, luce che segue il dito, filo dello scroll ── */
+.boot{position:fixed;inset:0;z-index:100;pointer-events:auto;display:grid;place-items:center;cursor:pointer}
+.boot .meta{position:absolute;left:0;right:0;height:50.5%;background:var(--ossidiana);transition:transform 1.1s cubic-bezier(.8,0,.2,1)}
+.boot .su-m{top:0}.boot .giu-m{bottom:0}
+.boot.apri .su-m{transform:translateY(-101%)}.boot.apri .giu-m{transform:translateY(101%)}
+.boot .taglio{position:absolute;left:0;right:0;top:50%;height:1px;background:var(--bianco-caldo);box-shadow:0 0 18px #FFB65C,0 0 60px rgba(255,150,40,.8);transform:scaleX(0);transition:transform .5s var(--curva),opacity .6s .6s}
+.boot.taglia .taglio{transform:scaleX(1)}.boot.apri .taglio{opacity:0}
+.boot .righe{position:relative;z-index:2;width:min(88vw,380px);font:500 12px/22px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--titanio);transition:opacity .3s}
+.boot.taglia .righe{opacity:0}
+.boot .righe b{display:block;font:400 22px/30px var(--stark);letter-spacing:.2em;color:var(--avorio);margin-bottom:14px}
+.boot .righe div{display:flex;justify-content:space-between;opacity:0}
+.boot .righe div.su{opacity:1}
+.boot .righe i{font-style:normal;color:var(--ambra)}
+.boot .carica{margin-top:16px;height:1px;background:var(--linea);overflow:hidden}
+.boot .carica span{display:block;height:100%;width:0;background:var(--ambra);box-shadow:0 0 10px var(--ambra);transition:width 1.4s cubic-bezier(.6,0,.2,1)}
+.boot.via{visibility:hidden}
+#scintille,#braci{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#braci{z-index:1;opacity:.55}
+#scintille{z-index:95}
+.luce-cursore{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(227,155,58,.09),transparent 62%);pointer-events:none;z-index:2;opacity:0;transition:opacity .6s}
+.filo-scroll{position:fixed;left:0;top:0;height:2px;width:100%;z-index:80;background:var(--ambra);box-shadow:0 0 12px rgba(227,155,58,.8);transform-origin:left;transform:scaleX(0)}
+.grana{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.045;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+main{position:relative;z-index:3}
+
 /* ── SCENE: una cosa per schermata ── */
-.scena{position:relative;min-height:100svh;padding:96px max(24px,env(safe-area-inset-right,0px)) 96px max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.scena{position:relative;min-height:100svh;padding:96px max(24px,env(safe-area-inset-right,0px)) 96px max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
 .scena + .scena{border-top:1px solid var(--linea)}
-.titolo{font-size:26px;line-height:32px;max-width:680px}
-.riga{margin-top:16px;font-size:18px;line-height:28px;color:var(--titanio);max-width:420px}
+.scena::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(rgba(227,155,58,.12),transparent);transform:translateY(-120px);pointer-events:none}
+.scena.attiva::before{animation:scansiona 1.6s var(--curva) both}
+@keyframes scansiona{0%{transform:translateY(-120px);opacity:1}100%{transform:translateY(100svh);opacity:0}}
+.titolo{font-size:23px;line-height:32px;max-width:680px}
+.riga{margin-top:16px;font-size:18px;line-height:28px;color:var(--titanio);max-width:430px}
+.etichetta{font:500 11px/16px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--titanio);margin-bottom:20px}
+.etichetta b{color:var(--ambra);font-weight:500}
 .angoli{position:absolute;inset:24px;pointer-events:none}
-.angoli i{position:absolute;width:20px;height:20px;border-color:var(--ambra);border-style:solid;opacity:0;transition:opacity .9s var(--curva),transform .9s var(--curva)}
-.angoli i:nth-child(1){left:0;top:0;border-width:1px 0 0 1px;transform:translate(-10px,-10px)}
-.angoli i:nth-child(2){right:0;top:0;border-width:1px 1px 0 0;transform:translate(10px,-10px)}
-.angoli i:nth-child(3){left:0;bottom:0;border-width:0 0 1px 1px;transform:translate(-10px,10px)}
-.angoli i:nth-child(4){right:0;bottom:0;border-width:0 1px 1px 0;transform:translate(10px,10px)}
-.scena.attiva .angoli i{opacity:.28;transform:none}
-.js-anima .compare{opacity:0;transform:translateY(20px);transition:opacity 1.1s var(--curva),transform 1.1s var(--curva)}
-.js-anima .scena.attiva .compare{opacity:1;transform:none}
-.scena.attiva .compare.d1{transition-delay:.15s}.scena.attiva .compare.d2{transition-delay:.3s}.scena.attiva .compare.d3{transition-delay:.45s}
+.angoli i{position:absolute;width:22px;height:22px;border-color:var(--ambra);border-style:solid;opacity:0;transition:opacity .9s var(--curva),transform .9s var(--curva)}
+.angoli i:nth-child(1){left:0;top:0;border-width:1px 0 0 1px;transform:translate(-14px,-14px)}
+.angoli i:nth-child(2){right:0;top:0;border-width:1px 1px 0 0;transform:translate(14px,-14px)}
+.angoli i:nth-child(3){left:0;bottom:0;border-width:0 0 1px 1px;transform:translate(-14px,14px)}
+.angoli i:nth-child(4){right:0;bottom:0;border-width:0 1px 1px 0;transform:translate(14px,14px)}
+.scena.attiva .angoli i{opacity:.35;transform:none}
+.js-anima .compare{opacity:0;transform:translateY(22px);filter:blur(6px);transition:opacity 1.1s var(--curva),transform 1.1s var(--curva),filter 1.1s var(--curva)}
+.js-anima .scena.attiva .compare{opacity:1;transform:none;filter:none}
+.scena.attiva .compare.d1{transition-delay:.18s}.scena.attiva .compare.d2{transition-delay:.36s}.scena.attiva .compare.d3{transition-delay:.54s}
+/* il titolo esce incandescente e si raffredda */
+.scena.attiva .js-decifra{animation:raffredda 2.2s ease-out both}
+@keyframes raffredda{0%{text-shadow:0 0 16px #FF9B3A,0 0 44px rgba(255,120,30,.6);color:var(--bianco-caldo)}100%{text-shadow:0 0 0 transparent}}
 
 /* pulsante */
-.pulsante{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:32px;background:var(--ambra);color:var(--ossidiana);text-decoration:none;font:600 17px/24px var(--testo);padding:17px 32px;border-radius:2px;min-width:260px;border:0;cursor:pointer;animation:chiama 3s var(--curva) infinite;transition:transform .5s var(--curva),background .5s var(--curva)}
+.pulsante{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:32px;background:var(--ambra);color:var(--ossidiana);text-decoration:none;font:600 17px/24px var(--testo);padding:17px 32px;border-radius:2px;min-width:260px;border:0;cursor:pointer;animation:chiama 2.8s var(--curva) infinite;transition:transform .5s var(--curva),background .5s var(--curva)}
+.pulsante::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(100deg,transparent,rgba(255,244,224,.7),transparent);transform:skewX(-18deg);animation:lampo 4s var(--curva) infinite 1.6s}
 .pulsante:hover{background:var(--ambra-forte);transform:translateY(-2px)}
 .pulsante:active{transform:translateY(1px)}
-.pulsante svg{width:20px;height:20px}
-@keyframes chiama{0%{box-shadow:0 0 0 0 rgba(227,155,58,.4)}70%{box-shadow:0 0 0 16px rgba(227,155,58,0)}100%{box-shadow:0 0 0 0 rgba(227,155,58,0)}}
+.pulsante svg{width:20px;height:20px;position:relative}
+@keyframes chiama{0%{box-shadow:0 0 0 0 rgba(227,155,58,.45)}70%{box-shadow:0 0 0 18px rgba(227,155,58,0)}100%{box-shadow:0 0 0 0 rgba(227,155,58,0)}}
+@keyframes lampo{0%{left:-40%}35%,100%{left:130%}}
 
-/* eroe: solo il marchio */
-.avvio{position:absolute;left:max(24px,env(safe-area-inset-left,0px));top:calc(28px + env(safe-area-inset-top,0px));font:500 12px/20px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--titanio)}
+/* ── EROE: la sfera di neuroni, come su Jarvis ── */
+.eroe{padding-top:0;justify-content:flex-start}
+.eroe .plancia{position:relative;width:calc(100% + 48px);margin:0 -24px;height:58svh;min-height:330px;-webkit-mask-image:linear-gradient(#000 62%,transparent);mask-image:linear-gradient(#000 62%,transparent);opacity:0;transform:scale(.86);filter:blur(10px);transition:opacity 1.6s var(--curva),transform 2.2s var(--curva),filter 1.6s var(--curva)}
+.acceso .plancia{opacity:1;transform:none;filter:none}
+.eroe .plancia iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none}
+.eroe .alone{position:absolute;left:50%;top:28svh;width:70vmin;height:70vmin;margin:-35vmin 0 0 -35vmin;border-radius:50%;background:radial-gradient(circle,rgba(227,155,58,.16),transparent 65%);pointer-events:none;animation:respira 5s ease-in-out infinite}
+.eroe h1{font-size:30px;line-height:38px;margin-top:-28px;position:relative}
+.eroe .riga{position:relative}
+.avvio{position:absolute;z-index:4;left:max(24px,env(safe-area-inset-left,0px));top:calc(24px + env(safe-area-inset-top,0px));text-align:left;font:500 11px/20px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--titanio)}
+.avvio div{opacity:0;transform:translateX(-8px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.avvio div.su{opacity:1;transform:none}
 .avvio b{color:var(--ambra);font-weight:500}
-.marchio{font:800 clamp(64px,17vw,148px)/.9 var(--marchio);letter-spacing:-.01em;text-transform:none;display:flex}
-.marchio .m{position:relative}
-.marchio .m::after{content:"";position:absolute;left:6%;right:6%;bottom:-.12em;height:.06em;background:var(--ambra);box-shadow:0 0 18px rgba(227,155,58,.45);transform-origin:left;transform:scaleX(0);transition:transform 1.2s var(--curva) .5s}
-.acceso .marchio .m::after{transform:none}
-.eroe .sotto{margin-top:36px;font:700 22px/28px var(--titoli);letter-spacing:.08em;text-transform:uppercase;color:var(--ambra)}
-.js-anima .eroe .seq{opacity:0;transform:translateY(12px);transition:opacity 1s var(--curva),transform 1s var(--curva)}
-.acceso .seq{opacity:1!important;transform:none!important}
-.acceso .s1{transition-delay:.9s!important}.acceso .s2{transition-delay:1.1s!important}.acceso .s3{transition-delay:1.3s!important}
+.js-anima .eroe .seq{opacity:0;transform:translateY(14px);filter:blur(6px);transition:opacity 1s var(--curva),transform 1s var(--curva),filter 1s var(--curva)}
+.acceso .seq{opacity:1!important;transform:none!important;filter:none!important}
+.acceso .s1{transition-delay:.5s!important}.acceso .s2{transition-delay:.8s!important}.acceso .s3{transition-delay:1.05s!important}
 
-/* ── LA PROVA: il computer che lavora da solo ── */
-.demo{width:min(100%,760px);margin-top:40px;text-align:left;border:1px solid var(--linea);border-radius:3px;overflow:hidden;background:var(--grafite)}
-.demo .voce{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--linea);min-height:60px}
-.demo .mic{width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--linea);display:grid;place-items:center;color:var(--titanio);transition:border-color .3s,color .3s}
-.demo .mic svg{width:14px;height:14px}
-.demo .voce.parla .mic{border-color:var(--ambra);color:var(--ambra)}
-.demo .detto{font-size:16px;line-height:22px;color:var(--titanio)}
-.demo .voce.parla .detto,.demo .voce.detta .detto{color:var(--avorio)}
-.demo .pc{position:relative;height:420px;overflow:hidden;background:var(--ossidiana)}
-.pc .menu{position:absolute;inset:0 0 auto;height:30px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--titanio);border-bottom:1px solid var(--linea);z-index:5;background:var(--ossidiana)}
-.pc .menu b{color:var(--ambra);font-weight:500}
-.fin{position:absolute;background:var(--grafite-2);border:1px solid #2E2E2E;border-radius:5px;box-shadow:0 24px 60px -24px #000;overflow:hidden;font-size:13px;line-height:18px;opacity:0;transform:translateY(10px) scale(.98);transition:opacity .5s var(--curva),transform .5s var(--curva),filter .5s}
-.fin.su{opacity:1;transform:none}
-.fin.dietro{filter:brightness(.5)}
-.fin .tit{display:flex;align-items:center;gap:5px;padding:7px 10px;border-bottom:1px solid var(--linea);font:500 11px/14px var(--mono);color:var(--titanio)}
-.fin .tit i{width:7px;height:7px;border-radius:50%;background:#333}
-.fin .tit span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fin .corpo{padding:8px;display:grid;gap:2px}
-.fin .r{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 8px;border-radius:2px;transition:opacity .4s var(--curva),transform .4s var(--curva),background .3s}
-.js-anima .fin .r:not(.su){opacity:0;transform:translateY(4px)}
-.fin .r.luce{background:#241A0E;box-shadow:inset 0 0 0 1px rgba(227,155,58,.6)}
-.fin .r em{font:500 12px/18px var(--mono);font-style:normal;color:var(--titanio);white-space:nowrap}
-.fin .r.tot{border-top:1px solid var(--linea);border-radius:0;margin-top:4px;font-weight:600}
-.fin .r.tot em{color:var(--ambra)}
-.fin .r.no em{color:#D9826B}
-.fin .r .v{color:var(--ambra);margin-left:6px}
-.fin .corpo{transition:padding .3s var(--curva)}
-.fin.timbrata .corpo{padding-bottom:36px}
-.timbro{position:absolute;right:10px;bottom:10px;font:500 10px/14px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ambra);border:1px solid var(--ambra);padding:4px 7px;border-radius:2px;transform:rotate(-4deg) scale(1.6);opacity:0;transition:opacity .3s,transform .4s cubic-bezier(.5,1.8,.5,1)}
-.timbro.su{opacity:1;transform:rotate(-4deg)}
-.memo{position:absolute;left:12px;top:42px;width:min(260px,calc(100% - 24px));border:1px solid rgba(227,155,58,.55);background:#16120C;border-radius:4px;padding:10px 12px;z-index:4;opacity:0;transform:translateY(-6px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
-.memo.su{opacity:1;transform:none}
-.memo .t{font:500 10px/14px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ambra);margin-bottom:6px}
-.memo p{font-size:13px;line-height:18px;padding:3px 0}
-.notifica{position:absolute;right:12px;top:42px;width:min(290px,calc(100% - 24px));background:#1C1C1C;border:1px solid #333;border-radius:12px;padding:12px;z-index:6;opacity:0;transform:translateY(-16px);transition:opacity .5s var(--curva),transform .6s var(--curva);box-shadow:0 20px 50px -20px #000}
-.notifica.su{opacity:1;transform:none}
-.notifica .t{display:flex;align-items:center;gap:8px;font:500 11px/14px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--titanio)}
-.notifica .t i{width:20px;height:20px;border-radius:4px;background:var(--ossidiana);display:grid;place-items:center;font:800 10px/1 var(--marchio);font-style:normal;color:var(--avorio);border-bottom:2px solid var(--ambra)}
-.notifica p{margin-top:8px;font-size:14px;line-height:20px}
-.notifica .bt{display:flex;gap:6px;margin-top:10px}
-.notifica .bt span{flex:1;text-align:center;font-size:13px;line-height:18px;padding:7px 8px;border-radius:6px;background:#2A2A2A}
-.notifica .bt span:first-child{background:var(--ambra);color:var(--ossidiana);font-weight:600}
-.cursore-m{position:absolute;left:0;top:0;width:16px;height:20px;z-index:7;pointer-events:none;transition:transform .85s var(--curva);opacity:0}
-.cursore-m.su{opacity:1}
-.cursore-m::after{content:"";position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--ambra);opacity:0}
-.cursore-m.clic::after{animation:clic .5s var(--curva)}
-@keyframes clic{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
-.dock{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:5px;padding:5px;background:#141414;border:1px solid #2A2A2A;border-radius:10px;z-index:5}
-.dock span{position:relative;width:32px;height:32px;border-radius:7px;background:#1F1F1F;display:grid;place-items:center;color:#5E5E5E;transition:color .3s,background .3s}
-.dock svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.dock span.uso{color:var(--ambra);background:#241A0E}
-.dock span.uso::after{content:"";position:absolute;bottom:-4px;left:50%;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:var(--ambra)}
-.squadra{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:12px 16px;border-top:1px solid var(--linea);font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.squadra .et{color:var(--titanio);margin-right:4px}
-.squadra span:not(.et){padding:6px 8px;border:1px solid var(--linea);border-radius:2px;color:#555;transition:all .35s var(--curva)}
-.squadra span.lavora{color:var(--ossidiana);background:var(--ambra);border-color:var(--ambra)}
-.squadra span.fatto{color:var(--ambra);border-color:rgba(227,155,58,.5)}
-.comandi{display:grid;gap:8px;padding:16px;border-top:1px solid var(--linea)}
-.comandi p{font:500 11px/16px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--titanio);margin-bottom:4px}
-.comandi button{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;text-align:left;background:var(--ossidiana);border:1px solid var(--linea);border-radius:2px;color:var(--avorio);font:500 16px/22px var(--testo);padding:12px 16px;cursor:pointer;transition:border-color .3s var(--curva),background .3s var(--curva)}
-.comandi button::before{content:"›";color:var(--ambra);font:500 20px/1 var(--mono)}
-.comandi button:hover,.comandi button.attivo{border-color:var(--ambra);background:#17120B}
-.comandi button[disabled]{opacity:.4;cursor:default}
-.simula{margin-top:14px;font-size:14px;line-height:20px;color:#5E5E5E;max-width:440px}
+/* ── LE FOTO: in cornice, come un'inquadratura. La luce le scopre, la camera respira ── */
+.cornice{position:relative;width:min(100%,760px);aspect-ratio:16/9;border:1px solid var(--linea);border-radius:3px;overflow:hidden;margin-bottom:44px;background:var(--grafite)}
+.cornice img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 9s cubic-bezier(.2,.6,.2,1)}
+.attiva .cornice img{transform:scale(1.02)}
+.js-anima .cornice{clip-path:inset(0 100% 0 0)}
+.attiva .cornice{clip-path:inset(0 0 0 0);transition:clip-path 1.6s cubic-bezier(.7,0,.2,1) .2s}
+.cornice .bordo-luce{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--bianco-caldo);box-shadow:0 0 20px #FFB65C,0 0 50px rgba(255,150,40,.7);z-index:3;opacity:0}
+.attiva .cornice .bordo-luce{animation:passa 1.6s cubic-bezier(.7,0,.2,1) .2s both}
+@keyframes passa{0%{left:0;opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+.cornice::before{content:"";position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(transparent 0 2px,rgba(0,0,0,.18) 2px 3px);pointer-events:none;mix-blend-mode:multiply}
+.cornice::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(transparent 55%,rgba(5,5,5,.75)),radial-gradient(ellipse at center,transparent 50%,rgba(5,5,5,.55));pointer-events:none}
+.hud{position:absolute;z-index:4;font:500 10px/14px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--avorio);text-shadow:0 1px 6px #000}
+.hud.as{left:14px;top:12px}.hud.ad{right:14px;top:12px;color:var(--ambra)}.hud.bs{left:14px;bottom:12px;color:var(--titanio)}
+.hud.ad::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#E5674F;margin-right:6px;vertical-align:1px;animation:batte 1.2s steps(1) infinite}
+@keyframes batte{50%{opacity:0}}
+.mirino{position:absolute;z-index:4;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border:1px solid rgba(242,240,235,.35);border-radius:50%;opacity:0}
+.mirino::before,.mirino::after{content:"";position:absolute;background:rgba(242,240,235,.5)}
+.mirino::before{left:50%;top:-10px;bottom:-10px;width:1px}.mirino::after{top:50%;left:-10px;right:-10px;height:1px}
+.attiva .mirino{animation:mira 2.4s var(--curva) 1.6s both}
+@keyframes mira{0%{opacity:0;transform:scale(2)}30%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0}}
 
-/* poteri */
-.potere-visivo{width:min(100%,360px);height:200px;margin-bottom:40px;position:relative}
-.onda{display:flex;align-items:center;justify-content:center;gap:5px;height:100%}
-.onda span{width:4px;border-radius:1px;background:var(--ambra);height:8px;box-shadow:0 0 10px rgba(227,155,58,.3)}
-.rete svg,.memoria svg{width:100%;height:100%;overflow:visible}
-.nomi{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px;max-width:440px}
-.nomi span{font-size:14px;line-height:20px;padding:4px 12px;border:1px solid var(--linea);border-radius:2px;color:var(--titanio)}
-.nomi span.tuo{border-color:var(--ambra);color:var(--ambra)}
-
-/* telefono */
-.telefono{width:min(100%,300px);border:1px solid var(--linea);border-radius:28px;padding:16px 12px 24px;background:var(--grafite);margin-bottom:40px;text-align:left}
-.telefono .testa{display:flex;align-items:center;gap:12px;padding:4px 8px 16px;border-bottom:1px solid var(--linea)}
-.telefono .testa i{width:32px;height:32px;border-radius:6px;background:var(--ossidiana);display:grid;place-items:center;font:800 14px/1 var(--marchio);font-style:normal;border-bottom:2px solid var(--ambra)}
-.telefono .testa b{display:block;font-weight:600;font-size:14px;line-height:20px}
+/* telefono davanti al rooftop */
+.duo{position:relative;width:min(100%,560px);margin-bottom:64px}
+.duo .cornice{width:78%;margin:0 0 0 auto;aspect-ratio:4/5}
+.duo .telefono{position:absolute;left:0;bottom:-28px;width:min(60%,290px);margin:0;box-shadow:0 40px 80px -30px #000,0 0 0 1px rgba(227,155,58,.08)}
+.telefono{border:1px solid var(--linea);border-radius:28px;padding:14px 10px 20px;background:rgba(15,15,16,.96);text-align:left;backdrop-filter:blur(8px)}
+.telefono .testa{display:flex;align-items:center;gap:10px;padding:4px 6px 12px;border-bottom:1px solid var(--linea)}
+.telefono .testa i{width:30px;height:30px;border-radius:6px;background:var(--ossidiana);display:grid;place-items:center;font:400 12px/1 var(--stark);font-style:normal;border-bottom:2px solid var(--ambra)}
+.telefono .testa b{display:block;font-weight:600;font-size:14px;line-height:18px}
 .telefono .testa span{font-size:12px;line-height:16px;color:var(--ambra)}
-.messaggi{display:flex;flex-direction:column;gap:8px;padding-top:16px;min-height:220px}
-.msg{max-width:86%;padding:8px 12px;border-radius:12px;font-size:14px;line-height:20px;transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.messaggi{display:flex;flex-direction:column;gap:7px;padding-top:12px;min-height:236px}
+.msg{max-width:90%;padding:7px 10px;border-radius:12px;font-size:13px;line-height:18px;transition:opacity .5s var(--curva),transform .5s var(--curva)}
 .js-anima .msg:not(.su){opacity:0;transform:translateY(8px) scale(.96)}
 .msg.io{align-self:flex-end;background:#2B2117;border-bottom-right-radius:3px}
 .msg.lui{align-self:flex-start;border:1px solid var(--linea);border-bottom-left-radius:3px}
 .msg.vocale{display:flex;align-items:center;gap:8px}
 .msg.vocale .mini{display:flex;gap:2px;align-items:center}
 .msg.vocale .mini span{width:2px;background:currentColor;border-radius:1px}
-.scrive{align-self:flex-start;display:none;gap:4px;padding:12px;border:1px solid var(--linea);border-radius:12px}
+.scrive{align-self:flex-start;display:none;gap:4px;padding:10px;border:1px solid var(--linea);border-radius:12px}
 .scrive.su{display:flex}
-.scrive span{width:6px;height:6px;border-radius:50%;background:var(--titanio);animation:punto 1s infinite}
+.scrive span{width:5px;height:5px;border-radius:50%;background:var(--titanio);animation:punto 1s infinite}
 .scrive span:nth-child(2){animation-delay:.15s}.scrive span:nth-child(3){animation-delay:.3s}
 @keyframes punto{50%{opacity:.2}}
+
+/* ── LA SQUADRA: lei, Mark, gli agenti. Gli impulsi corrono sui fili ── */
+.org{display:flex;flex-direction:column;align-items:center;width:min(100%,640px);margin-top:40px}
+.org .nodo{border:1px solid var(--linea);padding:10px 20px;font:400 11px/16px var(--stark);letter-spacing:.16em;text-transform:uppercase;border-radius:2px;background:var(--grafite)}
+.org .nodo.mark{border-color:var(--ambra);color:var(--ambra);box-shadow:0 0 30px -6px rgba(227,155,58,.5);padding:14px 28px;font-size:14px}
+.org .filo-v{position:relative;width:1px;height:34px;background:var(--linea);overflow:hidden}
+.org .filo-v::after,.org .ramo::after{content:"";position:absolute;background:var(--ambra);box-shadow:0 0 8px var(--ambra)}
+.org .filo-v::after{left:0;width:1px;height:10px;animation:scorre-v 1.6s linear infinite}
+@keyframes scorre-v{from{top:-10px}to{top:100%}}
+.org .ramo{position:relative;width:76%;height:1px;background:var(--linea);overflow:hidden}
+.org .ramo::after{top:0;height:1px;width:40px;animation:scorre-o 2.2s linear infinite}
+@keyframes scorre-o{from{left:-40px}to{left:100%}}
+.agenti{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin-top:18px}
+.agente{position:relative;border:1px solid var(--linea);border-radius:3px;padding:14px 12px;text-align:left;background:var(--grafite);overflow:hidden;transition:border-color .4s}
+.agente.lampo{border-color:rgba(227,155,58,.7)}
+.agente::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ambra);transform:scaleX(0);transform-origin:left}
+.agente.lampo::after{animation:carica 1.8s var(--curva) both}
+@keyframes carica{0%{transform:scaleX(0)}100%{transform:scaleX(1);opacity:0}}
+.agente b{display:block;font-weight:600;font-size:15px;line-height:20px}
+.agente span{display:block;margin-top:6px;font:500 11px/16px var(--mono);letter-spacing:.04em;color:var(--titanio);min-height:32px}
+.agente span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ambra);margin-right:7px;vertical-align:1px;animation:respira 1.4s infinite}
+.agente.tuo{border-style:dashed;border-color:rgba(227,155,58,.5)}
+.agente.tuo b{color:var(--ambra)}
+.agente.tuo span::before{display:none}
+
+/* voce */
+.potere-visivo{width:min(100%,360px);height:200px;margin-bottom:40px;position:relative}
+.onda{display:flex;align-items:center;justify-content:center;gap:5px;height:100%}
+.onda span{width:4px;border-radius:1px;background:var(--ambra);height:8px;box-shadow:0 0 12px rgba(227,155,58,.45)}
+
+/* memoria: i ricordi che si scrivono da soli */
+.ricordi{width:min(100%,460px);margin-top:40px;border:1px solid var(--linea);border-radius:3px;background:var(--grafite);text-align:left;overflow:hidden}
+.ricordi .testa-r{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--linea);font:500 10px/14px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--titanio)}
+.ricordi .testa-r b{color:var(--ambra);font-weight:500}
+.ricordi .lista{padding:8px 14px 12px;height:196px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;-webkit-mask-image:linear-gradient(transparent,#000 40%);mask-image:linear-gradient(transparent,#000 40%)}
+.ricordi .r{display:flex;gap:12px;font:500 13px/20px var(--mono);padding:4px 0;animation:entra-r .5s var(--curva)}
+.ricordi .r i{font-style:normal;color:var(--ambra);flex:none}
+.ricordi .r span{color:var(--avorio)}
+.ricordi .r em{font-style:normal;color:var(--titanio)}
+@keyframes entra-r{from{opacity:0;transform:translateY(8px)}}
+.ricordi .cur{display:inline-block;width:7px;height:14px;background:var(--ambra);vertical-align:-2px;margin-left:2px;animation:batte 1s steps(1) infinite}
 
 /* da solo / con me */
 .bivio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;width:min(100%,560px);margin-top:40px;text-align:left}
 .bivio > div{border:1px solid var(--linea);border-radius:3px;padding:20px 16px}
-.bivio > div.si{border-color:var(--ambra);background:var(--grafite)}
-.bivio h3{font:700 14px/20px var(--titoli);text-transform:uppercase;margin:0 0 12px;letter-spacing:.08em}
+.bivio > div.si{border-color:var(--ambra);background:var(--grafite);box-shadow:0 20px 60px -30px rgba(227,155,58,.5)}
+.bivio h3{font:400 13px/20px var(--stark);text-transform:uppercase;margin:0 0 12px;letter-spacing:.08em}
 .bivio .no h3{color:var(--titanio)}
 .bivio .si h3{color:var(--ambra)}
 .bivio p{font-size:14px;line-height:20px;padding:8px 0;border-top:1px solid var(--linea)}
@@ -184,19 +214,19 @@ p{margin:0;text-wrap:pretty}
 /* passi */
 .passi{position:relative;width:min(100%,420px);margin-top:40px;text-align:left;padding-left:48px}
 .passi .filo{position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:var(--linea)}
-.passi .filo i{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--ambra);transform-origin:top;transition:transform 1.6s var(--curva) .3s}
+.passi .filo i{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--ambra);box-shadow:0 0 10px var(--ambra);transform-origin:top;transition:transform 1.6s var(--curva) .3s}
 .js-anima .scena:not(.attiva) .passi .filo i{transform:scaleY(0)}
 .passo{position:relative;padding-bottom:40px}
 .passo:last-child{padding-bottom:0}
-.passo::before{content:"";position:absolute;left:-40px;top:5px;width:14px;height:14px;border-radius:2px;border:1px solid var(--ambra);background:var(--ossidiana)}
-.passo b{display:block;font:700 16px/24px var(--titoli);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.passo::before{content:"";position:absolute;left:-40px;top:5px;width:14px;height:14px;border-radius:50%;border:1px solid var(--ambra);background:var(--ossidiana);box-shadow:0 0 10px rgba(227,155,58,.4)}
+.passo b{display:block;font:400 14px/24px var(--stark);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
 .passo span{color:var(--titanio)}
 
 /* posti */
 .posti{display:grid;grid-template-columns:repeat(5,36px);gap:16px;margin:40px 0 8px}
-.posti i{width:36px;height:36px;border-radius:2px;border:1px solid var(--linea);position:relative;transition:border-color .4s var(--curva)}
-.posti i::after{content:"";position:absolute;inset:12px;border-radius:1px;background:var(--ambra);opacity:0;transition:opacity .4s var(--curva)}
-.posti i.su{border-color:var(--ambra)}
+.posti i{width:36px;height:36px;border-radius:50%;border:1px solid var(--linea);position:relative;transition:border-color .4s var(--curva),box-shadow .4s}
+.posti i::after{content:"";position:absolute;inset:12px;border-radius:50%;background:var(--ambra);opacity:0;transition:opacity .4s var(--curva)}
+.posti i.su{border-color:var(--ambra);box-shadow:0 0 16px rgba(227,155,58,.4)}
 .posti i.su::after{opacity:1}
 
 /* domande */
@@ -209,10 +239,21 @@ summary::after{content:"";position:absolute;right:8px;top:26px;width:9px;height:
 details[open] summary::after{transform:rotate(225deg);top:30px}
 details p{padding:0 0 20px;color:var(--titanio)}
 
-.firma{font:800 40px/1 var(--marchio);position:relative;display:inline-block}
-.firma::after{content:"";position:absolute;left:6%;right:6%;bottom:-.14em;height:.07em;background:var(--ambra)}
+/* chiusura: il punzone di Mark battuto sull'attico */
+.fine .cornice{aspect-ratio:21/9;margin-bottom:0}
+.lastra{position:relative;margin-top:-64px;z-index:5;width:150px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2E2E33,#0F0F10 70%);display:grid;place-items:center;box-shadow:0 30px 60px -20px #000}
+.anello{width:82%;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--ambra);display:grid;place-items:center;position:relative}
+.anello svg{position:absolute;inset:-9%;width:118%;height:118%;animation:gira 30s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.anello b{font:400 40px/1 var(--stark);position:relative}
+.anello b::after{content:"";position:absolute;left:4%;right:4%;bottom:-.18em;height:3px;background:var(--ambra)}
+.js-anima .fine:not(.attiva) .anello{opacity:0}
+.fine.attiva .anello{animation:batti .9s cubic-bezier(.6,0,.4,1) 1.2s both}
+.fine.attiva .lastra{animation:trema .35s 1.75s both}
+@keyframes batti{0%{transform:scale(2.6);opacity:0;filter:blur(6px)}60%{transform:scale(1);opacity:1;filter:none}68%{transform:scale(.95)}100%{transform:scale(1)}}
+@keyframes trema{0%,100%{transform:none}25%{transform:translate(2px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,1px)}}
 
-footer{padding:32px max(24px,env(safe-area-inset-right,0px)) 112px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--linea);text-align:center;font-size:13px;line-height:18px;color:var(--titanio)}
+footer{position:relative;z-index:3;padding:32px max(24px,env(safe-area-inset-right,0px)) 112px max(24px,env(safe-area-inset-left,0px));border-top:1px solid var(--linea);text-align:center;font-size:13px;line-height:18px;color:var(--titanio);background:var(--ossidiana)}
 footer a{color:var(--titanio)}
 
 /* barra fissa su telefono */
@@ -220,6 +261,7 @@ footer a{color:var(--titanio)}
 .barra.su{transform:none}
 .barra .pulsante{width:100%;margin:0;animation:none}
 
+.acceso .js-decifra{animation:raffredda 2.4s ease-out .5s both}
 /* ── IL FILTRO: cinque domande ── */
 .filtro{position:fixed;inset:0;z-index:60;background:var(--ossidiana);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s var(--curva),visibility .5s}
 .filtro.su{opacity:1;visibility:visible}
@@ -259,103 +301,117 @@ footer a{color:var(--titanio)}
 .riepilogo span{text-align:right;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .campo.sbagliato input{border-color:#E5674F}
 
+.domanda h2{font-size:24px;line-height:32px}
 @media (min-width:900px){
-  .titolo{font-size:34px;line-height:42px}
-  .eroe .sotto{font-size:26px;line-height:32px}
-  .domanda h2{font-size:36px}
-  .demo .pc{height:440px}
+  .titolo{font-size:32px;line-height:44px}
+  .eroe h1{font-size:44px;line-height:54px}
+  .domanda h2{font-size:30px;line-height:40px}
+  .agenti{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .agenti .tuo{grid-column:span 4}
+  .lastra{width:180px;margin-top:-90px}
   .barra{display:none}
 }
-@media (max-width:899px){.eroe .pulsante,.scena > .pulsante{width:100%;min-width:0}}
-@media (max-width:380px){.bivio{grid-template-columns:1fr}.dock span{width:28px;height:28px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:899px){.eroe .pulsante,.scena > .pulsante{width:100%;min-width:0}.agenti .tuo{grid-column:span 2}.duo .cornice{width:86%}.duo .telefono{width:56%;padding:10px 8px 14px;border-radius:22px}.duo .msg{font-size:12px;line-height:16px}.duo .messaggi{min-height:200px}}
+@media (max-width:380px){.bivio{grid-template-columns:1fr}.titolo{font-size:20px;line-height:28px}.eroe h1{font-size:25px;line-height:32px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.boot{display:none}}
 </style>
 </head>
 <body>
+<div class="boot js-boot" aria-hidden="true">
+  <div class="meta su-m"></div><div class="meta giu-m"></div><div class="taglio"></div>
+  <div class="righe">
+    <b>MARK I</b>
+    <div><span>Cervello</span><i>collegato</i></div>
+    <div><span>Memoria</span><i>caricata</i></div>
+    <div><span>Agenti</span><i>online</i></div>
+    <div><span>Voce</span><i>pronta</i></div>
+    <div class="carica"><span class="js-carica"></span></div>
+  </div>
+</div>
+<canvas id="braci" aria-hidden="true"></canvas>
+<canvas id="scintille" aria-hidden="true"></canvas>
+<div class="luce-cursore js-luce" aria-hidden="true"></div>
+<div class="grana" aria-hidden="true"></div>
+<div class="filo-scroll js-filo" aria-hidden="true"></div>
 
 <main>
   <section class="scena eroe js-eroe">
-    <div class="avvio"><span class="punto"></span><b>[ MARK I ]</b> online</div>
-    <h1 class="marchio" aria-label="Mark"><span class="m">M</span>ARK</h1>
-    <div class="sotto seq s1">Sul tuo computer.</div>
+    <div class="avvio" aria-hidden="true"><div><span class="punto"></span>Sistema <b>[ MARK I ]</b></div><div>Memoria · agenti · voce</div><div>Online</div></div>
+    <div class="alone" aria-hidden="true"></div>
+    <div class="plancia"><iframe src="plancia/index.html?solo" title="Mark" loading="eager"></iframe></div>
+    <h1 class="seq s1 js-decifra js-titolo-eroe">MARK.<br><span class="ambra">SUL TUO COMPUTER.</span></h1>
     <p class="riga seq s2">Lo stesso dei miei video.<br>Lo accendiamo insieme, in videochiamata.</p>
     <div class="seq s3"><a class="pulsante js-wa" href="#">Voglio il mio Mark</a></div>
   </section>
 
-  <section class="scena js-demo-scena" id="prova">
+  <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare">PROVALO <span class="ambra">ADESSO.</span></h2>
-    <p class="riga compare d1">Non ti risponde. Lo fa.<br>Dagli un ordine e guarda il computer lavorare da solo.</p>
-    <div class="demo compare d2">
-      <div class="voce js-voce"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="detto js-detto">Scegli un ordine qui sotto</span></div>
-      <div class="pc js-pc" aria-live="polite">
-        <div class="menu"><span><span class="punto"></span><b>Mark I</b> · <span class="js-stato">pronto</span></span><span>Clic tuoi <b>0</b></span></div>
-        <div class="memo js-memo"><div class="t js-memo-t"></div><div class="js-memo-r"></div></div>
-        <div class="notifica js-notifica"><div class="t"><i>M</i>Mark · adesso</div><p class="js-notifica-p"></p><div class="bt js-notifica-bt"></div></div>
-        <div class="js-finestre"></div>
-        <svg class="cursore-m js-cursore" viewBox="0 0 16 20" aria-hidden="true"><path d="M1 1v15l4-4 3 7 2.5-1-3-7h6z" fill="#F2F0EB" stroke="#0A0A0A" stroke-width="1.2" stroke-linejoin="round"/></svg>
-        <div class="dock js-dock" aria-hidden="true">
-          <span data-app="cartelle"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg></span>
-          <span data-app="documenti"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span>
-          <span data-app="posta"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg></span>
-          <span data-app="banca"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18"/></svg></span>
-          <span data-app="fatture"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>
-          <span data-app="browser"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>
-          <span data-app="crm"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 10h16M9 10v9"/></svg></span>
+    <div class="cornice"><img src="studio.jpg" alt="Lo studio dell'imprenditore nell'attico di notte, la lampada accesa sulla scrivania" loading="lazy"><div class="bordo-luce"></div><div class="mirino"></div><span class="hud as">Cam 01 · Lo studio</span><span class="hud ad">Rec</span><span class="hud bs">23:04 · Mark al lavoro</span></div>
+    <p class="etichetta compare"><b>●</b> L'era degli agenti</p>
+    <h2 class="titolo compare d1 js-decifra">LA TUA AZIENDA,<br><span class="corsivo">agentica.</span></h2>
+    <p class="riga compare d2">Vent'anni fa la parola era digitalizzare. Oggi è agentica: agenti AI che lavorano nella tua azienda, sui tuoi programmi, giorno e notte.</p>
+    <p class="riga compare d3" style="color:var(--avorio)">Chi è arrivato tardi al digitale se lo ricorda ancora.</p>
+  </section>
+
+  <section class="scena js-chat-scena">
+    <div class="angoli"><i></i><i></i><i></i><i></i></div>
+    <div class="duo">
+      <div class="cornice"><img src="rooftop.jpg" alt="Il rooftop con la piscina sopra la città all'ora blu" loading="lazy"><div class="bordo-luce"></div><span class="hud as">Cam 02 · Rooftop</span><span class="hud ad">Live</span></div>
+      <div class="telefono compare d1">
+        <div class="testa"><i>M</i><div><b>Mark</b><span>online</span></div></div>
+        <div class="messaggi js-messaggi">
+          <div class="msg io vocale"><span class="mini"><span style="height:6px"></span><span style="height:12px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:5px"></span></span>0:04</div>
+          <div class="msg lui">Fatto, signore. Il preventivo per Rossi è pronto, lo trova nella posta.</div>
+          <div class="msg io">Mandalo e fissa la call per giovedì</div>
+          <div class="msg lui">Mandato. Giovedì alle 10, invito già partito.</div>
+          <div class="scrive js-scrive"><span></span><span></span><span></span></div>
         </div>
       </div>
-      <div class="squadra js-squadra"><span class="et">La squadra</span></div>
-      <div class="comandi js-comandi">
-        <p>Di' a Mark</p>
-        <button type="button" data-c="0">Prepara il preventivo per Rossi</button>
-        <button type="button" data-c="1">Fai le fatture di ottobre</button>
-        <button type="button" data-c="2">Trovami clienti nuovi a Milano</button>
+    </div>
+    <h2 class="titolo compare d1 js-decifra">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
+    <p class="riga compare d2">Gli scrivi o gli mandi un vocale su Telegram, ovunque tu sia. Ti risponde a voce.</p>
+  </section>
+
+  <section class="scena js-squadra-scena">
+    <div class="angoli"><i></i><i></i><i></i><i></i></div>
+    <h2 class="titolo compare js-decifra">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
+    <p class="riga compare d1">Tu dai l'ordine. Mark lo divide tra gli agenti, che si passano il lavoro.</p>
+    <div class="org compare d2">
+      <div class="nodo">Tu</div>
+      <div class="filo-v"></div>
+      <div class="nodo mark">Mark</div>
+      <div class="filo-v"></div>
+      <div class="ramo"></div>
+      <div class="agenti js-agenti">
+        <div class="agente"><b>Analista</b><span>rilegge le call della settimana</span></div>
+        <div class="agente"><b>Copywriter</b><span>scrive le mail ai clienti</span></div>
+        <div class="agente"><b>Contabile</b><span>controlla le fatture con la banca</span></div>
+        <div class="agente"><b>Cacciatore di clienti</b><span>cerca aziende nuove</span></div>
+        <div class="agente tuo"><b>+ il tuo</b><span>costruito sul processo della tua azienda</span></div>
       </div>
     </div>
-    <p class="simula compare d3">Simulazione con dati di esempio. Sul tuo computer Mark lavora sui tuoi file, sulla tua posta e sui tuoi programmi, e non manda niente senza il tuo sì.</p>
   </section>
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <div class="potere-visivo compare"><div class="onda js-onda"></div></div>
-    <h2 class="titolo compare d1">GLI PARLI.<br><span class="ambra">TI RISPONDE.</span></h2>
+    <h2 class="titolo compare d1 js-decifra">GLI PARLI.<br><span class="ambra">TI RISPONDE.</span></h2>
     <p class="riga compare d2">A voce, quando vuoi. Ti chiama «signore», se vuoi anche quello.</p>
   </section>
 
-  <section class="scena">
+  <section class="scena js-memoria-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="potere-visivo rete compare"><svg class="js-rete" viewBox="0 0 360 200" aria-hidden="true"></svg></div>
-    <h2 class="titolo compare d1">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
-    <p class="riga compare d2">Agenti che si parlano tra loro e si passano il lavoro. Anche mentre dormi.</p>
-    <div class="nomi compare d3"><span>Analista</span><span>Copywriter</span><span>Contabile</span><span>Cacciatore di clienti</span><span class="tuo">+ il tuo</span></div>
-  </section>
-
-  <section class="scena">
-    <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="potere-visivo memoria compare"><svg class="js-memoria" viewBox="0 0 360 200" aria-hidden="true"></svg></div>
-    <h2 class="titolo compare d1">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
-    <p class="riga compare d2">Clienti, progetti, decisioni. Ogni giorno sa qualcosa in più del tuo lavoro.</p>
-  </section>
-
-  <section class="scena js-chat-scena">
-    <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="telefono compare">
-      <div class="testa"><i>M</i><div><b>Mark</b><span>online</span></div></div>
-      <div class="messaggi js-messaggi">
-        <div class="msg io vocale"><span class="mini"><span style="height:6px"></span><span style="height:12px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:5px"></span></span>0:04</div>
-        <div class="msg lui">Controllato, signore. Il venditore è affidabile: oltre 520 recensioni, 98% positive.</div>
-        <div class="msg io">Ordina la tastiera per il Mac mini</div>
-        <div class="msg lui">Fatto. Arriva domani, fattura intestata alla società.</div>
-        <div class="scrive js-scrive"><span></span><span></span><span></span></div>
-      </div>
+    <h2 class="titolo compare js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
+    <p class="riga compare d1">Clienti, progetti, decisioni. Ogni giorno sa qualcosa in più del tuo lavoro.</p>
+    <div class="ricordi compare d2" aria-hidden="true">
+      <div class="testa-r"><span>Memoria di Mark</span><b><span class="punto"></span>si aggiorna</b></div>
+      <div class="lista js-ricordi"></div>
     </div>
-    <h2 class="titolo compare d1">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
-    <p class="riga compare d2">Gli scrivi o gli mandi un vocale su Telegram. Ti risponde a voce.</p>
   </section>
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare">NON TI SERVE<br><span class="ambra">UN TUTORIAL.</span></h2>
+    <h2 class="titolo compare js-decifra">NON TI SERVE<br><span class="ambra">UN TUTORIAL.</span></h2>
     <div class="bivio compare d1">
       <div class="no"><h3>Da solo</h3><p>Mesi di prove</p><p>Voce lenta</p><p>Memoria che si azzera</p></div>
       <div class="si"><h3>Con me</h3><p>Un'ora di call</p><p>Già collaudato</p><p>Acceso quando chiudi</p></div>
@@ -364,7 +420,7 @@ footer a{color:var(--titanio)}
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare">TRE PASSI</h2>
+    <h2 class="titolo compare js-decifra">TRE PASSI</h2>
     <div class="passi compare d1">
       <div class="filo"><i></i></div>
       <div class="passo"><b>Mi scrivi</b><span>Cinque domande. Ti rispondiamo noi.</span></div>
@@ -375,7 +431,7 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-posti-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare">10 POSTI<br><span class="ambra">A OTTOBRE.</span></h2>
+    <h2 class="titolo compare js-decifra">10 POSTI<br><span class="ambra">A OTTOBRE.</span></h2>
     <p class="riga compare d1">Ogni Mark lo accendo io, con te.</p>
     <div class="posti js-posti" aria-label="10 posti a ottobre"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <a class="pulsante compare d2 js-wa" href="#">Voglio il mio Mark</a>
@@ -383,7 +439,7 @@ footer a{color:var(--titanio)}
 
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare">DOMANDE</h2>
+    <h2 class="titolo compare js-decifra">DOMANDE</h2>
     <div class="domande compare d1">
       <details><summary>Devo saper programmare?</summary><p>No. Si installa da solo, passo per passo, e in call ci sono io.</p></details>
       <details><summary>Funziona su Windows?</summary><p>Sì, su Mac e su Windows. Va bene il computer che usi già.</p></details>
@@ -393,11 +449,12 @@ footer a{color:var(--titanio)}
     </div>
   </section>
 
-  <section class="scena js-fine-scena">
+  <section class="scena fine js-fine-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="firma compare" aria-hidden="true">M</div>
-    <h2 class="titolo compare d1" style="margin-top:40px">PRONTO QUANDO VUOI.</h2>
-    <a class="pulsante compare d2 js-wa" href="#">Scrivimi</a>
+    <div class="cornice"><img src="doppia.jpg" alt="L'attico a doppia altezza al tramonto, il fuoco acceso e la città dietro i vetri" loading="lazy"><div class="bordo-luce"></div><span class="hud as">Cam 03 · Casa</span><span class="hud ad">Rec</span></div>
+    <div class="lastra js-lastra" aria-hidden="true"><div class="anello"><svg viewBox="0 0 200 200"><defs><path id="cerchio" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><text font-family="Geist Mono, monospace" font-size="12" letter-spacing="5" fill="#8C8C8C"><textPath href="#cerchio">MARK I · SUL TUO COMPUTER · 2026 ·</textPath></text></svg><b>M</b></div></div>
+    <h2 class="titolo compare d2 js-decifra" style="margin-top:36px">PRONTO QUANDO VUOI.</h2>
+    <a class="pulsante compare d3 js-wa" href="#">Scrivimi</a>
   </section>
 </main>
 
@@ -586,155 +643,146 @@ invia.addEventListener('click', e => {
   vai('grazie');
 });
 
-/* ── LE SCENE: una alla volta, come su iltuojarvis.com ── */
+/* ── REGIA ── */
+const fine = matchMedia('(pointer:fine)').matches;
+function tela(c){ const d = Math.min(devicePixelRatio || 1, 2); c.width = innerWidth*d; c.height = innerHeight*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); return x; }
+
+/* le scintille: un solo canvas sopra tutto, ogni esplosione si aggiunge alle altre */
+const cS = document.getElementById('scintille'); let xS = tela(cS), sc = [], vivo = false;
+function scintille(ox, oy, n, forza = 1){
+  if (lento) return;
+  for (let i = 0; i < n; i++){ const a = Math.random()*Math.PI*2, v = (1.5 + Math.random()*7)*forza; sc.push({x: ox, y: oy, vx: Math.cos(a)*v, vy: Math.sin(a)*v - 2.5*forza, l: 30 + Math.random()*55, m: 30 + Math.random()*55}); }
+  if (!vivo){ vivo = true; requestAnimationFrame(vola); }
+}
+function vola(){
+  xS.clearRect(0,0,innerWidth,innerHeight); xS.lineCap = 'round';
+  sc.forEach(s => { s.x += s.vx; s.y += s.vy; s.vy += .16; s.vx *= .985; s.l--;
+    const k = s.l/s.m; xS.strokeStyle = 'rgba(255,' + (140 + Math.round(110*k)) + ',' + Math.round(60*k + 20) + ',' + Math.min(1, k*1.4) + ')'; xS.lineWidth = 1.6*k + .4;
+    xS.beginPath(); xS.moveTo(s.x, s.y); xS.lineTo(s.x - s.vx*2.2, s.y - s.vy*2.2); xS.stroke(); });
+  sc = sc.filter(s => s.l > 0);
+  if (sc.length) requestAnimationFrame(vola); else { vivo = false; xS.clearRect(0,0,innerWidth,innerHeight); }
+}
+const centro = el => { const r = el.getBoundingClientRect(); return [r.left + r.width/2, r.top + r.height/2]; };
+
+/* le braci che salgono piano dietro a tutto */
+(function(){
+  if (lento) return;
+  const c = document.getElementById('braci'); let x = tela(c);
+  const p = Array.from({length: innerWidth < 600 ? 26 : 48}, () => ({x: Math.random()*innerWidth, y: Math.random()*innerHeight, v: .15 + Math.random()*.5, r: .5 + Math.random()*1.5, a: Math.random()*6}));
+  (function brucia(){
+    x.clearRect(0,0,innerWidth,innerHeight);
+    p.forEach(b => { b.y -= b.v; b.x += Math.sin((b.y + b.a*100)/40)*.3; b.a += .005;
+      if (b.y < -10){ b.y = innerHeight + 10; b.x = Math.random()*innerWidth; }
+      x.fillStyle = 'rgba(227,155,58,' + (.15 + .35*Math.abs(Math.sin(b.a*3))) + ')'; x.beginPath(); x.arc(b.x, b.y, b.r, 0, 6.283); x.fill(); });
+    requestAnimationFrame(brucia);
+  })();
+})();
+addEventListener('resize', () => { xS = tela(cS); });
+
+/* la luce ambra che segue il mouse */
+if (fine && !lento){ const l = document.querySelector('.js-luce'); let tx = 0, ty = 0, cx = 0, cy = 0;
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; l.style.opacity = 1; }, {passive: true});
+  (function segue(){ cx += (tx - cx)*.12; cy += (ty - cy)*.12; l.style.transform = 'translate(' + cx + 'px,' + cy + 'px)'; requestAnimationFrame(segue); })(); }
+
+/* il filo dello scroll */
+const filo = document.querySelector('.js-filo');
+addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; filo.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')'; }, {passive: true});
+
+/* il testo che si decifra, come un HUD */
+const SEGNI = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&@$<>/';
+function decifra(el){
+  const nodi = []; (function scorri(n){ n.childNodes.forEach(x => x.nodeType === 3 ? nodi.push(x) : scorri(x)); })(el);
+  nodi.forEach(n => { const vero = n.textContent; if (lento || !vero.trim()) return; let f = 0; const tot = 24;
+    const id = setInterval(() => { f++; n.textContent = [...vero].map((ch,i) => /[\s.,'’]/.test(ch) || i < vero.length * f / tot ? ch : SEGNI[Math.random()*SEGNI.length|0]).join(''); if (f >= tot){ clearInterval(id); n.textContent = vero; } }, 34); });
+}
+
+/* ── L'ACCENSIONE: righe di sistema, il taglio di luce, si apre come un sipario e la sfera esplode di scintille ── */
+const eroe = document.querySelector('.js-eroe'), boot = document.querySelector('.js-boot');
+let visto = false; try { visto = sessionStorage.getItem('mark-boot') === '1'; } catch (x) {}
+function accendi(){
+  eroe.classList.add('acceso');
+  decifra(document.querySelector('.js-titolo-eroe'));
+  document.querySelectorAll('.avvio div').forEach((d, i) => setTimeout(() => d.classList.add('su'), 300 + i*260));
+  setTimeout(() => { const p = eroe.querySelector('.plancia').getBoundingClientRect(); scintille(innerWidth/2, p.top + p.height*.45, innerWidth < 600 ? 90 : 160, 1.1); }, lento ? 0 : 450);
+}
+function sipario(){
+  if (lento || visto){ boot.classList.add('via'); accendi(); return; }
+  try { sessionStorage.setItem('mark-boot', '1'); } catch (x) {}
+  document.body.classList.add('chiuso');
+  const righe = boot.querySelectorAll('.righe div:not(.carica)');
+  righe.forEach((r, i) => setTimeout(() => r.classList.add('su'), 250 + i*230));
+  setTimeout(() => { boot.querySelector('.js-carica').style.width = '100%'; }, 200);
+  let finito = false;
+  const apri = () => { if (finito) return; finito = true;
+    boot.classList.add('taglia');
+    setTimeout(() => { scintille(innerWidth/2, innerHeight/2, 120, 1.2); boot.classList.add('apri'); document.body.classList.remove('chiuso'); accendi(); }, 420);
+    setTimeout(() => boot.classList.add('via'), 1600); };
+  setTimeout(apri, 1750);
+  boot.addEventListener('click', apri);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(sipario)); else sipario();
+
+/* ── LE SCENE ── */
 const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const s = e.target; if (s.classList.contains('attiva')) return;
   s.classList.add('attiva');
-  if (s.classList.contains('js-chat-scena')) chat();
+  s.querySelectorAll('.js-decifra').forEach(decifra);
+  const t = s.querySelector('.titolo'); if (t) setTimeout(() => { const [x, y] = centro(t); scintille(x, y, innerWidth < 600 ? 26 : 44, .7); }, 380);
+  if (s.classList.contains('js-chat-scena')) setTimeout(chat, 900);
   if (s.classList.contains('js-posti-scena')) posti();
-  if (s.classList.contains('js-demo-scena')) setTimeout(() => giro || demo(0), lento ? 0 : 1000);
+  if (s.classList.contains('js-squadra-scena')) squadra();
+  if (s.classList.contains('js-memoria-scena')) ricordi();
+  if (s.classList.contains('js-fine-scena') && !lento) setTimeout(() => { const [x, y] = centro(document.querySelector('.js-lastra')); scintille(x, y, 150, 1.2); }, 1700);
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
 
-const eroe = document.querySelector('.js-eroe');
-requestAnimationFrame(() => requestAnimationFrame(() => eroe.classList.add('acceso')));
+/* ogni pulsante sprizza scintille quando lo tocchi */
+document.querySelectorAll('.pulsante').forEach(b => b.addEventListener('pointerdown', e => scintille(e.clientX, e.clientY, 40, .8)));
 
 /* ── POTERI ── */
 const onda = document.querySelector('.js-onda'); const barre = Array.from({length: 32}, () => onda.appendChild(document.createElement('span')));
 (function vibra(t){ barre.forEach((b,i) => { const x = i/barre.length; b.style.height = (8 + Math.abs(Math.sin(t/260 + i*.5) * Math.sin(t/610 + i*.17)) * 140 * Math.sin(Math.PI*x)) + 'px'; }); if (!lento) requestAnimationFrame(vibra); })(1200);
-
-(function(){ const svg = document.querySelector('.js-rete'), NS = 'http://www.w3.org/2000/svg';
-  const nodi = Array.from({length: 7}, (_, i) => ({a: i/6*Math.PI*2})), centro = {x:180, y:100}, linee = [], punti = [], pos = [];
-  for (let i = 0; i < 7; i++) for (let j = i+1; j < 7; j++){ const l = document.createElementNS(NS,'line'); l.setAttribute('stroke','rgba(227,155,58,.14)'); svg.appendChild(l); linee.push([l,i,j]); }
-  const impulsi = Array.from({length: 6}, () => { const c = document.createElementNS(NS,'circle'); c.setAttribute('r', 2.5); c.setAttribute('fill','#F2B25E'); svg.appendChild(c); return {c, da: 0, a: 1, t: Math.random()}; });
-  nodi.forEach((n,i) => { const c = document.createElementNS(NS,'rect'); const s = i === 6 ? 22 : 12; c.setAttribute('width', s); c.setAttribute('height', s); c.setAttribute('rx', 2); c.setAttribute('fill', i === 6 ? '#E39B3A' : '#0A0A0A'); c.setAttribute('stroke','#E39B3A'); c.setAttribute('stroke-width', 1.2); c.dataset.s = s; svg.appendChild(c); punti.push(c); });
-  (function gira(t){ nodi.forEach((n,i) => { const a = n.a + t/7000; pos[i] = i === 6 ? centro : {x: centro.x + Math.cos(a)*150, y: centro.y + Math.sin(a)*72}; const s = +punti[i].dataset.s; punti[i].setAttribute('x', pos[i].x - s/2); punti[i].setAttribute('y', pos[i].y - s/2); });
-    linee.forEach(([l,i,j]) => { l.setAttribute('x1',pos[i].x); l.setAttribute('y1',pos[i].y); l.setAttribute('x2',pos[j].x); l.setAttribute('y2',pos[j].y); });
-    impulsi.forEach(p => { p.t += .01; if (p.t >= 1){ p.t = 0; p.da = Math.random()*7|0; p.a = (p.da + 1 + (Math.random()*6|0)) % 7; }
-      const A = pos[p.da], B = pos[p.a]; p.c.setAttribute('cx', A.x + (B.x-A.x)*p.t); p.c.setAttribute('cy', A.y + (B.y-A.y)*p.t); p.c.setAttribute('opacity', Math.sin(Math.PI*p.t)); });
-    if (!lento) requestAnimationFrame(gira); })(0);
-})();
-
-(function(){ const svg = document.querySelector('.js-memoria'), NS = 'http://www.w3.org/2000/svg';
-  const n = Array.from({length: 46}, () => ({x: 20 + Math.random()*320, y: 12 + Math.random()*176, l: 0}));
-  const archi = []; n.forEach((a,i) => n.forEach((b,j) => { if (j > i && Math.hypot(a.x-b.x, a.y-b.y) < 62){ const l = document.createElementNS(NS,'line'); l.setAttribute('x1',a.x); l.setAttribute('y1',a.y); l.setAttribute('x2',b.x); l.setAttribute('y2',b.y); l.setAttribute('stroke','#E39B3A'); l.setAttribute('stroke-opacity', .07); svg.appendChild(l); archi.push([l,i,j]); } }));
-  const pt = n.map(a => { const c = document.createElementNS(NS,'circle'); c.setAttribute('cx',a.x); c.setAttribute('cy',a.y); c.setAttribute('r',2.2); c.setAttribute('fill','#E39B3A'); svg.appendChild(c); return c; });
-  if (lento) return;
-  setInterval(() => { n[Math.random()*n.length|0].l = 1; }, 160);
-  (function vive(){ n.forEach((a,i) => { a.l *= .965; pt[i].setAttribute('opacity', .22 + a.l*.78); pt[i].setAttribute('r', 2.2 + a.l*2.4); });
-    archi.forEach(([l,i,j]) => l.setAttribute('stroke-opacity', .05 + Math.max(n[i].l, n[j].l)*.45)); requestAnimationFrame(vive); })();
-})();
 
 function chat(){ const m = [...document.querySelectorAll('.js-messaggi .msg')], s = document.querySelector('.js-scrive'); let i = 0;
   (function prossimo(){ if (i >= m.length){ s.classList.remove('su'); return; } const lui = m[i].classList.contains('lui');
     if (lui){ s.classList.add('su'); m[i].parentNode.insertBefore(s, m[i]); }
     setTimeout(() => { s.classList.remove('su'); m[i].classList.add('su'); i++; setTimeout(prossimo, 500); }, lui ? 1100 : 300); })(); }
 
-function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setTimeout(() => p.classList.add('su'), 400 + i*160)); }
+function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setTimeout(() => { p.classList.add('su'); if (i === 9) { const [x, y] = centro(p); scintille(x, y, 30, .6); } }, 400 + i*160)); }
 
-/* ── LA PROVA: un ordine a voce e il computer lavora da solo. Memoria, programmi veri, la squadra, la conferma sul telefono.
-   Un chatbot risponde in una bolla: qui non c'è nessuna bolla, si vede il lavoro fatto. Dati di esempio, dichiarati sotto. ──
-   Passi: [attesa ms, azione, ...]. Finestre: [sinistra %, alto px, larghezza %, alto px sul telefono] */
-const DEMO = [
-  {ordine: 'Prepara il preventivo per Rossi', squadra: ['Analista', 'Copywriter', 'Contabile', 'Contraddittorio'], passi: [
-    [0, 'agente', 0],
-    [200, 'memo', 'Dalla memoria · Rossi Immobiliare', ['Call di martedì: tre agenzie, vuole partire a novembre', 'L\'anno scorso ha chiesto di pagare in due rate', 'Preferisce i preventivi di una pagina']],
-    [2400, 'app', 'cartelle'],
-    [100, 'apri', 'a', 'Clienti › Rossi Immobiliare', [54, 42, 42, 48], [['Note call 21 ott.txt', 'ieri'], ['Listino 2026.xlsx', 'sett.'], ['Preventivo 2025.pdf', '2025']]],
-    [400, 'righe', 'a'],
-    [900, 'punta', 'a', 0], [1100, 'punta', 'a', 1],
-    [1100, 'agente', 1], [0, 'app', 'documenti'],
-    [100, 'apri', 'b', 'Preventivo Rossi.pdf', [4, 160, 50, 100], [['Gestione annunci, 3 agenzie', '2.400 €'], ['Sito e schede immobili', '1.800 €'], ['Totale IVA inclusa', '5.124 €', 'tot'], ['In due rate', 'nov · dic']]],
-    [400, 'righe', 'b', 0, 2],
-    [900, 'agente', 2], [200, 'righe', 'b', 2, 4],
-    [1100, 'agente', 3], [600, 'timbro', 'b', 'Numeri ricontrollati'],
-    [1100, 'app', 'posta'],
-    [100, 'apri', 'c', 'Posta · bozza', [42, 226, 54, 156], [['A', 'm.rossi@rossiimmobiliare.it'], ['Oggetto', 'Il preventivo di martedì'], ['Allegato', 'Preventivo Rossi.pdf']]],
-    [400, 'righe', 'c'], [900, 'punta', 'c', 2],
-    [1300, 'fine', 'Il preventivo per Rossi è pronto e la mail è in bozza. La mando, signore?', ['Mandala', 'Fammela vedere']]
-  ]},
-  {ordine: 'Fai le fatture di ottobre', squadra: ['Contabile', 'Copywriter'], passi: [
-    [0, 'agente', 0],
-    [200, 'memo', 'Dalla memoria · la sua contabilità', ['Fatture elettroniche dal suo gestionale', 'Clienti a 30 giorni', 'Bianchi paga quasi sempre in ritardo']],
-    [2400, 'app', 'banca'],
-    [100, 'apri', 'a', 'Conto aziendale · ottobre', [54, 42, 42, 48], [['Rossi Immobiliare', '+ 2.400 €'], ['Studio Verdi', '+ 1.200 €'], ['Neri Srl', '+ 900 €'], ['Bianchi & Figli', 'manca 1.500 €', 'no']]],
-    [400, 'righe', 'a'],
-    [900, 'punta', 'a', 0, '✓'], [1000, 'punta', 'a', 1, '✓'], [1000, 'punta', 'a', 2, '✓'], [1000, 'punta', 'a', 3],
-    [1100, 'app', 'fatture'],
-    [100, 'apri', 'b', 'Fatture · ottobre', [4, 160, 50, 100], [['N. 41 · Rossi Immobiliare', '2.400 €'], ['N. 42 · Studio Verdi', '1.200 €'], ['N. 43 · Neri Srl', '900 €'], ['Pronte da emettere', '3', 'tot']]],
-    [400, 'righe', 'b'],
-    [1500, 'agente', 1], [0, 'app', 'posta'],
-    [100, 'apri', 'c', 'Posta · bozza', [42, 226, 54, 156], [['A', 'amministrazione@bianchiefigli.it'], ['Oggetto', 'Fattura 38, un promemoria'], ['Scaduta da', '12 giorni', 'no']]],
-    [400, 'righe', 'c'],
-    [1400, 'fine', 'Tre fatture pronte e il promemoria a Bianchi è in bozza. Le emetto, signore?', ['Emetti', 'Prima le guardo']]
-  ]},
-  {ordine: 'Trovami clienti nuovi a Milano', squadra: ['Cacciatore di clienti', 'Copywriter', 'Contraddittorio'], passi: [
-    [0, 'agente', 0],
-    [200, 'memo', 'Dalla memoria · il suo cliente ideale', ['Agenzie immobiliari da 5 a 20 persone', 'Milano e provincia', 'Rossi, Verdi e Neri sono già clienti']],
-    [2400, 'app', 'browser'],
-    [100, 'apri', 'a', 'Browser · agenzie immobiliari Milano', [54, 42, 42, 48], [['Navigli Case', '4,8 ★'], ['Immobiliare Sempione', '4,6 ★'], ['Rossi Immobiliare', 'già cliente', 'no'], ['Brera Casa', '4,7 ★']]],
-    [400, 'righe', 'a'],
-    [900, 'punta', 'a', 0, '✓'], [1000, 'punta', 'a', 1, '✓'], [1000, 'punta', 'a', 3, '✓'],
-    [1100, 'app', 'crm'],
-    [100, 'apri', 'b', 'CRM · lead nuove', [4, 160, 50, 100], [['Navigli Case', 'titolare trovato'], ['Immobiliare Sempione', 'titolare trovato'], ['Brera Casa', 'titolare trovato'], ['Lead nuove oggi', '12', 'tot']]],
-    [400, 'righe', 'b'],
-    [1400, 'agente', 1], [0, 'app', 'posta'],
-    [100, 'apri', 'c', 'Posta · 12 bozze', [42, 226, 54, 156], [['A', 'titolare · Navigli Case'], ['Oggetto', 'Una domanda sui vostri annunci'], ['Scritte', 'una per una']]],
-    [400, 'righe', 'c'],
-    [1100, 'agente', 2], [600, 'timbro', 'c', 'Già clienti saltati'],
-    [1300, 'fine', '12 agenzie nuove nel CRM e 12 mail in bozza, scritte una per una. Le mando, signore?', ['Mandale', 'Fammele vedere']]
-  ]}
+/* la squadra: ogni agente passa da un lavoro al risultato, a turno */
+const LAVORI = [
+  ['rilegge le call della settimana', 'tre opportunità trovate'],
+  ['scrive le mail ai clienti', '12 bozze pronte'],
+  ['controlla le fatture con la banca', 'tutto torna, una da sollecitare'],
+  ['cerca aziende nuove', '8 contatti nel CRM']
 ];
-const pc = document.querySelector('.js-pc'), dFin = pc.querySelector('.js-finestre'), dCur = pc.querySelector('.js-cursore'), dMemo = pc.querySelector('.js-memo'), dNot = pc.querySelector('.js-notifica'), dStato = pc.querySelector('.js-stato');
-const dVoce = document.querySelector('.js-voce'), dDetto = document.querySelector('.js-detto'), dSquadra = document.querySelector('.js-squadra'), dBottoni = [...document.querySelectorAll('.js-comandi button')];
-let giro = 0;
-function demo(n){
-  const mio = ++giro, c = DEMO[n], t = lento ? 0 : 1, stretto = () => pc.clientWidth < 560, fin = {};
-  const dopo = (ms, f) => setTimeout(() => { if (mio === giro) f(); }, ms * t);
-  dBottoni.forEach((b, i) => { b.classList.toggle('attivo', i === n); b.disabled = true; });
-  dFin.textContent = ''; dMemo.classList.remove('su'); dNot.classList.remove('su'); dCur.classList.remove('su');
-  pc.querySelectorAll('.js-dock span').forEach(s => s.classList.remove('uso'));
-  dSquadra.querySelectorAll('span:not(.et)').forEach(s => s.remove());
-  const chip = c.squadra.map(x => { const s = document.createElement('span'); s.textContent = x; dSquadra.append(s); return s; });
-  dStato.textContent = 'ascolta'; dVoce.classList.remove('detta'); dVoce.classList.add('parla');
-  const frase = '«' + c.ordine + '»'; let i = 0;
-  (function batte(){ if (mio !== giro) return; dDetto.textContent = frase.slice(0, ++i); if (i < frase.length) setTimeout(batte, lento ? 0 : 38); else { dVoce.classList.replace('parla', 'detta'); dopo(300, avvia); } })();
-  function cursore(el){ const r = el.getBoundingClientRect(), p = pc.getBoundingClientRect(); dCur.classList.add('su'); dCur.style.transform = 'translate(' + (r.left - p.left + Math.min(r.width * .55, 140)) + 'px,' + (r.top - p.top + r.height * .55) + 'px)'; }
-  const AZIONI = {
-    agente(k){ chip.forEach((s, j) => { if (j < k) { s.classList.remove('lavora'); s.classList.add('fatto'); } }); chip[k].classList.add('lavora'); },
-    memo(tit, righe){ pc.querySelector('.js-memo-t').textContent = tit; const box = pc.querySelector('.js-memo-r'); box.textContent = ''; righe.forEach(x => { const p = document.createElement('p'); p.textContent = x; box.append(p); }); dMemo.classList.add('su'); },
-    app(k){ const s = pc.querySelector('.js-dock [data-app="' + k + '"]'); s.classList.add('uso'); cursore(s); },
-    apri(id, tit, [l, a, w, an], righe){
-      Object.values(fin).forEach(f => f.el.classList.add('dietro'));
-      if (stretto() || Object.keys(fin).length) dMemo.classList.remove('su');
-      const el = document.createElement('div'), testa = document.createElement('div'), nome = document.createElement('span'), corpo = document.createElement('div');
-      el.className = 'fin'; testa.className = 'tit'; corpo.className = 'corpo';
-      testa.append(document.createElement('i'), document.createElement('i'), document.createElement('i'), nome); nome.textContent = tit;
-      const rr = righe.map(([sx, dx, cl]) => { const r = document.createElement('div'), b = document.createElement('span'), e = document.createElement('em'); r.className = 'r' + (cl ? ' ' + cl : ''); b.textContent = sx; e.textContent = dx; r.append(b, e); corpo.append(r); return r; });
-      el.append(testa, corpo);
-      if (stretto()) { el.style.left = '4%'; el.style.width = '92%'; el.style.top = an + 'px'; } else { el.style.left = l + '%'; el.style.width = w + '%'; el.style.top = a + 'px'; }
-      dFin.append(el); fin[id] = {el, rr};
-      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('su')));
-    },
-    righe(id, da = 0, a){ const rr = fin[id].rr; rr.slice(da, a ?? rr.length).forEach((r, k) => dopo(k * 260, () => r.classList.add('su'))); },
-    punta(id, k, segno){ const f = fin[id], r = f.rr[k]; f.el.classList.remove('dietro'); cursore(r);
-      dopo(850, () => { dCur.classList.remove('clic'); void dCur.offsetWidth; dCur.classList.add('clic'); f.rr.forEach(x => x.classList.toggle('luce', x === r));
-        if (segno && !r.querySelector('.v')) { const v = document.createElement('span'); v.className = 'v'; v.textContent = segno; r.querySelector('em').append(v); } }); },
-    timbro(id, testo){ const s = document.createElement('div'); s.className = 'timbro'; s.textContent = testo; fin[id].el.append(s); fin[id].el.classList.add('timbrata'); requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add('su'))); },
-    fine(testo, bottoni){
-      chip.forEach(s => { s.classList.remove('lavora'); s.classList.add('fatto'); });
-      dCur.classList.remove('su'); dStato.textContent = 'fatto';
-      dNot.querySelector('.js-notifica-p').textContent = testo;
-      const bt = dNot.querySelector('.js-notifica-bt'); bt.textContent = ''; bottoni.forEach(x => { const s = document.createElement('span'); s.textContent = x; bt.append(s); });
-      dNot.classList.add('su');
-      dBottoni.forEach(b => b.disabled = false);
-    }
-  };
-  function avvia(){
-    dStato.textContent = 'al lavoro';
-    let quando = 0; c.passi.forEach(([attesa, azione, ...arg]) => { quando += attesa; dopo(quando, () => AZIONI[azione](...arg)); });
+function squadra(){ const ag = [...document.querySelectorAll('.js-agenti .agente:not(.tuo)')]; let k = 0;
+  if (lento) return;
+  setInterval(() => { const a = ag[k % ag.length], j = k % ag.length, sp = a.querySelector('span'), fase = Math.floor(k / ag.length) % 2;
+    a.classList.remove('lampo'); void a.offsetWidth; a.classList.add('lampo'); sp.textContent = LAVORI[j][fase === 0 ? 1 : 0]; k++; }, 1300); }
+
+/* la memoria: i ricordi si scrivono uno dopo l'altro */
+const RICORDI = [
+  ['Rossi Immobiliare', 'paga in due rate'],
+  ['Studio Verdi', 'call solo al mattino'],
+  ['Marco', 'preferisce WhatsApp alle mail'],
+  ['Preventivi', 'una pagina, mai di più'],
+  ['Fornitore carta', 'sconto oltre i 500 €'],
+  ['Neri Srl', 'rinnovo a dicembre'],
+  ['Decisione 21 ott', 'niente sconti a novembre'],
+  ['Bianchi & Figli', 'sollecitare con garbo']
+];
+function ricordi(){ const box = document.querySelector('.js-ricordi'); let i = 0;
+  function scrivi(){ const [chi, cosa] = RICORDI[i % RICORDI.length]; i++;
+    const r = document.createElement('div'), ic = document.createElement('i'), s = document.createElement('span'), em = document.createElement('em'), cur = document.createElement('b');
+    r.className = 'r'; ic.textContent = '+'; s.textContent = chi; cur.className = 'cur'; r.append(ic, s, em); em.append(cur);
+    box.querySelectorAll('.cur').forEach(c => c.remove()); box.append(r); while (box.children.length > 7) box.firstChild.remove();
+    if (lento){ em.textContent = cosa; return; }
+    let k = 0; (function batte(){ em.textContent = cosa.slice(0, ++k); em.append(cur); if (k < cosa.length) setTimeout(batte, 32); })();
   }
+  if (lento){ for (let k = 0; k < 6; k++) scrivi(); return; }
+  scrivi(); setInterval(scrivi, 1600);
 }
-dBottoni.forEach(b => b.addEventListener('click', () => demo(+b.dataset.c)));
 
 const barra = document.querySelector('.js-barra');
 /* la barra sparisce quando a schermo c'è già un pulsante grande: l'eroe e la chiusura */
