@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v14 (23 ott, 18:55): apertura in registro trailer (neuroni bassi e corposi, archi elettrici, riser, BRAAM); agentica = glitch + colpo; telefono senza firma; «Gli parli» = vibrazione + ding; tutorial = buzz di errore + conferma; app della squadra = pop.
   v13 (23 ott, 18:35): suoni HUD stile Mark (beep, clic, scansioni, servomotori, metallo FM, carica del repulsore), corti e secchi, niente note lunghe né arpeggi; la squadra si costruisce in 1,6 s (M, rami, agenti, programmi) appena entra in vista, poi gli impulsi.
   v12 (23 ott, 18:15): ogni sezione ha la sua firma sonora (glitch, tri-tono, arpeggio, vocale, bloom, colpo, tre passi, scatto, carta, risalita); le note della squadra solo con la squadra a schermo e solo i primi 6 tocchi, così nessun suono continua da solo.
   v11 (23 ott, 18:00): niente tappeto; effetti tutti diversi (fruscio variabile solo a titolo a metà schermo, bolle della chat, spunte, note della squadra, dieci note dei posti, luccichio della memoria, punzone di metallo); apertura 0,5 s più veloce; se il browser trattiene l'audio, un neurone pulsa e «Tocca per accendere Mark» (dopo 5 s parte muto).
@@ -873,6 +874,7 @@ const S = (() => {
   function rumore(dur){ const b = ctx.createBuffer(1, Math.ceil(ctx.sampleRate*dur), ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random()*2 - 1; const s = ctx.createBufferSource(); s.buffer = b; return s; }
   function tono(tipo, f0, f1, dur, vol, umido, t = ctx.currentTime){ const o = ctx.createOscillator(), g = ctx.createGain(); o.type = tipo; o.frequency.setValueAtTime(f0, t); if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur*.8);
     g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0008, t + dur); o.connect(g); esce(g, umido); o.start(t); o.stop(t + dur + .05); }
+  const graffio = (() => { const n = 1024, c = new Float32Array(n); for (let i = 0; i < n; i++){ const x = i/(n - 1)*2 - 1; c[i] = Math.tanh(x*3.2); } return c; })();
   function bip(f, dur = .03, vol = .1, tipo = 'sine', t = ctx.currentTime){ const o = ctx.createOscillator(), g = ctx.createGain(); o.type = tipo; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f*.97, t + dur);
     g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .002); g.gain.setValueAtTime(vol, t + dur*.6); g.gain.exponentialRampToValueAtTime(.0008, t + dur); o.connect(g); esce(g, .04); o.start(t); o.stop(t + dur + .02); }
   function clic(vol = .3, t = ctx.currentTime){ const n = rumore(.006), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'highpass'; f.frequency.value = 2200; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + .006); n.connect(f); f.connect(g); esce(g, 0); n.start(t); }
@@ -894,36 +896,59 @@ const S = (() => {
       return (ctx.state === 'running' ? Promise.resolve() : ctx.resume()).then(() => vivo(), () => false); },
     vivo,
     /* ── la tavolozza HUD: beep, clic, scansioni, servomotori, metallo FM. Corti, secchi, quasi senza riverbero ── */
-    granello(){ if (!vivo() || raro('gr', 28)) return; bip(2600 + Math.random()*2600, .018, .075); },
-    scarica(){ if (!vivo() || raro('sc', 40)) return; const t = ctx.currentTime, n = rumore(.03), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'bandpass'; f.frequency.value = 3500 + Math.random()*3000; f.Q.value = 9;
-      g.gain.setValueAtTime(.5, t); g.gain.exponentialRampToValueAtTime(.001, t + .028); n.connect(f); f.connect(g); esce(g, .05); n.start(t); bip(5200, .01, .03, 'square', t + .008); },
-    /* il fischio di carica del repulsore: sale fino al colpo */
-    pad(dur){ if (!vivo()) return; const t = ctx.currentTime, o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
-      o.type = 'sine'; o2.type = 'sine'; o.frequency.setValueAtTime(320, t); o.frequency.exponentialRampToValueAtTime(2600, t + dur); o2.frequency.setValueAtTime(480, t); o2.frequency.exponentialRampToValueAtTime(3900, t + dur);
-      lfo.frequency.value = 11; lg.gain.value = 14; lfo.connect(lg); lg.connect(o.frequency); lg.connect(o2.frequency);
-      const g2 = ctx.createGain(); g2.gain.value = .35; o.connect(g); o2.connect(g2); g2.connect(g);
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.085, t + dur*.95); g.gain.linearRampToValueAtTime(0, t + dur + .02); esce(g, .05);
-      [o, o2, lfo].forEach(x => { x.start(t); x.stop(t + dur + .05); }); },
-    risucchio(dur = .9){ if (!vivo()) return; const t = ctx.currentTime, n = rumore(dur + .05), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'bandpass'; f.Q.value = 3;
-      f.frequency.setValueAtTime(1500, t); f.frequency.exponentialRampToValueAtTime(9000, t + dur); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.16, t + dur*.9); g.gain.linearRampToValueAtTime(0, t + dur + .02);
-      n.connect(f); f.connect(g); esce(g, .05); n.start(t); servo(200, 640, dur*.9, .12, t); },
+    /* il neurone che spunta: un tocco basso e corposo, come dati che caricano. Più neuroni ci sono, più è pieno */
+    granello(){ if (!vivo() || raro('gr', 55)) return; const t = ctx.currentTime, f = 150 + Math.random()*70; tono('sine', f, f*.55, .09, .32, .05, t); tono('triangle', f*2, f, .04, .08, 0, t); clic(.12, t); },
+    /* il collegamento: un arco elettrico distorto, basso, che si sente unire */
+    scarica(){ if (!vivo() || raro('sc', 70)) return; const t = ctx.currentTime, o = ctx.createOscillator(), d = ctx.createWaveShaper(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+      o.type = 'sawtooth'; o.frequency.setValueAtTime(70 + Math.random()*70, t); o.frequency.exponentialRampToValueAtTime(240 + Math.random()*120, t + .05); d.curve = graffio; f.type = 'lowpass'; f.frequency.value = 2400;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.16, t + .004); g.gain.exponentialRampToValueAtTime(.001, t + .06); o.connect(d); d.connect(f); f.connect(g); esce(g, .08); o.start(t); o.stop(t + .07); },
+    /* il riser da trailer: sintetizzatori bassi che salgono e si aprono, sotto un sub che cresce */
+    pad(dur){ if (!vivo()) return; const t = ctx.currentTime, f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'lowpass'; f.Q.value = 6; f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(5200, t + dur);
+      [55, 82.41, 110, 164.81].forEach((fr, i) => { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.setValueAtTime(fr, t); o.frequency.exponentialRampToValueAtTime(fr*1.5, t + dur); o.detune.value = (i - 1.5)*9; o.connect(f); o.start(t); o.stop(t + dur + .03); });
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.2, t + dur*.97); g.gain.linearRampToValueAtTime(0, t + dur + .02); f.connect(g); esce(g, .08);
+      const n = rumore(dur + .05), nf = ctx.createBiquadFilter(), ng = ctx.createGain(); nf.type = 'bandpass'; nf.Q.value = 1.5; nf.frequency.setValueAtTime(600, t); nf.frequency.exponentialRampToValueAtTime(7000, t + dur);
+      ng.gain.setValueAtTime(0, t); ng.gain.linearRampToValueAtTime(.12, t + dur*.97); ng.gain.linearRampToValueAtTime(0, t + dur + .02); n.connect(nf); nf.connect(ng); esce(ng, .05); n.start(t); n.stop(t + dur + .05);
+      tono('sine', 40, 62, dur, .45, 0, t); },
+    risucchio(dur = .9){ if (!vivo()) return; const t = ctx.currentTime, n = rumore(dur + .05), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'highpass'; f.frequency.setValueAtTime(400, t); f.frequency.exponentialRampToValueAtTime(6000, t + dur);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.14, t + dur*.92); g.gain.linearRampToValueAtTime(0, t + dur + .01); n.connect(f); f.connect(g); esce(g, .05); n.start(t); n.stop(t + dur + .05); },
+    /* il BRAAM: impatto basso e distorto da trailer, il sub che cade, il colpo metallico */
     botto(){ if (!vivo()) return; const t = ctx.currentTime;
-      tono('sine', 66, 34, .9, .95, .08, t); tono('sine', 170, 70, .18, .75, .05, t); tono('square', 340, 140, .07, .18, 0, t);
+      tono('sine', 58, 30, 1.2, 1, .05, t); tono('sine', 140, 55, .22, .8, .05, t);
+      const d = ctx.createWaveShaper(), f = ctx.createBiquadFilter(), g = ctx.createGain(); d.curve = graffio; f.type = 'lowpass'; f.frequency.setValueAtTime(3800, t); f.frequency.exponentialRampToValueAtTime(220, t + .95);
+      [55, 82.41, 110, 130.81].forEach((fr, i) => { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = fr; o.detune.value = (i - 1.5)*12; o.connect(d); o.start(t); o.stop(t + 1.05); });
+      g.gain.setValueAtTime(.34, t); g.gain.exponentialRampToValueAtTime(.001, t + 1); d.connect(f); f.connect(g); esce(g, .15);
       const c = rumore(.09), hp = ctx.createBiquadFilter(), cg = ctx.createGain(); hp.type = 'highpass'; hp.frequency.value = 2500; cg.gain.setValueAtTime(.45, t); cg.gain.exponentialRampToValueAtTime(.001, t + .08); c.connect(hp); hp.connect(cg); esce(cg, .1); c.start(t);
-      metallo(1760, 2540, 3.2, .38, .12, t + .02); bip(3520, .04, .07, 'sine', t + .3); bip(4186, .05, .06, 'sine', t + .36); },
+      metallo(1760, 2540, 3.2, .4, .1, t + .02); },
     risveglio(){ if (!vivo()) return; conferma(); metallo(1760, 2540, 2.5, .3, .08, ctx.currentTime + .1); },
     firma(nome){ if (!vivo()) return; const t = ctx.currentTime, v = 1 + (Math.random() - .5)*.05;
-      if (nome === 'agentica'){ for (let i = 0; i < 12; i++) bip((1200 + Math.random()*3600)*v, .012, .1, 'square', t + i*.022); }
-      else if (nome === 'telefono') conferma(v);
+      if (nome === 'agentica'){}
+      else if (nome === 'telefono'){}
       else if (nome === 'squadra'){ servo(140*v, 440*v, .14, .3, t); clic(.4, t + .15); bip(2794*v, .025, .08, 'sine', t + .17); }
-      else if (nome === 'voce'){ sweep(900*v, 2500*v, .07, .1, t); sweep(2500*v, 1400*v, .06, .08, t + .09); clic(.3, t + .16); }
+      else if (nome === 'voce') this.notifica();
       else if (nome === 'memoria'){ const n = rumore(.18), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'bandpass'; f.Q.value = 5; f.frequency.setValueAtTime(2500, t); f.frequency.exponentialRampToValueAtTime(8500, t + .16);
         g.gain.setValueAtTime(.3, t); g.gain.linearRampToValueAtTime(0, t + .17); n.connect(f); f.connect(g); esce(g, .05); n.start(t); bip(3520*v, .02, .09, 'sine', t + .19); bip(3520*v, .02, .09, 'sine', t + .25); }
-      else if (nome === 'tutorial'){ bip(1400*v, .03, .1, 'square', t); bip(2800*v, .045, .1, 'sine', t + .06); }
+      else if (nome === 'tutorial') this.noSi();
       else if (nome === 'passi'){ [0, .075, .15].forEach((d, i) => { clic(.35, t + d); bip((2200 + i*120)*v, .014, .06, 'square', t + d + .004); }); }
       else if (nome === 'posti'){ clic(.4, t); bip(1760*v, .03, .08, 'sine', t + .01); }
       else if (nome === 'domande'){ clic(.3, t); bip(1318.5*v, .02, .06, 'sine', t + .01); }
       else if (nome === 'fine'){ sweep(400*v, 1700*v, .16, .12, t); clic(.45, t + .17); metallo(1200*v, 1730*v, 2.5, .25, .07, t + .18); } },
+    /* la parola che si decifra: un glitch che balbetta, basso e digitale */
+    glitch(dur = .9){ if (!vivo()) return; const t = ctx.currentTime, d = ctx.createWaveShaper(), g = ctx.createGain(); d.curve = graffio; d.connect(g); g.gain.value = .12; esce(g, .05);
+      for (let k = 0; k < Math.floor(dur/.045); k++){ const o = ctx.createOscillator(), og = ctx.createGain(), q = t + k*.045; o.type = k % 3 ? 'square' : 'sawtooth'; o.frequency.value = [110, 220, 165, 330, 98, 440][Math.random()*6|0];
+        og.gain.setValueAtTime(0, q); og.gain.linearRampToValueAtTime(Math.random() < .3 ? 0 : 1, q + .002); og.gain.setValueAtTime(0, q + .025 + Math.random()*.012); o.connect(og); og.connect(d); o.start(q); o.stop(q + .045); } },
+    /* il colpo: la parola è nata */
+    colpo(){ if (!vivo()) return; const t = ctx.currentTime; tono('sine', 90, 42, .45, .9, .05, t); tono('sawtooth', 220, 110, .16, .2, .05, t); clic(.5, t); metallo(1320, 1910, 3, .32, .1, t + .01); },
+    /* il messaggio in arrivo: il telefono vibra due volte, poi il ding */
+    notifica(){ if (!vivo()) return; const t = ctx.currentTime;
+      [0, .17].forEach(d => { const o = ctx.createOscillator(), am = ctx.createOscillator(), ag = ctx.createGain(), g = ctx.createGain(); o.type = 'square'; o.frequency.value = 165; am.frequency.value = 38; ag.gain.value = .5; am.connect(ag); ag.connect(g.gain);
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 900; g.gain.setValueAtTime(.18, t + d); g.gain.setValueAtTime(0, t + d + .12); o.connect(f); f.connect(g); esce(g, 0); o.start(t + d); am.start(t + d); o.stop(t + d + .13); am.stop(t + d + .13); });
+      [[1567.98, .42], [2093, .55]].forEach(([fr, d]) => { tono('sine', fr, fr, .45, .16, .12, t + d); tono('sine', fr*2.76, fr*2.76, .12, .03, .1, t + d); }); },
+    /* da solo no, con me sì: il buzz di errore, poi la conferma */
+    noSi(){ if (!vivo()) return; const t = ctx.currentTime, o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'square'; o.frequency.value = 98; f.type = 'lowpass'; f.frequency.value = 1100;
+      g.gain.setValueAtTime(.22, t); g.gain.setValueAtTime(.22, t + .16); g.gain.linearRampToValueAtTime(0, t + .19); o.connect(f); f.connect(g); esce(g, 0); o.start(t); o.stop(t + .2);
+      bip(1567.98, .05, .13, 'sine', t + .32); bip(2349.3, .07, .13, 'sine', t + .39); bip(3135.96, .09, .1, 'sine', t + .47); },
+    /* un'app che si apre */
+    pop(){ if (!vivo() || raro('pop', 60)) return; const t = ctx.currentTime; sweep(380, 980, .035, .12, t); clic(.15, t); },
     bolla(lui){ if (!vivo()) return; const t = ctx.currentTime; if (lui){ bip(2637, .025, .1, 'sine', t); bip(3520, .03, .09, 'sine', t + .045); } else { clic(.3, t); bip(1568, .02, .07, 'sine', t + .005); } },
     spunta(i){ if (!vivo()) return; bip([2093, 2349.3, 2637, 2793.8][i % 4], .03, .1); },
     plin(i){ if (!vivo()) return; clic(.25); bip(2200 + i*55, .018, .07, 'square'); },
@@ -1046,9 +1071,9 @@ function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setT
 /* la parola: DIGITALE si barra, si decifra e diventa AGENTICA, tra le scintille */
 function trasforma(){ const el = document.querySelector('.js-morph'); if (lento){ el.textContent = el.dataset.a; el.classList.add('fatto'); return; }
   setTimeout(() => el.classList.add('barrato'), 1200);
-  setTimeout(() => { const a = el.dataset.a; let f = 0; const tot = 26;
+  setTimeout(() => { S.glitch(.95); const a = el.dataset.a; let f = 0; const tot = 26;
     const id = setInterval(() => { f++; el.textContent = [...a].map((ch, i) => ch === '.' || i < a.length * f / tot ? ch : SEGNI[Math.random()*SEGNI.length|0]).join('');
-      if (f >= tot){ clearInterval(id); el.textContent = a; el.classList.add('fatto'); S.ping(true); const [x, y] = centro(el); scintille(x, y, innerWidth < 600 ? 70 : 120, 1); } }, 36); }, 1900); }
+      if (f >= tot){ clearInterval(id); el.textContent = a; el.classList.add('fatto'); S.colpo(); const [x, y] = centro(el); scintille(x, y, innerWidth < 600 ? 70 : 120, 1); } }, 36); }, 1900); }
 
 /* il vocale di Mark: si sente davvero */
 const audio = document.querySelector('.js-audio'), vocale = document.querySelector('.js-vocale'), onde = document.querySelector('.js-onde'), durata = document.querySelector('.js-durata');
@@ -1099,7 +1124,7 @@ const SAGOMA = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradien
     passo(200, () => rami.forEach(p => p.classList.add('su')));
     omini.forEach((o, i) => passo(480 + i*110, () => { o.classList.add('su'); S.spunta(i); }));
     passo(880, () => tronchi.forEach(p => p.classList.add('su')));
-    apps.forEach((ap, j) => passo(960 + j*45, () => { ap.el.classList.add('su'); if (j % 3 === 0) S.plin(j); }));
+    apps.forEach((ap, j) => passo(960 + j*45, () => { ap.el.classList.add('su'); if (j % 2 === 0) S.pop(); }));
     passo(1650, () => { pronta = true; }); }
   new IntersectionObserver(es => { inVista = es[0].isIntersecting; if (inVista){ note = 0; costruisci(); } }, {threshold: .18}).observe(box);
   if (lento) return;
