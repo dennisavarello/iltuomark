@@ -50,7 +50,7 @@ function palco(box, fov, bloomForza){
   box.appendChild(r.domElement);
   const scena = new THREE.Scene(), cam = new THREE.PerspectiveCamera(fov,1,.1,3000);
   const comp = new THREE.EffectComposer(r); comp.addPass(new THREE.RenderPass(scena, cam));
-  const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(256,256), bloomForza, .6, .12); comp.addPass(bloom);
+  const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(256,256), bloomForza, SOLO ? .72 : .6, .12); comp.addPass(bloom);
   const misura = () => { const w = box.clientWidth, h = Math.max(1, box.clientHeight); r.setSize(w,h,false); comp.setSize(w,h); cam.aspect = w/h; cam.updateProjectionMatrix(); };
   new ResizeObserver(misura).observe(box); misura();
   return {r, scena, cam, comp, bloom};
@@ -59,7 +59,7 @@ function palco(box, fov, bloomForza){
 // ════════════════════════════════════════════════════════════════════════
 //  L'ENTITÀ — nanotecnologia: lo sciame cambia forma da solo e vibra con la voce
 // ════════════════════════════════════════════════════════════════════════
-const E = palco(document.getElementById('entita'), 40, 1.15);
+const E = palco(document.getElementById('entita'), 40, SOLO ? 1.7 : 1.15);
 const NP = 16000;   /* 23 ott: densità identica a Jarvis (Dennis: «troppo sottile»). Il peso si toglie altrove: niente ecosistema in ?solo e pausa fuori schermo */
 const gP = new THREE.BufferGeometry(), dir = new Float32Array(NP*3), rnd = new Float32Array(NP*4);
 for (let i=0;i<NP;i++){
@@ -114,15 +114,15 @@ const mP = new THREE.ShaderMaterial({
       q += vec3(snoise(vec3(rnd.xy*40., t*.3)), snoise(vec3(rnd.yz*40., t*.3)), snoise(vec3(rnd.zw*40., t*.3))) * (1.2 + voce*5.);
       vec4 mv = modelViewMatrix * vec4(q,1.);
       gl_Position = projectionMatrix * mv;
-      gl_PointSize = px * (1.1 + rnd.w*1.6 + voce*2.2) * (300./-mv.z);
+      gl_PointSize = px * (1.1 + rnd.w*1.6 + voce*2.2) * (300./-mv.z) * ${SOLO ? '1.28' : '1.0'};
       vLuce = .45 + .55*smoothstep(-.4,.8,n1) + voce*.9 + ascolta*.3 - libera*.25;
       vOro = step(.965, rnd.z);
     }`,
   fragmentShader: `varying float vLuce; varying float vOro;
     void main(){ float d = length(gl_PointCoord-.5); if (d>.5) discard; float a = smoothstep(.5,.0,d);
-      vec3 holo = mix(vec3(.89,.55,.18), vec3(1.,.90,.74), clamp(vLuce-.6,0.,1.));   // Ambra Forgia → avorio
+      vec3 holo = mix(vec3(1.,.66,.26), vec3(1.,.92,.78), clamp(vLuce-.6,0.,1.));   // Ambra Forgia → avorio, più luminosa: l'ambra accende il bagliore meno del ciano
       vec3 c = mix(holo, vec3(.80,.82,.85), vOro);                                   // scintille di titanio
-      gl_FragColor = vec4(c*vLuce*a, a); }`,
+      gl_FragColor = vec4(c*vLuce*a*${SOLO ? '1.35' : '1.0'}, a); }`,
   transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
 });
 const sciame = new THREE.Points(gP, mP); E.scena.add(sciame);
