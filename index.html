@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v7 (23 ott, 16:30): accensione col nucleo di luce (niente scintille davanti alla sfera), iPhone in proporzioni vere con l'ordine da 80.000 € salvato e il vocale nuovo, squadra di omini collegati ai loghi in 3D (WhatsApp, HubSpot, TeamSystem, Zucchetti, SAP…), memoria = foto del cervello di neuroni.
   v6 (23 ott, 16:10): via le righe di sistema in alto, via le foto di studio e rooftop. AGENTICA che nasce da DIGITALE, iPhone con Mark Chat e il vocale vero di Mark (vocale-mark.mp3), la memoria come grafo di neuroni alla Obsidian.
   MARK · IL FUNNEL v5 — 23 ott 2026 sera. Dennis: «la prova fa cagare, toglila»; «la palla di neuroni è una figata, la teniamo»; «Mark sul tuo computer lo terrei, col font high tech»;
   «un po di foto ci stanno se si resta minimal»; «molte più animazioni cinematic: deve fare scintille, deve sembrare una serie TV».
@@ -347,6 +348,70 @@ footer a{color:var(--titanio)}
 .grafo{position:relative;width:min(100%,860px);height:460px;border:1px solid var(--linea);border-radius:3px;background:radial-gradient(ellipse at center,#120E08,#050505 72%);overflow:hidden;margin-bottom:44px}
 .grafo canvas{position:absolute;inset:0;width:100%;height:100%}
 @media (max-width:899px){.grafo{height:380px}.iphone{height:560px}}
+
+/* ── v7: l'accensione è un nucleo di luce, non scintille: il flash, il riflesso anamorfico, due onde d'urto, poi la sfera si materializza ── */
+.nucleo,.flare,.onda-urto{position:absolute;left:50%;top:max(29svh,165px);pointer-events:none;z-index:2;opacity:0}
+.nucleo{width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#FFF6E6;box-shadow:0 0 40px 22px rgba(255,214,150,.9),0 0 140px 70px rgba(227,155,58,.55)}
+.acceso .nucleo{animation:nucleo 2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes nucleo{0%{opacity:0;transform:scale(.1)}15%{opacity:1;transform:scale(1)}40%{opacity:1;transform:scale(2.2)}100%{opacity:0;transform:scale(10)}}
+.flare{width:130vw;height:2px;margin:-1px 0 0 -65vw;background:linear-gradient(90deg,transparent,rgba(255,190,110,.15) 20%,#FFF1D8 50%,rgba(255,190,110,.15) 80%,transparent);box-shadow:0 0 22px 2px rgba(255,170,80,.7)}
+.acceso .flare{animation:flare 2.1s cubic-bezier(.2,.7,.2,1) .12s both}
+@keyframes flare{0%{opacity:0;transform:scaleX(0) scaleY(1)}22%{opacity:1;transform:scaleX(1) scaleY(2)}100%{opacity:0;transform:scaleX(1.25) scaleY(.5)}}
+.onda-urto{width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;border:1px solid rgba(242,178,94,.9);box-shadow:0 0 30px rgba(227,155,58,.35),inset 0 0 30px rgba(227,155,58,.25)}
+.acceso .onda-urto{animation:urto 2.4s cubic-bezier(.1,.6,.2,1) .3s both}
+.acceso .onda-urto.u2{animation-delay:.6s}
+@keyframes urto{0%{opacity:1;transform:scale(.05)}100%{opacity:0;transform:scale(5)}}
+.eroe .plancia{transition-delay:.45s}
+
+/* ── v7: iPhone in proporzioni vere (393 × 852), cornice in titanio e tasti ── */
+.tel-box{position:relative;width:min(84vw,340px);margin-top:44px}
+.tasto{position:absolute;width:3px;background:#2E2E33;border-radius:2px}
+.tasto.t1{left:-3px;top:17%;height:5%}.tasto.t2{left:-3px;top:25%;height:9%}.tasto.t3{left:-3px;top:36%;height:9%}.tasto.t4{right:-3px;top:28%;height:13%}
+.iphone{width:100%;height:auto;aspect-ratio:393/852;border:11px solid #070707;outline:none;border-radius:56px;box-shadow:0 0 0 2px #3A3A3F,0 0 0 3px #17171A,0 70px 120px -50px rgba(227,155,58,.45)}
+@media (max-width:899px){.iphone{height:auto}}
+.iphone .messaggi{padding:12px 10px}
+.iphone .msg{font-size:13px;line-height:18px}
+.lavoro{width:90%;padding:10px 12px!important}
+.lavoro .t-lav{font:500 10px/14px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ambra);margin-bottom:6px}
+.lavoro .r{display:flex;gap:8px;font-size:12.5px;line-height:17px;padding:3px 0;color:var(--titanio);transition:opacity .4s,transform .4s}
+.lavoro .r::before{content:"";flex:none;width:12px;height:12px;margin-top:2px;border-radius:50%;border:1.5px solid var(--linea)}
+.lavoro .r.ok{color:var(--avorio)}
+.lavoro .r.ok::before{border-color:var(--ambra);background:var(--ambra) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2l2 2 4-4.4' fill='none' stroke='%23050505' stroke-width='1.6'/%3E%3C/svg%3E") center/10px no-repeat}
+.js-anima .lavoro .r:not(.su){opacity:0;transform:translateX(-6px)}
+.lavoro .chiede{margin-top:8px;color:var(--avorio);transition:opacity .4s}
+.js-anima .lavoro .chiede:not(.su){opacity:0}
+.home-ind{width:34%;height:4px;border-radius:3px;background:#3A3A3E;margin:0 auto 8px}
+
+/* ── v7: la squadra. Omini collegati ai programmi dell'azienda, gli impulsi corrono sui fili ── */
+.rete-ag{position:relative;width:min(100%,900px);height:540px;margin-top:36px}
+.fili{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fili .fc{stroke:rgba(227,155,58,.55);stroke-width:1}
+.fili .ft{stroke:rgba(200,190,175,.16);stroke-width:1;stroke-dasharray:3 4}
+.cuore{position:absolute;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 40% 35%,#2A2118,#0A0806 70%);border:1px solid var(--ambra);box-shadow:0 0 50px -6px rgba(227,155,58,.7),inset 0 0 20px rgba(227,155,58,.25);font:400 22px/1 var(--stark);z-index:3}
+.cuore::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(227,155,58,.35);animation:respira 2.6s ease-in-out infinite}
+.omino{position:absolute;width:96px;margin-left:-48px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
+.omino .sagoma{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#1E1914,#0B0B0C 72%);border:1px solid rgba(227,155,58,.55);box-shadow:0 14px 30px -12px #000,0 0 26px -8px rgba(227,155,58,.6);transition:box-shadow .3s,transform .3s}
+.omino.attivo .sagoma{box-shadow:0 14px 30px -12px #000,0 0 36px -2px rgba(227,155,58,.95);transform:scale(1.06)}
+.omino svg{width:34px;height:34px}
+.omino b{font:500 10px/14px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--avorio);white-space:nowrap}
+.tool{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:15px;display:grid;place-items:center;z-index:3;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 78%,#fff),var(--c) 45%,color-mix(in srgb,var(--c) 70%,#000));
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -4px 8px rgba(0,0,0,.35),0 16px 26px -10px rgba(0,0,0,.9),0 0 22px -8px var(--c);
+  transform:perspective(320px) rotateX(14deg) rotateY(var(--ry,0deg));animation:galleggia 4.6s ease-in-out infinite;animation-delay:var(--d,0s);transition:filter .3s}
+.tool::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 46%);pointer-events:none}
+.tool img{width:27px;height:27px;filter:brightness(0) invert(1) drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.tool span{font:600 8.5px/1 var(--testo);letter-spacing:.02em;color:#fff;text-align:center;padding:0 3px}
+.tool.tocca{filter:brightness(1.35) drop-shadow(0 0 14px var(--c))}
+@keyframes galleggia{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media (max-width:899px){.rete-ag{height:600px}.tool{width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:12px}.tool img{width:21px;height:21px}.tool span{font-size:7px}.omino{width:80px;margin-left:-40px}.omino .sagoma{width:52px;height:52px}.omino svg{width:28px;height:28px}.cuore{width:62px;height:62px;margin:-31px 0 0 -31px;font-size:18px}}
+
+/* ── v7: il cervello di neuroni ── */
+.cervello{position:relative;width:min(100%,960px);aspect-ratio:16/9;margin-top:36px;overflow:hidden;-webkit-mask-image:radial-gradient(ellipse 66% 62% at 50% 52%,#000 42%,transparent 100%);mask-image:radial-gradient(ellipse 66% 62% at 50% 52%,#000 42%,transparent 100%)}
+.cervello img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 10s cubic-bezier(.2,.6,.2,1);animation:pensa 5s ease-in-out infinite}
+.attiva .cervello img{transform:scale(1.02)}
+@keyframes pensa{0%,100%{filter:brightness(.95) saturate(1)}50%{filter:brightness(1.18) saturate(1.15)}}
+.impulso{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,214,150,.22) 48%,rgba(255,240,210,.35) 50%,rgba(255,214,150,.22) 52%,transparent 65%);mix-blend-mode:screen;transform:translateX(-100%);animation:impulso 6s cubic-bezier(.6,0,.4,1) infinite 1.5s}
+@keyframes impulso{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
 .domanda h2{font-size:24px;line-height:32px}
 @media (min-width:900px){
   .titolo{font-size:32px;line-height:44px}
@@ -383,6 +448,7 @@ footer a{color:var(--titanio)}
 <main>
   <section class="scena eroe js-eroe">
     <div class="alone" aria-hidden="true"></div>
+    <div class="nucleo" aria-hidden="true"></div><div class="flare" aria-hidden="true"></div><div class="onda-urto" aria-hidden="true"></div><div class="onda-urto u2" aria-hidden="true"></div>
     <div class="plancia"><iframe src="plancia/index.html?solo" title="Mark" loading="eager"></iframe></div>
     <h1 class="seq s1 js-decifra js-titolo-eroe">MARK.<br><span class="ambra">SUL TUO COMPUTER.</span></h1>
     <p class="riga seq s2">Lo stesso dei miei video.<br>Lo accendiamo insieme, in videochiamata.</p>
@@ -398,43 +464,33 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-chat-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="iphone compare">
-      <div class="isola"></div>
-      <div class="stato-tel"><span>9:41</span><span class="tacche"><i></i><i></i><i></i><i></i></span></div>
-      <div class="app-testa"><i>M</i><div><b>Mark Chat</b><span class="js-online">online</span></div></div>
-      <div class="messaggi js-messaggi">
-        <div class="msg io">Mark, cosa mi sono perso stamattina?</div>
-        <div class="msg lui vocale-m js-vocale"><button type="button" class="play js-play" aria-label="Ascolta il vocale di Mark"><svg viewBox="0 0 24 24"><path class="tri" d="M8 5v14l11-7z"/><path class="pau" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button><span class="onde js-onde"></span><span class="durata js-durata">0:08</span></div>
-        <div class="msg io">Perfetto, manda la conferma a Rossi</div>
-        <div class="msg lui">Fatto, signore. Invito partito, gliel'ho segnato in agenda.</div>
-        <div class="scrive js-scrive"><span></span><span></span><span></span></div>
+    <h2 class="titolo compare js-decifra">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
+    <p class="riga compare d1">Gli scrivi o gli mandi un vocale.</p>
+    <div class="tel-box compare d2">
+      <i class="tasto t1"></i><i class="tasto t2"></i><i class="tasto t3"></i><i class="tasto t4"></i>
+      <div class="iphone">
+        <div class="isola"></div>
+        <div class="stato-tel"><span>9:41</span><span class="tacche"><i></i><i></i><i></i><i></i></span></div>
+        <div class="app-testa"><i>M</i><div><b>Mark Chat</b><span>online</span></div></div>
+        <div class="messaggi js-messaggi">
+          <div class="msg io">Il cliente di Monaco ha annullato l'ordine da 80.000 €. Recuperalo.</div>
+          <div class="msg lui lavoro js-lavoro"><p class="t-lav">Mark al lavoro</p><div class="r">Lette le 14 mail con il cliente</div><div class="r">Gestionale: merce pronta martedì</div><div class="r">Sconto del 3% deciso a settembre</div><div class="r">Mail al buyer scritta in tedesco</div><p class="chiede">La mando, signore?</p></div>
+          <div class="msg io">Vai</div>
+          <div class="msg lui vocale-m js-vocale"><button type="button" class="play js-play" aria-label="Ascolta il vocale di Mark"><svg viewBox="0 0 24 24"><path class="tri" d="M8 5v14l11-7z"/><path class="pau" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button><span class="onde js-onde"></span><span class="durata js-durata">0:07</span></div>
+          <div class="scrive js-scrive"><span></span><span></span><span></span></div>
+        </div>
+        <div class="barra-tel"><span>Scrivi a Mark…</span><i></i></div>
+        <div class="home-ind"></div>
       </div>
-      <div class="barra-tel"><span>Scrivi a Mark…</span><i></i></div>
     </div>
-    <button type="button" class="ascolta compare d1 js-ascolta"><span class="mini"><i></i><i></i><i></i><i></i></span>Ascolta il vocale di Mark</button>
     <audio class="js-audio" src="vocale-mark.mp3" preload="none"></audio>
-    <h2 class="titolo compare d2 js-decifra">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
-    <p class="riga compare d3">Gli scrivi o gli mandi un vocale. Ti risponde a voce, e si ricorda tutto.</p>
   </section>
 
   <section class="scena js-squadra-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <h2 class="titolo compare js-decifra">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
-    <p class="riga compare d1">Tu dai l'ordine. Mark lo divide tra gli agenti, che si passano il lavoro.</p>
-    <div class="org compare d2">
-      <div class="nodo">Tu</div>
-      <div class="filo-v"></div>
-      <div class="nodo mark">Mark</div>
-      <div class="filo-v"></div>
-      <div class="ramo"></div>
-      <div class="agenti js-agenti">
-        <div class="agente"><b>Analista</b><span>rilegge le call della settimana</span></div>
-        <div class="agente"><b>Copywriter</b><span>scrive le mail ai clienti</span></div>
-        <div class="agente"><b>Contabile</b><span>controlla le fatture con la banca</span></div>
-        <div class="agente"><b>Cacciatore di clienti</b><span>cerca aziende nuove</span></div>
-        <div class="agente tuo"><b>+ il tuo</b><span>costruito sul processo della tua azienda</span></div>
-      </div>
-    </div>
+    <p class="riga compare d1">Con i programmi che usi già.</p>
+    <div class="rete-ag compare d2 js-rete-ag" role="img" aria-label="Gli agenti di Mark collegati a WhatsApp, Gmail, HubSpot, Salesforce, TeamSystem, Zucchetti, SAP e agli altri programmi dell'azienda"><svg class="fili js-fili" aria-hidden="true"></svg></div>
   </section>
 
   <section class="scena">
@@ -446,9 +502,9 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-memoria-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="grafo compare" aria-hidden="true"><canvas class="js-grafo"></canvas><span class="hud as">Memoria di Mark</span><span class="hud ad js-conta">0 ricordi</span></div>
-    <h2 class="titolo compare d1 js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
-    <p class="riga compare d2">Ogni cliente, ogni decisione, ogni file. Collegati tra loro, come nella tua testa.</p>
+    <h2 class="titolo compare js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
+    <p class="riga compare d1">Clienti, decisioni, file. Tutto collegato.</p>
+    <div class="cervello compare d2"><img src="cervello.jpg" alt="Una testa di vetro di profilo, piena di neuroni d'oro collegati tra loro" loading="lazy"><div class="impulso"></div></div>
   </section>
 
   <section class="scena">
@@ -744,8 +800,7 @@ let visto = false; try { visto = sessionStorage.getItem('mark-boot') === '1'; } 
 function accendi(){
   eroe.classList.add('acceso');
   decifra(document.querySelector('.js-titolo-eroe'));
-    setTimeout(() => { const p = eroe.querySelector('.plancia').getBoundingClientRect(); scintille(innerWidth/2, p.top + p.height*.45, innerWidth < 600 ? 90 : 160, 1.1); }, lento ? 0 : 450);
-}
+  }
 function sipario(){
   if (lento || visto){ boot.classList.add('via'); accendi(); return; }
   try { sessionStorage.setItem('mark-boot', '1'); } catch (x) {}
@@ -756,7 +811,7 @@ function sipario(){
   let finito = false;
   const apri = () => { if (finito) return; finito = true;
     boot.classList.add('taglia');
-    setTimeout(() => { scintille(innerWidth/2, innerHeight/2, 120, 1.2); boot.classList.add('apri'); document.body.classList.remove('chiuso'); accendi(); }, 420);
+    setTimeout(() => { boot.classList.add('apri'); document.body.classList.remove('chiuso'); accendi(); }, 420);
     setTimeout(() => boot.classList.add('via'), 1600); };
   setTimeout(apri, 1750);
   boot.addEventListener('click', apri);
@@ -770,9 +825,7 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersectin
   const t = s.querySelector('.titolo'); if (t) setTimeout(() => { const [x, y] = centro(t); scintille(x, y, innerWidth < 600 ? 26 : 44, .7); }, 380);
   if (s.classList.contains('js-chat-scena')) setTimeout(chat, 900);
   if (s.classList.contains('js-posti-scena')) posti();
-  if (s.classList.contains('js-squadra-scena')) squadra();
-  if (s.classList.contains('js-memoria-scena')) grafo();
-  if (s.classList.contains('js-agentica-scena')) trasforma();
+      if (s.classList.contains('js-agentica-scena')) trasforma();
   if (s.classList.contains('js-fine-scena') && !lento) setTimeout(() => { const [x, y] = centro(document.querySelector('.js-lastra')); scintille(x, y, 150, 1.2); }, 1700);
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
@@ -785,23 +838,16 @@ const onda = document.querySelector('.js-onda'); const barre = Array.from({lengt
 (function vibra(t){ barre.forEach((b,i) => { const x = i/barre.length; b.style.height = (8 + Math.abs(Math.sin(t/260 + i*.5) * Math.sin(t/610 + i*.17)) * 140 * Math.sin(Math.PI*x)) + 'px'; }); if (!lento) requestAnimationFrame(vibra); })(1200);
 
 function chat(){ const m = [...document.querySelectorAll('.js-messaggi .msg')], s = document.querySelector('.js-scrive'); let i = 0;
-  (function prossimo(){ if (i >= m.length){ s.classList.remove('su'); return; } const lui = m[i].classList.contains('lui');
-    if (lui){ s.classList.add('su'); m[i].parentNode.insertBefore(s, m[i]); }
-    setTimeout(() => { s.classList.remove('su'); m[i].classList.add('su'); i++; setTimeout(prossimo, 500); }, lui ? 1100 : 300); })(); }
+  (function prossimo(){ if (i >= m.length){ s.classList.remove('su'); return; } const el = m[i], lui = el.classList.contains('lui');
+    if (lui){ s.classList.add('su'); el.parentNode.insertBefore(s, el); }
+    setTimeout(() => { s.classList.remove('su'); el.classList.add('su'); i++;
+      if (el.classList.contains('js-lavoro')){ const r = [...el.querySelectorAll('.r')];
+        r.forEach((x, k) => { setTimeout(() => x.classList.add('su'), 300 + k*700); setTimeout(() => x.classList.add('ok'), 750 + k*700); });
+        setTimeout(() => { el.querySelector('.chiede').classList.add('su'); setTimeout(prossimo, 900); }, 500 + r.length*700);
+      } else setTimeout(prossimo, 600); }, lui ? 1200 : 400); })(); }
 
 function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setTimeout(() => { p.classList.add('su'); if (i === 9) { const [x, y] = centro(p); scintille(x, y, 30, .6); } }, 400 + i*160)); }
 
-/* la squadra: ogni agente passa da un lavoro al risultato, a turno */
-const LAVORI = [
-  ['rilegge le call della settimana', 'tre opportunità trovate'],
-  ['scrive le mail ai clienti', '12 bozze pronte'],
-  ['controlla le fatture con la banca', 'tutto torna, una da sollecitare'],
-  ['cerca aziende nuove', '8 contatti nel CRM']
-];
-function squadra(){ const ag = [...document.querySelectorAll('.js-agenti .agente:not(.tuo)')]; let k = 0;
-  if (lento) return;
-  setInterval(() => { const a = ag[k % ag.length], j = k % ag.length, sp = a.querySelector('span'), fase = Math.floor(k / ag.length) % 2;
-    a.classList.remove('lampo'); void a.offsetWidth; a.classList.add('lampo'); sp.textContent = LAVORI[j][fase === 0 ? 1 : 0]; k++; }, 1300); }
 
 /* la parola: DIGITALE si barra, si decifra e diventa AGENTICA, tra le scintille */
 function trasforma(){ const el = document.querySelector('.js-morph'); if (lento){ el.textContent = el.dataset.a; el.classList.add('fatto'); return; }
@@ -811,79 +857,54 @@ function trasforma(){ const el = document.querySelector('.js-morph'); if (lento)
       if (f >= tot){ clearInterval(id); el.textContent = a; el.classList.add('fatto'); const [x, y] = centro(el); scintille(x, y, innerWidth < 600 ? 70 : 120, 1); } }, 36); }, 1900); }
 
 /* il vocale di Mark: si sente davvero */
-const audio = document.querySelector('.js-audio'), vocale = document.querySelector('.js-vocale'), ascolta = document.querySelector('.js-ascolta'), onde = document.querySelector('.js-onde'), durata = document.querySelector('.js-durata');
+const audio = document.querySelector('.js-audio'), vocale = document.querySelector('.js-vocale'), onde = document.querySelector('.js-onde'), durata = document.querySelector('.js-durata');
 const tacche = Array.from({length: 30}, (_, i) => { const t = document.createElement('span'); t.style.height = (5 + Math.abs(Math.sin(i*1.7) * Math.cos(i*.6)) * 21) + 'px'; onde.append(t); return t; });
 const tempo = x => '0:' + String(Math.max(0, Math.ceil(x))).padStart(2, '0');
 function suona(){ if (audio.paused){ audio.currentTime = audio.ended ? 0 : audio.currentTime; audio.play().catch(() => {}); } else audio.pause(); }
-[document.querySelector('.js-play'), ascolta].forEach(b => b.addEventListener('click', e => { suona(); const [x, y] = centro(e.currentTarget); scintille(x, y, 24, .6); }));
-audio.addEventListener('play', () => { vocale.classList.add('suona'); ascolta.classList.add('suona'); });
-['pause', 'ended'].forEach(ev => audio.addEventListener(ev, () => { vocale.classList.remove('suona'); ascolta.classList.remove('suona'); }));
+[document.querySelector('.js-play')].forEach(b => b.addEventListener('click', e => { suona(); const [x, y] = centro(e.currentTarget); scintille(x, y, 24, .6); }));
+audio.addEventListener('play', () => { vocale.classList.add('suona'); });
+['pause', 'ended'].forEach(ev => audio.addEventListener(ev, () => { vocale.classList.remove('suona'); }));
 audio.addEventListener('timeupdate', () => { const p = audio.duration ? audio.currentTime / audio.duration : 0; tacche.forEach((t, i) => t.classList.toggle('sentito', i / tacche.length < p)); durata.textContent = tempo((audio.duration || 8) - audio.currentTime); });
 audio.addEventListener('ended', () => { tacche.forEach(t => t.classList.remove('sentito')); durata.textContent = tempo(audio.duration); });
 
-/* la memoria: un grafo di neuroni che cresce, come la vista grafo di Obsidian */
-const RICORDI = {
-  Clienti: ['Rossi Immobiliare', 'Studio Verdi', 'Neri Srl', 'Bianchi & Figli', 'Marco'],
-  Decisioni: ['Niente sconti a novembre', 'Preventivi di una pagina', 'Call solo al mattino'],
-  Progetti: ['Sito nuovo', 'Campagna di Natale', 'Listino 2026'],
-  Fatture: ['Fattura 41', 'Rate di Rossi', 'Sollecito Bianchi'],
-  Call: ['Call del 21 ott', 'Call con Verdi', 'Riunione del lunedì'],
-  Fornitori: ['Fornitore carta', 'Tipografia', 'Commercialista'],
-  Team: ['Giulia', 'Turni di dicembre'],
-  Idee: ['Evento in primavera', 'Newsletter']
-};
-let grafoPartito = false;
-function grafo(){ if (grafoPartito) return; grafoPartito = true;
-  const box = document.querySelector('.grafo'), c = box.querySelector('canvas'), conta = box.querySelector('.js-conta');
-  let W, H, x; function misura(){ const d = Math.min(devicePixelRatio || 1, 2); W = box.clientWidth; H = box.clientHeight; c.width = W*d; c.height = H*d; x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); }
-  misura(); addEventListener('resize', misura);
-  const N = [], E = [], nomi = Object.keys(RICORDI), piccolo = W < 600, k = Math.min(1, W*H/395600), sk = Math.sqrt(k);
-  const nuovo = (px, py, hub, nome) => { const n = {x: px, y: py, vx: 0, vy: 0, hub, nome, luce: 0, r: hub === true ? 6 : 1.4 + Math.random()*1.8, vicini: []}; N.push(n); return n; };
-  const lega = (a, b) => { E.push([a, b]); a.vicini.push(b); b.vicini.push(a); };
-  const hubs = nomi.map((h, i) => { const a = i / nomi.length * Math.PI * 2; const n = nuovo(W/2 + Math.cos(a)*W*.28, H/2 + Math.sin(a)*H*.3, true, h); n.gruppo = i; return n; });
-  hubs.forEach((h, i) => { lega(h, hubs[(i + 1) % hubs.length]); if (i % 2 === 0) lega(h, hubs[(i + 3) % hubs.length]); });
-  const figli = piccolo ? 14 : 24;
-  hubs.forEach(h => { for (let k = 0; k < figli; k++){ const n = nuovo(h.x + (Math.random()-.5)*60, h.y + (Math.random()-.5)*60, false, null); n.gruppo = h.gruppo; lega(h, n);
-    if (k > 2 && Math.random() < .35){ const g = N.filter(m => m.gruppo === h.gruppo && !m.hub); lega(n, g[Math.random()*g.length|0]); } } });
-  for (let k = 0; k < (piccolo ? 14 : 30); k++){ const a = N[8 + Math.random()*(N.length-8)|0], b = N[8 + Math.random()*(N.length-8)|0]; if (a !== b && a.gruppo !== b.gruppo) lega(a, b); }
-  let topo = null, dentro = true;
-  box.addEventListener('pointermove', e => { const r = box.getBoundingClientRect(); topo = {x: e.clientX - r.left, y: e.clientY - r.top}; });
-  box.addEventListener('pointerleave', () => { topo = null; });
-  new IntersectionObserver(es => { dentro = es[0].isIntersecting; }).observe(box);
-  let totale = 1200 + N.length;
-  function nasce(){ const h = hubs[Math.random()*hubs.length|0], lista = RICORDI[h.nome], nome = lista[Math.random()*lista.length|0];
-    const n = nuovo(h.x + (Math.random()-.5)*30, h.y + (Math.random()-.5)*30, false, nome); n.gruppo = h.gruppo; n.luce = 1; n.r = 2.6; lega(h, n);
-    const altro = N[8 + Math.random()*(N.length-9)|0]; if (altro !== n) lega(n, altro);
-    h.luce = 1; totale++; conta.textContent = totale.toLocaleString('it-IT') + ' ricordi';
-    if (N.length > (piccolo ? 170 : 290)){ const via = N.findIndex(m => !m.hub && !m.nome); if (via > -1){ const m = N[via]; N.splice(via, 1); for (let i = E.length - 1; i >= 0; i--) if (E[i][0] === m || E[i][1] === m) E.splice(i, 1); N.forEach(o => { o.vicini = o.vicini.filter(v => v !== m); }); } } }
-  conta.textContent = totale.toLocaleString('it-IT') + ' ricordi';
-  if (!lento) setInterval(() => dentro && nasce(), 1100);
-  let t = 0;
-  (function vive(){
-    if (dentro || lento){
-      t++;
-      const cx = W/2 + Math.sin(t/400)*W*.02, cy = H/2 + Math.cos(t/500)*H*.02;
-      for (let i = 0; i < N.length; i++){ const a = N[i];
-        for (let j = i + 1; j < N.length; j++){ const b = N[j]; let dx = a.x - b.x, dy = a.y - b.y, d2 = dx*dx + dy*dy + 1; if (d2 > 12000) continue;
-          const f = (a.hub && b.hub ? 900 : 46) * k / d2; dx *= f; dy *= f; a.vx += dx; a.vy += dy; b.vx -= dx; b.vy -= dy; } }
-      E.forEach(([a, b]) => { const dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx*dx + dy*dy) || 1, l = a.hub && b.hub ? Math.min(W, H)*(piccolo ? .27 : .34) : (a.hub || b.hub ? 30*sk : 22*sk), f = (d - l) / d * (a.hub && b.hub ? .01 : .045); a.vx += dx*f; a.vy += dy*f; b.vx -= dx*f; b.vy -= dy*f; });
-      N.forEach(n => { n.vx += (cx - n.x) * (n.hub ? .003 : .0022); n.vy += (cy - n.y) * (n.hub ? .003 : .0026); n.vx *= .82; n.vy *= .82; n.x += Math.max(-4, Math.min(4, n.vx)); n.y += Math.max(-4, Math.min(4, n.vy)); const m = 46; if (n.x < m) n.vx += (m - n.x)*.06; if (n.x > W - m) n.vx -= (n.x - W + m)*.06; if (n.y < m + 14) n.vy += (m + 14 - n.y)*.06; if (n.y > H - m) n.vy -= (n.y - H + m)*.06; n.x = Math.max(8, Math.min(W - 8, n.x)); n.y = Math.max(26, Math.min(H - 8, n.y)); n.luce *= .985; });
-      let scelto = null; if (topo){ let m = 400; N.forEach(n => { const d = (n.x - topo.x)**2 + (n.y - topo.y)**2; if (d < m){ m = d; scelto = n; } }); }
-      const accesi = scelto ? new Set([scelto, ...scelto.vicini]) : null;
-      x.clearRect(0, 0, W, H);
-      E.forEach(([a, b]) => { const on = accesi && accesi.has(a) && accesi.has(b), l = Math.max(a.luce, b.luce);
-        x.strokeStyle = on ? 'rgba(227,155,58,.75)' : l > .05 ? 'rgba(227,155,58,' + (.12 + l*.5) + ')' : (accesi ? 'rgba(200,190,175,.04)' : 'rgba(200,190,175,.11)');
-        x.lineWidth = on ? 1.2 : .7; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); });
-      N.forEach(n => { const on = accesi && accesi.has(n), spento = accesi && !on;
-        if (n.hub || n.luce > .05 || on){ const g = x.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*5); g.addColorStop(0, 'rgba(227,155,58,' + (n.hub ? .35 : n.luce*.6) + ')'); g.addColorStop(1, 'rgba(227,155,58,0)'); x.fillStyle = g; x.beginPath(); x.arc(n.x, n.y, n.r*5, 0, 6.283); x.fill(); }
-        x.fillStyle = n.hub ? '#E39B3A' : n.luce > .05 ? 'rgba(242,178,94,' + (.5 + n.luce*.5) + ')' : spento ? 'rgba(140,140,140,.25)' : 'rgba(190,186,178,.75)';
-        x.beginPath(); x.arc(n.x, n.y, n.r + (on ? 1 : 0), 0, 6.283); x.fill();
-        if (n.hub || (n.nome && (n.luce > .25 || on))){ x.font = (n.hub ? '600 12px ' : '500 11px ') + 'Switzer, system-ui, sans-serif'; x.textAlign = 'center';
-          x.fillStyle = n.hub ? (spento ? 'rgba(242,240,235,.35)' : 'rgba(242,240,235,.92)') : 'rgba(242,178,94,' + Math.min(1, on ? 1 : n.luce*1.4) + ')'; x.fillText(n.nome, n.x, n.y - n.r - 7); } });
-    }
-    if (!lento) requestAnimationFrame(vive);
-  })();
-}
+/* la squadra: gli omini di Mark collegati ai programmi dell'azienda, gli impulsi corrono sui fili */
+const AGENTI = [
+  {n: 'Vendite', t: ['hubspot', 'salesforce', 'whatsapp', 'gmail']},
+  {n: 'Contabilità', t: ['TeamSystem', 'Zucchetti', 'googlesheets', 'stripe']},
+  {n: 'Operazioni', t: ['sap', 'googlecalendar', 'slack']},
+  {n: 'Marketing', t: ['shopify', 'notion', 'googledrive']}
+];
+const TINTA = {whatsapp: '#25D366', gmail: '#EA4335', googlecalendar: '#4285F4', googlesheets: '#34A853', googledrive: '#1FA463', hubspot: '#FF7A59', salesforce: '#00A1E0', shopify: '#5E8E3E', slack: '#4A154B', notion: '#2A2A2A', stripe: '#635BFF', sap: '#0A8BD6', TeamSystem: '#24242A', Zucchetti: '#24242A'};
+const SAGOMA = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#E39B3A"/></linearGradient></defs><circle cx="20" cy="13" r="7" fill="url(#og)"/><path d="M6 37c0-8.3 6.3-14 14-14s14 5.7 14 14z" fill="url(#og)"/></svg>';
+(function(){
+  const box = document.querySelector('.js-rete-ag'), svg = box.querySelector('.js-fili'), NS = 'http://www.w3.org/2000/svg';
+  const cuore = document.createElement('div'); cuore.className = 'cuore'; cuore.textContent = 'M'; box.append(cuore);
+  const fili = [], omini = [], tools = [];
+  AGENTI.forEach((a, i) => { const o = document.createElement('div'); o.className = 'omino'; o.innerHTML = '<i class="sagoma">' + SAGOMA + '</i>'; const b = document.createElement('b'); b.textContent = a.n; o.append(b); box.append(o); omini.push(o);
+    a.t.forEach((t, k) => { const el = document.createElement('div'); el.className = 'tool'; el.style.setProperty('--c', TINTA[t]); el.style.setProperty('--d', (-(i*1.1 + k*.7)) + 's');
+      if (/^[a-z]/.test(t)){ const im = document.createElement('img'); im.src = 'loghi/' + t + '.svg'; im.alt = ''; el.append(im); } else { const sp = document.createElement('span'); sp.textContent = t; el.append(sp); }
+      box.append(el); tools.push({el, a: i, k}); }); });
+  const linea = (cl) => { const l = document.createElementNS(NS, 'line'); l.setAttribute('class', cl); svg.append(l); return l; };
+  const lC = omini.map(() => linea('fc')), lT = tools.map(() => linea('ft'));
+  const imp = Array.from({length: 7}, () => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 2.6); c.setAttribute('fill', '#FFD9A0'); c.style.filter = 'drop-shadow(0 0 4px #E39B3A)'; svg.append(c); return {c, t: Math.random(), q: Math.random()*tools.length|0, fase: 0}; });
+  let P = {};
+  function disponi(){ const W = box.clientWidth, H = box.clientHeight, cx = W/2, cy = H/2, stretto = W < 600;
+    P.c = [cx, cy]; cuore.style.left = cx + 'px'; cuore.style.top = cy + 'px';
+    const ang = [-150, -30, 30, 150].map(g => g*Math.PI/180);
+    P.o = omini.map((o, i) => { const x = cx + Math.cos(ang[i])*W*(stretto ? .2 : .22), y = cy + Math.sin(ang[i])*H*(stretto ? .2 : .2); o.style.left = x + 'px'; o.style.top = (y - (stretto ? 26 : 31)) + 'px'; return [x, y]; });
+    P.t = tools.map(({el, a, k}) => { const n = AGENTI[a].t.length, base = ang[a], passo = (stretto ? 15 : 16)*Math.PI/180, g = base + (k - (n-1)/2)*passo;
+      const x = cx + Math.cos(g)*W*(stretto ? .42 : .44), y = cy + Math.sin(g)*H*(stretto ? .44 : .42); el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.setProperty('--ry', (Math.cos(g) * -14) + 'deg'); return [x, y]; });
+    lC.forEach((l, i) => { l.setAttribute('x1', cx); l.setAttribute('y1', cy); l.setAttribute('x2', P.o[i][0]); l.setAttribute('y2', P.o[i][1]); });
+    lT.forEach((l, j) => { const o = P.o[tools[j].a]; l.setAttribute('x1', o[0]); l.setAttribute('y1', o[1]); l.setAttribute('x2', P.t[j][0]); l.setAttribute('y2', P.t[j][1]); }); }
+  disponi(); addEventListener('resize', disponi);
+  if (lento) return;
+  (function corre(){ imp.forEach(p => { p.t += p.fase === 0 ? .025 : .02;
+      const tl = tools[p.q], A = p.fase === 0 ? P.c : P.o[tl.a], B = p.fase === 0 ? P.o[tl.a] : P.t[p.q];
+      if (p.t >= 1){ p.t = 0; if (p.fase === 0){ p.fase = 1; omini[tl.a].classList.add('attivo'); setTimeout(() => omini[tl.a].classList.remove('attivo'), 400); }
+        else { p.fase = 0; tl.el.classList.add('tocca'); setTimeout(() => tl.el.classList.remove('tocca'), 500); p.q = Math.random()*tools.length|0; } }
+      p.c.setAttribute('cx', A[0] + (B[0]-A[0])*p.t); p.c.setAttribute('cy', A[1] + (B[1]-A[1])*p.t); p.c.setAttribute('opacity', Math.sin(Math.PI*p.t)*.9 + .1); });
+    requestAnimationFrame(corre); })();
+})();
 
 const barra = document.querySelector('.js-barra');
 /* la barra sparisce quando a schermo c'è già un pulsante grande: l'eroe e la chiusura */
