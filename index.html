@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v16 (23 ott, 19:30): via l'invito a toccare (si perde gente): l'apertura parte sempre da sola. Davide si bloccava sulla sfera. Sfera leggera nel funnel (1x, 6-9 mila particelle, niente ecosistema calcolato di nascosto, ferma fuori schermo), tele a 1x, reti di sicurezza (apertura forzata a 4 s, partenza senza caratteri a 1,5 s, pagina mai chiusa dopo 9 s).
   v15 (23 ott, 19:15): ogni suono legato al suo movimento: ticchettio della decifrazione + aggancio su ogni titolo, taglio quando una riga barra, crepitio su ogni scintilla, il tutorial si barra e si accende, la notifica di Mark scende col ding, scansione col lampo del cervello, clic quando il filo tocca i passi. Via le sfocature animate e la sfera ferma fuori schermo (la squadra non scatta più).
   v14 (23 ott, 18:55): apertura in registro trailer (neuroni bassi e corposi, archi elettrici, riser, BRAAM); agentica = glitch + colpo; telefono senza firma; «Gli parli» = vibrazione + ding; tutorial = buzz di errore + conferma; app della squadra = pop.
   v13 (23 ott, 18:35): suoni HUD stile Mark (beep, clic, scansioni, servomotori, metallo FM, carica del repulsore), corti e secchi, niente note lunghe né arpeggi; la squadra si costruisce in 1,6 s (M, rami, agenti, programmi) appena entra in vista, poi gli impulsi.
@@ -818,7 +819,7 @@ invia.addEventListener('click', e => {
 
 /* ── REGIA ── */
 const fine = matchMedia('(pointer:fine)').matches;
-function tela(c){ const d = Math.min(devicePixelRatio || 1, 2); c.width = innerWidth*d; c.height = innerHeight*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); return x; }
+function tela(c){ const d = 1; c.width = innerWidth*d; c.height = innerHeight*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); return x; }
 
 /* le scintille: un solo canvas sopra tutto, ogni esplosione si aggiunge alle altre */
 const cS = document.getElementById('scintille'); let xS = tela(cS), sc = [], vivo = false;
@@ -1009,7 +1010,7 @@ S.init(); S.sblocca().then(ok => { if (ok){ GESTI.forEach(ev => removeEventListe
 /* ── L'ACCENSIONE: dal nero spuntano piano i puntini, si collegano in una rete, poi corrono tutti a formare la sfera di neuroni. Boato, e parte il funnel ── */
 const eroe = document.querySelector('.js-eroe');
 /* la sfera fuori schermo si ferma: libera il telefono per le scene sotto */
-new IntersectionObserver(es => { const pl = eroe.querySelector('.plancia'); pl.style.visibility = es[0].isIntersecting ? '' : 'hidden'; }).observe(eroe);
+new IntersectionObserver(es => { const pl = eroe.querySelector('.plancia'), si = es[0].isIntersecting; pl.style.visibility = si ? '' : 'hidden'; try { pl.querySelector('iframe').contentWindow.__pausa = !si; } catch (x) {} }).observe(eroe);
 function accendi(){
   eroe.classList.add('acceso');
   decifra(document.querySelector('.js-titolo-eroe'));
@@ -1017,10 +1018,10 @@ function accendi(){
 /* nessun browser lascia suonare una pagina prima di un gesto: se il suono è già libero si parte subito,
    altrimenti un neurone solo pulsa nel nero e il visitatore lo accende col dito. Dopo 5 secondi si parte comunque, muti */
 function invito(){
+  /* 23 ott: niente più «Tocca per accendere»: fa perdere gente. L'apertura parte sempre subito; se il browser trattiene l'audio, scorre muta e il suono si accende al primo tocco */
+  intro(); return;
   const box = document.querySelector('.js-intro');
-  if (lento){ intro(); return; }
-  if (S.vivo()){ intro(); return; }
-  const c = box.querySelector('canvas'), d = Math.min(devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight; c.width = W*d; c.height = H*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0);
+  const c = box.querySelector('canvas'), d = 1, W = innerWidth, H = innerHeight; c.width = W*d; c.height = H*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0);
   const r = eroe.querySelector('.plancia').getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height*.47;
   box.classList.add('aspetta'); document.body.classList.add('chiuso');
   let via = false;
@@ -1035,7 +1036,7 @@ function intro(){
   const box = document.querySelector('.js-intro'), c = box.querySelector('canvas');
   if (lento){ box.remove(); fase = 'acceso'; accendi(); return; }
   document.body.classList.add('chiuso');
-  const d = Math.min(devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight; c.width = W*d; c.height = H*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0);
+  const d = 1, W = innerWidth, H = innerHeight; c.width = W*d; c.height = H*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0);
   const r = eroe.querySelector('.plancia').getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height*.47, R = Math.min(r.width, r.height)*.3;
   box.style.setProperty('--x', cx + 'px'); box.style.setProperty('--y', cy + 'px');
   const N = W < 600 ? 230 : 420, oro = Math.PI*(3 - Math.sqrt(5));
@@ -1049,7 +1050,8 @@ function intro(){
   setTimeout(() => { if (!botto){ fase = 'corsa'; S.risucchio(.9); } }, 1500);
   const scoppia = () => { if (botto) return; botto = true; fase = 'acceso'; S.botto(); box.classList.add('botto'); accendi(); document.body.classList.remove('chiuso');
     setTimeout(() => box.classList.add('via'), 550); setTimeout(() => { fine = true; box.remove(); }, 1600); };
-  (function frame(now){ if (fine) return; const t = (now - t0)/1000, rot = t*.55;
+  setTimeout(() => { if (!botto) scoppia(); }, 4200);   /* rete di sicurezza: se i fotogrammi si inceppano, dopo 4 s si parte comunque */
+  (function frame(now){ if (fine) return; try { const t = (now - t0)/1000, rot = t*.55;
     const corsa = Math.min(1, Math.max(0, (t - 1.5)/.9));
     P.forEach(p => { const u = Math.min(1, Math.max(0, (corsa*1.3 - p.ritardo))), e = u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3)/2;
       const ax = p.ux*Math.cos(rot) - p.uz*Math.sin(rot), az = p.ux*Math.sin(rot) + p.uz*Math.cos(rot), k = 1/(1.9 - az*.55);
@@ -1064,11 +1066,14 @@ function intro(){
       x.fillStyle = 'rgba(227,155,58,' + (.16*a*tw) + ')'; x.beginPath(); x.arc(p.x, p.y, 4.5*pr, 0, 6.283); x.fill();
       x.fillStyle = 'rgba(255,232,190,' + (.95*a*tw) + ')'; x.beginPath(); x.arc(p.x, p.y, 1.25*pr, 0, 6.283); x.fill(); });
     if (t > 2.45) scoppia();
+    } catch (x) { scoppia(); fine = true; box.remove(); return; }
     requestAnimationFrame(frame); })(t0);
 }
 /* si aspetta un attimo il motore audio: se il browser lo concede già, niente invito */
-const via0 = () => setTimeout(invito, 120);
+let partito = false; const via0 = () => { if (partito) return; partito = true; setTimeout(invito, 120); };
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(via0)); else via0();
+setTimeout(via0, 1500);
+setTimeout(() => { const b = document.querySelector('.js-intro'); if (b){ b.remove(); fase = 'acceso'; eroe.classList.add('acceso'); } if (!document.querySelector('.js-filtro.su')) document.body.classList.remove('chiuso'); }, 9000);
 
 /* ── LE SCENE ── */
 const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const s = e.target; if (s.classList.contains('attiva')) return;

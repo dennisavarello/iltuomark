@@ -43,8 +43,10 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 <script src="lib/RenderPass.js"></script><script src="lib/ShaderPass.js"></script><script src="lib/UnrealBloomPass.js"></script>
 <script>
 const V = (x,y,z) => new THREE.Vector3(x,y,z);
+/* ⭐ 23 ott: dentro il funnel (?solo) la sfera è leggera: risoluzione 1x, niente antialias, meno particelle, nessun ecosistema, e si ferma quando il funnel la nasconde (window.__pausa) */
+const SOLO = /solo/.test(location.search);
 function palco(box, fov, bloomForza){
-  const r = new THREE.WebGLRenderer({antialias:true}); r.setPixelRatio(Math.min(devicePixelRatio,2)); r.setClearColor(0x0B0B0C);
+  const r = new THREE.WebGLRenderer({antialias:!SOLO, powerPreference:'high-performance'}); r.setPixelRatio(SOLO ? 1 : Math.min(devicePixelRatio,2)); r.setClearColor(0x0B0B0C);
   box.appendChild(r.domElement);
   const scena = new THREE.Scene(), cam = new THREE.PerspectiveCamera(fov,1,.1,3000);
   const comp = new THREE.EffectComposer(r); comp.addPass(new THREE.RenderPass(scena, cam));
@@ -58,7 +60,7 @@ function palco(box, fov, bloomForza){
 //  L'ENTITÀ — nanotecnologia: lo sciame cambia forma da solo e vibra con la voce
 // ════════════════════════════════════════════════════════════════════════
 const E = palco(document.getElementById('entita'), 40, 1.15);
-const NP = 16000;
+const NP = SOLO ? (innerWidth < 600 ? 6000 : 9000) : 16000;
 const gP = new THREE.BufferGeometry(), dir = new Float32Array(NP*3), rnd = new Float32Array(NP*4);
 for (let i=0;i<NP;i++){
   const y = 1 - (i+.5)/NP*2, rr = Math.sqrt(1-y*y), t = i*2.399963;        // spirale di Fibonacci: punti uniformi sulla sfera
@@ -342,7 +344,7 @@ function vivaEcosistema(now){
       messi.push({x:e.x, y, w:e.w}); e.A.tag.style.transform = `translate(${Math.round(e.x - e.w/2)}px, ${Math.round(y - e.h)}px)`; });
 }
 
-function frame(now){ requestAnimationFrame(frame); vivaEntita(now); vivaEcosistema(now); }
+function frame(now){ requestAnimationFrame(frame); if (window.__pausa) return; vivaEntita(now); if (!SOLO) vivaEcosistema(now); }
 requestAnimationFrame(frame);
 </script>
 </body>
