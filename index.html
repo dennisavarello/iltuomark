@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v6 (23 ott, 16:10): via le righe di sistema in alto, via le foto di studio e rooftop. AGENTICA che nasce da DIGITALE, iPhone con Mark Chat e il vocale vero di Mark (vocale-mark.mp3), la memoria come grafo di neuroni alla Obsidian.
   MARK · IL FUNNEL v5 — 23 ott 2026 sera. Dennis: «la prova fa cagare, toglila»; «la palla di neuroni è una figata, la teniamo»; «Mark sul tuo computer lo terrei, col font high tech»;
   «un po di foto ci stanno se si resta minimal»; «molte più animazioni cinematic: deve fare scintille, deve sembrare una serie TV».
   v5: eroe come Jarvis (sfera della plancia in ambra), titoli Michroma che si decifrano e si arroventano, accensione a sipario, scintille, braci, foto della vision board in cornice con HUD da telecamera.
@@ -301,6 +302,51 @@ footer a{color:var(--titanio)}
 .riepilogo span{text-align:right;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .campo.sbagliato input{border-color:#E5674F}
 
+
+/* ── v6: la parola che diventa agentica ── */
+.js-agentica-scena .titolo{font-size:clamp(24px,6.6vw,60px);line-height:1.3;max-width:900px}
+.morph{display:inline-block;position:relative;color:var(--titanio);transition:color .4s,text-shadow .6s}
+.morph::after{content:"";position:absolute;left:-3%;right:-3%;top:50%;height:2px;background:var(--titanio);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--curva)}
+.morph.barrato::after{transform:scaleX(1)}
+.morph.fatto{color:var(--ambra);text-shadow:0 0 28px rgba(227,155,58,.5)}
+.morph.fatto::after{opacity:0;transition:opacity .2s}
+
+/* ── v6: l'iPhone con Mark Chat e il vocale vero ── */
+.iphone{position:relative;width:min(100%,312px);height:640px;border:10px solid #060606;outline:1px solid #34343A;border-radius:52px;background:#0E0E0F;display:flex;flex-direction:column;text-align:left;overflow:hidden;box-shadow:0 60px 120px -50px rgba(227,155,58,.45),0 0 0 4px #121214}
+.isola{position:absolute;top:9px;left:50%;width:92px;height:27px;margin-left:-46px;background:#000;border-radius:20px;z-index:3}
+.stato-tel{display:flex;justify-content:space-between;align-items:center;padding:12px 24px 0;font:600 13px/20px var(--testo)}
+.tacche{display:flex;align-items:flex-end;gap:2px;height:11px}
+.tacche i{width:3px;background:var(--avorio);border-radius:1px}
+.tacche i:nth-child(1){height:4px}.tacche i:nth-child(2){height:6px}.tacche i:nth-child(3){height:8px}.tacche i:nth-child(4){height:11px}
+.app-testa{display:flex;align-items:center;gap:10px;padding:20px 14px 12px;border-bottom:1px solid var(--linea)}
+.app-testa i{width:32px;height:32px;border-radius:8px;background:var(--ossidiana);display:grid;place-items:center;font:400 12px/1 var(--stark);font-style:normal;border-bottom:2px solid var(--ambra)}
+.app-testa b{display:block;font-weight:600;font-size:15px;line-height:18px}
+.app-testa span{font-size:12px;line-height:16px;color:var(--ambra)}
+.iphone .messaggi{flex:1;min-height:0;padding:14px 12px;gap:8px;justify-content:flex-end}
+.iphone .msg{font-size:14px;line-height:19px}
+.vocale-m{display:flex;align-items:center;gap:9px;width:84%;padding:8px 10px!important}
+.play{width:36px;height:36px;flex:none;border-radius:50%;background:var(--ambra);border:0;display:grid;place-items:center;cursor:pointer;animation:chiama 2.4s var(--curva) infinite}
+.play svg{width:15px;height:15px;fill:var(--ossidiana)}
+.play .pau,.suona .play .tri{display:none}.suona .play .pau{display:inline}
+.onde{flex:1;display:flex;align-items:center;gap:2px;height:28px}
+.onde span{flex:1;max-width:3px;border-radius:1px;background:#5E5E5E;transition:background .2s}
+.onde span.sentito{background:var(--ambra)}
+.durata{font:500 11px/14px var(--mono);color:var(--titanio)}
+.barra-tel{display:flex;justify-content:space-between;align-items:center;margin:4px 10px 12px;border:1px solid var(--linea);border-radius:20px;padding:7px 8px 7px 14px;font-size:13px;color:#5E5E5E}
+.barra-tel i{width:24px;height:24px;border-radius:50%;background:var(--ambra)}
+.ascolta{margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:none;border:1px solid var(--linea);border-radius:22px;padding:11px 20px;color:var(--avorio);font:500 15px/20px var(--testo);cursor:pointer;transition:border-color .3s}
+.ascolta:hover,.ascolta.suona{border-color:var(--ambra)}
+.ascolta .mini{display:inline-flex;gap:2px;align-items:center;height:14px}
+.ascolta .mini i{width:2px;height:5px;background:var(--ambra);border-radius:1px}
+.ascolta.suona .mini i{animation:parla .5s var(--curva) infinite alternate}
+.ascolta.suona .mini i:nth-child(2){animation-delay:.12s}.ascolta.suona .mini i:nth-child(3){animation-delay:.24s}.ascolta.suona .mini i:nth-child(4){animation-delay:.36s}
+@keyframes parla{to{height:14px}}
+.js-chat-scena .titolo{margin-top:40px}
+
+/* ── v6: la memoria come un grafo di neuroni, alla Obsidian ── */
+.grafo{position:relative;width:min(100%,860px);height:460px;border:1px solid var(--linea);border-radius:3px;background:radial-gradient(ellipse at center,#120E08,#050505 72%);overflow:hidden;margin-bottom:44px}
+.grafo canvas{position:absolute;inset:0;width:100%;height:100%}
+@media (max-width:899px){.grafo{height:380px}.iphone{height:560px}}
 .domanda h2{font-size:24px;line-height:32px}
 @media (min-width:900px){
   .titolo{font-size:32px;line-height:44px}
@@ -336,7 +382,6 @@ footer a{color:var(--titanio)}
 
 <main>
   <section class="scena eroe js-eroe">
-    <div class="avvio" aria-hidden="true"><div><span class="punto"></span>Sistema <b>[ MARK I ]</b></div><div>Memoria · agenti · voce</div><div>Online</div></div>
     <div class="alone" aria-hidden="true"></div>
     <div class="plancia"><iframe src="plancia/index.html?solo" title="Mark" loading="eager"></iframe></div>
     <h1 class="seq s1 js-decifra js-titolo-eroe">MARK.<br><span class="ambra">SUL TUO COMPUTER.</span></h1>
@@ -344,32 +389,32 @@ footer a{color:var(--titanio)}
     <div class="seq s3"><a class="pulsante js-wa" href="#">Voglio il mio Mark</a></div>
   </section>
 
-  <section class="scena">
+  <section class="scena js-agentica-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="cornice"><img src="studio.jpg" alt="Lo studio dell'imprenditore nell'attico di notte, la lampada accesa sulla scrivania" loading="lazy"><div class="bordo-luce"></div><div class="mirino"></div><span class="hud as">Cam 01 · Lo studio</span><span class="hud ad">Rec</span><span class="hud bs">23:04 · Mark al lavoro</span></div>
     <p class="etichetta compare"><b>●</b> L'era degli agenti</p>
-    <h2 class="titolo compare d1 js-decifra">LA TUA AZIENDA,<br><span class="corsivo">agentica.</span></h2>
-    <p class="riga compare d2">Vent'anni fa la parola era digitalizzare. Oggi è agentica: agenti AI che lavorano nella tua azienda, sui tuoi programmi, giorno e notte.</p>
-    <p class="riga compare d3" style="color:var(--avorio)">Chi è arrivato tardi al digitale se lo ricorda ancora.</p>
+    <h2 class="titolo compare d1">LA TUA AZIENDA,<br><span class="morph js-morph" data-da="DIGITALE." data-a="AGENTICA.">DIGITALE.</span></h2>
+    <p class="riga compare d2">Ieri si digitalizzava. Oggi gli agenti AI lavorano nella tua azienda, giorno e notte.</p>
   </section>
 
   <section class="scena js-chat-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <div class="duo">
-      <div class="cornice"><img src="rooftop.jpg" alt="Il rooftop con la piscina sopra la città all'ora blu" loading="lazy"><div class="bordo-luce"></div><span class="hud as">Cam 02 · Rooftop</span><span class="hud ad">Live</span></div>
-      <div class="telefono compare d1">
-        <div class="testa"><i>M</i><div><b>Mark</b><span>online</span></div></div>
-        <div class="messaggi js-messaggi">
-          <div class="msg io vocale"><span class="mini"><span style="height:6px"></span><span style="height:12px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:5px"></span></span>0:04</div>
-          <div class="msg lui">Fatto, signore. Il preventivo per Rossi è pronto, lo trova nella posta.</div>
-          <div class="msg io">Mandalo e fissa la call per giovedì</div>
-          <div class="msg lui">Mandato. Giovedì alle 10, invito già partito.</div>
-          <div class="scrive js-scrive"><span></span><span></span><span></span></div>
-        </div>
+    <div class="iphone compare">
+      <div class="isola"></div>
+      <div class="stato-tel"><span>9:41</span><span class="tacche"><i></i><i></i><i></i><i></i></span></div>
+      <div class="app-testa"><i>M</i><div><b>Mark Chat</b><span class="js-online">online</span></div></div>
+      <div class="messaggi js-messaggi">
+        <div class="msg io">Mark, cosa mi sono perso stamattina?</div>
+        <div class="msg lui vocale-m js-vocale"><button type="button" class="play js-play" aria-label="Ascolta il vocale di Mark"><svg viewBox="0 0 24 24"><path class="tri" d="M8 5v14l11-7z"/><path class="pau" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button><span class="onde js-onde"></span><span class="durata js-durata">0:08</span></div>
+        <div class="msg io">Perfetto, manda la conferma a Rossi</div>
+        <div class="msg lui">Fatto, signore. Invito partito, gliel'ho segnato in agenda.</div>
+        <div class="scrive js-scrive"><span></span><span></span><span></span></div>
       </div>
+      <div class="barra-tel"><span>Scrivi a Mark…</span><i></i></div>
     </div>
-    <h2 class="titolo compare d1 js-decifra">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
-    <p class="riga compare d2">Gli scrivi o gli mandi un vocale su Telegram, ovunque tu sia. Ti risponde a voce.</p>
+    <button type="button" class="ascolta compare d1 js-ascolta"><span class="mini"><i></i><i></i><i></i><i></i></span>Ascolta il vocale di Mark</button>
+    <audio class="js-audio" src="vocale-mark.mp3" preload="none"></audio>
+    <h2 class="titolo compare d2 js-decifra">ANCHE<br><span class="ambra">DAL TELEFONO.</span></h2>
+    <p class="riga compare d3">Gli scrivi o gli mandi un vocale. Ti risponde a voce, e si ricorda tutto.</p>
   </section>
 
   <section class="scena js-squadra-scena">
@@ -401,12 +446,9 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-memoria-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
-    <p class="riga compare d1">Clienti, progetti, decisioni. Ogni giorno sa qualcosa in più del tuo lavoro.</p>
-    <div class="ricordi compare d2" aria-hidden="true">
-      <div class="testa-r"><span>Memoria di Mark</span><b><span class="punto"></span>si aggiorna</b></div>
-      <div class="lista js-ricordi"></div>
-    </div>
+    <div class="grafo compare" aria-hidden="true"><canvas class="js-grafo"></canvas><span class="hud as">Memoria di Mark</span><span class="hud ad js-conta">0 ricordi</span></div>
+    <h2 class="titolo compare d1 js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
+    <p class="riga compare d2">Ogni cliente, ogni decisione, ogni file. Collegati tra loro, come nella tua testa.</p>
   </section>
 
   <section class="scena">
@@ -702,8 +744,7 @@ let visto = false; try { visto = sessionStorage.getItem('mark-boot') === '1'; } 
 function accendi(){
   eroe.classList.add('acceso');
   decifra(document.querySelector('.js-titolo-eroe'));
-  document.querySelectorAll('.avvio div').forEach((d, i) => setTimeout(() => d.classList.add('su'), 300 + i*260));
-  setTimeout(() => { const p = eroe.querySelector('.plancia').getBoundingClientRect(); scintille(innerWidth/2, p.top + p.height*.45, innerWidth < 600 ? 90 : 160, 1.1); }, lento ? 0 : 450);
+    setTimeout(() => { const p = eroe.querySelector('.plancia').getBoundingClientRect(); scintille(innerWidth/2, p.top + p.height*.45, innerWidth < 600 ? 90 : 160, 1.1); }, lento ? 0 : 450);
 }
 function sipario(){
   if (lento || visto){ boot.classList.add('via'); accendi(); return; }
@@ -730,7 +771,8 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersectin
   if (s.classList.contains('js-chat-scena')) setTimeout(chat, 900);
   if (s.classList.contains('js-posti-scena')) posti();
   if (s.classList.contains('js-squadra-scena')) squadra();
-  if (s.classList.contains('js-memoria-scena')) ricordi();
+  if (s.classList.contains('js-memoria-scena')) grafo();
+  if (s.classList.contains('js-agentica-scena')) trasforma();
   if (s.classList.contains('js-fine-scena') && !lento) setTimeout(() => { const [x, y] = centro(document.querySelector('.js-lastra')); scintille(x, y, 150, 1.2); }, 1700);
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
@@ -761,27 +803,86 @@ function squadra(){ const ag = [...document.querySelectorAll('.js-agenti .agente
   setInterval(() => { const a = ag[k % ag.length], j = k % ag.length, sp = a.querySelector('span'), fase = Math.floor(k / ag.length) % 2;
     a.classList.remove('lampo'); void a.offsetWidth; a.classList.add('lampo'); sp.textContent = LAVORI[j][fase === 0 ? 1 : 0]; k++; }, 1300); }
 
-/* la memoria: i ricordi si scrivono uno dopo l'altro */
-const RICORDI = [
-  ['Rossi Immobiliare', 'paga in due rate'],
-  ['Studio Verdi', 'call solo al mattino'],
-  ['Marco', 'preferisce WhatsApp alle mail'],
-  ['Preventivi', 'una pagina, mai di più'],
-  ['Fornitore carta', 'sconto oltre i 500 €'],
-  ['Neri Srl', 'rinnovo a dicembre'],
-  ['Decisione 21 ott', 'niente sconti a novembre'],
-  ['Bianchi & Figli', 'sollecitare con garbo']
-];
-function ricordi(){ const box = document.querySelector('.js-ricordi'); let i = 0;
-  function scrivi(){ const [chi, cosa] = RICORDI[i % RICORDI.length]; i++;
-    const r = document.createElement('div'), ic = document.createElement('i'), s = document.createElement('span'), em = document.createElement('em'), cur = document.createElement('b');
-    r.className = 'r'; ic.textContent = '+'; s.textContent = chi; cur.className = 'cur'; r.append(ic, s, em); em.append(cur);
-    box.querySelectorAll('.cur').forEach(c => c.remove()); box.append(r); while (box.children.length > 7) box.firstChild.remove();
-    if (lento){ em.textContent = cosa; return; }
-    let k = 0; (function batte(){ em.textContent = cosa.slice(0, ++k); em.append(cur); if (k < cosa.length) setTimeout(batte, 32); })();
-  }
-  if (lento){ for (let k = 0; k < 6; k++) scrivi(); return; }
-  scrivi(); setInterval(scrivi, 1600);
+/* la parola: DIGITALE si barra, si decifra e diventa AGENTICA, tra le scintille */
+function trasforma(){ const el = document.querySelector('.js-morph'); if (lento){ el.textContent = el.dataset.a; el.classList.add('fatto'); return; }
+  setTimeout(() => el.classList.add('barrato'), 1200);
+  setTimeout(() => { const a = el.dataset.a; let f = 0; const tot = 26;
+    const id = setInterval(() => { f++; el.textContent = [...a].map((ch, i) => ch === '.' || i < a.length * f / tot ? ch : SEGNI[Math.random()*SEGNI.length|0]).join('');
+      if (f >= tot){ clearInterval(id); el.textContent = a; el.classList.add('fatto'); const [x, y] = centro(el); scintille(x, y, innerWidth < 600 ? 70 : 120, 1); } }, 36); }, 1900); }
+
+/* il vocale di Mark: si sente davvero */
+const audio = document.querySelector('.js-audio'), vocale = document.querySelector('.js-vocale'), ascolta = document.querySelector('.js-ascolta'), onde = document.querySelector('.js-onde'), durata = document.querySelector('.js-durata');
+const tacche = Array.from({length: 30}, (_, i) => { const t = document.createElement('span'); t.style.height = (5 + Math.abs(Math.sin(i*1.7) * Math.cos(i*.6)) * 21) + 'px'; onde.append(t); return t; });
+const tempo = x => '0:' + String(Math.max(0, Math.ceil(x))).padStart(2, '0');
+function suona(){ if (audio.paused){ audio.currentTime = audio.ended ? 0 : audio.currentTime; audio.play().catch(() => {}); } else audio.pause(); }
+[document.querySelector('.js-play'), ascolta].forEach(b => b.addEventListener('click', e => { suona(); const [x, y] = centro(e.currentTarget); scintille(x, y, 24, .6); }));
+audio.addEventListener('play', () => { vocale.classList.add('suona'); ascolta.classList.add('suona'); });
+['pause', 'ended'].forEach(ev => audio.addEventListener(ev, () => { vocale.classList.remove('suona'); ascolta.classList.remove('suona'); }));
+audio.addEventListener('timeupdate', () => { const p = audio.duration ? audio.currentTime / audio.duration : 0; tacche.forEach((t, i) => t.classList.toggle('sentito', i / tacche.length < p)); durata.textContent = tempo((audio.duration || 8) - audio.currentTime); });
+audio.addEventListener('ended', () => { tacche.forEach(t => t.classList.remove('sentito')); durata.textContent = tempo(audio.duration); });
+
+/* la memoria: un grafo di neuroni che cresce, come la vista grafo di Obsidian */
+const RICORDI = {
+  Clienti: ['Rossi Immobiliare', 'Studio Verdi', 'Neri Srl', 'Bianchi & Figli', 'Marco'],
+  Decisioni: ['Niente sconti a novembre', 'Preventivi di una pagina', 'Call solo al mattino'],
+  Progetti: ['Sito nuovo', 'Campagna di Natale', 'Listino 2026'],
+  Fatture: ['Fattura 41', 'Rate di Rossi', 'Sollecito Bianchi'],
+  Call: ['Call del 21 ott', 'Call con Verdi', 'Riunione del lunedì'],
+  Fornitori: ['Fornitore carta', 'Tipografia', 'Commercialista'],
+  Team: ['Giulia', 'Turni di dicembre'],
+  Idee: ['Evento in primavera', 'Newsletter']
+};
+let grafoPartito = false;
+function grafo(){ if (grafoPartito) return; grafoPartito = true;
+  const box = document.querySelector('.grafo'), c = box.querySelector('canvas'), conta = box.querySelector('.js-conta');
+  let W, H, x; function misura(){ const d = Math.min(devicePixelRatio || 1, 2); W = box.clientWidth; H = box.clientHeight; c.width = W*d; c.height = H*d; x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); }
+  misura(); addEventListener('resize', misura);
+  const N = [], E = [], nomi = Object.keys(RICORDI), piccolo = W < 600, k = Math.min(1, W*H/395600), sk = Math.sqrt(k);
+  const nuovo = (px, py, hub, nome) => { const n = {x: px, y: py, vx: 0, vy: 0, hub, nome, luce: 0, r: hub === true ? 6 : 1.4 + Math.random()*1.8, vicini: []}; N.push(n); return n; };
+  const lega = (a, b) => { E.push([a, b]); a.vicini.push(b); b.vicini.push(a); };
+  const hubs = nomi.map((h, i) => { const a = i / nomi.length * Math.PI * 2; const n = nuovo(W/2 + Math.cos(a)*W*.28, H/2 + Math.sin(a)*H*.3, true, h); n.gruppo = i; return n; });
+  hubs.forEach((h, i) => { lega(h, hubs[(i + 1) % hubs.length]); if (i % 2 === 0) lega(h, hubs[(i + 3) % hubs.length]); });
+  const figli = piccolo ? 14 : 24;
+  hubs.forEach(h => { for (let k = 0; k < figli; k++){ const n = nuovo(h.x + (Math.random()-.5)*60, h.y + (Math.random()-.5)*60, false, null); n.gruppo = h.gruppo; lega(h, n);
+    if (k > 2 && Math.random() < .35){ const g = N.filter(m => m.gruppo === h.gruppo && !m.hub); lega(n, g[Math.random()*g.length|0]); } } });
+  for (let k = 0; k < (piccolo ? 14 : 30); k++){ const a = N[8 + Math.random()*(N.length-8)|0], b = N[8 + Math.random()*(N.length-8)|0]; if (a !== b && a.gruppo !== b.gruppo) lega(a, b); }
+  let topo = null, dentro = true;
+  box.addEventListener('pointermove', e => { const r = box.getBoundingClientRect(); topo = {x: e.clientX - r.left, y: e.clientY - r.top}; });
+  box.addEventListener('pointerleave', () => { topo = null; });
+  new IntersectionObserver(es => { dentro = es[0].isIntersecting; }).observe(box);
+  let totale = 1200 + N.length;
+  function nasce(){ const h = hubs[Math.random()*hubs.length|0], lista = RICORDI[h.nome], nome = lista[Math.random()*lista.length|0];
+    const n = nuovo(h.x + (Math.random()-.5)*30, h.y + (Math.random()-.5)*30, false, nome); n.gruppo = h.gruppo; n.luce = 1; n.r = 2.6; lega(h, n);
+    const altro = N[8 + Math.random()*(N.length-9)|0]; if (altro !== n) lega(n, altro);
+    h.luce = 1; totale++; conta.textContent = totale.toLocaleString('it-IT') + ' ricordi';
+    if (N.length > (piccolo ? 170 : 290)){ const via = N.findIndex(m => !m.hub && !m.nome); if (via > -1){ const m = N[via]; N.splice(via, 1); for (let i = E.length - 1; i >= 0; i--) if (E[i][0] === m || E[i][1] === m) E.splice(i, 1); N.forEach(o => { o.vicini = o.vicini.filter(v => v !== m); }); } } }
+  conta.textContent = totale.toLocaleString('it-IT') + ' ricordi';
+  if (!lento) setInterval(() => dentro && nasce(), 1100);
+  let t = 0;
+  (function vive(){
+    if (dentro || lento){
+      t++;
+      const cx = W/2 + Math.sin(t/400)*W*.02, cy = H/2 + Math.cos(t/500)*H*.02;
+      for (let i = 0; i < N.length; i++){ const a = N[i];
+        for (let j = i + 1; j < N.length; j++){ const b = N[j]; let dx = a.x - b.x, dy = a.y - b.y, d2 = dx*dx + dy*dy + 1; if (d2 > 12000) continue;
+          const f = (a.hub && b.hub ? 900 : 46) * k / d2; dx *= f; dy *= f; a.vx += dx; a.vy += dy; b.vx -= dx; b.vy -= dy; } }
+      E.forEach(([a, b]) => { const dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx*dx + dy*dy) || 1, l = a.hub && b.hub ? Math.min(W, H)*(piccolo ? .27 : .34) : (a.hub || b.hub ? 30*sk : 22*sk), f = (d - l) / d * (a.hub && b.hub ? .01 : .045); a.vx += dx*f; a.vy += dy*f; b.vx -= dx*f; b.vy -= dy*f; });
+      N.forEach(n => { n.vx += (cx - n.x) * (n.hub ? .003 : .0022); n.vy += (cy - n.y) * (n.hub ? .003 : .0026); n.vx *= .82; n.vy *= .82; n.x += Math.max(-4, Math.min(4, n.vx)); n.y += Math.max(-4, Math.min(4, n.vy)); const m = 46; if (n.x < m) n.vx += (m - n.x)*.06; if (n.x > W - m) n.vx -= (n.x - W + m)*.06; if (n.y < m + 14) n.vy += (m + 14 - n.y)*.06; if (n.y > H - m) n.vy -= (n.y - H + m)*.06; n.x = Math.max(8, Math.min(W - 8, n.x)); n.y = Math.max(26, Math.min(H - 8, n.y)); n.luce *= .985; });
+      let scelto = null; if (topo){ let m = 400; N.forEach(n => { const d = (n.x - topo.x)**2 + (n.y - topo.y)**2; if (d < m){ m = d; scelto = n; } }); }
+      const accesi = scelto ? new Set([scelto, ...scelto.vicini]) : null;
+      x.clearRect(0, 0, W, H);
+      E.forEach(([a, b]) => { const on = accesi && accesi.has(a) && accesi.has(b), l = Math.max(a.luce, b.luce);
+        x.strokeStyle = on ? 'rgba(227,155,58,.75)' : l > .05 ? 'rgba(227,155,58,' + (.12 + l*.5) + ')' : (accesi ? 'rgba(200,190,175,.04)' : 'rgba(200,190,175,.11)');
+        x.lineWidth = on ? 1.2 : .7; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); });
+      N.forEach(n => { const on = accesi && accesi.has(n), spento = accesi && !on;
+        if (n.hub || n.luce > .05 || on){ const g = x.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*5); g.addColorStop(0, 'rgba(227,155,58,' + (n.hub ? .35 : n.luce*.6) + ')'); g.addColorStop(1, 'rgba(227,155,58,0)'); x.fillStyle = g; x.beginPath(); x.arc(n.x, n.y, n.r*5, 0, 6.283); x.fill(); }
+        x.fillStyle = n.hub ? '#E39B3A' : n.luce > .05 ? 'rgba(242,178,94,' + (.5 + n.luce*.5) + ')' : spento ? 'rgba(140,140,140,.25)' : 'rgba(190,186,178,.75)';
+        x.beginPath(); x.arc(n.x, n.y, n.r + (on ? 1 : 0), 0, 6.283); x.fill();
+        if (n.hub || (n.nome && (n.luce > .25 || on))){ x.font = (n.hub ? '600 12px ' : '500 11px ') + 'Switzer, system-ui, sans-serif'; x.textAlign = 'center';
+          x.fillStyle = n.hub ? (spento ? 'rgba(242,240,235,.35)' : 'rgba(242,240,235,.92)') : 'rgba(242,178,94,' + Math.min(1, on ? 1 : n.luce*1.4) + ')'; x.fillText(n.nome, n.x, n.y - n.r - 7); } });
+    }
+    if (!lento) requestAnimationFrame(vive);
+  })();
 }
 
 const barra = document.querySelector('.js-barra');
