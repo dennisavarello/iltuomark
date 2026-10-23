@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v12 (23 ott, 18:15): ogni sezione ha la sua firma sonora (glitch, tri-tono, arpeggio, vocale, bloom, colpo, tre passi, scatto, carta, risalita); le note della squadra solo con la squadra a schermo e solo i primi 6 tocchi, così nessun suono continua da solo.
   v11 (23 ott, 18:00): niente tappeto; effetti tutti diversi (fruscio variabile solo a titolo a metà schermo, bolle della chat, spunte, note della squadra, dieci note dei posti, luccichio della memoria, punzone di metallo); apertura 0,5 s più veloce; se il browser trattiene l'audio, un neurone pulsa e «Tocca per accendere Mark» (dopo 5 s parte muto).
   v10 (23 ott, 17:40): suono rifatto (iPhone in «playback» anche col silenzioso, sblocco col suono muto, frequenze udibili sui telefoni, compressore, tasto che si accende davvero); accensione: dal nero i puntini spuntano, si collegano, corrono a formare la sfera, boato; MEMORIA PERSISTENTE «in locale».
   v9 (23 ott, 17:10): sound design sintetizzato (battito, risucchio, boato, tappeto, tick, ping), si aggancia al primo tocco; tasto audio in alto a destra. Accensione a particelle (seme di luce, implosione a spirale, lampo, la sfera nasce al loro posto) a ogni apertura; agentica senza etichetta e con una riga; cervello nuovo con nome nuovo (cache).
@@ -892,6 +893,20 @@ const S = (() => {
     passaggio(){ if (!vivo() || raro('pass', 700)) return; const v = Math.random(), f0 = 260 + v*380, f1 = 1100 + Math.random()*1700, dur = .45 + Math.random()*.5;
       soffio(f0, f1, dur, .1 + Math.random()*.08, .6 + Math.random()*1.6, .5);
       const nota = [523.25, 587.33, 659.25, 783.99, 880, 987.77][Math.random()*6|0]; tono('sine', nota, nota, 1.1, .03, .9, ctx.currentTime + dur*.7); },
+    /* la firma di ogni sezione: un suono suo, che nessun'altra sezione usa, con piccole variazioni a ogni ascolto */
+    firma(nome){ if (!vivo()) return; const t = ctx.currentTime, v = 1 + (Math.random() - .5)*.06;
+      if (nome === 'agentica'){ for (let i = 0; i < 9; i++) tono('square', (600 + Math.random()*2600)*v, 900, .04, .1, .15, t + i*.045); }
+      else if (nome === 'telefono'){ [1046.5, 1318.5, 1567.98].forEach((f, i) => tono('sine', f*v, f*v, .22, .1, .35, t + i*.11)); }
+      else if (nome === 'squadra'){ [392, 523.25, 659.25, 783.99].forEach((f, i) => tono('triangle', f*v, f*v, .5, .08, .5, t + i*.075)); soffio(300, 1400, .5, .07, 1, .4); }
+      else if (nome === 'voce'){ const o = ctx.createOscillator(), a1 = ctx.createBiquadFilter(), a2 = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'sawtooth'; o.frequency.setValueAtTime(130*v, t); o.frequency.linearRampToValueAtTime(165*v, t + .7);
+        a1.type = 'bandpass'; a1.frequency.value = 730; a1.Q.value = 6; a2.type = 'bandpass'; a2.frequency.value = 1100; a2.Q.value = 7; o.connect(a1); o.connect(a2); a1.connect(g); a2.connect(g);
+        g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1.1, t + .3); g.gain.linearRampToValueAtTime(0, t + .85); esce(g, .55); o.start(t); o.stop(t + .9); }
+      else if (nome === 'memoria'){ tono('sine', 196*v, 196*v, 2.2, .12, .9, t); tono('sine', 293.66*v, 293.66*v, 2, .08, .9, t + .12); tono('sine', 587.33*v, 587.33*v, 1.6, .03, .95, t + .25); }
+      else if (nome === 'tutorial'){ tono('sine', 140*v, 80, .25, .5, .2, t); tono('sine', 880*v, 880*v, .7, .08, .6, t + .18); }
+      else if (nome === 'passi'){ [659.25, 880, 1174.66].forEach((f, i) => tono('triangle', f*v, f*v, .18, .08, .3, t + i*.15)); }
+      else if (nome === 'posti'){ const n = rumore(.05), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'highpass'; f.frequency.value = 1800; g.gain.setValueAtTime(.35, t); g.gain.exponentialRampToValueAtTime(.001, t + .05); n.connect(f); f.connect(g); esce(g, .2); n.start(t); tono('sine', 330*v, 330*v, .15, .2, .2, t + .02); }
+      else if (nome === 'domande'){ const n = rumore(.35), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = 'lowpass'; f.frequency.setValueAtTime(2400, t); f.frequency.exponentialRampToValueAtTime(600, t + .3); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.16, t + .08); g.gain.linearRampToValueAtTime(0, t + .33); n.connect(f); f.connect(g); esce(g, .3); n.start(t); }
+      else if (nome === 'fine'){ soffio(200, 2600, .55, .32, 1.2, .5); tono('sine', 220*v, 440*v, .55, .06, .5, t); } },
     /* i messaggi della chat: Mark e lei hanno due voci diverse */
     bolla(lui){ if (!vivo()) return; const t = ctx.currentTime; if (lui){ tono('sine', 880, 880, .18, .09, .3, t); tono('sine', 1318.5, 1318.5, .25, .07, .4, t + .07); } else tono('triangle', 620 + Math.random()*60, 560, .12, .07, .15, t); },
     spunta(i){ if (!vivo()) return; const f = [783.99, 880, 987.77, 1174.66][i % 4]; tono('sine', f, f, .35, .07, .5); },
@@ -941,7 +956,7 @@ function invito(){
     x.clearRect(0, 0, W, H); const g = x.createRadialGradient(cx, cy, 0, cx, cy, 26 + b*30); g.addColorStop(0, 'rgba(255,232,190,' + (.5 + b*.5) + ')'); g.addColorStop(.25, 'rgba(227,155,58,' + (.25 + b*.3) + ')'); g.addColorStop(1, 'rgba(227,155,58,0)');
     x.fillStyle = g; x.beginPath(); x.arc(cx, cy, 60, 0, 6.283); x.fill(); x.fillStyle = '#FFF1D8'; x.beginPath(); x.arc(cx, cy, 2.2 + b*1.2, 0, 6.283); x.fill(); requestAnimationFrame(pulsa); })(performance.now());
   const parti = suono => { if (via) return; via = true; box.classList.remove('aspetta'); if (suono) S.sblocca().then(() => aggiornaTasto()); intro(); };
-  box.addEventListener('pointerdown', () => parti(true), {once: true});
+  ['pointerdown', 'pointerup', 'touchend', 'click'].forEach(ev => box.addEventListener(ev, () => { if (!via) parti(true); else S.sblocca().then(() => aggiornaTasto()); }));
   setTimeout(() => parti(false), 5000);
 }
 function intro(){
@@ -996,7 +1011,8 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersectin
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
 /* il suono di un titolo parte solo quando il titolo è arrivato a metà schermo, non al primo movimento */
-const ioSuono = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting || e.target.dataset.suonato) return; e.target.dataset.suonato = '1'; S.passaggio(); }), {rootMargin: '0px 0px -45% 0px', threshold: 0});
+const FIRME = ['agentica', 'telefono', 'squadra', 'voce', 'memoria', 'tutorial', 'passi', 'posti', 'domande', 'fine'], scene = [...document.querySelectorAll('.scena:not(.eroe)')];
+const ioSuono = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting || e.target.dataset.suonato) return; e.target.dataset.suonato = '1'; S.firma(FIRME[scene.indexOf(e.target.closest('.scena'))] || 'fine'); }), {rootMargin: '0px 0px -45% 0px', threshold: 0});
 document.querySelectorAll('.scena:not(.eroe) .titolo').forEach(t => ioSuono.observe(t));
 
 /* ogni pulsante sprizza scintille quando lo tocchi */
@@ -1066,13 +1082,15 @@ const SAGOMA = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradien
     tronchi.forEach((p, i) => { const ult = yT + (AGENTI[i].t.length - 1)*passo; p.setAttribute('d', 'M' + xs[i] + ' ' + (yA + (stretto ? 34 : 40)) + 'V' + ult); });
     G = {cx, yM, yBus, yA, xs, pos}; }
   disponi(); addEventListener('resize', disponi);
+  let inVista = false, note = 0;
+  new IntersectionObserver(es => { inVista = es[0].isIntersecting; if (inVista) note = 0; }, {threshold: .45}).observe(box);
   if (lento) return;
   /* il percorso di un impulso: giù da Mark, lungo il bus, giù fino all'agente e poi fino al programma */
   function punti(q){ const {cx, yM, yBus, yA, xs, pos} = G, a = apps[q].a; return [[cx, yM + 30], [cx, yBus], [xs[a], yBus], [xs[a], yA - 30], [xs[a], yA + 34], pos[q]]; }
   function lungo(P, t){ const L = []; let tot = 0; for (let i = 1; i < P.length; i++){ const d = Math.hypot(P[i][0]-P[i-1][0], P[i][1]-P[i-1][1]); L.push(d); tot += d; }
     let r = t*tot; for (let i = 0; i < L.length; i++){ if (r <= L[i] || i === L.length - 1){ const f = L[i] ? Math.min(1, r/L[i]) : 0; return [P[i][0] + (P[i+1][0]-P[i][0])*f, P[i][1] + (P[i+1][1]-P[i][1])*f, i]; } r -= L[i]; } }
   (function corre(){ imp.forEach(p => { p.t += .009;
-      if (p.t >= 1){ const ap = apps[p.q]; ap.el.classList.add('tocca'); S.nota(p.q); setTimeout(() => ap.el.classList.remove('tocca'), 500); p.t = 0; p.q = Math.random()*apps.length|0; }
+      if (p.t >= 1){ const ap = apps[p.q]; ap.el.classList.add('tocca'); if (inVista && note < 6){ note++; S.nota(p.q); } setTimeout(() => ap.el.classList.remove('tocca'), 500); p.t = 0; p.q = Math.random()*apps.length|0; }
       const [x, y, tratto] = lungo(punti(p.q), p.t);
       if (tratto === 3){ const o = omini[apps[p.q].a]; o.classList.add('attivo'); setTimeout(() => o.classList.remove('attivo'), 300); }
       p.c.setAttribute('cx', x); p.c.setAttribute('cy', y); p.c.setAttribute('opacity', Math.min(1, Math.sin(Math.PI*p.t)*1.6)); });
