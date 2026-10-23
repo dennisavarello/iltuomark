@@ -8,20 +8,23 @@
 <meta name="theme-color" content="#0B0B0C">
 <meta property="og:title" content="Mark · Sul tuo computer">
 <meta property="og:description" content="Memoria, agenti e voce. Lo accendiamo insieme, in videochiamata.">
-<meta property="og:image" content="https://iltuomark.com/eroe.jpg">
+<meta property="og:image" content="https://iltuomark.com/attico-largo.jpg">
 <meta property="og:url" content="https://iltuomark.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="eroe.jpg" as="image">
+<link rel="preload" href="attico-telefono.jpg" as="image" media="(max-width:899px)">
+<link rel="preload" href="attico-largo.jpg" as="image" media="(min-width:900px)">
 <!--
-  MARK · IL FUNNEL v2 — 23 ott 2026, online su iltuomark.com.
+  MARK · IL FUNNEL v3 — 23 ott 2026 pomeriggio, online su iltuomark.com. Dennis: «è Mark I, Mark II non esiste»; «troppo acciaio, mi gasa la grande città, l'attico tutto vetri».
+  v3: eroe nell'attico sulla città (foto Higgsfield), acciaio solo come accento della forgia, demo interattiva al posto della VSL (che mostrava Jarvis), Mark I ovunque, telefono rifinito.
+  v2:
   Dalla v1 (anteprima del 22 ott) restano testo, scene e filtro a 5 domande. Cambia il gesto: LA FORGIA.
   I titoli escono dalla fessura incandescenti e si raffreddano in avorio, la M dell'eroe si accende tra le scintille,
   la chiusura è un punzone battuto sul metallo. Nuove scene: Turno di notte e il contatore dei rilasci.
   Le lead vanno alla stessa RACCOLTA di iltuojarvis.com (CRM Lead Jarvis → GHL «Jarvis»), con pagina = iltuomark.com.
 -->
 <style>
-/* Lusso industriale di notte: foto vere, un solo accento ambra, il metallo che si arroventa e si raffredda. */
+/* L'attico sulla città di notte: vetro, skyline, un solo accento ambra. La forgia resta come gesto: le cose si arroventano e si raffreddano. */
 @font-face{font-family:Archivo;src:url(archivo-700.woff2) format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:Unbounded;src:url(unbounded-800.woff2) format('woff2');font-weight:800;font-display:swap}
 @font-face{font-family:Switzer;src:url(switzer-500.woff2) format('woff2');font-weight:500;font-display:swap}
@@ -87,9 +90,10 @@ p{margin:0;text-wrap:pretty}
 
 /* ── EROE: il metallo, le braci, la M che si accende ── */
 .eroe{min-height:100svh;padding:0;align-items:stretch;text-align:left;justify-content:flex-end;overflow:hidden}
-.eroe .foto{position:absolute;inset:-4% 0 0;width:100%;height:104%;object-fit:cover;object-position:30% 50%;transform:scale(1.08);transition:transform 2.6s var(--curva)}
+.eroe picture{position:absolute;inset:0}
+.eroe .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.08);transition:transform 3.2s var(--curva)}
 .eroe.acceso .foto{transform:scale(1)}
-.eroe::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--ossidiana) 6%,rgba(11,11,12,.62) 46%,rgba(11,11,12,.2));pointer-events:none}
+.eroe::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--ossidiana) 4%,rgba(11,11,12,.55) 42%,rgba(11,11,12,0) 75%);pointer-events:none}
 .eroe .luce{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px circle at var(--x,30%) var(--y,40%),rgba(227,155,58,.16),transparent 60%);mix-blend-mode:screen}
 #braci,#scintille{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .eroe .dentro{position:relative;z-index:3;padding-block:0 56px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));max-width:1180px}
@@ -118,17 +122,33 @@ p{margin:0;text-wrap:pretty}
 .giu::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ambra);animation:scende 2.2s var(--curva) infinite}
 @keyframes scende{to{top:100%}}
 
-/* VSL */
-.vsl{position:relative;width:min(100%,360px);aspect-ratio:9/16;border:1px solid var(--linea);border-radius:3px;overflow:hidden;background:var(--grafite);margin-top:40px;box-shadow:0 0 0 1px rgba(227,155,58,.08),0 30px 80px -30px rgba(227,155,58,.35)}
-.vsl video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
-.vsl .play{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;border:0;cursor:pointer;background:linear-gradient(transparent 55%,rgba(0,0,0,.55))}
-.vsl .play i{width:72px;height:72px;border-radius:50%;border:1px solid var(--ambra);display:flex;align-items:center;justify-content:center;background:var(--ossidiana);position:relative}
-.vsl .play i::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--ambra);animation:onda-play 2.2s var(--curva) infinite}
-@keyframes onda-play{from{transform:scale(1);opacity:.8}to{transform:scale(1.7);opacity:0}}
-.vsl .play i::before{content:"";border-left:18px solid var(--ambra);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
-.vsl.in-onda .play{display:none}
-.vsl .rec{position:absolute;top:12px;left:12px;font:500 11px/16px var(--mono);letter-spacing:.14em;color:var(--avorio);display:flex;align-items:center;gap:6px;pointer-events:none}
-.vsl.in-onda .rec{display:none}
+/* LA DEMO: Mark al lavoro, si tocca un comando e si guarda */
+.demo{width:min(100%,640px);margin-top:40px;text-align:left;background:rgba(22,22,24,.92);border:1px solid var(--linea);border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(227,155,58,.06),0 40px 100px -40px rgba(227,155,58,.45)}
+.demo .barra-f{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--linea);font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--titanio)}
+.demo .barra-f b{color:var(--ambra);font-weight:500}
+.demo .schermo{padding:20px 16px;min-height:300px;display:flex;flex-direction:column;gap:12px}
+.demo .ordine{align-self:flex-end;max-width:88%;background:#3A2A16;border-radius:12px;border-bottom-right-radius:3px;padding:10px 14px;font-size:16px;line-height:22px}
+.demo .ordine:empty{display:none}
+.demo .passi-m{display:grid;gap:6px;font:500 13px/20px var(--mono);color:var(--titanio)}
+.demo .passi-m div{display:grid;grid-template-columns:18px 1fr;gap:8px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--curva),transform .4s var(--curva)}
+.demo .passi-m div.su{opacity:1;transform:none}
+.demo .passi-m i{font-style:normal;color:var(--ambra)}
+.demo .passi-m div.lavora i{animation:respira .8s ease-in-out infinite}
+.demo .passi-m b{font-weight:500;color:var(--avorio)}
+.demo .risposta{border:1px solid var(--linea);border-radius:12px;border-bottom-left-radius:3px;padding:12px 14px;font-size:16px;line-height:23px;max-width:94%;opacity:0;transform:translateY(8px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.demo .risposta.su{opacity:1;transform:none}
+.demo .risposta:empty{display:none}
+.demo .file{display:flex;align-items:center;gap:12px;margin-top:10px;padding:10px 12px;border:1px solid var(--ambra);border-radius:2px;background:#22190F;font:500 14px/20px var(--testo)}
+.demo .file i{width:28px;height:34px;flex:none;border:1.5px solid var(--ambra);border-radius:2px;position:relative}
+.demo .file i::after{content:"";position:absolute;left:5px;right:5px;top:9px;height:2px;background:var(--ambra);box-shadow:0 6px 0 var(--ambra),0 12px 0 var(--ambra)}
+.demo .file span{color:var(--titanio);display:block;font-size:13px}
+.comandi{display:grid;gap:8px;padding:16px;border-top:1px solid var(--linea)}
+.comandi p{font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--titanio);margin-bottom:4px}
+.comandi button{display:flex;align-items:center;gap:12px;min-height:56px;width:100%;text-align:left;background:var(--ossidiana);border:1px solid var(--linea);border-radius:3px;color:var(--avorio);font:500 17px/22px var(--testo);padding:12px 16px;cursor:pointer;transition:border-color .3s var(--curva),background .3s var(--curva)}
+.comandi button::before{content:"›";color:var(--ambra);font:500 20px/1 var(--mono)}
+.comandi button:hover,.comandi button.attivo{border-color:var(--ambra);background:#22190F}
+.comandi button[disabled]{opacity:.45;cursor:default}
+.simula{margin-top:14px;font-size:15px;color:#6C6F74;max-width:440px}
 
 /* poteri */
 .potere-visivo{width:min(100%,360px);height:200px;margin-bottom:40px;position:relative}
@@ -192,7 +212,7 @@ p{margin:0;text-wrap:pretty}
 .piastre{display:flex;justify-content:center;gap:6px;margin-top:28px}
 .piastre i{width:clamp(36px,9vw,56px);height:10px;background:var(--grafite-2);border:1px solid var(--linea);transition:background .4s,border-color .4s,transform .4s var(--curva),box-shadow .4s}
 .piastre i.su{background:var(--ambra);border-color:var(--ambra);transform:translateY(-4px);box-shadow:0 0 16px rgba(227,155,58,.5)}
-.versioni{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:28px;font:500 14px/20px var(--testo);color:var(--titanio)}
+.versioni{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:28px;font:500 14px/20px var(--testo);color:var(--titanio)}
 .versioni b{display:block;font:500 15px/22px var(--mono);letter-spacing:.08em;color:#6C6F74}
 .versioni .ora b{color:var(--avorio)}.versioni .ora span{color:var(--ambra)}
 .versioni .prossima b{color:var(--ambra)}
@@ -295,6 +315,17 @@ footer a{color:var(--titanio)}
   .domanda h2{font-size:40px}
   .barra{display:none}
 }
+@media (max-width:899px){
+  .scena{min-height:0;padding-block:96px}
+  .eroe{min-height:100svh}
+  .eroe .dentro{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+  .eroe .pulsante,.scena > .pulsante{width:100%;min-width:0}
+  .giu{display:none}
+  .angoli{inset:16px}
+  .potere-visivo{height:180px;margin-bottom:28px}
+  .telefono{margin-bottom:32px}
+}
+@media (max-width:380px){.bivio{grid-template-columns:1fr}.titolo{font-size:34px}}
 @media (max-width:520px){.avvio .dx{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.marchio .l,.eroe .seq{opacity:1;transform:none}.marchio .m::after{transform:none}.cursore{display:none}}
 </style>
@@ -305,11 +336,11 @@ footer a{color:var(--titanio)}
 
 <main>
   <section class="scena eroe js-eroe">
-    <img class="foto" src="eroe.jpg" alt="Titanio spazzolato e alluminio nero, con un filo di luce ambra sul bordo">
+    <picture><source media="(min-width:900px)" srcset="attico-largo.jpg"><img class="foto" src="attico-telefono.jpg" alt="Un attico tutto vetri sulla città di notte, con un portatile acceso sulla scrivania"></picture>
     <div class="luce js-luce" aria-hidden="true"></div>
     <canvas id="braci" aria-hidden="true"></canvas>
     <canvas id="scintille" aria-hidden="true"></canvas>
-    <div class="avvio" aria-hidden="true"><div><span class="punto"></span>Sistema <b>[ MARK II ]</b> online</div><div class="dx">Memoria · agenti · voce</div></div>
+    <div class="avvio" aria-hidden="true"><div><span class="punto"></span>Sistema <b>[ MARK I ]</b> online</div><div class="dx">Memoria · agenti · voce</div></div>
     <div class="dentro">
       <h1 class="marchio" aria-label="Mark"><span class="l m" style="--i:0">M</span><span class="l" style="--i:1">A</span><span class="l" style="--i:2">R</span><span class="l" style="--i:3">K</span></h1>
       <p class="saluto" aria-hidden="true"><span class="js-saluto"></span><span class="cursore"></span></p>
@@ -320,10 +351,25 @@ footer a{color:var(--titanio)}
     <div class="giu" aria-hidden="true"></div>
   </section>
 
-  <section class="scena" id="vsl">
+  <section class="scena js-demo-scena" id="prova">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo forgia">GUARDALO LAVORARE</h2>
-    <div class="vsl compare d1"><video class="js-vsl" src="vsl.mp4" poster="copertina.jpg" playsinline preload="metadata"></video><span class="rec"><span class="punto"></span>Mark II</span><button class="play js-vsl-play" type="button" aria-label="Guarda il video"><i></i></button></div>
+    <h2 class="titolo forgia">PROVALO<br><span class="ambra">ADESSO.</span></h2>
+    <p class="riga compare d1">Tocca un comando e guarda Mark al lavoro.</p>
+    <div class="demo compare d2">
+      <div class="barra-f"><span><span class="punto"></span><b>Mark I</b> · sul tuo computer</span><span class="js-stato">pronto</span></div>
+      <div class="schermo" aria-live="polite">
+        <div class="ordine js-ordine"></div>
+        <div class="passi-m js-passi-m"></div>
+        <div class="risposta js-risposta"></div>
+      </div>
+      <div class="comandi js-comandi">
+        <p>Scegli cosa chiedergli</p>
+        <button type="button" data-c="0">Cosa ho domani?</button>
+        <button type="button" data-c="1">Prepara il preventivo per Rossi</button>
+        <button type="button" data-c="2">Riassumi le mail di oggi</button>
+      </div>
+    </div>
+    <p class="simula compare d3">È una simulazione con dati di esempio. Sul tuo computer Mark lavora sui tuoi file, sulla tua posta e sui tuoi programmi.</p>
   </section>
 
   <section class="scena">
@@ -334,7 +380,7 @@ footer a{color:var(--titanio)}
   </section>
 
   <section class="scena con-foto">
-    <img class="sfondo" src="officina.jpg" alt="">
+    <img class="sfondo" src="torre.jpg" alt="">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <div class="potere-visivo rete compare"><svg class="js-rete" viewBox="0 0 360 200" aria-hidden="true"></svg></div>
     <h2 class="titolo forgia">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
@@ -342,7 +388,8 @@ footer a{color:var(--titanio)}
     <div class="nomi compare d3"><span>Analista</span><span>Copywriter</span><span>Cacciatore di clienti</span><span>Costruttore di siti</span><span>Contabile</span><span>Contraddittorio</span><span class="tuo">+ il tuo</span></div>
   </section>
 
-  <section class="scena js-notte-scena">
+  <section class="scena con-foto js-notte-scena">
+    <img class="sfondo" src="citta-notte.jpg" alt="">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <h2 class="titolo forgia">ANCHE<br><span class="ambra">MENTRE DORMI.</span></h2>
     <div class="notte">
@@ -387,15 +434,16 @@ footer a{color:var(--titanio)}
     </div>
   </section>
 
-  <section class="scena js-rilascio-scena">
+  <section class="scena con-foto js-rilascio-scena">
+    <img class="sfondo" src="eroe.jpg" alt="">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <h2 class="titolo forgia">OGNI VERSIONE<br><span class="ambra">È PIÙ FORTE.</span></h2>
     <p class="riga compare d1">Mark cresce a giorni di rilascio. Gli aggiornamenti arrivano anche a te.</p>
     <div class="rilascio compare d2">
       <span class="tag">Giorno di rilascio</span><span class="tag dx"><span class="punto"></span>Online</span>
-      <div class="contatore" aria-label="Mark II"><span>MARK</span><span class="rullo"><div class="js-rullo"><span>I</span><span>II</span></div></span></div>
-      <div class="piastre js-piastre"><i></i><i></i><i></i></div>
-      <div class="versioni"><div><b>MARK I</b>il prototipo</div><div class="ora"><b>MARK II</b><span>online</span></div><div class="prossima"><b>MARK III</b>in forgia</div></div>
+      <div class="contatore" aria-label="Mark I"><span>MARK</span><span class="rullo"><div class="js-rullo"><span>&nbsp;</span><span>I</span></div></span></div>
+      <div class="piastre js-piastre"><i></i><i></i></div>
+      <div class="versioni"><div class="ora"><b>MARK I</b><span>online</span></div><div class="prossima"><b>MARK II</b>in forgia</div></div>
     </div>
   </section>
 
@@ -433,7 +481,7 @@ footer a{color:var(--titanio)}
   <section class="scena con-foto js-punzone-scena">
     <img class="sfondo" src="attico.jpg" alt="">
     <canvas id="scintille-fine" aria-hidden="true"></canvas>
-    <div class="lastra" aria-hidden="true"><div class="anello"><svg viewBox="0 0 200 200"><defs><path id="cerchio" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><text font-family="Geist Mono, monospace" font-size="11" letter-spacing="4" fill="#9A9DA1"><textPath href="#cerchio">FORGIATO · PRECISO · TUO · MARK II · 2026 ·</textPath></text></svg><b>M</b></div></div>
+    <div class="lastra" aria-hidden="true"><div class="anello"><svg viewBox="0 0 200 200"><defs><path id="cerchio" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><text font-family="Geist Mono, monospace" font-size="11" letter-spacing="4" fill="#9A9DA1"><textPath href="#cerchio">FORGIATO · PRECISO · TUO · MARK I · 2026 ·</textPath></text></svg><b>M</b></div></div>
     <h2 class="titolo forgia" style="margin-top:40px">PRONTO QUANDO VUOI.</h2>
     <a class="pulsante compare d2 js-wa" href="#">Scrivimi</a>
   </section>
@@ -644,6 +692,7 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersectin
   if (s.classList.contains('js-posti-scena')) posti();
   if (s.classList.contains('js-notte-scena')) notte();
   if (s.classList.contains('js-rilascio-scena')) rilascio();
+  if (s.classList.contains('js-demo-scena')) setTimeout(() => giro || demo(0), lento ? 0 : 1200);
   if (s.classList.contains('js-punzone-scena')) setTimeout(() => scintille(document.getElementById('scintille-fine'), .5, .5, 120), 520);
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
@@ -734,18 +783,53 @@ function chat(){ const m = [...document.querySelectorAll('.js-messaggi .msg')], 
     if (lui){ s.classList.add('su'); m[i].parentNode.insertBefore(s, m[i]); }
     setTimeout(() => { s.classList.remove('su'); m[i].classList.add('su'); i++; setTimeout(prossimo, 500); }, lui ? 1100 : 300); })(); }
 
+/* Mark I è online, Mark II è in forgia: il contatore scatta su I e si accende la prima piastra */
 function rilascio(){ const r = document.querySelector('.js-rullo'), p = document.querySelectorAll('.js-piastre i');
-  p[0].classList.add('su');
-  setTimeout(() => { r.style.transform = 'translateY(-1.1em)'; p[1].classList.add('su'); }, lento ? 0 : 1400);
+  setTimeout(() => { r.style.transform = 'translateY(-1.1em)'; p[0].classList.add('su'); }, lento ? 0 : 900);
 }
 
 function posti(){ document.querySelectorAll('.js-posti i').forEach((p,i) => setTimeout(() => p.classList.add('su'), 400 + i*160)); }
 
-const vsl = document.querySelector('.js-vsl');
-document.querySelector('.js-vsl-play').addEventListener('click', () => { vsl.closest('.vsl').classList.add('in-onda'); vsl.controls = true; vsl.play().catch(()=>{}); });
+/* ── LA DEMO: un comando, gli agenti che si passano il lavoro, il risultato. Dati di esempio, dichiarati sotto la finestra ── */
+const DEMO = [
+  {ordine: 'Cosa ho domani?',
+   passi: [['Calendario', 'tre appuntamenti trovati'], ['Posta', 'un cambio d\'orario da Rossi']],
+   risposta: 'Domani alle 10 call con Rossi Immobiliare, alle 12:30 pranzo con Marco, alle 16 il dentista. Rossi ha spostato la call di mezz\'ora: l\'ho già aggiornata in agenda, signore. Le note per la call sono pronte.'},
+  {ordine: 'Prepara il preventivo per Rossi',
+   passi: [['Analista', 'rilegge la call di martedì'], ['Copywriter', 'scrive l\'offerta'], ['Contabile', 'calcola prezzi e IVA'], ['Contraddittorio', 'ricontrolla i numeri']],
+   risposta: 'Pronto, signore. Non lo mando finché non mi dà l\'ok.',
+   file: ['Preventivo Rossi Immobiliare.pdf', '3 pagine · pronto da inviare']},
+  {ordine: 'Riassumi le mail di oggi',
+   passi: [['Posta', '38 mail lette da stamattina'], ['Filtro', '35 tra newsletter e notifiche, messe da parte']],
+   risposta: 'Ne contano 3, signore: un cliente chiede di anticipare la consegna, il commercialista vuole le fatture di settembre, un fornitore ha mandato il listino nuovo. Le bozze di risposta sono pronte.'}
+];
+const dOrdine = document.querySelector('.js-ordine'), dPassi = document.querySelector('.js-passi-m'), dRisposta = document.querySelector('.js-risposta'), dStato = document.querySelector('.js-stato'), dBottoni = [...document.querySelectorAll('.js-comandi button')];
+let giro = 0;
+function demo(n){
+  const mio = ++giro, c = DEMO[n], t = lento ? 0 : 1;
+  const dopo = (ms, f) => setTimeout(() => { if (mio === giro) f(); }, ms * t);
+  dBottoni.forEach((b, i) => { b.classList.toggle('attivo', i === n); b.disabled = true; });
+  dOrdine.textContent = ''; dPassi.textContent = ''; dRisposta.textContent = ''; dRisposta.classList.remove('su'); dStato.textContent = 'ascolta';
+  let i = 0; (function batte(){ if (mio !== giro) return; dOrdine.textContent = c.ordine.slice(0, ++i); if (i < c.ordine.length) setTimeout(batte, lento ? 0 : 34); else avvia(); })();
+  function avvia(){
+    dStato.textContent = 'al lavoro';
+    const righe = c.passi.map(([chi, cosa]) => { const r = document.createElement('div'), ic = document.createElement('i'), tx = document.createElement('span'), b = document.createElement('b'); ic.textContent = '●'; b.textContent = chi; tx.append(b, ' ' + cosa); r.append(ic, tx); r.className = 'lavora'; dPassi.append(r); return [r, ic]; });
+    righe.forEach(([r, ic], k) => { dopo(300 + k * 750, () => r.classList.add('su')); dopo(900 + k * 750, () => { r.classList.remove('lavora'); ic.textContent = '✓'; }); });
+    dopo(1200 + righe.length * 750, () => {
+      dRisposta.textContent = c.risposta;
+      if (c.file){ const f = document.createElement('div'), ic = document.createElement('i'), tx = document.createElement('div'), sp = document.createElement('span'); f.className = 'file'; tx.textContent = c.file[0]; sp.textContent = c.file[1]; tx.append(sp); f.append(ic, tx); dRisposta.append(f); }
+      dRisposta.classList.add('su'); dStato.textContent = 'fatto';
+      dBottoni.forEach(b => b.disabled = false);
+    });
+  }
+}
+dBottoni.forEach(b => b.addEventListener('click', () => demo(+b.dataset.c)));
 
 const barra = document.querySelector('.js-barra');
-new IntersectionObserver(e => barra.classList.toggle('su', !e[0].isIntersecting)).observe(eroe);
+/* la barra sparisce quando a schermo c'è già un pulsante grande: l'eroe e la chiusura */
+const visti = new Set();
+const vedi = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? visti.add(e.target) : visti.delete(e.target)); barra.classList.toggle('su', !visti.size); });
+[eroe, document.querySelector('.js-punzone-scena')].forEach(x => vedi.observe(x));
 </script>
 </body>
 </html>
