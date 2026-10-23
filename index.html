@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v8 (23 ott, 16:50): iPhone più piccolo e pieno (Mark avvisa per primo), squadra ad albero con le icone vere delle app (TeamSystem e Zucchetti dai loro siti), MEMORIA PERPETUA, cervello fatto di neuroni leggibili.
   v7 (23 ott, 16:30): accensione col nucleo di luce (niente scintille davanti alla sfera), iPhone in proporzioni vere con l'ordine da 80.000 € salvato e il vocale nuovo, squadra di omini collegati ai loghi in 3D (WhatsApp, HubSpot, TeamSystem, Zucchetti, SAP…), memoria = foto del cervello di neuroni.
   v6 (23 ott, 16:10): via le righe di sistema in alto, via le foto di studio e rooftop. AGENTICA che nasce da DIGITALE, iPhone con Mark Chat e il vocale vero di Mark (vocale-mark.mp3), la memoria come grafo di neuroni alla Obsidian.
   MARK · IL FUNNEL v5 — 23 ott 2026 sera. Dennis: «la prova fa cagare, toglila»; «la palla di neuroni è una figata, la teniamo»; «Mark sul tuo computer lo terrei, col font high tech»;
@@ -412,6 +413,33 @@ footer a{color:var(--titanio)}
 @keyframes pensa{0%,100%{filter:brightness(.95) saturate(1)}50%{filter:brightness(1.18) saturate(1.15)}}
 .impulso{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,214,150,.22) 48%,rgba(255,240,210,.35) 50%,rgba(255,214,150,.22) 52%,transparent 65%);mix-blend-mode:screen;transform:translateX(-100%);animation:impulso 6s cubic-bezier(.6,0,.4,1) infinite 1.5s}
 @keyframes impulso{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+
+/* ── v8: iPhone più piccolo e pieno; la squadra ad albero con le icone vere delle app ── */
+.tel-box{width:min(70vw,272px);margin-top:36px}
+.iphone{border-width:9px;border-radius:46px}
+.iphone .messaggi{padding:10px 8px;gap:6px}
+.iphone .msg{font-size:12px;line-height:16px;padding:7px 9px}
+.app-testa{padding:16px 12px 10px}
+.stato-tel{padding:10px 20px 0;font-size:12px}
+.isola{width:78px;height:23px;margin-left:-39px;top:7px}
+.lavoro .r{font-size:11.5px;line-height:15px;padding:2px 0}
+.lavoro .t-lav{margin-bottom:4px}
+.avviso{border-color:rgba(227,155,58,.5)!important;background:#1A140C}
+.play{width:30px;height:30px}
+.albero{height:auto}
+.albero .fili path{fill:none;stroke-width:1}
+.albero .fili .fc{stroke:rgba(227,155,58,.55)}
+.albero .fili .ft{stroke:rgba(200,190,175,.22);stroke-dasharray:none}
+.albero .cuore{position:absolute}
+.app{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:14px;z-index:3;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(170deg,#FFFFFF,#ECECEF);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -3px 6px rgba(0,0,0,.12),0 18px 28px -12px rgba(0,0,0,.95),0 0 0 .5px rgba(0,0,0,.4);
+  transform:perspective(320px) rotateX(16deg);animation:galleggia 4.6s ease-in-out infinite;animation-delay:var(--d,0s);transition:box-shadow .3s}
+.app::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(165deg,rgba(255,255,255,.55),transparent 42%);pointer-events:none}
+.app img{width:64%;height:64%;object-fit:contain}
+.app.pieno img{width:100%;height:100%;object-fit:cover}
+.app.tocca{box-shadow:inset 0 1px 0 #fff,0 18px 28px -12px rgba(0,0,0,.95),0 0 26px 2px rgba(227,155,58,.75)}
+@media (max-width:899px){.app{width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:11px}.albero .omino{width:78px;margin-left:-39px}.albero .omino b{font-size:8.5px;letter-spacing:.1em}}
 .domanda h2{font-size:24px;line-height:32px}
 @media (min-width:900px){
   .titolo{font-size:32px;line-height:44px}
@@ -473,7 +501,8 @@ footer a{color:var(--titanio)}
         <div class="stato-tel"><span>9:41</span><span class="tacche"><i></i><i></i><i></i><i></i></span></div>
         <div class="app-testa"><i>M</i><div><b>Mark Chat</b><span>online</span></div></div>
         <div class="messaggi js-messaggi">
-          <div class="msg io">Il cliente di Monaco ha annullato l'ordine da 80.000 €. Recuperalo.</div>
+          <div class="msg lui avviso">Signore, il cliente di Monaco ha appena annullato l'ordine da 80.000&nbsp;€.</div>
+          <div class="msg io">Recuperalo.</div>
           <div class="msg lui lavoro js-lavoro"><p class="t-lav">Mark al lavoro</p><div class="r">Lette le 14 mail con il cliente</div><div class="r">Gestionale: merce pronta martedì</div><div class="r">Sconto del 3% deciso a settembre</div><div class="r">Mail al buyer scritta in tedesco</div><p class="chiede">La mando, signore?</p></div>
           <div class="msg io">Vai</div>
           <div class="msg lui vocale-m js-vocale"><button type="button" class="play js-play" aria-label="Ascolta il vocale di Mark"><svg viewBox="0 0 24 24"><path class="tri" d="M8 5v14l11-7z"/><path class="pau" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button><span class="onde js-onde"></span><span class="durata js-durata">0:07</span></div>
@@ -490,7 +519,7 @@ footer a{color:var(--titanio)}
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <h2 class="titolo compare js-decifra">UNA SQUADRA<br><span class="ambra">CHE LAVORA PER TE.</span></h2>
     <p class="riga compare d1">Con i programmi che usi già.</p>
-    <div class="rete-ag compare d2 js-rete-ag" role="img" aria-label="Gli agenti di Mark collegati a WhatsApp, Gmail, HubSpot, Salesforce, TeamSystem, Zucchetti, SAP e agli altri programmi dell'azienda"><svg class="fili js-fili" aria-hidden="true"></svg></div>
+    <div class="rete-ag albero compare d2 js-rete-ag" role="img" aria-label="Gli agenti di Mark collegati a WhatsApp, Gmail, HubSpot, Salesforce, TeamSystem, Zucchetti, SAP e agli altri programmi dell'azienda"><svg class="fili js-fili" aria-hidden="true"></svg></div>
   </section>
 
   <section class="scena">
@@ -502,9 +531,10 @@ footer a{color:var(--titanio)}
 
   <section class="scena js-memoria-scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare js-decifra">SI RICORDA<br><span class="ambra">TUTTO.</span></h2>
-    <p class="riga compare d1">Clienti, decisioni, file. Tutto collegato.</p>
-    <div class="cervello compare d2"><img src="cervello.jpg" alt="Una testa di vetro di profilo, piena di neuroni d'oro collegati tra loro" loading="lazy"><div class="impulso"></div></div>
+    <p class="etichetta compare"><b>●</b> Memoria persistente</p>
+    <h2 class="titolo compare d1 js-decifra">MEMORIA<br><span class="ambra">PERPETUA.</span></h2>
+    <p class="riga compare d2">Non si azzera mai. Ogni giorno ricorda di più, e diventa più forte.</p>
+    <div class="cervello compare d3"><img src="cervello.jpg" alt="Un cervello fatto di migliaia di neuroni d'oro collegati tra loro" loading="lazy"><div class="impulso"></div></div>
   </section>
 
   <section class="scena">
@@ -867,42 +897,46 @@ audio.addEventListener('play', () => { vocale.classList.add('suona'); });
 audio.addEventListener('timeupdate', () => { const p = audio.duration ? audio.currentTime / audio.duration : 0; tacche.forEach((t, i) => t.classList.toggle('sentito', i / tacche.length < p)); durata.textContent = tempo((audio.duration || 8) - audio.currentTime); });
 audio.addEventListener('ended', () => { tacche.forEach(t => t.classList.remove('sentito')); durata.textContent = tempo(audio.duration); });
 
-/* la squadra: gli omini di Mark collegati ai programmi dell'azienda, gli impulsi corrono sui fili */
+/* la squadra ad albero: Mark in cima, gli agenti sotto, ognuno con i suoi programmi in colonna. Gli impulsi scendono lungo i rami */
 const AGENTI = [
-  {n: 'Vendite', t: ['hubspot', 'salesforce', 'whatsapp', 'gmail']},
-  {n: 'Contabilità', t: ['TeamSystem', 'Zucchetti', 'googlesheets', 'stripe']},
-  {n: 'Operazioni', t: ['sap', 'googlecalendar', 'slack']},
-  {n: 'Marketing', t: ['shopify', 'notion', 'googledrive']}
+  {n: 'Vendite', t: ['hubspot.svg', 'salesforce.svg', 'whatsapp-icon.svg', 'google-gmail.svg']},
+  {n: 'Contabilità', t: ['teamsystem.png', 'zucchetti.png', 'stripe.svg']},
+  {n: 'Operazioni', t: ['sap.svg', 'microsoft-teams.svg', 'google-calendar.svg']},
+  {n: 'Marketing', t: ['shopify.svg', 'notion-icon.svg', 'google-drive.svg']}
 ];
-const TINTA = {whatsapp: '#25D366', gmail: '#EA4335', googlecalendar: '#4285F4', googlesheets: '#34A853', googledrive: '#1FA463', hubspot: '#FF7A59', salesforce: '#00A1E0', shopify: '#5E8E3E', slack: '#4A154B', notion: '#2A2A2A', stripe: '#635BFF', sap: '#0A8BD6', TeamSystem: '#24242A', Zucchetti: '#24242A'};
+const PIENI = ['zucchetti.png'];
 const SAGOMA = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#E39B3A"/></linearGradient></defs><circle cx="20" cy="13" r="7" fill="url(#og)"/><path d="M6 37c0-8.3 6.3-14 14-14s14 5.7 14 14z" fill="url(#og)"/></svg>';
 (function(){
   const box = document.querySelector('.js-rete-ag'), svg = box.querySelector('.js-fili'), NS = 'http://www.w3.org/2000/svg';
   const cuore = document.createElement('div'); cuore.className = 'cuore'; cuore.textContent = 'M'; box.append(cuore);
-  const fili = [], omini = [], tools = [];
+  const omini = [], apps = [];
   AGENTI.forEach((a, i) => { const o = document.createElement('div'); o.className = 'omino'; o.innerHTML = '<i class="sagoma">' + SAGOMA + '</i>'; const b = document.createElement('b'); b.textContent = a.n; o.append(b); box.append(o); omini.push(o);
-    a.t.forEach((t, k) => { const el = document.createElement('div'); el.className = 'tool'; el.style.setProperty('--c', TINTA[t]); el.style.setProperty('--d', (-(i*1.1 + k*.7)) + 's');
-      if (/^[a-z]/.test(t)){ const im = document.createElement('img'); im.src = 'loghi/' + t + '.svg'; im.alt = ''; el.append(im); } else { const sp = document.createElement('span'); sp.textContent = t; el.append(sp); }
-      box.append(el); tools.push({el, a: i, k}); }); });
-  const linea = (cl) => { const l = document.createElementNS(NS, 'line'); l.setAttribute('class', cl); svg.append(l); return l; };
-  const lC = omini.map(() => linea('fc')), lT = tools.map(() => linea('ft'));
-  const imp = Array.from({length: 7}, () => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 2.6); c.setAttribute('fill', '#FFD9A0'); c.style.filter = 'drop-shadow(0 0 4px #E39B3A)'; svg.append(c); return {c, t: Math.random(), q: Math.random()*tools.length|0, fase: 0}; });
-  let P = {};
-  function disponi(){ const W = box.clientWidth, H = box.clientHeight, cx = W/2, cy = H/2, stretto = W < 600;
-    P.c = [cx, cy]; cuore.style.left = cx + 'px'; cuore.style.top = cy + 'px';
-    const ang = [-150, -30, 30, 150].map(g => g*Math.PI/180);
-    P.o = omini.map((o, i) => { const x = cx + Math.cos(ang[i])*W*(stretto ? .2 : .22), y = cy + Math.sin(ang[i])*H*(stretto ? .2 : .2); o.style.left = x + 'px'; o.style.top = (y - (stretto ? 26 : 31)) + 'px'; return [x, y]; });
-    P.t = tools.map(({el, a, k}) => { const n = AGENTI[a].t.length, base = ang[a], passo = (stretto ? 15 : 16)*Math.PI/180, g = base + (k - (n-1)/2)*passo;
-      const x = cx + Math.cos(g)*W*(stretto ? .42 : .44), y = cy + Math.sin(g)*H*(stretto ? .44 : .42); el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.setProperty('--ry', (Math.cos(g) * -14) + 'deg'); return [x, y]; });
-    lC.forEach((l, i) => { l.setAttribute('x1', cx); l.setAttribute('y1', cy); l.setAttribute('x2', P.o[i][0]); l.setAttribute('y2', P.o[i][1]); });
-    lT.forEach((l, j) => { const o = P.o[tools[j].a]; l.setAttribute('x1', o[0]); l.setAttribute('y1', o[1]); l.setAttribute('x2', P.t[j][0]); l.setAttribute('y2', P.t[j][1]); }); }
+    a.t.forEach((t, k) => { const el = document.createElement('div'); el.className = 'app' + (PIENI.includes(t) ? ' pieno' : ''); el.style.setProperty('--d', (-(i*1.1 + k*.7)) + 's');
+      const im = document.createElement('img'); im.src = 'loghi/' + t; im.alt = ''; el.append(im); box.append(el); apps.push({el, a: i, k}); }); });
+  const tracciato = cl => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', cl); svg.append(p); return p; };
+  const rami = omini.map(() => tracciato('fc')), tronchi = omini.map(() => tracciato('ft'));
+  const imp = Array.from({length: 6}, () => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 2.6); c.setAttribute('fill', '#FFD9A0'); c.style.filter = 'drop-shadow(0 0 4px #E39B3A)'; svg.append(c); return {c, t: Math.random(), q: Math.random()*apps.length|0}; });
+  let G = null;
+  function disponi(){ const W = box.clientWidth, stretto = W < 600, passo = stretto ? 58 : 74, yM = 40, yBus = stretto ? 96 : 104, yA = stretto ? 140 : 158, yT = yA + (stretto ? 82 : 96);
+    const H = yT + (Math.max(...AGENTI.map(a => a.t.length)) - 1)*passo + 50; box.style.height = H + 'px';
+    const cx = W/2; cuore.style.left = cx + 'px'; cuore.style.top = yM + 'px';
+    const xs = AGENTI.map((_, i) => W*(i + .5)/AGENTI.length);
+    omini.forEach((o, i) => { o.style.left = xs[i] + 'px'; o.style.top = (yA - (stretto ? 26 : 31)) + 'px'; });
+    const pos = apps.map(({el, a, k}) => { const x = xs[a], y = yT + k*passo; el.style.left = x + 'px'; el.style.top = y + 'px'; return [x, y]; });
+    rami.forEach((p, i) => p.setAttribute('d', 'M' + cx + ' ' + (yM + 30) + 'V' + yBus + 'H' + xs[i] + 'V' + (yA - 30)));
+    tronchi.forEach((p, i) => { const ult = yT + (AGENTI[i].t.length - 1)*passo; p.setAttribute('d', 'M' + xs[i] + ' ' + (yA + (stretto ? 34 : 40)) + 'V' + ult); });
+    G = {cx, yM, yBus, yA, xs, pos}; }
   disponi(); addEventListener('resize', disponi);
   if (lento) return;
-  (function corre(){ imp.forEach(p => { p.t += p.fase === 0 ? .025 : .02;
-      const tl = tools[p.q], A = p.fase === 0 ? P.c : P.o[tl.a], B = p.fase === 0 ? P.o[tl.a] : P.t[p.q];
-      if (p.t >= 1){ p.t = 0; if (p.fase === 0){ p.fase = 1; omini[tl.a].classList.add('attivo'); setTimeout(() => omini[tl.a].classList.remove('attivo'), 400); }
-        else { p.fase = 0; tl.el.classList.add('tocca'); setTimeout(() => tl.el.classList.remove('tocca'), 500); p.q = Math.random()*tools.length|0; } }
-      p.c.setAttribute('cx', A[0] + (B[0]-A[0])*p.t); p.c.setAttribute('cy', A[1] + (B[1]-A[1])*p.t); p.c.setAttribute('opacity', Math.sin(Math.PI*p.t)*.9 + .1); });
+  /* il percorso di un impulso: giù da Mark, lungo il bus, giù fino all'agente e poi fino al programma */
+  function punti(q){ const {cx, yM, yBus, yA, xs, pos} = G, a = apps[q].a; return [[cx, yM + 30], [cx, yBus], [xs[a], yBus], [xs[a], yA - 30], [xs[a], yA + 34], pos[q]]; }
+  function lungo(P, t){ const L = []; let tot = 0; for (let i = 1; i < P.length; i++){ const d = Math.hypot(P[i][0]-P[i-1][0], P[i][1]-P[i-1][1]); L.push(d); tot += d; }
+    let r = t*tot; for (let i = 0; i < L.length; i++){ if (r <= L[i] || i === L.length - 1){ const f = L[i] ? Math.min(1, r/L[i]) : 0; return [P[i][0] + (P[i+1][0]-P[i][0])*f, P[i][1] + (P[i+1][1]-P[i][1])*f, i]; } r -= L[i]; } }
+  (function corre(){ imp.forEach(p => { p.t += .009;
+      if (p.t >= 1){ const ap = apps[p.q]; ap.el.classList.add('tocca'); setTimeout(() => ap.el.classList.remove('tocca'), 500); p.t = 0; p.q = Math.random()*apps.length|0; }
+      const [x, y, tratto] = lungo(punti(p.q), p.t);
+      if (tratto === 3){ const o = omini[apps[p.q].a]; o.classList.add('attivo'); setTimeout(() => o.classList.remove('attivo'), 300); }
+      p.c.setAttribute('cx', x); p.c.setAttribute('cy', y); p.c.setAttribute('opacity', Math.min(1, Math.sin(Math.PI*p.t)*1.6)); });
     requestAnimationFrame(corre); })();
 })();
 
