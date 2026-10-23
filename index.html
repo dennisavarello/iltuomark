@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v18 (23 ott, 20:00): via l'animazione iniziale (rallentava), sfera con la densità di Jarvis (16 mila particelle, risoluzione piena).
   v17 (23 ott, 19:45): funnel senza suoni (resta solo il vocale di Mark nella chat, che parte col play); apertura dimezzata, 1,25 s.
   v16 (23 ott, 19:30): via l'invito a toccare (si perde gente): l'apertura parte sempre da sola. Davide si bloccava sulla sfera. Sfera leggera nel funnel (1x, 6-9 mila particelle, niente ecosistema calcolato di nascosto, ferma fuori schermo), tele a 1x, reti di sicurezza (apertura forzata a 4 s, partenza senza caratteri a 1,5 s, pagina mai chiusa dopo 9 s).
   v15 (23 ott, 19:15): ogni suono legato al suo movimento: ticchettio della decifrazione + aggancio su ogni titolo, taglio quando una riga barra, crepitio su ogni scintilla, il tutorial si barra e si accende, la notifica di Mark scende col ding, scansione col lampo del cervello, clic quando il filo tocca i passi. Via le sfocature animate e la sfera ferma fuori schermo (la squadra non scatta più).
@@ -126,7 +127,7 @@ main{position:relative;z-index:3}
 .avvio b{color:var(--ambra);font-weight:500}
 .js-anima .eroe .seq{opacity:0;transform:translateY(14px);filter:blur(6px);transition:opacity 1s var(--curva),transform 1s var(--curva),filter 1s var(--curva)}
 .acceso .seq{opacity:1!important;transform:none!important;filter:none!important}
-.acceso .s1{transition-delay:.5s!important}.acceso .s2{transition-delay:.8s!important}.acceso .s3{transition-delay:1.05s!important}
+.acceso .s1{transition-delay:.15s!important}.acceso .s2{transition-delay:.3s!important}.acceso .s3{transition-delay:.45s!important}
 
 /* ── LE FOTO: in cornice, come un'inquadratura. La luce le scopre, la camera respira ── */
 .cornice{position:relative;width:min(100%,760px);aspect-ratio:16/9;border:1px solid var(--linea);border-radius:3px;overflow:hidden;margin-bottom:44px;background:var(--grafite)}
@@ -371,7 +372,7 @@ footer a{color:var(--titanio)}
 .acceso .onda-urto{animation:urto 2.4s cubic-bezier(.1,.6,.2,1) .3s both}
 .acceso .onda-urto.u2{animation-delay:.6s}
 @keyframes urto{0%{opacity:1;transform:scale(.05)}100%{opacity:0;transform:scale(5)}}
-.eroe .plancia{transition-delay:.45s}
+.eroe .plancia{transition-delay:0s;filter:none!important}
 
 /* ── v7: iPhone in proporzioni vere (393 × 852), cornice in titanio e tasti ── */
 .tel-box{position:relative;width:min(84vw,340px);margin-top:44px}
@@ -892,8 +893,8 @@ function accendi(){
 /* nessun browser lascia suonare una pagina prima di un gesto: se il suono è già libero si parte subito,
    altrimenti un neurone solo pulsa nel nero e il visitatore lo accende col dito. Dopo 5 secondi si parte comunque, muti */
 function invito(){
-  /* 23 ott: niente più «Tocca per accendere»: fa perdere gente. L'apertura parte sempre subito; se il browser trattiene l'audio, scorre muta e il suono si accende al primo tocco */
-  intro(); return;
+  /* 23 ott: niente animazione iniziale (Dennis: «rallenta troppo»). La sfera e il titolo compaiono subito */
+  const b = document.querySelector('.js-intro'); if (b) b.remove(); fase = 'acceso'; accendi(); return;
   const box = document.querySelector('.js-intro');
   const c = box.querySelector('canvas'), d = 1, W = innerWidth, H = innerHeight; c.width = W*d; c.height = H*d; const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0);
   const r = eroe.querySelector('.plancia').getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height*.47;
