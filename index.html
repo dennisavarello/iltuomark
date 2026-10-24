@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v21 (24 ott): numeri corretti. Freelance e privati → Jarvis Setter (393520975156), microimprese e aziende → Jarvis Aziende (393513735369): tutti e due collegati al GHL «Jarvis». Via il numero personale di Davide e il 352 068 6513 (non collegato).
   v20 (24 ott): torna il WhatsApp scritto dalla lead col riepilogo già pronto. Freelance e privati → Dejan (393520686513, ex Jarvis Setter), microimprese e aziende → Davide (393520936895). Lead salvata nel CRM prima di aprire WhatsApp.
   v19 (23 ott, 20:10): sfera col glow di Jarvis: ambra più luminosa, puntini +28%, luce +35%, bagliore 1,7 (era 1,15).
   v18 (23 ott, 20:00): via l'animazione iniziale (rallentava), sfera con la densità di Jarvis (16 mila particelle, risoluzione piena).
@@ -733,15 +734,15 @@ const lento = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ── IL FILTRO ── */
 /* Il target si capisce dalle risposte, come su iltuojarvis.com: da solo = freelance, team = azienda, progetti personali = privato */
-/* 24 ott: torna il primo messaggio scritto DALLA LEAD su WhatsApp. Freelance e privati → Dejan (il numero che era del Jarvis Setter), microimprese e aziende → Davide. Entrambi i numeri sono su GHL */
-const NUMERO_DAVIDE = '393520936895', NUMERO_DEJAN = '393520686513';
+/* 24 ott (v21): primo messaggio scritto DALLA LEAD su WhatsApp, solo su numeri collegati via API al GHL «Jarvis». Freelance e privati → Jarvis Setter 352 097 5156, microimprese e aziende → Jarvis Aziende 351 373 5369. Mai il numero personale di Davide. */
+const NUMERO_AZIENDE = '393513735369', NUMERO_SETTER = '393520975156';
 function target(r){
   if (r.uso === 'Per i miei progetti personali') return 'privato';
   if (r.uso === 'Per la mia azienda e il mio team') return 'azienda';
   if (r.uso === 'Per organizzare il mio lavoro, sono da solo') return 'freelance';
   return 'microimpresa';
 }
-const numero = r => ['freelance', 'privato'].includes(target(r)) ? NUMERO_DEJAN : NUMERO_DAVIDE;
+const numero = r => ['freelance', 'privato'].includes(target(r)) ? NUMERO_SETTER : NUMERO_AZIENDE;
 const ICONA = '<svg viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M187.58 144.84l-32-16a8 8 0 0 0-8 .5l-14.69 9.8a40.55 40.55 0 0 1-16-16l9.8-14.69a8 8 0 0 0 .5-8l-16-32A8 8 0 0 0 104 64a40 40 0 0 0-40 40 88.1 88.1 0 0 0 88 88 40 40 0 0 0 40-40 8 8 0 0 0-4.42-7.16ZM152 176a72.08 72.08 0 0 1-72-72 24 24 0 0 1 19.29-23.54l11.48 23L101 118a8 8 0 0 0-.73 7.51 56.47 56.47 0 0 0 30.15 30.15A8 8 0 0 0 138 155l14.61-9.74 23 11.48A24 24 0 0 1 152 176ZM128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24Zm0 192a87.87 87.87 0 0 1-44.06-11.81 8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216Z"/></svg>';
 const filtro = document.querySelector('.js-filtro'), risposte = {}, storia = [];
 const passi = [...filtro.querySelectorAll('.domanda')], avanza = filtro.querySelector('.js-avanza'), indietro = filtro.querySelector('.js-indietro');
