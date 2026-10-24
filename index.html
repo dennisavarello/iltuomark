@@ -694,7 +694,7 @@ footer a{color:var(--titanio)}
     <div class="domanda" data-passo="6">
       <div class="num">Ultimo passo</div>
       <h2>Dove ti mando la proposta?</h2>
-      <p class="nota">Con queste risposte ti preparo un Mark su misura. Lasciami i contatti: ti scrivo io, e prima della chiamata hai già in mano cosa farà per te.</p>
+      <p class="nota">Con queste risposte ti preparo un Mark su misura. Lasciami i contatti e scrivici su WhatsApp: il messaggio con le tue risposte è già pronto.</p>
       <div class="coppia">
         <label class="campo"><span>Nome</span><input id="nome" class="js-campo" data-chiave="nome" autocomplete="given-name" placeholder="Marco"></label>
         <label class="campo"><span>Cognome</span><input id="cognome" class="js-campo" data-chiave="cognome" autocomplete="family-name" placeholder="Rossi"></label>
@@ -703,14 +703,14 @@ footer a{color:var(--titanio)}
       <label class="campo"><span>Telefono (WhatsApp)</span><input id="telefono" class="js-campo" data-chiave="telefono" data-tipo="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+39 333 123 4567"></label>
       <label class="consenso"><input id="consenso" type="checkbox" class="js-consenso"><span>Voglio ricevere da Dennis contenuti e novità su Mark via email e WhatsApp. Mi cancello quando voglio. <a href="privacy.html" target="_blank" rel="noopener">Privacy</a></span></label>
       <div class="riepilogo js-riepilogo"></div>
-      <a class="pulsante js-invia" href="#" aria-disabled="true">Invia la richiesta</a>
-      <p class="nota" style="font-size:15px;line-height:20px">Ti scriviamo noi su WhatsApp al numero che hai lasciato.</p>
+      <a class="pulsante js-invia" href="#" aria-disabled="true" rel="noopener">Scrivici su WhatsApp</a>
+      <p class="nota" style="font-size:15px;line-height:20px">Si apre WhatsApp con le tue risposte già scritte: premi invio e ti rispondiamo.</p>
     </div>
 
     <div class="domanda" data-passo="grazie">
       <div class="num">Richiesta ricevuta</div>
       <h2>Grazie, ci siamo.</h2>
-      <p class="nota">Abbiamo le tue risposte. Ti scriviamo su WhatsApp al numero che hai lasciato, nelle prossime ore, con la proposta per il tuo Mark.</p>
+      <p class="nota">Abbiamo le tue risposte. Premi invio su WhatsApp e ti rispondiamo con la proposta per il tuo Mark. Se WhatsApp non si è aperto, tranquillo: ti scriviamo noi al numero che hai lasciato.</p>
       <a class="pulsante" href="https://www.instagram.com/dennisavarello.bsn/" target="_blank" rel="noopener">Seguimi su Instagram</a>
     </div>
 
@@ -732,13 +732,15 @@ const lento = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ── IL FILTRO ── */
 /* Il target si capisce dalle risposte, come su iltuojarvis.com: da solo = freelance, team = azienda, progetti personali = privato */
-const NUMERO_DAVIDE = '393520936895';
+/* 24 ott: torna il primo messaggio scritto DALLA LEAD su WhatsApp. Freelance e privati → Dejan (il numero che era del Jarvis Setter), microimprese e aziende → Davide. Entrambi i numeri sono su GHL */
+const NUMERO_DAVIDE = '393520936895', NUMERO_DEJAN = '393520686513';
 function target(r){
   if (r.uso === 'Per i miei progetti personali') return 'privato';
   if (r.uso === 'Per la mia azienda e il mio team') return 'azienda';
   if (r.uso === 'Per organizzare il mio lavoro, sono da solo') return 'freelance';
   return 'microimpresa';
 }
+const numero = r => ['freelance', 'privato'].includes(target(r)) ? NUMERO_DEJAN : NUMERO_DAVIDE;
 const ICONA = '<svg viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M187.58 144.84l-32-16a8 8 0 0 0-8 .5l-14.69 9.8a40.55 40.55 0 0 1-16-16l9.8-14.69a8 8 0 0 0 .5-8l-16-32A8 8 0 0 0 104 64a40 40 0 0 0-40 40 88.1 88.1 0 0 0 88 88 40 40 0 0 0 40-40 8 8 0 0 0-4.42-7.16ZM152 176a72.08 72.08 0 0 1-72-72 24 24 0 0 1 19.29-23.54l11.48 23L101 118a8 8 0 0 0-.73 7.51 56.47 56.47 0 0 0 30.15 30.15A8 8 0 0 0 138 155l14.61-9.74 23 11.48A24 24 0 0 1 152 176ZM128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24Zm0 192a87.87 87.87 0 0 1-44.06-11.81 8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216Z"/></svg>';
 const filtro = document.querySelector('.js-filtro'), risposte = {}, storia = [];
 const passi = [...filtro.querySelectorAll('.domanda')], avanza = filtro.querySelector('.js-avanza'), indietro = filtro.querySelector('.js-indietro');
@@ -790,6 +792,9 @@ function riepiloga(){
   const box = filtro.querySelector('.js-riepilogo'); box.textContent = '';
   righe.forEach(([k, v]) => { const r = document.createElement('div'), b = document.createElement('b'), s = document.createElement('span'); b.textContent = k; s.textContent = v || ''; r.append(b, s); box.append(r); });
   const pronto = [...filtro.querySelectorAll('[data-passo="6"] .js-campo')].every(valido);
+  const nome = [risposte.nome, risposte.cognome].filter(Boolean).join(' ').trim();
+  const testo = `Ciao, sono ${nome}. Ho visto la pagina di Mark e lo voglio sul mio computer.\n\n` + righe.map(([k, v]) => `• ${k}: ${v || ''}`).join('\n');
+  invia.href = pronto ? `https://wa.me/${numero(risposte)}?text=${encodeURIComponent(testo)}` : '#';
   invia.setAttribute('aria-disabled', !pronto); invia.style.opacity = pronto ? 1 : .5;
 }
 
@@ -798,11 +803,14 @@ function riepiloga(){
 const UTM = (q => q ? '?' + q : '')([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_')).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&'));
 if (location.search) history.replaceState(null, '', location.pathname);
 const RACCOLTA = 'https://script.google.com/macros/s/AKfycbwkaixtjnRyktxhv5SMuOhi41CzeVnppWjWTFVGofk3dEve_cwbRAhe0acMRREB-xHa8Q/exec';
+/* dentro le app social target=_blank verso WhatsApp si perde: lì si apre nella stessa scheda */
+const IN_APP = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|BytedanceWebview|Threads/i.test(navigator.userAgent);
+invia.insertAdjacentHTML('afterbegin', ICONA);
 let inviata = false;
 invia.addEventListener('click', e => {
-  e.preventDefault();
   filtro.querySelectorAll('[data-passo="6"] .js-campo').forEach(c => { risposte[c.dataset.chiave] = c.value.trim(); }); riepiloga();
   if (invia.getAttribute('aria-disabled') === 'true') {
+    e.preventDefault();
     const male = [...filtro.querySelectorAll('[data-passo="6"] .js-campo')].filter(c => !valido(c));
     male.forEach(c => c.closest('.campo').classList.add('sbagliato'));
     if (male[0]) { male[0].scrollIntoView({block: 'center', behavior: 'smooth'}); male[0].focus(); }
@@ -811,11 +819,15 @@ invia.addEventListener('click', e => {
   if (!inviata) {
     inviata = true;
     const r = risposte, nome = [r.nome, r.cognome].filter(Boolean).join(' ');
-    const corpo = JSON.stringify({nome, cognome: r.cognome, email: r.email, telefono: r.telefono, consenso: filtro.querySelector('.js-consenso').checked, uso: r.uso, attivita: r.attivita, settore: r.settore, persone: 'target ' + target(r), primo: r.primo, processi: r.processi, investimento: r.investimento, numero: NUMERO_DAVIDE, pagina: location.origin + location.pathname + UTM});
+    const corpo = JSON.stringify({nome, cognome: r.cognome, email: r.email, telefono: r.telefono, consenso: filtro.querySelector('.js-consenso').checked, uso: r.uso, attivita: r.attivita, settore: r.settore, persone: 'target ' + target(r), primo: r.primo, processi: r.processi, investimento: r.investimento, numero: numero(r), pagina: location.origin + location.pathname + UTM});
     let ok = false;
     try { ok = navigator.sendBeacon && navigator.sendBeacon(RACCOLTA, new Blob([corpo], {type: 'text/plain'})); } catch (x) {}
     if (!ok) try { fetch(RACCOLTA, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain'}, body: corpo}); } catch (x) {}
   }
+  /* la lead è già salvata (beacon): ora si apre WhatsApp col messaggio pronto */
+  e.preventDefault();
+  if (IN_APP) setTimeout(() => { location.href = invia.href; }, 150);
+  else window.open(invia.href, '_blank', 'noopener');
   vai('grazie');
 });
 
