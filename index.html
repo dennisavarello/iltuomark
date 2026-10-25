@@ -802,7 +802,28 @@ function riepiloga(){
 
 /* La lead entra nella stessa RACCOLTA di iltuojarvis.com → CRM Lead Jarvis → GHL «Jarvis». «pagina» dice che arriva da iltuomark.com */
 /* Dentro «pagina» vanno solo gli utm_*: il fbclid di Instagram sforava il tetto della raccolta (15 ott) */
-const UTM = (q => q ? '?' + q : '')([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_')).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&'));
+/* 25 ott (sì di Davide): ogni lead deve avere una fonte. La raccolta crea i tag fonte-<utm_source> e fonte-<utm_source>-<utm_content>.
+   Reti, in ordine: 1) utm del link; 2) utm della prima visita (memoria del telefono, 60 giorni, utm_term=ritorno);
+   3) app da cui si apre la pagina (TikTok, Instagram, Facebook, Threads: il link in bio di TikTok non porta utm);
+   4) clic con fbclid/ttclid (solo il nome in utm_term, il valore sforava il tetto); 5) sito di provenienza; 6) «diretto». */
+const UTM = (() => {
+  const p = new URLSearchParams(location.search), K = 'mark_utm';
+  const dalLink = [...p].filter(([k]) => k.startsWith('utm_')).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+  try {
+    if (dalLink) { localStorage.setItem(K, JSON.stringify({q: dalLink, t: Date.now()})); return '?' + dalLink; }
+    const m = JSON.parse(localStorage.getItem(K) || 'null');
+    if (m && Date.now() - m.t < 60 * 864e5) return '?' + m.q + '&utm_term=ritorno';
+  } catch (x) {}
+  const ua = navigator.userAgent, ref = (document.referrer || '').toLowerCase();
+  const clic = p.has('ttclid') ? 'ttclid' : p.has('fbclid') ? 'fbclid' : p.has('gclid') ? 'gclid' : '';
+  const app = /musical_ly|TikTok|Bytedance/i.test(ua) ? 'tiktok' : /Instagram/i.test(ua) ? 'instagram' : /Threads|Barcelona/i.test(ua) ? 'threads' : /FBAN|FBAV|FB_IAB/i.test(ua) ? 'facebook' : '';
+  const da = [['instagram', 'instagram'], ['tiktok', 'tiktok'], ['youtube', 'youtube'], ['youtu.be', 'youtube'], ['facebook', 'facebook'], ['fb.', 'facebook'], ['google', 'google'], ['linkedin', 'linkedin'], ['t.co', 'twitter'], ['whatsapp', 'whatsapp'], ['t.me', 'telegram'], ['threads', 'threads']].find(([x]) => ref.includes(x));
+  const fonte = app || (clic === 'ttclid' ? 'tiktok' : clic === 'gclid' ? 'google' : '') || (da && da[1]) || (clic === 'fbclid' ? 'meta' : '');
+  const fine = clic ? '&utm_term=' + clic : '';
+  if (fonte) return `?utm_source=${fonte}&utm_medium=${app ? 'social' : 'referral'}&utm_campaign=mark&utm_content=senza-utm${fine}`;
+  if (ref && !ref.includes('iltuomark') && !ref.includes('iltuojarvis')) { try { return `?utm_source=${encodeURIComponent(new URL(ref).hostname)}&utm_medium=referral&utm_campaign=mark${fine}`; } catch (x) {} }
+  return '?utm_source=diretto&utm_medium=nessuno&utm_campaign=mark' + fine;
+})();
 if (location.search) history.replaceState(null, '', location.pathname);
 const RACCOLTA = 'https://script.google.com/macros/s/AKfycbwkaixtjnRyktxhv5SMuOhi41CzeVnppWjWTFVGofk3dEve_cwbRAhe0acMRREB-xHa8Q/exec';
 /* dentro le app social target=_blank verso WhatsApp si perde: lì si apre nella stessa scheda */
