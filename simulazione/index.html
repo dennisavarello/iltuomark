@@ -197,8 +197,8 @@ var D = [
    extra:{k:"q_gestionale", label:"Come si chiama il gestionale o il programma che usi di più? (facoltativo)", ph:"es. TeamSystem, Danea, Fatture in Cloud"}},
   {k:"q_obiezioni", tipo:"tanti", testo:'<h2>Cosa ti farebbe dire di no?</h2><p class="sotto">Scrivilo pure: in telefonata rispondiamo proprio a quello.</p><p class="nota">Puoi sceglierne più di una</p>', o:["Il costo","Non funziona col programma che uso","Non ho tempo per imparare a usarlo","La privacy dei miei dati","Ho già provato qualcosa e non ha funzionato","Devo sentire il socio o qualcun altro","Niente, voglio solo vederlo funzionare"], solo:"Niente, voglio solo vederlo funzionare",
    extra:{k:"q_obiezioni_testo", label:"Altro? Scrivilo qui (facoltativo)", ph:""}},
-  {k:"q_chi_decide", tipo:"uno", testo:"<h2>Chi decide con te?</h2>", o:["Decido io","Con un socio","Con la famiglia","Con il commercialista o un consulente","Altro"]},
-  {k:"q_quando_chiamare", tipo:"tanti", testo:'<h2>Quando preferisci che ti chiamiamo?</h2><p class="nota">Puoi sceglierne più di una</p>', o:["Mattina, dalle 9 alle 12","Pausa pranzo, dalle 12 alle 14","Pomeriggio, dalle 14 alle 18","Dopo le 18"]}
+  {k:"q_chi_usera", tipo:"uno", testo:"<h2>Chi lo userà: solo tu o anche i tuoi collaboratori?</h2>", o:["Solo io","Io e un collaboratore","Anche i miei dipendenti"]},
+  {k:"q_quando_partire", tipo:"uno", testo:'<h2>Mark si costruisce sul tuo lavoro ed è un investimento. Se fa per te, quando partiresti?</h2>', o:["Subito","Entro un mese","Mi servirebbe pagare a rate","Non adesso, sto solo guardando"]}
 ];
 var N = D.length;
 
@@ -282,8 +282,8 @@ function inviaParte1(){
   var r = S.r, ob = (r.q_obiezioni || []).slice();
   if (r.q_obiezioni_testo) ob.push("Altro: " + r.q_obiezioni_testo);
   var risposte = {q_chi_lo_fa:r.q_chi_lo_fa, q_come_lo_fa:r.q_come_lo_fa, q_ore:r.q_ore, q_chi_paga:r.q_chi_paga, q_quanto_anno:r.q_quanto_anno, q_valore_cliente:r.q_valore_cliente,
-    q_computer:r.q_computer, q_programmi:r.q_programmi, q_gestionale:r.q_gestionale, q_obiezioni:ob, q_chi_decide:r.q_chi_decide, q_quando_chiamare:r.q_quando_chiamare};
-  post({c:C, fase:"parte1", risposte:risposte}).then(function(){ S.inviato1 = true; S.i = N; salva(); meta(); })
+    q_computer:r.q_computer, q_programmi:r.q_programmi, q_gestionale:r.q_gestionale, q_obiezioni:ob, q_chi_usera:r.q_chi_usera, q_quando_partire:r.q_quando_partire};
+  post({c:C, fase:"parte1", risposte:risposte}).then(function(){ S.inviato1 = true; S.i = N; salva(); if (window.markTraccia) markTraccia('SimulazioneCompletata', {}, true); meta(); })
   .catch(function(){
     el('<h2>Le risposte non sono partite</h2><p class="sotto">Capita se la connessione salta. Le tue risposte sono ancora qui: riprova.</p>' + azioni('<button class="pulsante" id="riprova" type="button">Riprova</button>'));
     document.getElementById("riprova").onclick = inviaParte1;
@@ -393,5 +393,6 @@ fetch(API + "?c=" + encodeURIComponent(C)).then(function(x){ if (!x.ok) throw 0;
 }).catch(linkRotto);
 })();
 </script>
+<script src="/pixel.js" defer></script>
 </body>
 </html>

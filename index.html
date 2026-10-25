@@ -755,7 +755,7 @@ function vai(p, salva = true){
   if (p === 6) riepiloga();
   const campo = filtro.querySelector('.domanda.su input, .domanda.su textarea'); if (campo && matchMedia('(min-width:900px)').matches) campo.focus();
 }
-function apri(e){ e.preventDefault(); storia.length = 0; filtro.classList.add('su'); document.body.classList.add('chiuso'); vai(inviata ? 'grazie' : 1, false); }
+function apri(e){ e.preventDefault(); if (!inviata && window.markTraccia) markTraccia('QuestionarioAperto', {}, true); storia.length = 0; filtro.classList.add('su'); document.body.classList.add('chiuso'); vai(inviata ? 'grazie' : 1, false); }
 function chiudi(){ filtro.classList.remove('su'); document.body.classList.remove('chiuso'); }
 document.querySelectorAll('.js-wa').forEach(a => { a.addEventListener('click', apri); a.insertAdjacentHTML('afterbegin', ICONA); });
 filtro.querySelector('.js-chiudi').addEventListener('click', chiudi);
@@ -820,6 +820,7 @@ invia.addEventListener('click', e => {
   }
   if (!inviata) {
     inviata = true;
+    if (window.markTraccia) markTraccia('Lead', {content_name: 'Mark ' + target(risposte)});
     const r = risposte, nome = [r.nome, r.cognome].filter(Boolean).join(' ');
     const corpo = JSON.stringify({nome, cognome: r.cognome, email: r.email, telefono: r.telefono, consenso: filtro.querySelector('.js-consenso').checked, uso: r.uso, attivita: r.attivita, settore: r.settore, persone: 'target ' + target(r), primo: r.primo, processi: r.processi, investimento: r.investimento, numero: numero(r), pagina: location.origin + location.pathname + UTM});
     let ok = false;
@@ -1087,5 +1088,6 @@ const visti = new Set();
 const vedi = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? visti.add(e.target) : visti.delete(e.target)); barra.classList.toggle('su', !visti.size); });
 [eroe, document.querySelector('.js-fine-scena')].forEach(x => vedi.observe(x));
 </script>
+<script src="/pixel.js" defer></script>
 </body>
 </html>
