@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FAF7F0">
+<title>Mark · La tua simulazione</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23E39B3A'/%3E%3C/svg%3E">
+<link rel="preload" href="switzer-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="switzer-400.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Questionario «simulazione di Mark» per i lead nuovi di iltuomark.com (24/10/2026). Link personale dal pulsante del WhatsApp: ?c=<idcontatto>.<firma>.
+     Le risposte vanno alla funzione Google di Davide (progetto mark-questionario) che le scrive nel contatto GHL. Cartella di Davide: non toccare. -->
+<style>
+@font-face{font-family:Stark;src:url(michroma-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Switzer;src:url(switzer-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Switzer;src:url(switzer-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Switzer;src:url(switzer-600.woff2) format('woff2');font-weight:600;font-display:swap}
+/* Piano v2 (25/10, critica di Davide da iPhone: «tutto sto nero e grigino»). Tema CHIARO ad alto contrasto, come Typeform/Tally/Noom/Headway.
+   Avorio fondo #FAF7F0, carta #FFF per le risposte, inchiostro #17150F (17:1), testo secondario #4A463E (8,8:1), bordi #CBC3B3.
+   Ambra #E39B3A SOLO dove va l'occhio: pulsante (testo inchiostro 7,8:1), barra, scelta selezionata, tappa fatta. Ambra scura #8A5410 per le scritte d'accento (5,9:1).
+   Switzer per tutto (titoli 600 in minuscolo normale, corpo 18/27); Michroma solo nel marchio.
+   Cosa memorabile: il percorso in 3 tappe (modulo fatto → questionario → telefonata). */
+:root{--fondo:#FAF7F0;--carta:#FFFFFF;--inchiostro:#17150F;--grigio:#4A463E;--linea:#CBC3B3;--linea-tenue:#E6E0D3;
+  --ambra:#E39B3A;--ambra-forte:#F0A848;--ambra-scura:#8A5410;--ambra-bordo:#B4690E;--ambra-fondo:#FCEFD9;
+  --stark:Stark,Switzer,sans-serif;--testo:Switzer,system-ui,-apple-system,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--curva:cubic-bezier(.32,.72,0,1);color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fondo);color:var(--inchiostro);font:400 18px/1.5 var(--testo);min-height:100svh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ambra-bordo);outline-offset:3px}
+/* testa: indietro · marchio, poi barra e riga della tappa */
+.testa{position:sticky;top:0;z-index:5;background:var(--fondo);padding:8px max(20px,env(safe-area-inset-left)) 12px;border-bottom:1px solid var(--linea-tenue)}
+.testa-riga{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:48px}
+.marchio{font:400 14px/16px var(--stark);letter-spacing:.24em;color:var(--inchiostro)}
+.marchio i{font-style:normal;color:var(--ambra-bordo)}
+.indietro{display:flex;align-items:center;gap:6px;min-height:44px;background:none;border:0;padding:0 12px 0 0;color:var(--inchiostro);cursor:pointer;font:500 16px/1 var(--testo);visibility:hidden}
+.indietro svg{width:20px;height:20px}
+.indietro.si{visibility:visible}
+.barra{max-width:640px;margin:4px auto 0;height:6px;background:var(--linea-tenue);border-radius:3px;overflow:hidden}
+.barra span{display:block;height:100%;width:0;background:var(--ambra);border-radius:3px;transition:width .7s var(--curva)}
+.tappa{max-width:640px;margin:0 auto;display:flex;justify-content:space-between;min-height:20px;padding-top:10px;font:500 15px/20px var(--testo);color:var(--grigio)}
+.tappa b{font-weight:600;color:var(--inchiostro)}
+#contatore{font:500 15px/20px var(--testo);font-variant-numeric:tabular-nums;color:var(--grigio)}
+.tappa[hidden]{display:none}
+main{max-width:680px;margin:0 auto;padding:32px max(20px,env(safe-area-inset-left)) 24px;overflow-x:clip}
+html,body{overflow-x:hidden}
+/* entrata: avanti da destra, indietro da sinistra; le risposte arrivano una dopo l'altra */
+.schermo{animation:entra .42s var(--curva) both}
+.schermo.dietro{animation-name:entraDietro}
+@keyframes entra{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes entraDietro{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.scelte li{animation:sale .38s var(--curva) both;animation-delay:calc(var(--n,0) * 35ms + 80ms)}
+@keyframes sale{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.passo{display:inline-flex;align-items:center;margin:0 0 12px;font:600 16px/22px var(--testo);color:var(--ambra-scura)}
+h1{font:600 32px/1.15 var(--testo);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font:600 27px/1.22 var(--testo);margin:0;letter-spacing:-.015em;text-wrap:pretty}
+.citazione{display:block;margin:0 0 20px;padding:14px 16px;border-left:4px solid var(--ambra);background:var(--carta);border-radius:0 3px 3px 0;color:var(--grigio);font-size:17px;line-height:1.45}
+.sotto{margin:16px 0 0;color:var(--grigio);font-size:18px;line-height:1.5;text-wrap:pretty}
+.nota{margin:10px 0 0;color:var(--grigio);font:500 16px/22px var(--testo)}
+/* risposte: card intere da toccare, alte almeno 60 */
+.scelte{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
+.scelta{position:relative;width:100%;display:flex;align-items:center;gap:14px;text-align:left;min-height:60px;padding:14px 16px;background:var(--carta);border:1.5px solid var(--linea);border-radius:3px;cursor:pointer;font-size:18px;line-height:1.35;font-weight:500;color:var(--inchiostro);transition:border-color .2s var(--curva),background .2s var(--curva),transform .15s var(--curva)}
+.scelta:active{transform:scale(.985)}
+.scelta .lettera{flex:0 0 30px;height:30px;display:grid;place-items:center;border:1.5px solid var(--linea);border-radius:3px;background:var(--fondo);font:600 14px/1 var(--testo);color:var(--grigio);transition:background .2s var(--curva),border-color .2s var(--curva),color .2s}
+.scelta .lettera svg{width:16px;height:16px;display:none}
+.scelta[aria-pressed="true"]{border-color:var(--ambra-bordo);background:var(--ambra-fondo);box-shadow:inset 0 0 0 1px var(--ambra-bordo)}
+.scelta[aria-pressed="true"] .lettera{background:var(--ambra);border-color:var(--ambra-bordo);color:var(--inchiostro)}
+.scelta[aria-pressed="true"] .lettera svg{display:block}
+.scelta[aria-pressed="true"] .lettera em{display:none}
+.scelta .lettera em{font-style:normal}
+.scelta.preso{animation:preso .28s var(--curva)}
+@keyframes preso{40%{transform:scale(.97)}}
+@media (hover:hover){.scelta:hover{border-color:var(--ambra-bordo)}}
+.campo{margin-top:28px}
+.campo label{display:block;font-size:17px;line-height:1.4;font-weight:500;color:var(--inchiostro);margin-bottom:8px}
+.campo input,.campo textarea{width:100%;background:var(--carta);border:1.5px solid var(--linea);border-radius:3px;padding:14px 16px;font-size:18px;line-height:1.4;outline:none;transition:border-color .2s}
+.campo textarea{min-height:140px;resize:vertical}
+.campo input:focus,.campo textarea:focus{border-color:var(--ambra-bordo);box-shadow:0 0 0 3px rgba(227,155,58,.25)}
+.campo ::placeholder{color:#8C8577}
+.sub{margin-top:32px;padding-top:24px;border-top:1px solid var(--linea)}
+.sub h3{margin:0;font:600 21px/1.3 var(--testo)}
+/* pulsante in basso, alla portata del pollice */
+.azioni{position:sticky;bottom:0;z-index:6;margin:32px -20px 0;padding:20px 20px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(rgba(250,247,240,0),var(--fondo) 20px)}
+.azioni-in{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.pulsante{width:100%;min-height:58px;display:flex;align-items:center;justify-content:center;gap:12px;background:var(--ambra);color:var(--inchiostro);border:0;border-radius:3px;font:600 18px/24px var(--testo);cursor:pointer;transition:background .2s,opacity .2s,transform .2s var(--curva)}
+.pulsante svg{width:20px;height:20px;transition:transform .25s var(--curva)}
+.pulsante:hover{background:var(--ambra-forte)}
+.pulsante:hover svg{transform:translateX(3px)}
+.pulsante:active{transform:translateY(1px)}
+.pulsante[disabled]{background:var(--linea-tenue);color:#6B655A;cursor:default}
+.pulsante[disabled]:hover{background:var(--linea-tenue)}
+.sotto-pulsante{margin:0;text-align:center;color:var(--grigio);font-size:15px;line-height:1.4}
+.tasti{display:none}
+.secondario{background:none;border:0;color:var(--inchiostro);min-height:48px;font-size:17px;font-weight:500;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--linea)}
+.carica{margin-top:24px;display:block;border:2px dashed var(--ambra-bordo);border-radius:3px;padding:28px 16px;text-align:center;cursor:pointer;background:var(--carta)}
+.carica b{display:block;font-weight:600;font-size:19px;color:var(--inchiostro)}
+.carica span{display:block;margin-top:6px;color:var(--grigio);font-size:15px}
+.file{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--linea);border-radius:3px;font-size:16px;background:var(--carta)}
+.file button{background:none;border:0;color:var(--inchiostro);text-decoration:underline;min-height:44px;cursor:pointer}
+/* il percorso: tre tappe su una linea verticale */
+.percorso{list-style:none;margin:32px 0 0;padding:0;position:relative}
+.percorso li{position:relative;display:grid;grid-template-columns:32px 1fr;gap:16px;padding-bottom:24px}
+.percorso li:last-child{padding-bottom:0}
+.percorso li:not(:last-child)::before{content:"";position:absolute;left:15px;top:34px;bottom:2px;width:2px;background:var(--linea)}
+.percorso li.fatto:not(:last-child)::before{background:var(--ambra)}
+.percorso .seg{width:32px;height:32px;display:grid;place-items:center;border:1.5px solid var(--linea);border-radius:50%;background:var(--carta);font:600 14px/1 var(--testo);color:var(--grigio)}
+.percorso .seg svg{width:16px;height:16px}
+.percorso .fatto .seg{background:var(--ambra);border-color:var(--ambra);color:var(--inchiostro)}
+.percorso .ora .seg{border:2px solid var(--ambra-bordo);color:var(--ambra-bordo);box-shadow:0 0 0 4px rgba(227,155,58,.2)}
+.percorso .ora .seg::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ambra);animation:respira 2.2s ease-in-out infinite}
+.percorso .ora .seg span{display:none}
+.percorso strong{display:block;font:600 18px/1.35 var(--testo);padding-top:4px;color:var(--inchiostro)}
+.percorso small{display:block;margin-top:2px;color:var(--grigio);font-size:16px;line-height:1.45;text-wrap:pretty}
+.percorso .fatto strong{color:var(--grigio);font-weight:500}
+.percorso .stato{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:3px;background:var(--ambra-fondo);font:600 14px/22px var(--testo);color:var(--ambra-scura);vertical-align:1px}
+.percorso.lungo strong{font-weight:500;color:var(--inchiostro)}
+.percorso.lungo li.ora strong{font-weight:600}
+.punto{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ambra);margin-right:10px;animation:respira 2.2s ease-in-out infinite}
+@keyframes respira{50%{opacity:.35}}
+.errore{margin-top:16px;color:#B3261E;font-size:16px;font-weight:500}
+.carico{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:gira .8s linear infinite;vertical-align:-3px}
+@keyframes gira{to{transform:rotate(360deg)}}
+.video{position:relative;padding-top:56.25%;margin:20px 0 4px;border-radius:3px;overflow:hidden;background:#000;border:1px solid var(--linea)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.fine-titolo{margin-top:40px!important;padding-top:32px;border-top:1px solid var(--linea)}
+@media (min-width:900px){
+  main{padding-top:64px;padding-bottom:64px}
+  h1{font-size:44px}h2{font-size:34px}
+  .azioni{position:static;background:none;margin:0;padding:40px 0 0}
+  .azioni-in{max-width:none;flex-direction:row-reverse;justify-content:flex-start;align-items:center;gap:24px}
+  .pulsante{width:auto;padding:0 40px}
+  .sotto-pulsante{text-align:left}
+  .tasti{display:inline;color:var(--grigio);font:500 14px/20px var(--testo)}
+  main.largo{max-width:1080px}
+  body.largo .testa-riga,body.largo .barra{max-width:1040px}
+  .apertura{display:grid;grid-template-columns:1.1fr 1fr;grid-template-areas:"t d" "s d" "a d" "x d";grid-template-rows:auto auto auto 1fr;column-gap:80px;align-items:start}
+  .apertura h1{grid-area:t}.apertura>.sotto{grid-area:s;font-size:20px}.apertura .destra{grid-area:d}.apertura .azioni{grid-area:a}
+  .apertura .azioni-in{flex-direction:column;align-items:flex-start;gap:16px}
+  .apertura .percorso{margin-top:0}
+  .apertura .destra{padding:36px;border:1.5px solid var(--linea);border-radius:3px;background:var(--carta)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="testa">
+  <div class="testa-riga">
+    <button class="indietro" id="indietro" type="button" aria-label="Domanda precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>Indietro</button>
+    <span class="marchio">M<i>A</i>RK</span>
+  </div>
+  <div class="barra"><span id="barra"></span></div>
+  <div class="tappa" id="riga-tappa" hidden><span id="nome-tappa"></span><span id="contatore"></span></div>
+</header>
+<main id="app" aria-live="polite"><div class="schermo"><p class="sotto"><span class="carico"></span></p></div></main>
+<script>
+(function(){
+var API = "https://questionario-tekjtvnh3q-ew.a.run.app";
+var C = ((decodeURIComponent(location.search) || "").match(/([A-Za-z0-9]{10,40}\.[A-Za-z0-9_-]{12})(?:[^A-Za-z0-9_-]|$)/g) || [""]).pop().replace(/[^A-Za-z0-9_.-]+$/, "");
+var CHIAVE = "mark-q-" + C;
+var app = document.getElementById("app"), barra = document.getElementById("barra"), contatore = document.getElementById("contatore"), indietroBtn = document.getElementById("indietro");
+var info = {nome:"", lavoro:"", chi:""};
+var S = carica() || {i:-1, r:{}, inviato1:false};
+var files = [];
+
+function carica(){ try { return JSON.parse(localStorage.getItem(CHIAVE)); } catch(e){ return null; } }
+function salva(){ try { localStorage.setItem(CHIAVE, JSON.stringify(S)); } catch(e){} }
+function esc(t){ return String(t||"").replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+var verso = 1, tasti = null;
+function el(html, cls){
+  tasti = null; app.className = cls || ""; document.body.classList.toggle("largo", cls === "largo");
+  app.innerHTML = '<div class="schermo' + (verso < 0 ? ' dietro' : '') + '">' + html + '</div>'; verso = 1; window.scrollTo(0,0);
+}
+document.addEventListener("keydown", function(e){ if (tasti && !e.metaKey && !e.ctrlKey && !e.altKey) tasti(e); });
+var FRECCIA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+var SPUNTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+// Il percorso in 3 tappe: a = quante fatte (1 = modulo sul sito). Testi delle tappe: righe brevi, niente promesse nuove.
+function percorso(a, righe){
+  return '<ol class="percorso">' + righe.map(function(r, n){
+    var c = n < a ? "fatto" : (n === a ? "ora" : "");
+    return '<li class="' + c + '"><span class="seg">' + (n < a ? SPUNTA : '<span>' + (n+1) + '</span>') + '</span><div><strong>' + r[0] + (n === a && r[2] ? '<span class="stato">' + r[2] + '</span>' : '') + '</strong>' + (r[1] ? '<small>' + r[1] + '</small>' : '') + '</div></li>';
+  }).join("") + '</ol>';
+}
+
+var PAGANTI = ["Una persona (dipendente o collaboratore)","Un'agenzia","Il commercialista o un consulente","Un programma in abbonamento","Stavo per pagare qualcuno, ma non l'ho ancora fatto"];
+var D = [
+  {k:"q_chi_lo_fa", tipo:"uno", testo:function(){ return (info.lavoro ? '<span class="citazione">Nel modulo ci hai scritto che vorresti toglierti di dosso: «' + esc(info.lavoro) + '»</span><h2>Oggi chi lo fa?</h2>' : '<h2>Il lavoro che vorresti affidare a Mark: oggi chi lo fa?</h2>'); },
+   o:["Lo faccio io, a mano","Un dipendente o un collaboratore","Lo do fuori (agenzia, commercialista, consulente)","Un programma, ma serve comunque tanto lavoro a mano","Nessuno, e resta indietro"],
+   extra:{k:"q_come_lo_fa", label:"Come lo fai, in una riga (facoltativo)", ph:"es. copio i dati dalle email in Excel e poi faccio il preventivo"}},
+  {k:"q_ore", tipo:"uno", testo:"<h2>Quante ore a settimana ti porta via?</h2>", o:["Meno di 2","Da 2 a 5","Da 5 a 10","Da 10 a 20","Più di 20","Non saprei"]},
+  {k:"q_chi_paga", tipo:"tanti", testo:'<h2>Per risolverlo oggi paghi qualcuno, o stavi per farlo?</h2><p class="nota">Puoi sceglierne più di una</p>', o:PAGANTI.concat(["No, lo faccio io"]), solo:"No, lo faccio io",
+   sotto:{k:"q_quanto_anno", se:function(v){ return v.some(function(x){ return PAGANTI.indexOf(x) >= 0; }); }, titolo:"Più o meno quanto, in un anno?", o:["Meno di 1.000 €","Da 1.000 a 5.000 €","Da 5.000 a 15.000 €","Più di 15.000 €","Preferisco non dirlo"]}},
+  {k:"q_valore_cliente", tipo:"uno", testo:"<h2>In media, quanto ti porta un cliente nuovo?</h2>", o:["Meno di 500 €","Da 500 a 2.000 €","Da 2.000 a 10.000 €","Più di 10.000 €","Non lavoro con clienti","Non saprei"]},
+  {k:"q_computer", tipo:"uno", testo:"<h2>Su che computer lavori?</h2>", o:["Mac","Windows","Tutti e due","Non lo so"]},
+  {k:"q_programmi", tipo:"tanti", testo:'<h2>Quali di questi usi per lavoro?</h2><p class="nota">Puoi sceglierne più di uno</p>', o:["Gmail","Outlook","Excel o Fogli Google","WhatsApp Business","Un gestionale","Un CRM per i clienti","Programma delle fatture","Non lo so"], solo:"Non lo so",
+   extra:{k:"q_gestionale", label:"Come si chiama il gestionale o il programma che usi di più? (facoltativo)", ph:"es. TeamSystem, Danea, Fatture in Cloud"}},
+  {k:"q_obiezioni", tipo:"tanti", testo:'<h2>Cosa ti farebbe dire di no?</h2><p class="sotto">Scrivilo pure: in telefonata rispondiamo proprio a quello.</p><p class="nota">Puoi sceglierne più di una</p>', o:["Il costo","Non funziona col programma che uso","Non ho tempo per imparare a usarlo","La privacy dei miei dati","Ho già provato qualcosa e non ha funzionato","Devo sentire il socio o qualcun altro","Niente, voglio solo vederlo funzionare"], solo:"Niente, voglio solo vederlo funzionare",
+   extra:{k:"q_obiezioni_testo", label:"Altro? Scrivilo qui (facoltativo)", ph:""}},
+  {k:"q_chi_decide", tipo:"uno", testo:"<h2>Chi decide con te?</h2>", o:["Decido io","Con un socio","Con la famiglia","Con il commercialista o un consulente","Altro"]},
+  {k:"q_quando_chiamare", tipo:"tanti", testo:'<h2>Quando preferisci che ti chiamiamo?</h2><p class="nota">Puoi sceglierne più di una</p>', o:["Mattina, dalle 9 alle 12","Pausa pranzo, dalle 12 alle 14","Pomeriggio, dalle 14 alle 18","Dopo le 18"]}
+];
+var N = D.length;
+
+// Tappe mostrate in testa (solo grafica: le domande e l'ordine restano quelli approvati)
+function nomeTappa(i){ return i < 4 ? "Il tuo lavoro" : (i < 6 ? "I tuoi programmi" : "La telefonata"); }
+var rigaTappa = document.getElementById("riga-tappa"), nomeTappaEl = document.getElementById("nome-tappa");
+function avanzamento(i){
+  // Barra che parte già avanti e corre più all'inizio che alla fine (meta-analisi Villar 2014: veloce-poi-lenta = meno abbandoni)
+  if (i >= 0 && i < N){ barra.style.width = (8 + 84 * Math.pow(i / N, 0.75)) + "%"; contatore.textContent = (i+1) + " di " + N; nomeTappaEl.innerHTML = "<b>" + nomeTappa(i) + "</b>"; rigaTappa.hidden = false; }
+  else { barra.style.width = i >= N ? "100%" : "0"; contatore.textContent = ""; rigaTappa.hidden = true; }
+  indietroBtn.classList.toggle("si", i > 0 && i < N);
+}
+indietroBtn.onclick = function(){ if (S.i > 0 && S.i < N){ S.i--; verso = -1; salva(); mostra(); } };
+
+function lettera(n){ return "ABCDEFGHI".charAt(n); }
+function bottoniScelte(lista, sel, attr){
+  return '<ul class="scelte">' + lista.map(function(t, n){
+    var on = Array.isArray(sel) ? sel.indexOf(t) >= 0 : sel === t;
+    return '<li style="--n:' + n + '"><button type="button" class="scelta" ' + attr + ' data-v="' + esc(t) + '" aria-pressed="' + on + '"><span class="lettera" aria-hidden="true"><em>' + lettera(n) + '</em>' + SPUNTA + '</span><span>' + esc(t) + '</span></button></li>';
+  }).join("") + '</ul>';
+}
+function azioni(primario, secondario){
+  return '<div class="azioni"><div class="azioni-in">' + (primario || "") + (secondario || "") + '</div></div>';
+}
+
+function domanda(i){
+  var d = D[i], r = S.r;
+  var testo = typeof d.testo === "function" ? d.testo() : d.testo;
+  var sel = r[d.k] || (d.tipo === "tanti" ? [] : "");
+  var h = testo + bottoniScelte(d.o, sel, 'data-g="main"');
+  if (d.sotto) h += '<div class="sub" id="sub" hidden><h3>' + d.sotto.titolo + '</h3>' + bottoniScelte(d.sotto.o, r[d.sotto.k] || "", 'data-g="sub"') + '</div>';
+  if (d.extra) h += '<div class="campo"><label for="extra">' + d.extra.label + '</label><input id="extra" type="text" maxlength="200" autocomplete="off" enterkeyhint="next" placeholder="' + esc(d.extra.ph) + '" value="' + esc(r[d.extra.k] || "") + '"></div>';
+  var serveAvanti = d.tipo === "tanti" || d.extra || d.sotto;
+  h += azioni(serveAvanti ? '<button class="pulsante" id="avanti" type="button">' + (i === N-1 ? "Invia le risposte" : "Avanti") + FRECCIA + '</button>' + '<p class="sotto-pulsante tasti">oppure premi Invio</p>' : '<p class="sotto-pulsante tasti">Tocca una risposta o premi la lettera</p>');
+  el(h);
+  var avanti = document.getElementById("avanti"), sub = document.getElementById("sub"), extra = document.getElementById("extra");
+  function valido(){
+    var v = r[d.k];
+    var ok = d.tipo === "tanti" ? (v && v.length > 0) : !!v;
+    if (ok && d.sotto && d.sotto.se(v || [])) ok = !!r[d.sotto.k];
+    if (avanti) avanti.disabled = !ok;
+    if (sub){ var vis = d.sotto.se(r[d.k] || []); sub.hidden = !vis; if (!vis) delete r[d.sotto.k]; }
+  }
+  app.querySelectorAll(".scelta").forEach(function(b){
+    b.onclick = function(){
+      var v = b.getAttribute("data-v"), g = b.getAttribute("data-g");
+      if (g === "sub"){ r[d.sotto.k] = v; app.querySelectorAll('[data-g="sub"]').forEach(function(x){ x.setAttribute("aria-pressed", x === b); }); }
+      else if (d.tipo === "uno"){
+        r[d.k] = v; app.querySelectorAll('[data-g="main"]').forEach(function(x){ x.setAttribute("aria-pressed", x === b); });
+        if (!serveAvanti){ b.classList.add("preso"); tasti = null; salva(); setTimeout(function(){ prossima(); }, 320); return; }
+      } else {
+        var a = (r[d.k] || []).slice(), at = a.indexOf(v);
+        if (at >= 0) a.splice(at, 1); else { if (v === d.solo) a = []; else a = a.filter(function(x){ return x !== d.solo; }); a.push(v); }
+        r[d.k] = a;
+        app.querySelectorAll('[data-g="main"]').forEach(function(x){ x.setAttribute("aria-pressed", a.indexOf(x.getAttribute("data-v")) >= 0); });
+      }
+      salva(); valido();
+    };
+  });
+  if (extra) extra.oninput = function(){ r[d.extra.k] = extra.value; salva(); };
+  if (avanti) avanti.onclick = function(){ if (!avanti.disabled) prossima(); };
+  // Da computer: lettera = sceglie, Invio = avanti (come Typeform). Mai mentre si scrive nel campo.
+  tasti = function(e){
+    if (e.key === "Enter"){ if (avanti && !avanti.disabled){ e.preventDefault(); avanti.click(); } return; }
+    if (document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+    var n = "ABCDEFGHI".indexOf((e.key || "").toUpperCase()); if (n < 0 || e.key.length !== 1) return;
+    var b = app.querySelectorAll('[data-g="main"]')[n]; if (b) b.click();
+  };
+  valido();
+}
+
+function prossima(){ S.i++; salva(); if (S.i >= N) inviaParte1(); else mostra(); }
+
+function post(dati){
+  return fetch(API, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(dati)}).then(function(x){ return x.json().then(function(j){ if (!x.ok || !j.ok) throw new Error("salvataggio"); return j; }); });
+}
+
+function inviaParte1(){
+  avanzamento(N);
+  el('<p class="passo">Salvataggio</p><h2>Sto salvando le tue risposte…</h2><p class="sotto"><span class="carico"></span></p>');
+  var r = S.r, ob = (r.q_obiezioni || []).slice();
+  if (r.q_obiezioni_testo) ob.push("Altro: " + r.q_obiezioni_testo);
+  var risposte = {q_chi_lo_fa:r.q_chi_lo_fa, q_come_lo_fa:r.q_come_lo_fa, q_ore:r.q_ore, q_chi_paga:r.q_chi_paga, q_quanto_anno:r.q_quanto_anno, q_valore_cliente:r.q_valore_cliente,
+    q_computer:r.q_computer, q_programmi:r.q_programmi, q_gestionale:r.q_gestionale, q_obiezioni:ob, q_chi_decide:r.q_chi_decide, q_quando_chiamare:r.q_quando_chiamare};
+  post({c:C, fase:"parte1", risposte:risposte}).then(function(){ S.inviato1 = true; S.i = N; salva(); meta(); })
+  .catch(function(){
+    el('<h2>Le risposte non sono partite</h2><p class="sotto">Capita se la connessione salta. Le tue risposte sono ancora qui: riprova.</p>' + azioni('<button class="pulsante" id="riprova" type="button">Riprova</button>'));
+    document.getElementById("riprova").onclick = inviaParte1;
+  });
+}
+
+// Esempio vero mirato (Davide 24/10 notte: «o la togliamo o va fatta in modo strategico»): chiediamo IL file che serve
+// per il lavoro che il lead vuole togliersi, e diciamo cosa ci guadagna (Mark sul suo file vero in telefonata, come Studio 15).
+function tipoEsempio(){
+  var l = (info.lavoro || "").toLowerCase();
+  if (/fattur|contab|commercialist|pagament|incass|bilanc|prima nota/.test(l)) return {cosa:"una fattura o l\'export dei movimenti di un mese", perche:"sulle tue fatture"};
+  if (/client|vend|contatt|preventiv|lead|social|instagram|campagn/.test(l)) return {cosa:"un preventivo, la lista dei tuoi contatti o un messaggio che mandi ai clienti", perche:"sui tuoi clienti"};
+  if (/mail|posta|agenda|organizz|ricord|dimentic|scadenz|appuntament|telefon/.test(l)) return {cosa:"uno screenshot della tua posta o della tua agenda di questa settimana", perche:"sulla tua posta e sulla tua agenda"};
+  return {cosa:"il file o la schermata dove oggi perdi più tempo", perche:"sul tuo lavoro vero"};
+}
+
+function meta(){
+  avanzamento(N + 1);
+  var e = tipoEsempio();
+  el('<p class="passo"><span class="punto"></span>Parte obbligatoria completata</p><h1>Ci sei' + (info.nome ? ', ' + esc(info.nome) : '') + '</h1>' +
+     '<p class="sotto">Con queste risposte la simulazione si può già preparare.</p>' +
+     '<h2 style="margin-top:32px">Vuoi vedere Mark al lavoro su un tuo file vero?</h2>' +
+     '<p class="sotto">Mandaci ' + e.cosa + '. In telefonata ti facciamo vedere Mark che lavora proprio su quello, invece che su un esempio inventato.</p>' +
+     '<p class="sotto">Bastano una foto o uno screenshot dal telefono. Nomi e cifre puoi coprirli.</p>' +
+     azioni('<button class="pulsante" id="esempio" type="button">Sì, carico un file' + FRECCIA + '</button>', '<button class="secondario" id="basta" type="button">No, va bene così</button>'));
+  document.getElementById("esempio").onclick = caricaFile;
+  document.getElementById("basta").onclick = fine;
+}
+
+function caricaFile(){
+  var lista = files.map(function(f, n){ return '<div class="file"><span>' + esc(f.name) + '</span><button type="button" data-n="' + n + '">Togli</button></div>'; }).join("");
+  var e = tipoEsempio();
+  el('<p class="passo">Il tuo file · facoltativo</p><h2>Carica ' + e.cosa + '</h2>' +
+     '<p class="sotto">Lo usiamo solo per preparare la simulazione ' + e.perche + '. Nomi e cifre puoi coprirli.</p>' +
+     (files.length < 3 ? '<label class="carica" for="fileinput"><b>Carica un file</b><span>Foto, PDF, Word, Excel · fino a 10 MB · massimo 3</span></label><input id="fileinput" type="file" hidden accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt">' : '') +
+     lista + '<p class="errore" id="err" hidden></p>' +
+     azioni('<button class="pulsante" id="avanti" type="button">' + (files.length ? "Avanti" : "Salto questo passaggio") + '</button>'));
+  var inp = document.getElementById("fileinput"), err = document.getElementById("err");
+  if (inp) inp.onchange = function(){
+    var f = inp.files[0]; if (!f) return;
+    if (f.size > 10 * 1024 * 1024 || files.reduce(function(t, x){ return t + x.size; }, f.size) > 20 * 1024 * 1024){ err.hidden = false; err.textContent = "Questo file supera i 10 MB: prova con una foto o uno screenshot."; return; }
+    files.push(f); caricaFile();
+  };
+  app.querySelectorAll(".file button").forEach(function(b){ b.onclick = function(){ files.splice(+b.getAttribute("data-n"), 1); caricaFile(); }; });
+  document.getElementById("avanti").onclick = altro;
+}
+
+function altro(){
+  el('<p class="passo">Ultima cosa · facoltativa</p><h2>C\'è altro che dobbiamo sapere?</h2>' +
+     '<div class="campo"><label for="altro">Facoltativo</label><textarea id="altro" maxlength="3000" placeholder="come lo fai oggi passo per passo, cosa ti fa perdere più tempo, cosa hai già provato">' + esc(S.r.altro || "") + '</textarea></div>' +
+     '<p class="errore" id="err" hidden></p>' + azioni('<button class="pulsante" id="invia" type="button">Invia</button>'));
+  var t = document.getElementById("altro"); t.oninput = function(){ S.r.altro = t.value; salva(); };
+  var b = document.getElementById("invia");
+  b.onclick = function(){
+    if (!files.length && !(S.r.altro || "").trim()){ fine(); return; }
+    b.disabled = true; b.innerHTML = '<span class="carico"></span> Invio in corso';
+    Promise.all(files.map(function(f){ return new Promise(function(ok, ko){ var fr = new FileReader(); fr.onload = function(){ ok({name:f.name, type:f.type, data:fr.result}); }; fr.onerror = ko; fr.readAsDataURL(f); }); }))
+    .then(function(lista){ return post({c:C, fase:"parte2", altro:S.r.altro || "", files:lista}); })
+    .then(function(){ files = []; fine(); })
+    .catch(function(){ b.disabled = false; b.textContent = "Riprova"; var e = document.getElementById("err"); e.hidden = false; e.textContent = "L'invio non è riuscito. Controlla la connessione e riprova."; });
+  };
+}
+
+function fine(){
+  S.fine = true; salva(); avanzamento(N + 1); barra.style.width = "100%";
+  el('<p class="passo"><span class="punto"></span>Ricevuto</p><h1>Fatto' + (info.nome ? ', ' + esc(info.nome) : '') + '</h1>' +
+     '<p class="sotto">Prima della telefonata guarda questo video di 20 minuti: Dennis ti fa vedere come usiamo Mark ogni giorno nelle nostre aziende, con esempi veri.</p>' +
+     '<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/FF3P4joKUr0" title="Come usiamo Mark nelle nostre aziende" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>' +
+     '<h2 class="fine-titolo">Cosa succede adesso</h2>' +
+     '<ol class="percorso lungo"><li class="ora"><span class="seg"><span>1</span></span><div><strong>Prepariamo la simulazione di Mark applicata direttamente alla tua attività, con le risposte che ci hai dato.</strong></div></li>' +
+     '<li><span class="seg"><span>2</span></span><div><strong>Poi ti chiamiamo al numero che ci hai lasciato, nella fascia oraria che hai scelto.</strong></div></li>' +
+     '<li><span class="seg"><span>3</span></span><div><strong>In telefonata vedi la simulazione sul tuo lavoro e capisci subito se fa per te.</strong></div></li></ol>' +
+     '<p class="sotto">Se ti viene in mente un altro esempio, lo puoi mandare su WhatsApp allo stesso numero da cui ti abbiamo scritto.</p>');
+}
+
+// Prima schermata (metodo «Landing e Questionari che Convertono»): parole del WhatsApp + nome, cosa ottiene, percorso già iniziato
+// (il modulo sul sito è fatto davvero), quante domande e minuti, un pulsante in basso. Niente riquadro di numeri (Davide 24/10).
+function apertura(){
+  avanzamento(-1);
+  el('<div class="apertura"><h1>Ciao' + (info.nome ? ' ' + esc(info.nome) : '') + ', prepariamo Mark sul tuo lavoro</h1>' +
+     '<p class="sotto">Con le tue risposte prepariamo una simulazione di Mark applicata direttamente alla tua attività e te la facciamo vedere quando ti chiamiamo.</p>' +
+     '<div class="destra">' + percorso(1, [["Modulo sul sito"], ["Questionario", "9 domande, quasi tutte a un tocco", "2 minuti"], ["Telefonata con la simulazione", "Ti chiamiamo nella fascia oraria che scegli tu"]]) +
+     '</div>' +
+     azioni('<button class="pulsante" id="via" type="button">Iniziamo' + FRECCIA + '</button>', '<p class="sotto-pulsante">Le risposte servono solo a preparare la tua simulazione.</p>') + '</div>', "largo");
+  document.getElementById("via").onclick = function(){ S.i = 0; salva(); mostra(); };
+  tasti = function(e){ if (e.key === "Enter"){ e.preventDefault(); document.getElementById("via").click(); } };
+}
+
+function mostra(){
+  if (S.fine) return fine();
+  if (S.inviato1 && S.i >= N) return meta();
+  if (S.i < 0) return apertura();
+  if (S.i >= N) return inviaParte1();
+  avanzamento(S.i); domanda(S.i);
+}
+
+function linkRotto(){
+  avanzamento(-1);
+  el('<h1>Questo link non funziona</h1><p class="sotto">Apri il questionario dal pulsante del messaggio WhatsApp che ti abbiamo mandato. Se non lo trovi, rispondi a quel messaggio e te lo rimandiamo.</p>');
+}
+
+if (!/^[A-Za-z0-9]{10,40}\.[A-Za-z0-9_-]{12}$/.test(C)) return linkRotto();
+fetch(API + "?c=" + encodeURIComponent(C)).then(function(x){ if (!x.ok) throw 0; return x.json(); }).then(function(j){
+  info = j;
+  if (j.fatto && !S.inviato1){ S.inviato1 = true; S.i = N; salva(); }
+  mostra();
+}).catch(linkRotto);
+})();
+</script>
+</body>
+</html>
