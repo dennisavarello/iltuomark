@@ -203,7 +203,7 @@ var D = [
 var N = D.length;
 
 // Tappe mostrate in testa (solo grafica: le domande e l'ordine restano quelli approvati)
-function nomeTappa(i){ return i < 4 ? "Il tuo lavoro" : (i < 6 ? "I tuoi programmi" : "La telefonata"); }
+function nomeTappa(i){ return i < 4 ? "Il tuo lavoro" : (i < 6 ? "I tuoi programmi" : "Per partire"); }
 var rigaTappa = document.getElementById("riga-tappa"), nomeTappaEl = document.getElementById("nome-tappa");
 function avanzamento(i){
   // Barra che parte già avanti e corre più all'inizio che alla fine (meta-analisi Villar 2014: veloce-poi-lenta = meno abbandoni)
