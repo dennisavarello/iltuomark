@@ -13,6 +13,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v4 (28 ott, 19:20): via i numeri sotto Giacomo, via la società dal piede, il play si vede anche quando il video non c'è ancora (con «Video a breve»).
+  ⛔ Il funnel (/) NON deve mai avere un link a questa pagina: Instagram guarda il funnel, le testimonianze restano fuori dalla sua vista. robots.txt chiude tutto il dominio.
   v3 (28 ott, 19:05): Dennis «molto più minimal, molte meno scritte, niente corsivo che non si capisce». Via corsivo, righe del mestiere e momenti; restano nome, azienda, una frase, il video, tre numeri in due parole.
   TESTIMONIANZE · v2 (28 ott 2026). Dennis: «più minimal, deve vendere di brutto» · «nomi e cosa fanno sopra e sotto il video» · «da MacBook il video è troppo largo».
   Colonna unica da 880 px; il video non supera mai l'altezza dello schermo. Sopra: azienda, nome, la sua frase. Sotto: tre risultati coi suoi numeri e i momenti cliccabili.
@@ -122,7 +124,7 @@ p{margin:0;text-wrap:pretty}
 </section>
 
 <footer class="piede mono">
-  <span>Mark I · Dennis Avarello Consulting</span>
+  <span>Mark I</span>
   <a href="/privacy.html">Privacy</a>
 </footer>
 
@@ -135,11 +137,7 @@ const TESTIMONIANZE = [
     mestiere: 'Profilati in acciaio su misura, B2B. Segue da solo marketing, vendita e gestione.',
     frase: "L'investimento migliore fatto fino ad ora.",
     durata: '28 min', poster: 'giacomo-1.jpg', yt: '', mp4: '', inizio: 38,
-    risultati: [
-      ['10', 'min', 'per lead'],
-      ['60', 'ore', 'libere al mese'],
-      ['850', '€', 'risparmiati'],
-    ],
+    risultati: [],
     momenti: [
       [236, 'Il dubbio prima di pagare'],
       [454, 'Una lead in 10 minuti'],
@@ -180,7 +178,7 @@ TESTIMONIANZE.forEach(t => {
     </div>
     <div class="schermo entra ${pronto ? 'pronto' : ''}" ${pronto ? `role="button" tabindex="0" aria-label="Guarda la testimonianza di ${testo(t.nome)}, ${t.durata}"` : ''}>
       <img src="${t.poster}" alt="${testo(t.nome)}" loading="lazy">
-      ${pronto ? `<span class="play"><span>${PLAY}</span></span>` : '<span class="attesa mono">Video a breve</span>'}
+      <span class="play"><span>${PLAY}</span></span>${pronto ? '' : '<span class="attesa mono">Video a breve</span>'}
     </div>
     <div class="entra">
       ${t.risultati.length ? `<div class="risultati">${t.risultati.map(([n, u, d]) => `<div class="risultato"><b>${testo(n)}${u ? `<small>${testo(u)}</small>` : ''}</b><span>${testo(d)}</span></div>`).join('')}</div>` : ''}
