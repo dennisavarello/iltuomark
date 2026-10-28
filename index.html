@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v22 (28 ott): via la scena «10 POSTI A OTTOBRE» (Dennis: «la scarsità la fa Davide in call»).
   v21 (24 ott): numeri corretti. Freelance e privati → Jarvis Setter (393520975156), microimprese e aziende → Jarvis Aziende (393513735369): tutti e due collegati al GHL «Jarvis». Via il numero personale di Davide e il 352 068 6513 (non collegato).
   v20 (24 ott): torna il WhatsApp scritto dalla lead col riepilogo già pronto. Freelance e privati → Dejan (393520686513, ex Jarvis Setter), microimprese e aziende → Davide (393520936895). Lead salvata nel CRM prima di aprire WhatsApp.
   v19 (23 ott, 20:10): sfera col glow di Jarvis: ambra più luminosa, puntini +28%, luce +35%, bagliore 1,7 (era 1,15).
@@ -607,14 +608,6 @@ footer a{color:var(--titanio)}
     </div>
   </section>
 
-  <section class="scena js-posti-scena">
-    <div class="angoli"><i></i><i></i><i></i><i></i></div>
-    <h2 class="titolo compare js-decifra">10 POSTI<br><span class="ambra">A OTTOBRE.</span></h2>
-    <p class="riga compare d1">Ogni Mark lo accendo io, con te.</p>
-    <div class="posti js-posti" aria-label="10 posti a ottobre"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <a class="pulsante compare d2 js-wa" href="#">Voglio il mio Mark</a>
-  </section>
-
   <section class="scena">
     <div class="angoli"><i></i><i></i><i></i><i></i></div>
     <h2 class="titolo compare js-decifra">DOMANDE</h2>
@@ -1003,7 +996,7 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersectin
 }), {threshold:.3});
 document.querySelectorAll('.scena:not(.eroe)').forEach(s => io.observe(s));
 /* il suono di un titolo parte solo quando il titolo è arrivato a metà schermo, non al primo movimento */
-const FIRME = ['agentica', 'telefono', 'nessuna', 'voce', 'memoria', 'tutorial', 'passi', 'posti', 'domande', 'fine'], scene = [...document.querySelectorAll('.scena:not(.eroe)')];
+const FIRME = ['agentica', 'telefono', 'nessuna', 'voce', 'memoria', 'tutorial', 'passi', 'domande', 'fine'], scene = [...document.querySelectorAll('.scena:not(.eroe)')];
 /* niente suoni appesi ai titoli: ogni suono parte con il movimento che è suo */
 
 
