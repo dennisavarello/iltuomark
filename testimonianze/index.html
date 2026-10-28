@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Mark · Testimonianze</title>
-<meta name="description" content="Gli imprenditori che lavorano con Mark raccontano com'è andata, per intero.">
+<meta name="description" content="Imprenditori che lavorano con Mark raccontano com'è andata, coi loro numeri.">
 <meta name="theme-color" content="#050505">
 <meta property="og:title" content="Mark · Parlano loro">
-<meta property="og:description" content="Gli imprenditori che lavorano con Mark raccontano com'è andata.">
+<meta property="og:description" content="«L'investimento migliore fatto fino ad ora.» Giacomo Torreggiani, Profilsystem.">
 <meta property="og:image" content="https://iltuomark.com/testimonianze/giacomo-1.jpg">
 <meta property="og:url" content="https://iltuomark.com/testimonianze/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
-  TESTIMONIANZE · v1 (28 ott 2026). Dennis: «una pagina testimonianze sul dominio di Mark, dove le carichiamo tutte».
-  Per aggiungerne una: una riga in cima a TESTIMONIANZE (la più nuova va prima) + il poster in questa cartella.
-  yt = codice del video YouTube «non in elenco» (quello dopo v= nel link). mp4 = file già online. Senza nessuno dei due la card non compare.
-  Metodo: cervello-claude/Testimonianze Video — Il Metodo per Pubblicarle su iltuomark.com (Ott 2026).md
+  TESTIMONIANZE · v2 (28 ott 2026). Dennis: «più minimal, deve vendere di brutto» · «nomi e cosa fanno sopra e sotto il video» · «da MacBook il video è troppo largo».
+  Colonna unica da 880 px; il video non supera mai l'altezza dello schermo. Sopra: azienda, nome, la sua frase. Sotto: tre risultati coi suoi numeri e i momenti cliccabili.
+  Frasi e numeri presi dalle trascrizioni vere (consulenze/_assets-testimonianze/*-trascritto*.srt), mai scritti da noi.
+  Per aggiungerne una: un oggetto in cima a TESTIMONIANZE + poster in questa cartella. yt = codice YouTube «Non in elenco»; mp4 = file già online; senza nessuno dei due la card resta col poster e «A breve».
+  Metodo: cervello-claude/Testimonianze Video — Il Metodo per Pubblicarle su iltuomark.com (Ott 2026).md · skill «testimonianza».
 -->
 <style>
 @font-face{font-family:Stark;src:url(/michroma-400.woff2) format('woff2');font-weight:400;font-display:swap}
@@ -25,75 +26,111 @@
 @font-face{font-family:'Geist Mono';src:url(/geist-mono-500.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:'Instrument Serif';src:url(/instrument-serif-400-corsivo.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
 :root{
-  --ossidiana:#050505;--grafite:#0F0F10;--linea:#1F1F21;--avorio:#F2F0EB;--titanio:#8C8C8C;--ambra:#E39B3A;--ambra-forte:#F2B25E;
+  --nero:#050505;--grafite:#0E0E0F;--linea:#1C1C1E;--avorio:#F2F0EB;--titanio:#8C8C8C;--spento:#5A5A5C;--ambra:#E39B3A;--ambra-forte:#F2B25E;
   --stark:Stark,Switzer,sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--corsivo:'Instrument Serif',Georgia,serif;
-  --curva:cubic-bezier(.32,.72,0,1);color-scheme:dark
+  --curva:cubic-bezier(.32,.72,0,1);
+  --colonna:min(880px, calc(100vw - 32px));
+  color-scheme:dark
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--ossidiana);color:var(--avorio);font:500 17px/1.5 var(--testo);overflow-x:hidden}
+body{margin:0;background:var(--nero);color:var(--avorio);font:500 17px/1.5 var(--testo);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:var(--stark);font-weight:400;margin:0;letter-spacing:.04em;text-transform:uppercase;text-wrap:balance}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2{font-family:var(--stark);font-weight:400;margin:0;letter-spacing:.06em;text-transform:uppercase;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
-:focus-visible{outline:2px solid var(--ambra);outline-offset:4px}
-.corsivo{font-family:var(--corsivo);font-style:italic;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.3em;line-height:.8}
-.mono{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--titanio)}
+:focus-visible{outline:2px solid var(--ambra);outline-offset:4px;border-radius:4px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--titanio)}
+.colonna{width:var(--colonna);margin:0 auto}
 
-.testa{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:18px max(16px,4vw);background:linear-gradient(var(--ossidiana) 60%,transparent)}
-.marchio{font-family:var(--stark);font-size:15px;letter-spacing:.32em;display:flex;align-items:center;gap:10px}
+/* testa: marchio e il tasto per comprare, sempre a portata */
+.testa{position:fixed;inset:0 0 auto;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:16px max(16px,3vw);background:linear-gradient(rgba(5,5,5,.92),rgba(5,5,5,0));pointer-events:none}
+.testa>*{pointer-events:auto}
+.marchio{font-family:var(--stark);font-size:14px;letter-spacing:.34em;display:flex;align-items:center;gap:10px}
 .marchio i{width:6px;height:6px;border-radius:50%;background:var(--ambra);box-shadow:0 0 10px var(--ambra)}
+.pillola{font:600 14px/1 var(--testo);padding:11px 18px;border-radius:999px;border:1px solid rgba(227,155,58,.5);color:var(--ambra-forte);transition:background .3s,color .3s}
+.pillola:hover{background:var(--ambra);color:#140C02}
 
-.eroe{padding:12vh max(16px,4vw) 9vh;max-width:1240px;margin:0 auto}
-.eroe h1{font-size:clamp(40px,8.4vw,112px);line-height:1}
-.eroe p{margin-top:28px;font-size:clamp(18px,1.6vw,22px);color:var(--titanio);max-width:30ch}
+/* eroe */
+.eroe{padding:clamp(120px,20vh,200px) 0 clamp(56px,9vh,96px);text-align:center}
+.eroe h1{font-size:clamp(34px,6vw,76px);line-height:1.02}
+.eroe h1 em{font-family:var(--corsivo);font-style:italic;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.25em;line-height:.8}
+.eroe .mono{display:block;margin-bottom:26px}
 
-.elenco{max-width:1240px;margin:0 auto;padding:0 max(16px,4vw);display:grid;gap:72px 32px;grid-template-columns:1fr}
-@media (min-width:900px){.elenco{grid-template-columns:1fr 1fr}.elenco .prima{grid-column:1/-1}}
-.voce{opacity:0;transform:translateY(24px);transition:opacity .9s var(--curva),transform .9s var(--curva)}
-.voce.vista{opacity:1;transform:none}
-.schermo{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--grafite);border:1px solid var(--linea);cursor:pointer}
-.schermo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) brightness(.82);transition:transform 1.2s var(--curva),filter .6s}
-.schermo:hover img{transform:scale(1.025);filter:saturate(1) brightness(.92)}
-.schermo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,5,.75))}
-.play{position:absolute;z-index:2;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;border:1px solid rgba(242,178,94,.55);background:rgba(5,5,5,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;transition:transform .5s var(--curva),background .4s}
-.play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:1px solid rgba(227,155,58,.25);animation:onda 2.6s ease-out infinite}
-@keyframes onda{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
-.play svg{width:24px;height:24px;margin-left:4px;fill:var(--ambra-forte)}
-.schermo:hover .play{transform:scale(1.08);background:rgba(227,155,58,.18)}
-.durata{position:absolute;z-index:2;right:16px;bottom:14px;color:var(--avorio)}
+/* una testimonianza */
+.voce{padding:clamp(56px,10vh,110px) 0;border-top:1px solid var(--linea)}
+.voce:first-child{border-top:0;padding-top:0}
+.chi{display:flex;align-items:baseline;justify-content:space-between;gap:12px 24px;flex-wrap:wrap}
+.chi h2{font-size:clamp(22px,2.6vw,32px);line-height:1.1}
+.chi .mono{color:var(--ambra)}
+.mestiere{margin-top:8px;color:var(--titanio);font-size:16px}
+.frase{margin:28px 0 32px;font-family:var(--corsivo);font-style:italic;font-weight:400;font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-.005em;color:var(--avorio)}
+.frase::before{content:"«";color:var(--ambra)}
+.frase::after{content:"»";color:var(--ambra)}
+
+.schermo{position:relative;width:min(100%, calc((100svh - 150px) * 16 / 9));margin:0 auto;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--grafite);box-shadow:0 0 0 1px var(--linea),0 40px 80px -40px rgba(227,155,58,.18)}
+.schermo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) brightness(.78);transition:filter .6s}
+.schermo.pronto{cursor:pointer}
+.schermo.pronto:hover img{filter:saturate(.95) brightness(.9)}
+.play{position:absolute;inset:0;display:grid;place-items:center}
+.play span{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:rgba(5,5,5,.4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(242,178,94,.5);transition:transform .5s var(--curva),background .3s}
+.play svg{width:20px;height:20px;margin-left:3px;fill:var(--ambra-forte)}
+.schermo.pronto:hover .play span{transform:scale(1.08);background:rgba(227,155,58,.2)}
+.attesa{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);padding:9px 16px;border-radius:999px;background:rgba(5,5,5,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--avorio)}
 .schermo iframe,.schermo video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.schermo.acceso{cursor:auto}
-.schermo.acceso::after{display:none}
-.chi{margin-top:22px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
-.chi h2{font-size:clamp(20px,2.2vw,30px);line-height:1.15}
-.prima .chi h2{font-size:clamp(24px,3.2vw,44px)}
-.chi p{width:100%;color:var(--titanio);font-size:17px}
 
-.chiusura{padding:18vh max(16px,4vw) 14vh;text-align:center}
-.chiusura h2{font-size:clamp(30px,5.4vw,72px);line-height:1.05}
-.pulsante{display:inline-block;margin-top:40px;padding:18px 34px;border-radius:999px;background:var(--ambra);color:#140C02;font:600 17px/1 var(--testo);box-shadow:0 0 40px rgba(227,155,58,.25);transition:transform .4s var(--curva),box-shadow .4s}
+/* sotto il video: i suoi risultati, poi i momenti */
+.risultati{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.risultato{padding:24px 20px 24px 0}
+.risultato+.risultato{padding-left:20px;border-left:1px solid var(--linea)}
+.risultato b{display:block;font:400 clamp(22px,2.6vw,32px)/1.1 var(--stark);letter-spacing:.02em;color:var(--avorio)}
+.risultato b small{font:600 .55em/1 var(--testo);letter-spacing:.02em;color:var(--ambra);margin-left:6px}
+.risultato span{display:block;margin-top:8px;color:var(--titanio);font-size:15px;line-height:1.4}
+.momenti{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
+.momenti .mono{width:100%;margin-bottom:6px}
+.momento{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;border:1px solid var(--linea);font-size:14px;color:var(--avorio);transition:border-color .3s,background .3s}
+.momento i{font:500 11px/1 var(--mono);letter-spacing:.08em;font-style:normal;color:var(--ambra)}
+.momento:hover{border-color:rgba(227,155,58,.55);background:rgba(227,155,58,.06)}
+.momento[disabled]{opacity:.45;cursor:default}
+.momento[disabled]:hover{border-color:var(--linea);background:none}
+
+/* chiusura */
+.chiusura{padding:clamp(100px,18vh,180px) 0;text-align:center;border-top:1px solid var(--linea)}
+.chiusura h2{font-size:clamp(28px,5vw,64px);line-height:1.05}
+.chiusura h2 em{font-family:var(--corsivo);font-style:italic;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.25em;line-height:.8}
+.pulsante{display:inline-block;margin-top:36px;padding:18px 34px;border-radius:999px;background:var(--ambra);color:#140C02;font:600 17px/1 var(--testo);box-shadow:0 0 40px rgba(227,155,58,.25);transition:transform .4s var(--curva),box-shadow .4s}
 .pulsante:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(227,155,58,.4)}
-.piede{padding:28px max(16px,4vw) 40px;border-top:1px solid var(--linea);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.piede a:hover{color:var(--avorio)}
-@media (prefers-reduced-motion:reduce){.voce{opacity:1;transform:none;transition:none}.play::before{animation:none}}
+.piede{padding:24px max(16px,3vw) 36px;border-top:1px solid var(--linea);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+.entra{opacity:0;transform:translateY(20px);transition:opacity .9s var(--curva),transform .9s var(--curva)}
+.entra.vista{opacity:1;transform:none}
+
+@media (max-width:640px){
+  .risultati{grid-template-columns:1fr}
+  .risultato,.risultato+.risultato{padding:18px 0;border-left:0}
+  .risultato+.risultato{border-top:1px solid var(--linea)}
+  .play span{width:60px;height:60px}
+  .pillola{padding:10px 14px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.entra{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
 
 <header class="testa">
   <a class="marchio" href="/"><i></i>MARK</a>
-  <span class="mono">Testimonianze</span>
+  <a class="pillola" href="/">Voglio il mio Mark</a>
 </header>
 
-<section class="eroe">
-  <h1>Parlano <span class="corsivo">loro.</span></h1>
-  <p>Imprenditori che lavorano con Mark ogni giorno raccontano com'è andata.</p>
+<section class="eroe colonna">
+  <span class="mono">Testimonianze · Mark I</span>
+  <h1>Parlano <em>loro.</em></h1>
 </section>
 
-<main class="elenco js-elenco"></main>
+<main class="colonna js-elenco"></main>
 
-<section class="chiusura">
-  <h2>La prossima<br>è la <span class="corsivo">tua.</span></h2>
+<section class="chiusura colonna">
+  <h2>La prossima<br>è la <em>tua.</em></h2>
   <a class="pulsante" href="/">Voglio il mio Mark</a>
 </section>
 
@@ -103,54 +140,104 @@ p{margin:0;text-wrap:pretty}
 </footer>
 
 <script>
-/* La più nuova va in cima. Una riga = una testimonianza. */
+/* La più nuova va in cima. Frasi, numeri e minuti presi dalla trascrizione vera.
+   inizio = secondo da cui parte il video (salta la preparazione prima della prima domanda). */
 const TESTIMONIANZE = [
-  { nome: 'Giacomo Torreggiani', ruolo: 'Profilsystem · profilati in acciaio su misura', durata: '28 min',
-    poster: 'giacomo-1.jpg', yt: '', mp4: '' },
-  { nome: 'Stefano Coggi', ruolo: 'Personal trainer', durata: '8 min',
-    poster: 'stefano-1.jpg', yt: '', mp4: 'https://iltuojarvis.com/v/1a22e1368b/testimonianza-stefano.mp4' },
+  {
+    nome: 'Giacomo Torreggiani', azienda: 'Profilsystem',
+    mestiere: 'Profilati in acciaio su misura, B2B. Segue da solo marketing, vendita e gestione.',
+    frase: "L'investimento migliore fatto fino ad ora.",
+    durata: '28 min', poster: 'giacomo-1.jpg', yt: '', mp4: '', inizio: 38,
+    risultati: [
+      ['10', 'min', 'per qualificare una lead. Prima ci voleva più di un\'ora.'],
+      ['60', 'ore', 'al mese che non passa più sulle schede dei clienti.'],
+      ['850', '€', 'risparmiati in un anno sull\'assicurazione, con una ricerca.'],
+    ],
+    momenti: [
+      [236, 'Il dubbio prima di pagare'],
+      [454, 'Una lead in 10 minuti'],
+      [844, 'Un vocale uscito dal cliente'],
+      [1031, '850 € con una ricerca'],
+      [1508, 'Quando qualcosa si inceppa'],
+      [1696, '«Se hai ancora dubbi, lascia stare»'],
+    ],
+  },
+  {
+    nome: 'Stefano Coggi', azienda: 'Personal trainer',
+    mestiere: 'Lezioni uno a uno, coaching e programmi a distanza.',
+    frase: 'Potreste venderlo al doppio o al triplo.',
+    durata: '8 min', poster: 'stefano-1.jpg', yt: '', mp4: 'https://iltuojarvis.com/v/1a22e1368b/testimonianza-stefano.mp4', inizio: 0,
+    risultati: [
+      ['Fatture', '', 'create e mandate da Mark, che controlla anche il pagamento.'],
+      ['Agenda', '', 'gestita: appuntamenti, lezioni saltate, sostituzioni.'],
+      ['Zero', '', 'competenze tecniche. «Quello che pensi glielo dici, lui lo fa.»'],
+    ],
+    momenti: [
+      [152, 'La paura prima di comprarlo'],
+      [188, '«Fa tutto lui»'],
+      [318, 'Le fatture le fa lui'],
+      [435, 'A chi lo consiglia'],
+    ],
+  },
 ];
 
 const elenco = document.querySelector('.js-elenco');
 const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg>';
+const mmss = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+const testo = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-TESTIMONIANZE.filter(t => t.yt || t.mp4).forEach((t, i) => {
+TESTIMONIANZE.forEach(t => {
+  const pronto = !!(t.yt || t.mp4);
   const voce = document.createElement('article');
-  voce.className = 'voce' + (i === 0 ? ' prima' : '');
+  voce.className = 'voce';
   voce.innerHTML = `
-    <div class="schermo" role="button" tabindex="0" aria-label="Guarda la testimonianza di ${t.nome}">
-      <img src="${t.poster}" alt="${t.nome}" loading="${i < 2 ? 'eager' : 'lazy'}">
-      <span class="play">${PLAY}</span>
-      <span class="durata mono">${t.durata}</span>
+    <div class="entra">
+      <div class="chi"><h2>${testo(t.nome)}</h2><span class="mono">${testo(t.azienda)}</span></div>
+      <p class="mestiere">${testo(t.mestiere)}</p>
+      <p class="frase">${testo(t.frase)}</p>
     </div>
-    <div class="chi">
-      <h2>${t.nome}</h2>
-      <p>${t.ruolo}</p>
+    <div class="schermo entra ${pronto ? 'pronto' : ''}" ${pronto ? `role="button" tabindex="0" aria-label="Guarda la testimonianza di ${testo(t.nome)}, ${t.durata}"` : ''}>
+      <img src="${t.poster}" alt="${testo(t.nome)}" loading="lazy">
+      ${pronto ? `<span class="play"><span>${PLAY}</span></span>` : '<span class="attesa mono">Video a breve</span>'}
+    </div>
+    <div class="entra">
+      <div class="risultati">${t.risultati.map(([n, u, d]) => `<div class="risultato"><b>${testo(n)}${u ? `<small>${testo(u)}</small>` : ''}</b><span>${testo(d)}</span></div>`).join('')}</div>
+      <div class="momenti"><span class="mono">I momenti · ${t.durata}</span>${t.momenti.map(([s, l]) => `<button class="momento" data-s="${s}" ${pronto ? '' : 'disabled'}><i>${mmss(s)}</i>${testo(l)}</button>`).join('')}</div>
     </div>`;
+
   const schermo = voce.querySelector('.schermo');
-  const accendi = () => {
-    if (schermo.classList.contains('acceso')) return;
-    spegniTutti();
+  const poster = schermo.innerHTML;
+  const accendi = (da = t.inizio) => {
+    if (!pronto) return;
+    spegniTutti(schermo);
     schermo.classList.add('acceso');
-    schermo.dataset.poster = schermo.innerHTML;
-    schermo.innerHTML = t.yt
-      ? `<iframe src="https://www.youtube-nocookie.com/embed/${t.yt}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${t.nome}"></iframe>`
-      : `<video src="${t.mp4}" controls autoplay playsinline preload="auto"></video>`;
+    if (t.yt) {
+      schermo.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${t.yt}?autoplay=1&start=${da}&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${testo(t.nome)}"></iframe>`;
+    } else {
+      let v = schermo.querySelector('video');
+      if (!v) { schermo.innerHTML = `<video src="${t.mp4}#t=${da}" controls autoplay playsinline preload="auto"></video>`; v = schermo.querySelector('video'); }
+      else { v.currentTime = da; v.play(); }
+    }
   };
-  schermo.addEventListener('click', accendi);
-  schermo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accendi(); } });
+  schermo.spegni = () => { schermo.innerHTML = poster; schermo.classList.remove('acceso'); };
+  schermo.addEventListener('click', () => { if (!schermo.classList.contains('acceso')) accendi(); });
+  schermo.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !schermo.classList.contains('acceso')) { e.preventDefault(); accendi(); } });
+  voce.querySelectorAll('.momento').forEach(b => b.addEventListener('click', () => {
+    const s = +b.dataset.s;
+    if (t.yt && schermo.classList.contains('acceso')) schermo.spegni();
+    accendi(s);
+    schermo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }));
   elenco.appendChild(voce);
 });
 
-/* Un video alla volta: aprirne uno chiude l'altro. */
-function spegniTutti() {
-  document.querySelectorAll('.schermo.acceso').forEach(s => {
-    s.innerHTML = s.dataset.poster; s.classList.remove('acceso');
-  });
+/* Un video alla volta. */
+function spegniTutti(tranne) {
+  document.querySelectorAll('.schermo.acceso').forEach(s => { if (s !== tranne) s.spegni(); });
 }
 
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vista'); io.unobserve(e.target); } }), { threshold: .12 });
-document.querySelectorAll('.voce').forEach(v => io.observe(v));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vista'); io.unobserve(e.target); } }), { threshold: .1 });
+document.querySelectorAll('.entra').forEach(v => io.observe(v));
 </script>
 <script src="/pixel.js" defer></script>
 </body>
