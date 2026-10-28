@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230B0B0C'/%3E%3Cpath d='M14 46V18h8l10 15 10-15h8v28h-8V31l-10 14-10-14v15z' fill='%23EDE9E1'/%3E%3Crect x='14' y='50' width='36' height='4' fill='%23E39B3A'/%3E%3C/svg%3E">
 <link rel="preload" href="/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <!--
+  v3 (28 ott, 19:05): Dennis «molto più minimal, molte meno scritte, niente corsivo che non si capisce». Via corsivo, righe del mestiere e momenti; restano nome, azienda, una frase, il video, tre numeri in due parole.
   TESTIMONIANZE · v2 (28 ott 2026). Dennis: «più minimal, deve vendere di brutto» · «nomi e cosa fanno sopra e sotto il video» · «da MacBook il video è troppo largo».
   Colonna unica da 880 px; il video non supera mai l'altezza dello schermo. Sopra: azienda, nome, la sua frase. Sotto: tre risultati coi suoi numeri e i momenti cliccabili.
   Frasi e numeri presi dalle trascrizioni vere (consulenze/_assets-testimonianze/*-trascritto*.srt), mai scritti da noi.
@@ -24,7 +25,6 @@
 @font-face{font-family:Switzer;src:url(/switzer-500.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:Switzer;src:url(/switzer-600.woff2) format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:'Geist Mono';src:url(/geist-mono-500.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Instrument Serif';src:url(/instrument-serif-400-corsivo.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
 :root{
   --nero:#050505;--grafite:#0E0E0F;--linea:#1C1C1E;--avorio:#F2F0EB;--titanio:#8C8C8C;--spento:#5A5A5C;--ambra:#E39B3A;--ambra-forte:#F2B25E;
   --stark:Stark,Switzer,sans-serif;--testo:Switzer,system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--corsivo:'Instrument Serif',Georgia,serif;
@@ -52,21 +52,16 @@ p{margin:0;text-wrap:pretty}
 .pillola:hover{background:var(--ambra);color:#140C02}
 
 /* eroe */
-.eroe{padding:clamp(120px,20vh,200px) 0 clamp(56px,9vh,96px);text-align:center}
-.eroe h1{font-size:clamp(34px,6vw,76px);line-height:1.02}
-.eroe h1 em{font-family:var(--corsivo);font-style:italic;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.25em;line-height:.8}
-.eroe .mono{display:block;margin-bottom:26px}
+.eroe{padding:clamp(110px,16vh,160px) 0 clamp(40px,6vh,64px);text-align:center}
+.eroe h1{font-size:clamp(22px,2.6vw,30px);letter-spacing:.32em}
 
 /* una testimonianza */
 .voce{padding:clamp(56px,10vh,110px) 0;border-top:1px solid var(--linea)}
 .voce:first-child{border-top:0;padding-top:0}
 .chi{display:flex;align-items:baseline;justify-content:space-between;gap:12px 24px;flex-wrap:wrap}
-.chi h2{font-size:clamp(22px,2.6vw,32px);line-height:1.1}
+.chi h2{font-size:clamp(18px,2vw,24px);line-height:1.1}
 .chi .mono{color:var(--ambra)}
-.mestiere{margin-top:8px;color:var(--titanio);font-size:16px}
-.frase{margin:28px 0 32px;font-family:var(--corsivo);font-style:italic;font-weight:400;font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-.005em;color:var(--avorio)}
-.frase::before{content:"«";color:var(--ambra)}
-.frase::after{content:"»";color:var(--ambra)}
+.frase{margin:14px 0 26px;font:600 clamp(20px,2.2vw,26px)/1.3 var(--testo);letter-spacing:-.01em;color:var(--avorio)}
 
 .schermo{position:relative;width:min(100%, calc((100svh - 150px) * 16 / 9));margin:0 auto;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--grafite);box-shadow:0 0 0 1px var(--linea),0 40px 80px -40px rgba(227,155,58,.18)}
 .schermo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) brightness(.78);transition:filter .6s}
@@ -80,24 +75,18 @@ p{margin:0;text-wrap:pretty}
 .schermo iframe,.schermo video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 
 /* sotto il video: i suoi risultati, poi i momenti */
-.risultati{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
-.risultato{padding:24px 20px 24px 0}
-.risultato+.risultato{padding-left:20px;border-left:1px solid var(--linea)}
+.risultati{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px}
+.risultato{padding:6px 0;text-align:center}
+.risultato+.risultato{border-left:1px solid var(--linea)}
 .risultato b{display:block;font:400 clamp(22px,2.6vw,32px)/1.1 var(--stark);letter-spacing:.02em;color:var(--avorio)}
 .risultato b small{font:600 .55em/1 var(--testo);letter-spacing:.02em;color:var(--ambra);margin-left:6px}
-.risultato span{display:block;margin-top:8px;color:var(--titanio);font-size:15px;line-height:1.4}
+.risultato span{display:block;margin-top:6px;font:500 11px/1.3 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--titanio)}
 .momenti{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
 .momenti .mono{width:100%;margin-bottom:6px}
-.momento{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;border:1px solid var(--linea);font-size:14px;color:var(--avorio);transition:border-color .3s,background .3s}
-.momento i{font:500 11px/1 var(--mono);letter-spacing:.08em;font-style:normal;color:var(--ambra)}
-.momento:hover{border-color:rgba(227,155,58,.55);background:rgba(227,155,58,.06)}
-.momento[disabled]{opacity:.45;cursor:default}
-.momento[disabled]:hover{border-color:var(--linea);background:none}
 
 /* chiusura */
 .chiusura{padding:clamp(100px,18vh,180px) 0;text-align:center;border-top:1px solid var(--linea)}
-.chiusura h2{font-size:clamp(28px,5vw,64px);line-height:1.05}
-.chiusura h2 em{font-family:var(--corsivo);font-style:italic;text-transform:none;letter-spacing:0;color:var(--ambra);font-size:1.25em;line-height:.8}
+.chiusura h2{font-size:clamp(24px,3.6vw,44px);line-height:1.35}
 .pulsante{display:inline-block;margin-top:36px;padding:18px 34px;border-radius:999px;background:var(--ambra);color:#140C02;font:600 17px/1 var(--testo);box-shadow:0 0 40px rgba(227,155,58,.25);transition:transform .4s var(--curva),box-shadow .4s}
 .pulsante:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(227,155,58,.4)}
 .piede{padding:24px max(16px,3vw) 36px;border-top:1px solid var(--linea);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
@@ -106,9 +95,8 @@ p{margin:0;text-wrap:pretty}
 .entra.vista{opacity:1;transform:none}
 
 @media (max-width:640px){
-  .risultati{grid-template-columns:1fr}
-  .risultato,.risultato+.risultato{padding:18px 0;border-left:0}
-  .risultato+.risultato{border-top:1px solid var(--linea)}
+  .risultato b{font-size:20px}
+  .risultato span{font-size:9px;letter-spacing:.12em}
   .play span{width:60px;height:60px}
   .pillola{padding:10px 14px;font-size:13px}
 }
@@ -123,14 +111,13 @@ p{margin:0;text-wrap:pretty}
 </header>
 
 <section class="eroe colonna">
-  <span class="mono">Testimonianze · Mark I</span>
-  <h1>Parlano <em>loro.</em></h1>
+  <h1>Testimonianze</h1>
 </section>
 
 <main class="colonna js-elenco"></main>
 
 <section class="chiusura colonna">
-  <h2>La prossima<br>è la <em>tua.</em></h2>
+  <h2>La prossima è la tua.</h2>
   <a class="pulsante" href="/">Voglio il mio Mark</a>
 </section>
 
@@ -149,9 +136,9 @@ const TESTIMONIANZE = [
     frase: "L'investimento migliore fatto fino ad ora.",
     durata: '28 min', poster: 'giacomo-1.jpg', yt: '', mp4: '', inizio: 38,
     risultati: [
-      ['10', 'min', 'per qualificare una lead. Prima ci voleva più di un\'ora.'],
-      ['60', 'ore', 'al mese che non passa più sulle schede dei clienti.'],
-      ['850', '€', 'risparmiati in un anno sull\'assicurazione, con una ricerca.'],
+      ['10', 'min', 'per lead'],
+      ['60', 'ore', 'libere al mese'],
+      ['850', '€', 'risparmiati'],
     ],
     momenti: [
       [236, 'Il dubbio prima di pagare'],
@@ -167,11 +154,7 @@ const TESTIMONIANZE = [
     mestiere: 'Lezioni uno a uno, coaching e programmi a distanza.',
     frase: 'Potreste venderlo al doppio o al triplo.',
     durata: '8 min', poster: 'stefano-1.jpg', yt: '', mp4: 'https://iltuojarvis.com/v/1a22e1368b/testimonianza-stefano.mp4', inizio: 0,
-    risultati: [
-      ['Fatture', '', 'create e mandate da Mark, che controlla anche il pagamento.'],
-      ['Agenda', '', 'gestita: appuntamenti, lezioni saltate, sostituzioni.'],
-      ['Zero', '', 'competenze tecniche. «Quello che pensi glielo dici, lui lo fa.»'],
-    ],
+    risultati: [],
     momenti: [
       [152, 'La paura prima di comprarlo'],
       [188, '«Fa tutto lui»'],
@@ -193,16 +176,14 @@ TESTIMONIANZE.forEach(t => {
   voce.innerHTML = `
     <div class="entra">
       <div class="chi"><h2>${testo(t.nome)}</h2><span class="mono">${testo(t.azienda)}</span></div>
-      <p class="mestiere">${testo(t.mestiere)}</p>
-      <p class="frase">${testo(t.frase)}</p>
+      <p class="frase">«${testo(t.frase)}»</p>
     </div>
     <div class="schermo entra ${pronto ? 'pronto' : ''}" ${pronto ? `role="button" tabindex="0" aria-label="Guarda la testimonianza di ${testo(t.nome)}, ${t.durata}"` : ''}>
       <img src="${t.poster}" alt="${testo(t.nome)}" loading="lazy">
       ${pronto ? `<span class="play"><span>${PLAY}</span></span>` : '<span class="attesa mono">Video a breve</span>'}
     </div>
     <div class="entra">
-      <div class="risultati">${t.risultati.map(([n, u, d]) => `<div class="risultato"><b>${testo(n)}${u ? `<small>${testo(u)}</small>` : ''}</b><span>${testo(d)}</span></div>`).join('')}</div>
-      <div class="momenti"><span class="mono">I momenti · ${t.durata}</span>${t.momenti.map(([s, l]) => `<button class="momento" data-s="${s}" ${pronto ? '' : 'disabled'}><i>${mmss(s)}</i>${testo(l)}</button>`).join('')}</div>
+      ${t.risultati.length ? `<div class="risultati">${t.risultati.map(([n, u, d]) => `<div class="risultato"><b>${testo(n)}${u ? `<small>${testo(u)}</small>` : ''}</b><span>${testo(d)}</span></div>`).join('')}</div>` : ''}
     </div>`;
 
   const schermo = voce.querySelector('.schermo');
@@ -222,12 +203,6 @@ TESTIMONIANZE.forEach(t => {
   schermo.spegni = () => { schermo.innerHTML = poster; schermo.classList.remove('acceso'); };
   schermo.addEventListener('click', () => { if (!schermo.classList.contains('acceso')) accendi(); });
   schermo.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !schermo.classList.contains('acceso')) { e.preventDefault(); accendi(); } });
-  voce.querySelectorAll('.momento').forEach(b => b.addEventListener('click', () => {
-    const s = +b.dataset.s;
-    if (t.yt && schermo.classList.contains('acceso')) schermo.spegni();
-    accendi(s);
-    schermo.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }));
   elenco.appendChild(voce);
 });
 
